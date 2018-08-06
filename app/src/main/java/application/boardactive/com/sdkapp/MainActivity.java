@@ -110,8 +110,10 @@ public class MainActivity extends BaseActivity implements
 
     private Location mLocation;
 
-    private AdDropAdapter adapter;
-    private RecyclerView recyclerView;
+    private AdDropHorzAdapter mHorxAdapter;
+    private AdDropVertAdapter mVertAdapter;
+    private RecyclerView mHorzRecyclerView;
+    private RecyclerView mVertRecyclerView;
     ProgressDialog progressDoalog;
 
     private List<AdDrop> addropList;
@@ -523,7 +525,8 @@ public class MainActivity extends BaseActivity implements
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
                     List<AdDrop> dataList = Arrays.asList(gson.fromJson(responseData, AdDrop[].class));
-                    generateDataList(dataList);
+//                    generateHorzDataList(dataList);
+                    generateVertDataList(dataList);
 
                 } catch (IOException e) {
                     showErrorMessage();
@@ -537,12 +540,21 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-    private void generateDataList(List<AdDrop> adDropList) {
-        recyclerView = findViewById(R.id.customRecyclerView);
-        adapter = new AdDropAdapter(this,adDropList);
+//    private void generateHorzDataList(List<AdDrop> adDropList) {
+//        mHorzRecyclerView = findViewById(R.id.custom_horz_recyclerview);
+//        mHorxAdapter = new AdDropHorzAdapter(this,adDropList);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+//        mHorzRecyclerView.setLayoutManager(layoutManager);
+//        mHorzRecyclerView.setAdapter(mHorxAdapter);
+//    }
+
+    private void generateVertDataList(List<AdDrop> adDropList) {
+        mVertRecyclerView = findViewById(R.id.custom_vert_recyclerview);
+        mVertAdapter = new AdDropVertAdapter(this,adDropList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        mVertRecyclerView.setLayoutManager(layoutManager);
+        mVertRecyclerView.setAdapter(mVertAdapter);
     }
+
 }
 

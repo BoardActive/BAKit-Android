@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * BoardActive 2018.08.05
  */
-public class AdDropAdapter extends RecyclerView.Adapter<AdDropAdapter.CustomViewHolder> {
+public class AdDropVertAdapter extends RecyclerView.Adapter<AdDropVertAdapter.CustomViewHolder> {
 
     private List<AdDrop> dataList;
     private Context context;
 
-    public AdDropAdapter(Context context, List<AdDrop> dataList){
+    public AdDropVertAdapter(Context context, List<AdDrop> dataList){
         this.context = context;
         this.dataList = dataList;
     }
@@ -44,7 +44,7 @@ public class AdDropAdapter extends RecyclerView.Adapter<AdDropAdapter.CustomView
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.custom_row, parent, false);
+        View view = layoutInflater.inflate(R.layout.custom_vert_row, parent, false);
         return new CustomViewHolder(view);
     }
 
