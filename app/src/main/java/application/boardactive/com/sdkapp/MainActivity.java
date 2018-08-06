@@ -67,25 +67,6 @@ import okhttp3.Response;
  * BoardActive 2018.08.05
  */
 
-/**
- * The only activity in this sample.
- *
- * Note: for apps running in the background on "O" devices (regardless of the targetSdkVersion),
- * location may be computed less frequently than requested when the app is not in the foreground.
- * Apps that use a foreground service -  which involves displaying a non-dismissable
- * notification -  can bypass the background location limits and request location updates as before.
- *
- * This sample uses a long-running bound and started service for location updates. The service is
- * aware of foreground status of this activity, which is the only bound client in
- * this sample. After requesting location updates, when the activity ceases to be in the foreground,
- * the service promotes itself to a foreground service and continues receiving location updates.
- * When the activity comes back to the foreground, the foreground service stops, and the
- * notification associated with that foreground service is removed.
- *
- * While the foreground service notification is displayed, the user has the option to launch the
- * activity from the notification. The user can also remove location updates directly from the
- * notification. This dismisses the notification and stops the service.
- */
 public class MainActivity extends BaseActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -111,9 +92,7 @@ public class MainActivity extends BaseActivity implements
 
     private Location mLocation;
 
-    private AdDropHorzAdapter mHorxAdapter;
     private AdDropVertAdapter mVertAdapter;
-    private RecyclerView mHorzRecyclerView;
     private RecyclerView mVertRecyclerView;
     ProgressDialog progressDoalog;
 

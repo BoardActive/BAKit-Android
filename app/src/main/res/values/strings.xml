@@ -42,4 +42,8 @@
     <string name="loader_example">Loader Example</string>
     <string name="no_data_loaded">No data loaded.</string>
 
+    <string name="title_mup_name">Thomas Powell</string>
+    <string name="subtitle_mup">Coding Android Native SDK</string>
+
+
 </resources>

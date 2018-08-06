@@ -13,6 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * BoardActive 2018.08.05
+ */
 public class AdDropHorzAdapter extends RecyclerView.Adapter<AdDropHorzAdapter.CustomViewHolder> {
 
     private List<AdDrop> dataList;

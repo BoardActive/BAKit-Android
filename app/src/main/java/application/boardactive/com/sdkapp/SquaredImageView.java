@@ -3,7 +3,9 @@ package application.boardactive.com.sdkapp;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-
+/**
+ * BoardActive 2018.08.05
+ */
 /** An image view which always remains square with respect to its width. */
 public final class SquaredImageView extends ImageView {
   public SquaredImageView(Context context) {
