@@ -254,7 +254,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void startDataRequest() {
-        new MainActivity.GetDataTask().execute();
+        new GetDataTask().execute();
     }
 
 
@@ -380,7 +380,7 @@ public class MainActivity extends BaseActivity implements
             mLocation = intent.getParcelableExtra(LocationUpdatesService.EXTRA_LOCATION);
             if (mLocation != null) {
 
-                new MainActivity.PostLocation().execute();
+                new PostLocation().execute();
 
                 Toast.makeText(MainActivity.this, Utils.getLocationText(mLocation),
                         Toast.LENGTH_SHORT).show();
