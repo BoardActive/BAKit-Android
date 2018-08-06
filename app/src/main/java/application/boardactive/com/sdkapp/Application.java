@@ -31,6 +31,8 @@ public class Application extends android.app.Application {
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
+
     }
 
     private class ExampleNotificationReceivedHandler implements OneSignal.NotificationReceivedHandler {

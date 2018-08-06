@@ -35,22 +35,14 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/geo_locate_run" />
+            android:text="@string/btn_geo_locate_run" />
 
         <Button
             android:id="@+id/remove_location_updates_button"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/geo_locate_stop" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/onesignal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:text="@string/btn_geo_locate_stop" />
 
         <Button
             android:id="@+id/btn_onesignal_notification"
@@ -66,17 +58,34 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_onesignal_deeplink" />
 
+
+
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/custom_vert_recyclerview"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/onesignal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/activity_main_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/custom_vert_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"  />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

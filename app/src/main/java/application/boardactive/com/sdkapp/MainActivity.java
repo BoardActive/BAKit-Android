@@ -37,6 +37,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -118,7 +119,7 @@ public class MainActivity extends BaseActivity implements
 
     private List<AdDrop> addropList;
     private ProgressDialog progressDialog;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
@@ -148,6 +149,15 @@ public class MainActivity extends BaseActivity implements
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.getting_data));
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onResume();
+            }
+        });
 
         // Check that the user hasn't revoked permissions by going to Settings.
         if (Utils.requestingLocationUpdates(this)) {
@@ -267,6 +277,7 @@ public class MainActivity extends BaseActivity implements
                 new IntentFilter(LocationUpdatesService.ACTION_BROADCAST));
 
         startDataRequest();
+
 
     }
 
@@ -554,6 +565,8 @@ public class MainActivity extends BaseActivity implements
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         mVertRecyclerView.setLayoutManager(layoutManager);
         mVertRecyclerView.setAdapter(mVertAdapter);
+        mSwipeRefreshLayout.setRefreshing(false);
+
     }
 
 }

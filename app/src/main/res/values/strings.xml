@@ -16,10 +16,10 @@
 
     <string name="get_ad_drop_data">Get AdDrop Data</string>
     <string name="launch_activity">Launch activity</string>
-    <string name="geo_locate_run">Geo Service Run</string>
-    <string name="geo_locate_stop">Geo Service Stop</string>
-    <string name="btn_onesignal_notification">OneSignal</string>
-    <string name="btn_onesignal_deeplink">DeepLink</string>
+    <string name="btn_geo_locate_run">Run</string>
+    <string name="btn_geo_locate_stop">Stop</string>
+    <string name="btn_onesignal_notification">PN</string>
+    <string name="btn_onesignal_deeplink">PN DL</string>
 
     <string name="notification_service">Notification Service</string>
 
