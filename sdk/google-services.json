@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "908412444735",
+    "firebase_url": "https://boardactive-sdk.firebaseio.com",
+    "project_id": "boardactive-sdk",
+    "storage_bucket": "boardactive-sdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908412444735:android:56c4fbfedc95a0d4",
+        "android_client_info": {
+          "package_name": "com.boardactive.sdk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908412444735-ukbsu8b4nb82fhfqvvqe5mv0uovjvuar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4WqJpamTrBoY360f__Wr4l27inTridSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

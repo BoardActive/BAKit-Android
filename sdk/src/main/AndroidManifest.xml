@@ -1,0 +1,115 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.boardactive.sdk">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application>
+
+        <!-- [START fcm_default_icon] -->
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!-- [END fcm_default_icon] -->
+        <!-- [START fcm_default_channel] -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id"/>
+        <!-- [END fcm_default_channel] -->
+
+
+        <activity android:name=".fcm.AdDropFCMActivity"
+            android:label="@string/addrop_name"
+            android:theme="@style/AdDropTheme"
+            android:launchMode="singleTask"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <!-- [START FIREBASE SERVICE] -->
+        <service
+            android:name=".fcm.AdDropMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".fcm.AdDropJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+        <!-- [END FIREBASE SERVICE] -->
+
+
+        <!-- [START BOOT SERVICE] -->
+        <receiver android:name=".bootservice.BootReceiver" android:enabled="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".bootservice.BootAlarmService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <!-- [END BOOT SERVICE] -->
+
+
+        <!--[START ADDROP SERVICE] -->
+        <service
+            android:name=".location.AdDropIntentService"
+            android:exported="false"
+            />
+
+        <receiver android:name=".location.AdDropReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.boardactive.sdk.location.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
+            </intent-filter>
+        </receiver>
+        <!--[END  ADDROP SERVICE] -->
+
+        <activity android:name=".ui.AdDropMainActivity"
+            android:label="@string/addrop_name"
+            android:theme="@style/AdDropTheme"
+            android:launchMode="singleTask"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".ui.addrop.AdDropActivity"
+            android:label="@string/addrop_name"
+            android:theme="@style/AdDropTheme"
+            android:launchMode="singleTask"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity android:name=".location.AdDropLocationActivity"
+            android:label="@string/addrop_name"
+            android:theme="@style/AdDropTheme"
+            android:launchMode="singleTask"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+    </application>
+
+</manifest>
