@@ -14,6 +14,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.boardactive.sdk.models.AdDropBookmarkResponse;
+import com.boardactive.sdk.models.AdDropLatLng;
+import com.boardactive.sdk.network.NetworkClient;
+import com.boardactive.sdk.network.NetworkInterface;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -21,6 +25,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by root on 12/2/18.
@@ -32,10 +41,12 @@ public class LocationJobService extends JobService implements
         LocationListener,
         ResultCallback<Status> {
 
+
+
     /**
      * Update interval of location request
      */
-    private final int UPDATE_INTERVAL = 1000;
+    private final int UPDATE_INTERVAL = 5000;
 
     /**
      * fastest possible interval of location request
@@ -87,11 +98,16 @@ public class LocationJobService extends JobService implements
         //Log.d(TAG, "getLastKnownLocation()");
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if (lastLocation != null) {
-            Log.i(TAG, "LasKnown location. " +
+
+            Log.i(TAG, "LastKnown location. " +
                     "Long: " + lastLocation.getLongitude() +
                     " | Lat: " + lastLocation.getLatitude());
             writeLastLocation();
             startLocationUpdates();
+
+            mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
+            mAdDropLatLng.setLng(String.valueOf(lastLocation.getLatitude()));
+            getObservable().subscribeWith(getObserver());
 
         } else {
             Log.w(TAG, "No location retrieved yet");
@@ -227,5 +243,41 @@ public class LocationJobService extends JobService implements
     @Override
     public void onResult(@NonNull Status status) {
         Log.d(TAG,"result of google api client : " + status);
+    }
+
+
+
+    //Create GeoPoint
+    private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
+    public static final String LAT = "LAT";
+    public static final String LNG = "LNG";
+
+
+    public Observable<AdDropBookmarkResponse> getObservable(){
+        return NetworkClient.getRetrofit(mAdDropLatLng.getLat(), mAdDropLatLng.getLng()).create(NetworkInterface.class)
+                .createGeopoint(mAdDropLatLng)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public DisposableObserver<AdDropBookmarkResponse> getObserver(){
+        return new DisposableObserver<AdDropBookmarkResponse>() {
+
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull AdDropBookmarkResponse adDropBookmarkResponse) {
+                Log.d(TAG,"LocationJobService() OnNext");
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                Log.d(TAG,"LocationJobService() onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"LocationJobService() onComplete");
+            }
+        };
     }
 }
