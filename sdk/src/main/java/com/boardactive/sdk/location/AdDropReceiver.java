@@ -86,46 +86,48 @@ public class AdDropReceiver extends BroadcastReceiver {
 
             if (ACTION_PROCESS_UPDATES.equals(action)) {
                 Log.d(TAG, "Equals TRUE");
-                LocationResult result = LocationResult.extractResult(intent);
-                if (result != null) {
-                    List<Location> locations = result.getLocations();
-                    for (Location location : locations) {
-                        String lat = String.valueOf(location.getLatitude());
-                        String lng = String.valueOf(location.getLongitude());
+//                LocationResult result = LocationResult.extractResult(intent);
+//                if (result != null) {
+//                    List<Location> locations = result.getLocations();
+//                    for (Location location : locations) {
+//                        String lat = String.valueOf(location.getLatitude());
+//                        String lng = String.valueOf(location.getLongitude());
+//
+//                        Log.i(TAG, "Lat: " + lat);
+//                        Log.i(TAG, "Lng: " + lng);
+//
+//                        mAdDropLatLng.setLat(lat);
+//                        mAdDropLatLng.setLng(lng);
+//
+//                        PreferenceManager.getDefaultSharedPreferences(context)
+//                                .edit()
+//                                .putString(LAT, lat)
+//                                .apply();
+//
+//                        PreferenceManager.getDefaultSharedPreferences(context)
+//                                .edit()
+//                                .putString(LNG, lng)
+//                                .apply();
+//
+//                        getObservable().subscribeWith(getObserver());
+//                    }
+//                    Utils.setLocationUpdatesResult(context, locations);
+//                    Utils.sendNotification(context, Utils.getLocationResultTitle(context, locations));
+//                    Log.i(TAG, Utils.getLocationUpdatesResult(context));
+//
+//                }
 
-                        Log.i(TAG, "Lat: " + lat);
-                        Log.i(TAG, "Lng: " + lng);
+                JobScheduler jobScheduler;
+                ComponentName componentName;
+                JobInfo jobInfo;
 
-                        mAdDropLatLng.setLat(lat);
-                        mAdDropLatLng.setLng(lng);
+                jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
+                componentName = new ComponentName(context, LocationJobService.class);
+                jobInfo = new JobInfo.Builder(1, componentName)
+                        .setMinimumLatency(10000) //10 sec interval
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
+                jobScheduler.schedule(jobInfo);
 
-                        PreferenceManager.getDefaultSharedPreferences(context)
-                                .edit()
-                                .putString(LAT, lat)
-                                .apply();
-
-                        PreferenceManager.getDefaultSharedPreferences(context)
-                                .edit()
-                                .putString(LNG, lng)
-                                .apply();
-
-                        getObservable().subscribeWith(getObserver());
-                    }
-                    Utils.setLocationUpdatesResult(context, locations);
-                    Utils.sendNotification(context, Utils.getLocationResultTitle(context, locations));
-                    Log.i(TAG, Utils.getLocationUpdatesResult(context));
-
-                    JobScheduler jobScheduler;
-                    ComponentName componentName;
-                    JobInfo jobInfo;
-
-                    jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
-                    componentName = new ComponentName(context, LocationJobService.class);
-                    jobInfo = new JobInfo.Builder(1, componentName)
-                            .setMinimumLatency(10000) //10 sec interval
-                            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
-                    jobScheduler.schedule(jobInfo);
-                }
             }
         }
     }

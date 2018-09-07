@@ -1,11 +1,14 @@
 package com.boardactive.sdk.bootservice;
 
+import android.Manifest;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 public class BootReceiver extends BroadcastReceiver {
@@ -22,20 +25,29 @@ public class BootReceiver extends BroadcastReceiver {
 //        context.startActivity(i);
 
         /***** For start Service  ****/
-        Intent service = new Intent(context, BootAlarmService.class);
-        //service.setAction(RECEIVE_BOOT_COMPLETED);
-        context.startService(service);
+//        Intent service = new Intent(context, BootAlarmService.class);
+//        //service.setAction(RECEIVE_BOOT_COMPLETED);
+//        context.startService(service);
 
-      JobScheduler jobScheduler;
-      ComponentName componentName;
-      JobInfo jobInfo;
+      Toast.makeText(context, "Boot Start of Location Service",
+              Toast.LENGTH_LONG).show();
 
-      jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
-      componentName = new ComponentName(context, LocationJobService.class);
-      jobInfo = new JobInfo.Builder(1, componentName)
-              .setMinimumLatency(10000) //10 sec interval
-              .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
-      jobScheduler.schedule(jobInfo);
+
+      int permissionState = ActivityCompat.checkSelfPermission(context,
+              Manifest.permission.ACCESS_FINE_LOCATION);
+      if(permissionState == PackageManager.PERMISSION_GRANTED){
+        JobScheduler jobScheduler;
+        ComponentName componentName;
+        JobInfo jobInfo;
+
+        jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
+        componentName = new ComponentName(context, LocationJobService.class);
+        jobInfo = new JobInfo.Builder(1, componentName)
+                .setMinimumLatency(10000) //10 sec interval
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
+        jobScheduler.schedule(jobInfo);
+      }
+
       }
 
 }

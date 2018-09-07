@@ -62,12 +62,6 @@
         </receiver>
 
         <service
-            android:name=".bootservice.BootAlarmService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
-
-        <service
             android:name=".bootservice.LocationJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -76,10 +70,10 @@
 
 
         <!--[START ADDROP SERVICE] -->
-        <service
-            android:name=".location.AdDropIntentService"
-            android:exported="false"
-            />
+        <!--<service-->
+            <!--android:name=".location.AdDropIntentService"-->
+            <!--android:exported="false"-->
+            <!--/>-->
 
         <receiver android:name=".location.AdDropReceiver"
             android:enabled="true"

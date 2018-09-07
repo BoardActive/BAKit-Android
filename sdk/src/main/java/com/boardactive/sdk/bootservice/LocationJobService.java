@@ -31,17 +31,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by root on 12/2/18.
- */
 @SuppressLint("NewApi")
 public class LocationJobService extends JobService implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
         ResultCallback<Status> {
-
-
 
     /**
      * Update interval of location request
@@ -51,7 +46,7 @@ public class LocationJobService extends JobService implements
     /**
      * fastest possible interval of location request
      */
-    private final int FASTEST_INTERVAL = 900;
+    private final int FASTEST_INTERVAL = 2500;
 
     /**
      * The Job scheduler.
