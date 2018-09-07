@@ -16,17 +16,22 @@
 
 package com.boardactive.sdk.location;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.boardactive.sdk.bootservice.LocationJobService;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropLatLng;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 
 import java.util.List;
@@ -66,6 +71,14 @@ public class AdDropReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        long UPDATE_INTERVAL = 60000; // Every 60 seconds.
+
+        long FASTEST_UPDATE_INTERVAL = 30000; // Every 30 seconds
+
+        long MAX_WAIT_TIME = UPDATE_INTERVAL * 5; // Every 5 minutes.
+
+        LocationRequest mLocationRequest;
+
         if (intent != null) {
             final String action = intent.getAction();
 
@@ -101,6 +114,17 @@ public class AdDropReceiver extends BroadcastReceiver {
                     Utils.setLocationUpdatesResult(context, locations);
                     Utils.sendNotification(context, Utils.getLocationResultTitle(context, locations));
                     Log.i(TAG, Utils.getLocationUpdatesResult(context));
+
+                    JobScheduler jobScheduler;
+                    ComponentName componentName;
+                    JobInfo jobInfo;
+
+                    jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
+                    componentName = new ComponentName(context, LocationJobService.class);
+                    jobInfo = new JobInfo.Builder(1, componentName)
+                            .setMinimumLatency(10000) //10 sec interval
+                            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
+                    jobScheduler.schedule(jobInfo);
                 }
             }
         }

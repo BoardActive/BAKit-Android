@@ -1,6 +1,9 @@
 package com.boardactive.sdk.bootservice;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -22,6 +25,17 @@ public class BootReceiver extends BroadcastReceiver {
         Intent service = new Intent(context, BootAlarmService.class);
         //service.setAction(RECEIVE_BOOT_COMPLETED);
         context.startService(service);
+
+      JobScheduler jobScheduler;
+      ComponentName componentName;
+      JobInfo jobInfo;
+
+      jobScheduler = (JobScheduler) context.getSystemService(context.JOB_SCHEDULER_SERVICE);
+      componentName = new ComponentName(context, LocationJobService.class);
+      jobInfo = new JobInfo.Builder(1, componentName)
+              .setMinimumLatency(10000) //10 sec interval
+              .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
+      jobScheduler.schedule(jobInfo);
       }
 
 }

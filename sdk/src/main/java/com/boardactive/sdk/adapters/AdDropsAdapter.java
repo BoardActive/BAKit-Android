@@ -52,7 +52,9 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
     @Override
     public void onBindViewHolder(final AdDropsAdapter.AdDropHolder holder, final int position) {
 
-        final Boolean bookmark = addropList.get(position).getIsBookmarked();
+//        final Boolean bookmark = addropList.get(position).getIsBookmarked();
+        final Boolean bookmark = ((addropList.get(position).getIsBookmarked() == null) ? false : addropList.get(position).getIsBookmarked());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +76,7 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.ivAdDrop);
 
-        if(bookmark != null && bookmark == true){
+        if(bookmark){
             Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
             holder.ivFav.setImageDrawable(myDrawable);
         } else {
@@ -87,7 +89,7 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
         holder.ivFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addropList.get(position).getIsBookmarked() != null && !addropList.get(position).getIsBookmarked() == false){
+                if(bookmark){
                     Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
                     holder.ivFav.setImageDrawable(myDrawable);
                     addropList.get(position).setIsBookmarked(false);

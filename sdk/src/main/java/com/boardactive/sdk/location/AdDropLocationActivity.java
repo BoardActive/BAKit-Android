@@ -134,7 +134,8 @@ public class AdDropLocationActivity extends FragmentActivity implements
 
         // Sets the maximum time when batched location updates are delivered. Updates may be
         // delivered sooner than this interval.
-        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+        mLocationRequest.setMaxWaitTime(UPDATE_INTERVAL);
     }
 
     private PendingIntent getPendingIntent() {
