@@ -58,7 +58,7 @@ import io.reactivex.schedulers.Schedulers;
  *  foreground.
  */
 public class AdDropReceiver extends BroadcastReceiver {
-    private static final String TAG = "LUBroadcastReceiver";
+    private static final String TAG = "AdDropReceiver";
 
     private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
 

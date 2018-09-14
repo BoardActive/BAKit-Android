@@ -41,7 +41,7 @@ import com.boardactive.sdk.R;
 /**
  * Utility methods used in this sample.
  */
-class Utils {
+class  Utils {
 
     final static String KEY_LOCATION_UPDATES_REQUESTED = "location-updates-requested";
     final static String KEY_LOCATION_UPDATES_RESULT = "location-update-result";

@@ -53,7 +53,7 @@ public class AdDropIntentService extends IntentService {
 
     private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
 
-    private static final String ACTION_PROCESS_UPDATES =
+    public static final String ACTION_PROCESS_UPDATES =
             "com.boardactive.sdk.action" +
                     ".PROCESS_UPDATES";
     private static final String TAG = AdDropIntentService.class.getSimpleName();

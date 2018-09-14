@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.boardactive.sdk.BuildConfig;
+import com.boardactive.sdk.bootservice.BootReceiver;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -30,6 +31,11 @@ public class AdDropLocationActivity extends FragmentActivity implements
 
     private static final String TAG = AdDropLocationActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+
+    private static final int JOB_INTENT_SERVICE = 1;
+    private static final int JOB_SERVICE = 2;
+    private static final int JOB_DISPATCHER = 2;
+
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
@@ -58,6 +64,7 @@ public class AdDropLocationActivity extends FragmentActivity implements
     private FusedLocationProviderClient mFusedLocationClient;
 
     // UI Widgets.
+    private Button mStartBootReceiver;
     private Button mRequestUpdatesButton;
     private Button mRemoveUpdatesButton;
     private TextView mLocationUpdatesResultView;
@@ -67,6 +74,7 @@ public class AdDropLocationActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_drop_location);
 
+        mStartBootReceiver = (Button) findViewById(R.id.start_boot_receiver);
         mRequestUpdatesButton = (Button) findViewById(R.id.request_updates_button);
         mRemoveUpdatesButton = (Button) findViewById(R.id.remove_updates_button);
         mLocationUpdatesResultView = (TextView) findViewById(R.id.location_updates_result);
@@ -138,7 +146,7 @@ public class AdDropLocationActivity extends FragmentActivity implements
         mLocationRequest.setMaxWaitTime(UPDATE_INTERVAL);
     }
 
-    private PendingIntent getPendingIntent() {
+    private PendingIntent getPendingIntent(int JOB) {
         // Note: for apps targeting API level 25 ("Nougat") or lower, either
         // PendingIntent.getService() or PendingIntent.getBroadcast() may be used when requesting
         // location updates. For apps targeting API level O, only
@@ -146,13 +154,28 @@ public class AdDropLocationActivity extends FragmentActivity implements
         // started in the background in "O".
 
         // TODO(developer): uncomment to use PendingIntent.getService().
-//        Intent intent = new Intent(this, AdDropIntentService.class);
-//        intent.setAction(AdDropIntentService.ACTION_PROCESS_UPDATES);
-//        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent intent = new Intent(this, AdDropReceiver.class);
-        intent.setAction(AdDropReceiver.ACTION_PROCESS_UPDATES);
-        return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if(JOB == JOB_DISPATCHER){
+            Intent intent = new Intent(this, BootReceiver.class);
+            intent.setAction(AdDropReceiver.ACTION_PROCESS_UPDATES);
+            return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+
+        if(JOB == JOB_INTENT_SERVICE){
+            Intent intent = new Intent(this, AdDropIntentService.class);
+            intent.setAction(AdDropIntentService.ACTION_PROCESS_UPDATES);
+            return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        if(JOB == JOB_SERVICE){
+            Intent intent = new Intent(this, AdDropReceiver.class);
+            intent.setAction(AdDropReceiver.ACTION_PROCESS_UPDATES);
+            return PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        return null;
+
     }
 
     /**
@@ -264,7 +287,7 @@ public class AdDropLocationActivity extends FragmentActivity implements
         try {
             Log.i(TAG, "Starting location updates");
             Utils.setRequestingLocationUpdates(this, true);
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent(JOB_SERVICE));
         } catch (SecurityException e) {
             Utils.setRequestingLocationUpdates(this, false);
             e.printStackTrace();
@@ -272,12 +295,26 @@ public class AdDropLocationActivity extends FragmentActivity implements
     }
 
     /**
+     * Handles the Request Updates button and requests start of location updates.
+     */
+    public void startBootReceiver(View view) {
+        try {
+            Log.i(TAG, "Starting location updates");
+//            Utils.setRequestingLocationUpdates(this, true);
+            getPendingIntent(JOB_DISPATCHER);
+//            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent(JOB_DISPATCHER));
+        } catch (SecurityException e) {
+            Utils.setRequestingLocationUpdates(this, false);
+            e.printStackTrace();
+        }
+    }
+    /**
      * Handles the Remove Updates button, and requests removal of location updates.
      */
     public void removeLocationUpdates(View view) {
         Log.i(TAG, "Removing location updates");
         Utils.setRequestingLocationUpdates(this, false);
-        mFusedLocationClient.removeLocationUpdates(getPendingIntent());
+        mFusedLocationClient.removeLocationUpdates(getPendingIntent(JOB_SERVICE));
     }
 
     /**

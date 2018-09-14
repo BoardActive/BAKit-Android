@@ -75,13 +75,14 @@
             <!--android:exported="false"-->
             <!--/>-->
 
-        <receiver android:name=".location.AdDropReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.boardactive.sdk.location.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name=".location.AdDropReceiver"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.boardactive.sdk.location.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
         <!--[END  ADDROP SERVICE] -->
 
 
