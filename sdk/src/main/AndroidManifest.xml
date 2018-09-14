@@ -25,6 +25,10 @@
             android:value="@string/default_notification_channel_id"/>
         <!-- [END fcm_default_channel] -->
 
+        <activity
+            android:name=".bootservice.AdDropBootActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!-- [START FIREBASE SERVICE] -->
         <activity android:name=".fcm.AdDropFCMActivity"
@@ -42,18 +46,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-
-        <service android:name=".fcm.AdDropJobService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
-            </intent-filter>
-        </service>
         <!-- [END FIREBASE SERVICE] -->
 
-
-        <!-- [START BOOT SERVICE] -->
-        <receiver android:name=".bootservice.BootReceiver" android:enabled="true"
+        <!-- [START BOOT/DEFAULT SERVICE] -->
+        <receiver android:name=".bootservice.AdDropBootReceiver" android:enabled="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -61,30 +57,12 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".bootservice.LocationJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <!-- [END BOOT SERVICE] -->
-
-
-        <!--[START ADDROP SERVICE] -->
-        <!--<service-->
-            <!--android:name=".location.AdDropIntentService"-->
-            <!--android:exported="false"-->
-            <!--/>-->
-
-        <!--<receiver android:name=".location.AdDropReceiver"-->
-            <!--android:enabled="true"-->
-            <!--android:exported="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.boardactive.sdk.location.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--[END  ADDROP SERVICE] -->
-
+        <service android:name=".bootservice.AdDropJobDispatcherService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+        <!-- [END BOOT/DEFAULT SERVICE] -->
 
         <!-- [START INITIAL ACTIVITY] -->
         <activity android:name=".ui.AdDropMainActivity"
@@ -107,17 +85,6 @@
             >
         </activity>
         <!-- [END ADDROP ACTIVITY] -->
-
-        <!-- [START TEST LOCATION ACTIVITY] -->
-        <activity android:name=".location.AdDropLocationActivity"
-            android:label="@string/addrop_name"
-            android:theme="@style/AdDropTheme"
-            android:launchMode="singleTask"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            >
-        </activity>
-        <!-- [END TEST LOCATION ACTIVITY] -->
 
     </application>
 

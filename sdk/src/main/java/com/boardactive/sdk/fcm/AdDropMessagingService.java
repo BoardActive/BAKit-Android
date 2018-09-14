@@ -27,6 +27,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.boardactive.sdk.bootservice.AdDropJobDispatcherService;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
@@ -110,7 +111,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         // [START dispatch_job]
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
         Job myJob = dispatcher.newJobBuilder()
-                .setService(AdDropJobService.class)
+                .setService(AdDropJobDispatcherService.class)
                 .setTag("my-job-tag")
                 .build();
         dispatcher.schedule(myJob);

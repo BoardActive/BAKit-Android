@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.List;
 
-import com.boardactive.sdk.location.AdDropReceiver;
 import com.boardactive.sdk.models.AdDrops;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
@@ -34,9 +33,9 @@ public class AdDropsPresenter implements AdDropsPresenterInterface {
         mContext = context;
 
         mLat = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(AdDropReceiver.LAT, "");
+                .getString("LAT", "");
         mLng = PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(AdDropReceiver.LNG, "");
+                .getString("LNG", "");
 
         getObservable().subscribeWith(getObserver());
     }

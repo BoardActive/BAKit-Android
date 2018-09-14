@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BoardActive AdDrop</string>
+    <string name="app_name">BA Kit Demo</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_addrops">AdDrops</string>

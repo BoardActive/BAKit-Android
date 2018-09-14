@@ -27,13 +27,12 @@ import android.widget.Toast;
 
 import com.boardactive.sdk.BuildConfig;
 import com.boardactive.sdk.R;
-import com.boardactive.sdk.location.AdDropLocationActivity;
 import com.boardactive.sdk.ui.addrops.AdDropsFragment;
 import com.boardactive.sdk.ui.addrops_fav.AdDropsFavFragment;
 
 public class AdDropMainActivity extends AppCompatActivity {
 
-    private static final String TAG = AdDropLocationActivity.class.getSimpleName();
+    private static final String TAG = AdDropMainActivity.class.getSimpleName();
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     /**
