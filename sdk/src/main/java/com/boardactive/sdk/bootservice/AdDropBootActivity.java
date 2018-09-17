@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.boardactive.sdk.R;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.Job;
@@ -29,19 +30,21 @@ public class AdDropBootActivity extends Activity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
         // Check if the user revoked runtime permissions.
-        if (!checkPermissions()) {
-            requestPermissions();
-        }
-
-        Log.d(TAG, "AdDropBootActivity Opened");
+//        if (!checkPermissions()) {
+//            requestPermissions();
+//        }
 
         Log.d(TAG, "AdDropBootActivity Start Service");
-        scheduleJob();
+//        scheduleJob();
         Log.d(TAG, "AdDropBootActivity Close");
         finish();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     /**

@@ -40,12 +40,12 @@
             >
         </activity>
 
-        <service
-            android:name=".fcm.AdDropMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+        <!--<service-->
+            <!--android:name=".fcm.AdDropMessagingService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
         <!-- [END FIREBASE SERVICE] -->
 
         <!-- [START BOOT/DEFAULT SERVICE] -->

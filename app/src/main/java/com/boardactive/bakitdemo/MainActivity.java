@@ -36,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     Log.d(TAG, "MainActivity Start AdDropBootActivity");
-                    Intent addrop_boot = new Intent(MainActivity.this, AdDropBootActivity.class);
-                    addrop_boot.putExtra("", "");
-                    startActivity(addrop_boot);
-`
+//                    Intent addrop_boot = new Intent(MainActivity.this, AdDropBootActivity.class);
+//                    addrop_boot.putExtra("", "");
+//                    startActivity(addrop_boot);
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_addrops);
