@@ -37,7 +37,8 @@ public class AdDropJobDispatcherService extends JobService implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
         ResultCallback<Status> {
-    private static final String TAG = "BA: AdDropJobDispatcherService";
+
+    private static final String TAG = "BA: JobDispatcher";
 
     /**
      * Update interval of location request
