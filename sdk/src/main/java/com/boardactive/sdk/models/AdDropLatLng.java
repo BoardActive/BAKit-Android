@@ -12,6 +12,10 @@ public class AdDropLatLng {
     @Expose
     private String lng;
 
+    @SerializedName("deviceTimeString")
+    @Expose
+    private String deviceTimeString;
+
     /**
      * No args constructor for use in serialization
      */
@@ -21,14 +25,17 @@ public class AdDropLatLng {
     /**
      * @param lat
      * @param lng
+     * @param deviceTimeString
      */
     public AdDropLatLng(
             String lat,
-            String lng
+            String lng,
+            String deviceTimeString
     ) {
         super();
         this.lat = lat;
         this.lng = lng;
+        this.deviceTimeString = deviceTimeString;
     }
 
     public String getLat() {
@@ -47,4 +54,11 @@ public class AdDropLatLng {
         this.lng = lng;
     }
 
+    public String getDeviceTimeString() {
+        return deviceTimeString;
+    }
+
+    public void setDeviceTimeString(String deviceTimeString) {
+        this.deviceTimeString = deviceTimeString;
+    }
 }

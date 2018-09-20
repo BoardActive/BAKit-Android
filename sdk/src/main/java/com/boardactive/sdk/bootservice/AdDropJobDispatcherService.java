@@ -25,6 +25,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import io.reactivex.Observable;
@@ -152,9 +154,12 @@ public class AdDropJobDispatcherService extends JobService implements
             writeLastLocation();
             startLocationUpdates();
 
+            DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+            String date = df.format(Calendar.getInstance().getTime());
 
             mAdDropLatLng.setLng(String.valueOf(lastLocation.getLatitude()));
             mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
+            mAdDropLatLng.setDeviceTimeString(date);
             getObservable().subscribeWith(getObserver());
 
         } else {
@@ -217,8 +222,6 @@ public class AdDropJobDispatcherService extends JobService implements
 
     //Create GeoPoint
     private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
-    public static final String LAT = "LAT";
-    public static final String LNG = "LNG";
 
 
     public Observable<AdDropBookmarkResponse> getObservable(){

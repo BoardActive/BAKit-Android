@@ -2,6 +2,7 @@ package com.boardactive.sdk.network;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -59,8 +60,9 @@ public class NetworkClient {
                             .addHeader("X-BoardActive-Longitude", "" + lng)
                             .method(original.method(), original.body())
                             .build();
-
+                    Log.d("RetroFit","Request sent: " +request );
                     return chain.proceed(request);
+
                 }
             });
 

@@ -26,6 +26,10 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -105,9 +109,12 @@ public class LocationJobService extends JobService implements
             writeLastLocation();
             startLocationUpdates();
 
+            DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+            String date = df.format(Calendar.getInstance().getTime());
 
             mAdDropLatLng.setLng(String.valueOf(lastLocation.getLatitude()));
             mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
+            mAdDropLatLng.setDeviceTimeString(date);
             getObservable().subscribeWith(getObserver());
 
         } else {
