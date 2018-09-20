@@ -2,6 +2,10 @@ package com.boardactive.sdk.bootservice;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -15,10 +19,12 @@ import android.view.View;
 import com.boardactive.sdk.R;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
+import com.boardactive.sdk.bootservice.AdDropJobService;
 
 public class AdDropBootActivity extends Activity {
 
@@ -28,15 +34,15 @@ public class AdDropBootActivity extends Activity {
     private FirebaseJobDispatcher mDispatcher;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Check if the user revoked runtime permissions.
 //        if (!checkPermissions()) {
 //            requestPermissions();
 //        }
+        scheduleJob();
 
-        Log.d(TAG, "AdDropBootActivity Start Service");
-//        scheduleJob();
+
         Log.d(TAG, "AdDropBootActivity Close");
         finish();
 
@@ -91,17 +97,23 @@ public class AdDropBootActivity extends Activity {
     }
 
     private void scheduleJob() {
-        Job myJob = mDispatcher.newJobBuilder()
+
+        AdDropBootActivity context = this;
+        Log.d(TAG, "AdDropBootActivity Start Service");
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(context));
+        Job myJob;
+        myJob = dispatcher.newJobBuilder()
                 .setService(AdDropJobDispatcherService.class)
                 .setTag(JOB_TAG)
-                .setRecurring(false)
+                .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(5, 30))
                 .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
                 .setReplaceCurrent(false)
                 .setConstraints(Constraint.ON_ANY_NETWORK)
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
                 .build();
-        mDispatcher.mustSchedule(myJob);
+        dispatcher.mustSchedule(myJob);
+
     }
 
     private void cancelJob(String jobTag) {

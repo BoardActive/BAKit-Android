@@ -39,13 +39,16 @@
             android:screenOrientation="portrait"
             >
         </activity>
-
-        <!--<service-->
-            <!--android:name=".fcm.AdDropMessagingService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <service
+            android:name=".bootservice.LocationJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".fcm.AdDropMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
         <!-- [END FIREBASE SERVICE] -->
 
         <!-- [START BOOT/DEFAULT SERVICE] -->
@@ -62,6 +65,8 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
         </service>
+
+
         <!-- [END BOOT/DEFAULT SERVICE] -->
 
         <!-- [START INITIAL ACTIVITY] -->
@@ -74,7 +79,14 @@
             >
         </activity>
         <!-- [END INITIAL ACTIVITY] -->
+        <activity android:name=".ui.TransparentActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+
+            </intent-filter>
+        </activity>
         <!-- [START ADDROP ACTIVITY] -->
         <activity android:name=".ui.addrop.AdDropActivity"
             android:label="@string/addrop_name"
@@ -83,6 +95,10 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             >
+            <intent-filter>
+                <action android:name="OPEN_PROMOTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <!-- [END ADDROP ACTIVITY] -->
 

@@ -28,6 +28,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.boardactive.sdk.bootservice.AdDropJobDispatcherService;
+import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
@@ -39,7 +40,7 @@ import com.boardactive.sdk.R;
 public class AdDropMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "AdDropMessagingService";
-
+    Integer promotion_id;
     /**
      * Called when message is received.
      *
@@ -65,7 +66,8 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
+            promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
+            Log.d(TAG, "PROMO ID:" +promotion_id );
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
@@ -83,6 +85,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+        sendNotification(remoteMessage.getNotification().getBody(), promotion_id );
     }
     // [END receive_message]
 
@@ -142,8 +145,9 @@ public class AdDropMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    public void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, AdDropFCMActivity.class);
+    public void sendNotification(String messageBody, Integer promotion_id) {
+        Intent intent = new Intent(this, AdDropActivity.class);
+        intent.putExtra("promotion_id", promotion_id);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -152,16 +156,15 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                .setContentTitle("FCM Message")
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
-
+                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                        .setContentTitle("FCM Message")
+                        .setContentText(messageBody)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        
+
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,

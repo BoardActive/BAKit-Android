@@ -65,10 +65,12 @@ public class AdDropBootReceiver extends BroadcastReceiver {
     }
 
     private void scheduleJobDispatcherService() {
+        mContext = this.mContext;
+        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
         Job myJob = mDispatcher.newJobBuilder()
                 .setService(AdDropJobDispatcherService.class)
                 .setTag(JOB_TAG)
-                .setRecurring(false)
+                .setRecurring(true)
                 .setTrigger(Trigger.executionWindow(5, 30))
                 .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
                 .setReplaceCurrent(false)

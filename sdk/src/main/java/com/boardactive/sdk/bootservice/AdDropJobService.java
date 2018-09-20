@@ -99,8 +99,9 @@ public class AdDropJobService extends JobService implements
             writeLastLocation();
             startLocationUpdates();
 
-            mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
+
             mAdDropLatLng.setLng(String.valueOf(lastLocation.getLatitude()));
+            mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
             getObservable().subscribeWith(getObserver());
 
         } else {

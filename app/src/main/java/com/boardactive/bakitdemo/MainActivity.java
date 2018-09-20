@@ -16,9 +16,10 @@ import android.widget.TextView;
 
 import com.boardactive.bakitdemo.R;
 import com.boardactive.sdk.bootservice.AdDropBootActivity;
+import com.boardactive.sdk.bootservice.AdDropJobService;
 import com.boardactive.sdk.fcm.AdDropFCMActivity;
 import com.boardactive.sdk.ui.AdDropMainActivity;
-
+import com.boardactive.sdk.ui.TransparentActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     Log.d(TAG, "MainActivity Start AdDropBootActivity");
-//                    Intent addrop_boot = new Intent(MainActivity.this, AdDropBootActivity.class);
+                   Intent addrop_boot = new Intent(MainActivity.this, TransparentActivity.class);
 //                    addrop_boot.putExtra("", "");
-//                    startActivity(addrop_boot);
+                    startActivity(addrop_boot);
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_addrops);

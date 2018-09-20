@@ -6,6 +6,9 @@ import android.preference.PreferenceManager;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -33,41 +36,43 @@ public class NetworkClient {
         mContext = context;
     }
 
-    public static Retrofit getRetrofit(final String lat, final String lng){
+    public static Retrofit getRetrofit(final String lng, final String lat){
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
 
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new Interceptor() {
-                                          @Override
-                                          public Response intercept(Interceptor.Chain chain) throws IOException {
-                                              Request original = chain.request();
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Request original = chain.request();
+                    DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+                    String date = df.format(Calendar.getInstance().getTime());
+                    Request request = original.newBuilder()
+                            .header("Content-Type", "application/json")
+                            .addHeader("X-BoardActive-Application-Key", "key")
+                            .addHeader("X-BoardActive-Application-Secret", "secret")
+                            .addHeader("X-BoardActive-Advertiser-Ids", "333")
+                            .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
+                            .addHeader("X-BoardActive-Device-Time", date)
+                            .addHeader("X-BoardActive-Device-OS", "android")
+                            .addHeader("X-BoardActive-Latitude", "" + lat)
+                            .addHeader("X-BoardActive-Longitude", "" + lng)
+                            .method(original.method(), original.body())
+                            .build();
 
-                                              Request request = original.newBuilder()
-                                                      .header("Content-Type", "application/json")
-                                                      .addHeader("X-BoardActive-Application-Key", "key")
-                                                      .addHeader("X-BoardActive-Application-Secret", "secret")
-                                                      .addHeader("X-BoardActive-Advertiser-Id", "333")
-                                                      .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
-                                                      .addHeader("X-BoardActive-Device-OS", "android")
-                                                      .addHeader("X-BoardActive-Latitude", "" + lat)
-                                                      .addHeader("X-BoardActive-Longitude", "" + lng)
-                                                      .method(original.method(), original.body())
-                                                      .build();
-
-                                              return chain.proceed(request);
-                                          }
-                                      });
+                    return chain.proceed(request);
+                }
+            });
 
 
             OkHttpClient okHttpClient = httpClient.build();
 
             retrofit = new Retrofit.Builder()
-                        .baseUrl(REST_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .client(okHttpClient)
-                        .build();
+                    .baseUrl(REST_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(okHttpClient)
+                    .build();
 
         }
 

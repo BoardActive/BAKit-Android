@@ -1,6 +1,7 @@
 package com.boardactive.sdk.ui.addrop;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.models.AdDrop;
+import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +62,28 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras != null) {
-                mAdDrop_id = extras.getInt("ADDROP_ID");
+                //Nathan: Get additional data from FCM notification, for some reason it comes in as
+                //a string instead of an int...?
+                //String temp = Integer.toString(extras.getInt("ADDROP_ID"));
+                try {
+                    String temp = extras.getString("promotion_id");
+
+                    if (temp == null){
+                        Integer temp2 = extras.getInt("promotion_id");
+                        mAdDrop_id = temp2;
+                    }
+                    else {
+                        mAdDrop_id = Integer.parseInt(temp);
+                    }
+                }catch (Exception e) {
+                    Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
+                    //Lets spit out main list view instead of loading null promo
+                    Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
+                    AdDropActivity.this.startActivity(myIntent);
+                }
+                //mAdDrop_id = extras.getInt("promotion_id");
+
+
             }
         }
 
@@ -94,6 +117,16 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        //You can handle some notification data stuff here if desired
+//        if(intent.getStringExtra("promotion_id").equals("845")){
+//            Log.d(TAG,"AdDrop response was the correct promo id");
+//        }
+
     }
 
     @Override

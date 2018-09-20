@@ -60,7 +60,7 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             public void onClick(View v) {
                 Log.d("AdDropsAdapter", "position = " + addropList.get(position).getPromotion_id());
                 Intent intent = new Intent(context.getApplicationContext(), AdDropActivity.class);
-                intent.putExtra("ADDROP_ID", addropList.get(position).getPromotion_id());
+                intent.putExtra("promotion_id", addropList.get(position).getPromotion_id());
                 context.getApplicationContext().startActivity(intent);
             }
         });
