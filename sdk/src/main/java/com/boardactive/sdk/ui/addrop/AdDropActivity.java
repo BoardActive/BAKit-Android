@@ -3,6 +3,7 @@ package com.boardactive.sdk.ui.addrop;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +25,13 @@ import android.widget.Toast;
 
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.models.AdDrop;
+import com.boardactive.sdk.models.AdDropLocations;
 import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdDropActivity extends AppCompatActivity implements AdDropViewInterface {
@@ -63,8 +67,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             Bundle extras = getIntent().getExtras();
             if(extras != null) {
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
-                //a string instead of an int...?
-                //String temp = Integer.toString(extras.getInt("ADDROP_ID"));
+                //a string instead of an int...
                 try {
                     String temp = extras.getString("promotion_id");
 
@@ -81,7 +84,6 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
                     AdDropActivity.this.startActivity(myIntent);
                 }
-                //mAdDrop_id = extras.getInt("promotion_id");
 
 
             }
@@ -150,6 +152,13 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
                 ivFav.setImageDrawable(myDrawable);
             }
+            //If array is out of bounds below, unrender the Directions button
+            try {
+                String location = addrop.getLocations().get(0).getLongitude();
+            } catch (Exception e) {
+                btnDirections.setVisibility(View.GONE);
+                Log.w(TAG,"ERROR getting setting btn to invis: " + e.getMessage());
+            }
 
             ivFav.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,7 +178,15 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             btnDirections.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String addr1 = addrop.getLocations().get(0).getAddress_one();
+                    String addr2 = addrop.getLocations().get(0).getAddress_two();
+                    String city = addrop.getLocations().get(0).getCity();
+                    String zip = addrop.getLocations().get(0).getZip_code();
 
+                    Uri uri = Uri.parse("google.navigation:q="+addr1+","+addr2+","+city+","+zip);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.setPackage("com.google.android.apps.maps");
+                    startActivity(intent);
                 }
             });
 

@@ -160,6 +160,7 @@ public class AdDropJobDispatcherService extends JobService implements
             mAdDropLatLng.setLng(String.valueOf(lastLocation.getLatitude()));
             mAdDropLatLng.setLat(String.valueOf(lastLocation.getLongitude()));
             mAdDropLatLng.setDeviceTimeString(date);
+            Log.d(TAG, "LATLNG" +mAdDropLatLng.getLat()+mAdDropLatLng.getLng());
             getObservable().subscribeWith(getObserver());
 
         } else {

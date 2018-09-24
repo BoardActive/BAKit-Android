@@ -35,6 +35,7 @@ public class AdDropPresenter implements AdDropPresenterInterface {
                 .getString("LAT", "");
         mLng = PreferenceManager.getDefaultSharedPreferences(context)
                 .getString("LNG", "");
+        Log.w(TAG,"LATLONG"+mLat+" "+mLng);
 
         getObservable().subscribeWith(getObserver());
     }

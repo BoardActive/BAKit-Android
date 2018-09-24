@@ -38,9 +38,7 @@ public class AdDropLatLng {
         this.deviceTimeString = deviceTimeString;
     }
 
-    public String getLat() {
-        return lat;
-    }
+    public String getLat() { return lat; }
 
     public void setLat(String lat) {
         this.lat = lat;
