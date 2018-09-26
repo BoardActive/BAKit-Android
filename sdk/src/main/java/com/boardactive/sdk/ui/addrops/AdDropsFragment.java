@@ -64,7 +64,6 @@ public class AdDropsFragment extends Fragment implements AdDropsViewInterface {
     private void getAdDropList() {
 
         addropsPresenter.getAdDrops(getActivity().getBaseContext());
-
     }
 
     @Override

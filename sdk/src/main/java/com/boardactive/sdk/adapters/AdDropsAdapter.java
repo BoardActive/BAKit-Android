@@ -1,5 +1,6 @@
 package com.boardactive.sdk.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
+import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -98,6 +100,15 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
                     String lng = PreferenceManager.getDefaultSharedPreferences(context)
                             .getString("LNG", "");
                     getObservableRemoveBookmark(addropList.get(position).getPromotion_id(), lat, lng).subscribeWith(getObserverRemoveBookmark());
+//                    //AdDropsAdapter.notifyDataSetChanged();
+//                    Intent intent = new Intent(context,AdDropMainActivity.class);
+//
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//
+//                    context.getApplicationContext().startActivity(intent);
+
+
+
                 } else {
                     Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
                     holder.ivFav.setImageDrawable(myDrawable);
@@ -133,6 +144,8 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
         }
     }
 
+
+
     public Observable<AdDropBookmarkResponse> getObservableAddBookmark(Integer promotion_id, String lat, String lng){
         return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
                 .createAdDropBookmark(promotion_id)
@@ -157,6 +170,8 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             @Override
             public void onComplete() {
                 Log.d(TAG,"Create Bookmark onComplete");
+                final Activity activity = (Activity) context;
+                activity.recreate();
             }
         };
     }
@@ -185,6 +200,8 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             @Override
             public void onComplete() {
                 Log.d(TAG,"Remove Bookmark onComplete");
+                final Activity activity = (Activity) context;
+                activity.recreate();
             }
         };
     }

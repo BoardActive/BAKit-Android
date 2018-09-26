@@ -149,8 +149,7 @@ public class AdDropJobDispatcherService extends JobService implements
         if (lastLocation != null) {
 
             Log.i(TAG, "LastKnown location. " +
-                    "Long: " + lastLocation.getLongitude() +
-                    " | Lat: " + lastLocation.getLatitude());
+                    "  Lat: " + lastLocation.getLatitude() +" | Long: " + lastLocation.getLongitude());
             writeLastLocation();
             startLocationUpdates();
 
@@ -226,7 +225,10 @@ public class AdDropJobDispatcherService extends JobService implements
 
 
     public Observable<AdDropBookmarkResponse> getObservable(){
-        return NetworkClient.getRetrofit(mAdDropLatLng.getLat(), mAdDropLatLng.getLng()).create(NetworkInterface.class)
+        String lat = mAdDropLatLng.getLat();
+        String lng = mAdDropLatLng.getLng();
+        Log.w(TAG,"LATLNG+ "+lat+" - "+lng);
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
                 .createGeopoint(mAdDropLatLng)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

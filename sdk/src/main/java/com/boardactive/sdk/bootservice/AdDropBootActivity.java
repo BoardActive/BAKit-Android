@@ -39,7 +39,7 @@ public class AdDropBootActivity extends Activity {
         // Check if the user revoked runtime permissions.
 //        if (!checkPermissions()) {
 //            requestPermissions();
-//        }
+//       }
         scheduleJob();
 
 

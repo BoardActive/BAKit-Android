@@ -137,6 +137,7 @@ public class AdDropMainActivity extends AppCompatActivity {
                     return new AdDropsFragment();
                 case 1:
                     return new AdDropsFavFragment();
+
             }
             return null;
         }

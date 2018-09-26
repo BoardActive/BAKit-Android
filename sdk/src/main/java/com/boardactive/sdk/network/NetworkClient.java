@@ -20,7 +20,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
-
+    public static String mLat;
+    public static String mLng;
     public static Context mContext;
     public static Retrofit retrofit;
 
@@ -37,9 +38,10 @@ public class NetworkClient {
         mContext = context;
     }
 
-    public static Retrofit getRetrofit(final String lng, final String lat){
+    public static Retrofit getRetrofit(   String lng ,  String lat){
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
-
+         mLat = lat;
+         mLng = lng;
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new Interceptor() {
@@ -48,6 +50,7 @@ public class NetworkClient {
                     Request original = chain.request();
                     DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
                     String date = df.format(Calendar.getInstance().getTime());
+
                     Request request = original.newBuilder()
                             .header("Content-Type", "application/json")
                             .addHeader("X-BoardActive-Application-Key", "key")
@@ -56,11 +59,11 @@ public class NetworkClient {
                             .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
                             .addHeader("X-BoardActive-Device-Time", date)
                             .addHeader("X-BoardActive-Device-OS", "android")
-                            .addHeader("X-BoardActive-Latitude", "" + lat)
-                            .addHeader("X-BoardActive-Longitude", "" + lng)
+                            .addHeader("X-BoardActive-Latitude", "" + mLat)
+                            .addHeader("X-BoardActive-Longitude", "" + mLng)
                             .method(original.method(), original.body())
                             .build();
-                    Log.d("RetroFit","Request sent: " +request );
+                    Log.d("RetroFit","Request sent: " +mLat + "- " + mLng +request );
                     return chain.proceed(request);
 
                 }
