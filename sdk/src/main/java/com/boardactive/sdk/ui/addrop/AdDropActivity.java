@@ -1,10 +1,13 @@
 package com.boardactive.sdk.ui.addrop;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -25,7 +28,10 @@ import android.widget.Toast;
 
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.models.AdDrop;
+import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropLocations;
+import com.boardactive.sdk.network.NetworkClient;
+import com.boardactive.sdk.network.NetworkInterface;
 import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -33,6 +39,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class AdDropActivity extends AppCompatActivity implements AdDropViewInterface {
 
@@ -45,6 +56,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
     TextView tvTitle,tvCategory,tvDescription;
     ImageView ivAdDrop, ivFav;
     Button btnDirections, btnRedeem;
+    Context mContext = this;
 
 
     @Override
@@ -163,14 +175,25 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             ivFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!addrop.getIsBookmarked()){
+                    if (addrop.getIsBookmarked()){
                         Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart_outline);
                         ivFav.setImageDrawable(myDrawable);
-                        addrop.setIsBookmarked(true);
+                        addrop.setIsBookmarked(false);
+                        String lat = PreferenceManager.getDefaultSharedPreferences(mContext)
+                                .getString("LAT", "");
+                        String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
+                                .getString("LNG", "");
+                        getObservableRemoveBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverRemoveBookmark());
                     } else {
                         Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
                         ivFav.setImageDrawable(myDrawable);
-                        addrop.setIsBookmarked(false);
+                        addrop.setIsBookmarked(true);
+                        String lat = PreferenceManager.getDefaultSharedPreferences(mContext)
+                                .getString("LAT", "");
+                        String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
+                                .getString("LNG", "");
+                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+
                     }
                 }
             });
@@ -270,5 +293,74 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
 
         imageDialog.create();
         imageDialog.show();
+    }
+    public Observable<AdDropBookmarkResponse> getObservableAddBookmark(Integer promotion_id, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .createAdDropBookmark(promotion_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public DisposableObserver<AdDropBookmarkResponse> getObserverAddBookmark(){
+        return new DisposableObserver<AdDropBookmarkResponse>() {
+
+            @Override
+            public void onNext(@NonNull AdDropBookmarkResponse adDropBookmarkResponse) {
+                Log.d(TAG,"Create Bookmark OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Create Bookmark onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Create Bookmark onComplete");
+                Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
+                ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
+
+    public Observable<AdDropBookmarkResponse> getObservableRemoveBookmark(Integer promotion_id, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .removeAdDropBookmark(promotion_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public DisposableObserver<AdDropBookmarkResponse> getObserverRemoveBookmark(){
+        return new DisposableObserver<AdDropBookmarkResponse>() {
+
+            @Override
+            public void onNext(@NonNull AdDropBookmarkResponse adDropBookmarkResponse) {
+                Log.d(TAG,"Remove Bookmark OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Remove Bookmark onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Remove Bookmark onComplete");
+                Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart_outline);
+                ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
+    public void refresh() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 }

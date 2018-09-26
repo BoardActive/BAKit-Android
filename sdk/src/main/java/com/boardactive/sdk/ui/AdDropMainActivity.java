@@ -1,10 +1,14 @@
 package com.boardactive.sdk.ui;
 
 import android.Manifest;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -24,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Handler;
 
 import com.boardactive.sdk.BuildConfig;
 import com.boardactive.sdk.R;
@@ -49,11 +54,21 @@ public class AdDropMainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    public Integer runOnce = 0;
+    public Integer mPosition;
+    Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_drops_main);
+
+        // So we can tell adDropsAdapter what page we are on (only need it here incase user closes
+        // app while on favorites page, this overrides the old Boolean
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("favorites", false);
+        editor.commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,14 +88,33 @@ public class AdDropMainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Toast.makeText(AdDropMainActivity.this, "onPageScrolled(): " + position,
-                        Toast.LENGTH_SHORT).show();
+                mPosition = position;
             }
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(AdDropMainActivity.this, "onPageSelected(): " + position,
-                        Toast.LENGTH_SHORT).show();
+                mPosition = position;
+                if (runOnce == 0) {
+                    runOnce++;
+                    mViewPager.setAdapter(null);
+                    mViewPager.setAdapter(mSectionsPagerAdapter);
+                    mViewPager.setCurrentItem(position);
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    if (position == 1) {
+                        editor.putBoolean("favorites", true);
+                    }else{
+                        editor.putBoolean("favorites", false);
+                    }
+                    editor.commit();
+                }
+                //To prevent endless loop of PageChanges, wait a sec before allowing to run again
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        runOnce = 0;
+                    }
+                }, 100);
             }
 
             @Override
@@ -190,6 +224,18 @@ public class AdDropMainActivity extends AppCompatActivity {
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }
     }
+    @Override
+    public void onRestart()
+    {  // After a back btn event
+        super.onRestart();
+        //refresh(); <-- don't do this, will reset to root page
+        mViewPager.setAdapter(null);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(mPosition);
+
+        //Refresh your stuff here
+    }
+
 
     /**
      * Callback received when a permissions request has been completed.
@@ -239,5 +285,13 @@ public class AdDropMainActivity extends AppCompatActivity {
                         .show();
             }
         }
+    }
+    public void refresh() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 }

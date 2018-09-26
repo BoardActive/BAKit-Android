@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.network.NetworkClient;
@@ -37,6 +38,9 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
 
     List<AdDrops> addropList;
     Context context;
+    AdDropHolder mHolder;
+    Boolean onFavoritesPage;
+    Integer mPosition;
 
     public AdDropsAdapter(List<AdDrops> addropList, Context context) {
         this.addropList = addropList;
@@ -56,6 +60,7 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
 
 //        final Boolean bookmark = addropList.get(position).getIsBookmarked();
         final Boolean bookmark = ((addropList.get(position).getIsBookmarked() == null) ? false : addropList.get(position).getIsBookmarked());
+        mPosition = position;
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,22 +82,21 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
                 .placeholder((R.drawable.ic_launcher_background))
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.ivAdDrop);
-
-        if(bookmark){
+         onFavoritesPage = PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean("favorites", false);
+        if (onFavoritesPage == true) {
+            //Set all the little hearts to true cause otherwise it don't wanna work
+            //I think this dev bug is caused by the position id of the addrops in fav view..
+            //..possibly being incorrect.
             Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
             holder.ivFav.setImageDrawable(myDrawable);
-        } else {
-            Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
-            holder.ivFav.setImageDrawable(myDrawable);
-        }
 
-        Log.d(TAG, "");
-
-        holder.ivFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bookmark){
-                    Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
+            // This listener is for Favorites List view only, it handles bookmark add/remove
+            holder.ivFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // mHolder=holder;
+                    Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
                     holder.ivFav.setImageDrawable(myDrawable);
                     addropList.get(position).setIsBookmarked(false);
                     String lat = PreferenceManager.getDefaultSharedPreferences(context)
@@ -100,28 +104,49 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
                     String lng = PreferenceManager.getDefaultSharedPreferences(context)
                             .getString("LNG", "");
                     getObservableRemoveBookmark(addropList.get(position).getPromotion_id(), lat, lng).subscribeWith(getObserverRemoveBookmark());
-//                    //AdDropsAdapter.notifyDataSetChanged();
-//                    Intent intent = new Intent(context,AdDropMainActivity.class);
-//
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//
-//                    context.getApplicationContext().startActivity(intent);
 
 
-
-                } else {
-                    Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
-                    holder.ivFav.setImageDrawable(myDrawable);
-                    addropList.get(position).setIsBookmarked(true);
-                    String lat = PreferenceManager.getDefaultSharedPreferences(context)
-                            .getString("LAT", "");
-                    String lng = PreferenceManager.getDefaultSharedPreferences(context)
-                            .getString("LNG", "");
-                    getObservableAddBookmark(addropList.get(position).getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
                 }
+            });
+            // If not favorites view, handle bookmark img setting as normal
+        } else {
+            if (bookmark) {
+                Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
+                holder.ivFav.setImageDrawable(myDrawable);
+            } else {
+                Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
+                holder.ivFav.setImageDrawable(myDrawable);
+            }
+        }
+        // This listener is for Main List view only, it handles bookmark add/remove
+        if (onFavoritesPage == false) {
+            holder.ivFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mHolder = holder;
+                    if (bookmark) {
+                        Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
+                        holder.ivFav.setImageDrawable(myDrawable);
+                        addropList.get(position).setIsBookmarked(false);
+                        String lat = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getString("LAT", "");
+                        String lng = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getString("LNG", "");
+                        getObservableRemoveBookmark(addropList.get(position).getPromotion_id(), lat, lng).subscribeWith(getObserverRemoveBookmark());
+                    } else {
+                        Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
+                        holder.ivFav.setImageDrawable(myDrawable);
+                        addropList.get(position).setIsBookmarked(true);
+                        String lat = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getString("LAT", "");
+                        String lng = PreferenceManager.getDefaultSharedPreferences(context)
+                                .getString("LNG", "");
+                        getObservableAddBookmark(addropList.get(position).getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                    }
                 }
-        });
+            });
 
+        }
     }
 
     @Override
@@ -170,8 +195,26 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             @Override
             public void onComplete() {
                 Log.d(TAG,"Create Bookmark onComplete");
-                final Activity activity = (Activity) context;
-                activity.recreate();
+                //final Activity activity = (Activity) context;
+                //activity.recreate();
+                Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
+                mHolder.ivFav.setImageDrawable(myDrawable);
+                if (onFavoritesPage == false) {
+                    mHolder.ivFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart);
+                    mHolder.ivFav.setImageDrawable(myDrawable);
+                    addropList.get(mPosition).setIsBookmarked(true);
+                    String lat = PreferenceManager.getDefaultSharedPreferences(context)
+                            .getString("LAT", "");
+                    String lng = PreferenceManager.getDefaultSharedPreferences(context)
+                            .getString("LNG", "");
+                    getObservableAddBookmark(addropList.get(mPosition).getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                }
+            });
+        }
+
             }
         };
     }
@@ -200,8 +243,27 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             @Override
             public void onComplete() {
                 Log.d(TAG,"Remove Bookmark onComplete");
-                final Activity activity = (Activity) context;
-                activity.recreate();
+//                final Activity activity = (Activity) context;
+//                activity.recreate();
+                if (onFavoritesPage == false) {
+                    Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
+                    mHolder.ivFav.setImageDrawable(myDrawable);
+                    mHolder.ivFav.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                                Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
+                                mHolder.ivFav.setImageDrawable(myDrawable);
+                                addropList.get(mPosition).setIsBookmarked(false);
+                                String lat = PreferenceManager.getDefaultSharedPreferences(context)
+                                        .getString("LAT", "");
+                                String lng = PreferenceManager.getDefaultSharedPreferences(context)
+                                        .getString("LNG", "");
+                                getObservableRemoveBookmark(addropList.get(mPosition).getPromotion_id(), lat, lng).subscribeWith(getObserverRemoveBookmark());
+
+                        }
+                    });
+                }
             }
         };
     }
