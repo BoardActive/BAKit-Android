@@ -1,6 +1,5 @@
 package com.boardactive.sdk.network;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -21,7 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkClient extends Application {
+public class NetworkClient {
     private static String mLat;
     private static String mLng;
     private static Context mContext;
@@ -34,7 +33,7 @@ public class NetworkClient extends Application {
     private static String app_id;
 
     public void NetworkClient(Context context){
-        mContext = getApplicationContext();
+        mContext = context;
     }
     public static void setAppID (String App_id) {
         app_id = App_id;
@@ -45,12 +44,6 @@ public class NetworkClient extends Application {
     }
     public String getAppID() {
         return app_id;
-    }
-
-    @Override
-    public void onCreate(){
-        super.onCreate();
-        this.mContext = this;
     }
 
     // This function sends out our data to the API (events, locations, favorites, ect.)
