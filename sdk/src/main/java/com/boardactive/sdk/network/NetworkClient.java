@@ -20,22 +20,24 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
-    public static String mLat;
-    public static String mLng;
-    public static Context mContext;
-    public static Retrofit retrofit;
+    private static String mLat;
+    private static String mLng;
+    private static Context mContext;
+    private static Retrofit retrofit;
+
 
     private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
-    //    private static String ANDROID_PLAYER_ID = "d5a6d4ae-592a-4368-ab70-021d040db3b9"; //Tom's Android
-    private static String ANDROID_PLAYER_ID = "06a6d615-f88e-4a68-bb23-032297ca7703"; //Tom's Android
-    //Test Advertiser ID 333
-    private static String HARCODED_ADVERTISER_ID = "333"; //Tom's Android
-    private static String ANDROID_LAT = "33.8898219"; //Tom's Latitude
-    private static String ANDROID_LNG = "-84.4699005"; //Tom's Longitude
 
+    private static String app_id;
 
     public void NetworkClient(Context context){
         mContext = context;
+    }
+    public static void setAppID (String App_id) {
+        app_id = App_id;
+    }
+    public String getAppID() {
+        return app_id;
     }
 
     public static Retrofit getRetrofit(   String lng ,  String lat){
@@ -55,7 +57,7 @@ public class NetworkClient {
                             .header("Content-Type", "application/json")
                             .addHeader("X-BoardActive-Application-Key", "key")
                             .addHeader("X-BoardActive-Application-Secret", "secret")
-                            .addHeader("X-BoardActive-Advertiser-Ids", "333")
+                            .addHeader("X-BoardActive-Advertiser-Ids", app_id)
                             .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
                             .addHeader("X-BoardActive-Device-Time", date)
                             .addHeader("X-BoardActive-Device-OS", "android")
@@ -83,4 +85,7 @@ public class NetworkClient {
 
         return retrofit;
     }
+
+
+
 }

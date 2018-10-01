@@ -80,7 +80,7 @@ public class TransparentActivity extends Activity  {
 //                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY).setRequiresCharging(false).build();
 //        jobScheduler.schedule(jobInfo);
 
-        Log.w(TAG, "FCM calling LOcationjobservice");
+        Log.d(TAG, "TransparentActivity calling Locationjobservice");
         Context context = this;
 
 //        Intent service = new Intent(context, BootAlarmService.class);

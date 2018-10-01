@@ -244,8 +244,7 @@ public class AdDropJobService extends JobService implements
 
     //Create GeoPoint
     private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
-    public static final String LAT = "LAT";
-    public static final String LNG = "LNG";
+
 
 
     public Observable<AdDropBookmarkResponse> getObservable(){
