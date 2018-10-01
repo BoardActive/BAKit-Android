@@ -33,9 +33,9 @@ public class NetworkClient extends Application {
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
-//    public void NetworkClient(Context context){
-//        mContext = getApplicationContext();
-//    }
+    public void NetworkClient(Context context){
+        mContext = getApplicationContext();
+    }
     public static void setAppID (String App_id) {
         app_id = App_id;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
