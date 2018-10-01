@@ -33,9 +33,9 @@ public class NetworkClient extends Application {
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
-    public void NetworkClient(Context context){
-        mContext = getApplicationContext();
-    }
+//    public void NetworkClient(Context context){
+//        mContext = getApplicationContext();
+//    }
     public static void setAppID (String App_id) {
         app_id = App_id;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -45,6 +45,12 @@ public class NetworkClient extends Application {
     }
     public String getAppID() {
         return app_id;
+    }
+    
+    @Override
+    public void onCreate(){
+        super.onCreate();
+        mContext = this;
     }
 
     // This function sends out our data to the API (events, locations, favorites, ect.)
