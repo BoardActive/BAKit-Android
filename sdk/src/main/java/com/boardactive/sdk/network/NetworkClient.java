@@ -57,10 +57,10 @@ public class NetworkClient{
          mLat = lat;
          mLng = lng;
          // For background mode, load the advertiserID from savedPrefs
-         if (app_id == null){
-             //PreferenceManager.getDefaultSharedPreferences(Context mContext).getString("app_id", app_id);
-             app_id = "*";
-         }
+//         if (app_id == null){
+//             //PreferenceManager.getDefaultSharedPreferences(Context mContext).getString("app_id", app_id);
+//             app_id = "*";
+//         }
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new Interceptor() {
