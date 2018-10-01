@@ -30,8 +30,8 @@ public class NetworkClient{
     private static Retrofit retrofit;
 
     // If you are developing/testing your app please use our dev API to avoid test data in production
-    //private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
-    private static String REST_URL = "https://api.boardactive.com/"; //BA URL
+    private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
+    //private static String REST_URL = "https://api.boardactive.com/"; //BA URL
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
