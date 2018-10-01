@@ -46,11 +46,11 @@ public class NetworkClient extends Application {
     public String getAppID() {
         return app_id;
     }
-    
+
     @Override
     public void onCreate(){
         super.onCreate();
-        mContext = this;
+        this.mContext = this;
     }
 
     // This function sends out our data to the API (events, locations, favorites, ect.)
