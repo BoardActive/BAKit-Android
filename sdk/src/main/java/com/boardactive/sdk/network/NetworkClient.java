@@ -56,6 +56,9 @@ public class NetworkClient{
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
          mLat = lat;
          mLng = lng;
+         if (app_id == null) {
+            app_id = BuildConfig.VALUES_ARRAY[0];
+         }
          // For background mode, load the advertiserID from savedPrefs
 //         if (app_id == null){
 //             //PreferenceManager.getDefaultSharedPreferences(Context mContext).getString("app_id", app_id);
