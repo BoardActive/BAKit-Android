@@ -1,6 +1,7 @@
 package com.boardactive.sdk.network;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -25,9 +26,10 @@ public class NetworkClient {
     private static Context mContext;
     private static Retrofit retrofit;
 
-
-    private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
-
+    // If you are developing/testing your app please use our dev API to avoid test data in production
+    //private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
+    private static String REST_URL = "https://api.boardactive.com/"; //BA URL
+    // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
     public void NetworkClient(Context context){
@@ -35,15 +37,24 @@ public class NetworkClient {
     }
     public static void setAppID (String App_id) {
         app_id = App_id;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("app_id", app_id);
+        editor.commit();
     }
     public String getAppID() {
         return app_id;
     }
 
+    // This function sends out our data to the API (events, locations, favorites, ect.)
     public static Retrofit getRetrofit(   String lng ,  String lat){
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
          mLat = lat;
          mLng = lng;
+         // For background mode, load the advertiserID from savedPrefs
+         if (app_id == null){
+             app_id = PreferenceManager.getDefaultSharedPreferences(mContext).getString("app_id", "0");
+         }
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new Interceptor() {
