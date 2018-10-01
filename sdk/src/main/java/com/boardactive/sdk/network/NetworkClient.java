@@ -1,10 +1,13 @@
 package com.boardactive.sdk.network;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.boardactive.sdk.BuildConfig;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
@@ -20,7 +23,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetworkClient {
+public class NetworkClient{
     private static String mLat;
     private static String mLng;
     private static Context mContext;
@@ -32,15 +35,17 @@ public class NetworkClient {
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
-    public void NetworkClient(Context context){
+
+
+    public void NetworkClient (Context context){
         mContext = context;
     }
     public static void setAppID (String App_id) {
         app_id = App_id;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("app_id", app_id);
-        editor.commit();
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences();
+        //SharedPreferences.Editor editor = prefs.edit();
+        //editor.putString("app_id", app_id);
+        //editor.commit();
     }
     public String getAppID() {
         return app_id;
@@ -53,7 +58,8 @@ public class NetworkClient {
          mLng = lng;
          // For background mode, load the advertiserID from savedPrefs
          if (app_id == null){
-             app_id = PreferenceManager.getDefaultSharedPreferences(mContext).getString("app_id", "0");
+             //PreferenceManager.getDefaultSharedPreferences(Context mContext).getString("app_id", app_id);
+             app_id = "*";
          }
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
