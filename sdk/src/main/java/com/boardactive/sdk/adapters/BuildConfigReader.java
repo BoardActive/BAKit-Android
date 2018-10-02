@@ -1,5 +1,6 @@
 package com.boardactive.sdk.adapters;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.boardactive.sdk.BuildConfig;
 
@@ -19,6 +20,7 @@ public class BuildConfigReader {
     @Nullable
     private static Object getBuildConfigValue(String fieldName) {
         try {
+            Log.d("READERS", BUILD_CONFIG);
             Class c = Class.forName(BUILD_CONFIG);
             Field f = c.getDeclaredField(fieldName);
             f.setAccessible(true);
