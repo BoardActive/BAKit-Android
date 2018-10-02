@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.boardactive.sdk.BuildConfig;
+import com.boardactive.sdk.adapters.BuildConfigHelper;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.IOException;
@@ -54,11 +55,11 @@ public class NetworkClient{
          mLng = lng;
          //Get AppID from gradle.properties
          if (app_id == null) {
-            app_id = BuildConfig.VALUES_ARRAY[0];
+            app_id = BuildConfigHelper.APP_ID;
          }
          //Get Environment
-        Log.d("TAG",BuildConfig.VALUES_ARRAY[0]+ "---"+ BuildConfig.ENVIRONMENT_ARRAY[0]);
-         if (BuildConfig.ENVIRONMENT_ARRAY[0]=="dev"){
+        Log.d("TAG",BuildConfigHelper.APP_ID+ "---"+ BuildConfigHelper.ENVIRONMENT);
+         if (BuildConfigHelper.ENVIRONMENT=="dev"){
              REST_URL = "https://dev-api.boardactive.com/";
          }
 
