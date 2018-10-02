@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20214032-871e-4fdd-9957-8eeb4afee740" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/adapters/BuildConfigHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="91" lean-forward="true" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="91" />
+              <caret line="7" column="91" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="91" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/bootservice/AdDropJobDispatcherService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="124">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,15 +89,13 @@
       <file leaf-file-name="NetworkClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="61" column="99" lean-forward="false" selection-start-line="61" selection-start-column="99" selection-end-line="61" selection-end-column="99" />
+            <state relative-caret-position="133">
+              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
               <folding>
-                <element signature="e#1376#1377#0" expanded="true" />
-                <element signature="e#1410#1411#0" expanded="true" />
-                <element signature="e#1474#1475#0" expanded="true" />
-                <element signature="e#1505#1506#0" expanded="true" />
-                <element signature="e#1536#1537#0" expanded="true" />
-                <element signature="e#1565#1566#0" expanded="true" />
+                <element signature="e#1375#1376#0" expanded="true" />
+                <element signature="e#1409#1410#0" expanded="true" />
+                <element signature="e#1557#1558#0" expanded="true" />
+                <element signature="e#1586#1587#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2730,7 +2729,7 @@
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/adapters/BuildConfigHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="91" lean-forward="true" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="91" />
+          <caret line="7" column="91" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="91" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2756,22 +2755,20 @@
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/bootservice/AdDropJobDispatcherService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
-          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="61" column="99" lean-forward="false" selection-start-line="61" selection-start-column="99" selection-end-line="61" selection-end-column="99" />
+        <state relative-caret-position="133">
+          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
           <folding>
-            <element signature="e#1376#1377#0" expanded="true" />
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1474#1475#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1536#1537#0" expanded="true" />
-            <element signature="e#1565#1566#0" expanded="true" />
+            <element signature="e#1375#1376#0" expanded="true" />
+            <element signature="e#1409#1410#0" expanded="true" />
+            <element signature="e#1557#1558#0" expanded="true" />
+            <element signature="e#1586#1587#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -35,15 +35,16 @@ public class NetworkClient{
     private static String REST_URL = "https://api.boardactive.com/"; //BA URL
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
-    private static Package name;
+    private static String name;
 
 
 
     public void NetworkClient (Context context){
         mContext = context;
     }
-    public static void setAppID (String App_id, Package name) {
+    public static void setAppID (String App_id, String pname) {
         app_id = App_id;
+        name = pname;
     }
     public String getAppID() {
         return app_id;
