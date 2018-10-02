@@ -57,6 +57,7 @@ public class NetworkClient{
             app_id = BuildConfig.VALUES_ARRAY[0];
          }
          //Get Environment
+        Log.d("TAG",BuildConfig.VALUES_ARRAY[0]+ "---"+ BuildConfig.ENVIRONMENT_ARRAY[0]);
          if (BuildConfig.ENVIRONMENT_ARRAY[0]=="dev"){
              REST_URL = "https://dev-api.boardactive.com/";
          }
