@@ -5,7 +5,7 @@ import com.boardactive.sdk.BuildConfig;
 
 import java.lang.reflect.Field;
 
-public class BuildConfigHelper {
+public class BuildConfigReader {
 
     private static String BUILD_CONFIG;
 
@@ -14,7 +14,7 @@ public class BuildConfigHelper {
     public static  void setPackage (String packageName) {
         BUILD_CONFIG = packageName;
     }
-    
+
 
     @Nullable
     private static Object getBuildConfigValue(String fieldName) {
