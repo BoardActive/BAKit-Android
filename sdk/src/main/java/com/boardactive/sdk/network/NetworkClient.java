@@ -30,8 +30,8 @@ public class NetworkClient{
     private static Retrofit retrofit;
 
     // If you are developing/testing your app please use our dev API to avoid test data in production
-    private static String REST_URL = "https://dev-api.boardactive.com/"; //BA URL
-    //private static String REST_URL = "https://api.boardactive.com/"; //BA URL
+    //private static String REST_URL = "https://dev-api.boardactive.com/"; //BA DEV URL
+    private static String REST_URL = "https://api.boardactive.com/"; //BA URL
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
 
@@ -42,10 +42,6 @@ public class NetworkClient{
     }
     public static void setAppID (String App_id) {
         app_id = App_id;
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences();
-        //SharedPreferences.Editor editor = prefs.edit();
-        //editor.putString("app_id", app_id);
-        //editor.commit();
     }
     public String getAppID() {
         return app_id;
@@ -56,14 +52,15 @@ public class NetworkClient{
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
          mLat = lat;
          mLng = lng;
+         //Get AppID from gradle.properties
          if (app_id == null) {
             app_id = BuildConfig.VALUES_ARRAY[0];
          }
-         // For background mode, load the advertiserID from savedPrefs
-//         if (app_id == null){
-//             //PreferenceManager.getDefaultSharedPreferences(Context mContext).getString("app_id", app_id);
-//             app_id = "*";
-//         }
+         //Get Environment
+         if (BuildConfig.VALUES_ARRAY[0]=="dev"){
+             REST_URL = "https://dev-api.boardactive.com/";
+         }
+
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new Interceptor() {
