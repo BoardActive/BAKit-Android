@@ -1,33 +1,20 @@
 package com.boardactive.sdk.adapters;
 import android.support.annotation.Nullable;
 
+import com.boardactive.sdk.BuildConfig;
+
 import java.lang.reflect.Field;
 
 public class BuildConfigHelper {
 
-    private static final String BUILD_CONFIG = "com.example.nb.myapplication.BuildConfigHelper";
+    private static String BUILD_CONFIG;
 
     public static final String APP_ID = (String) getBuildConfigValue("APP_ID");
     public static final String ENVIRONMENT = (String) getBuildConfigValue("ENVIRONMENT");
-
-
-    private static boolean getDebug() {
-        Object o = getBuildConfigValue("DEBUG");
-        if (o != null && o instanceof Boolean) {
-            return (Boolean) o;
-        } else {
-            return false;
-        }
+    public static  void setPackage (String packageName) {
+        BUILD_CONFIG = packageName;
     }
-
-    private static int getVersionCode() {
-        Object o = getBuildConfigValue("VERSION_CODE");
-        if (o != null && o instanceof Integer) {
-            return (Integer) o;
-        } else {
-            return Integer.MIN_VALUE;
-        }
-    }
+    
 
     @Nullable
     private static Object getBuildConfigValue(String fieldName) {
