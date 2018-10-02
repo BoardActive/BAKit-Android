@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 
 public class BuildConfigHelper {
 
-    private static final String BUILD_CONFIG = "com.boardactive.sdk.adapters.BuildConfigHelper";
+    private static final String BUILD_CONFIG = "com.example.nb.myapplication.BuildConfigHelper";
 
     public static final String APP_ID = (String) getBuildConfigValue("APP_ID");
     public static final String ENVIRONMENT = (String) getBuildConfigValue("ENVIRONMENT");
