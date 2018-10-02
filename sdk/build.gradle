@@ -4,7 +4,7 @@ def String[] environmentArray = environment.split(',')
 
 android {
     compileSdkVersion 27
-
+    publishNonDefault true
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
