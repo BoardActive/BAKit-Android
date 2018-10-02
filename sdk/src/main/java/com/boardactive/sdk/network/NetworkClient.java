@@ -35,13 +35,14 @@ public class NetworkClient{
     private static String REST_URL = "https://api.boardactive.com/"; //BA URL
     // app_id is the Advertiser's ID from the BoardActive Platform
     private static String app_id;
+    private static Package name;
 
 
 
     public void NetworkClient (Context context){
         mContext = context;
     }
-    public static void setAppID (String App_id) {
+    public static void setAppID (String App_id, Package name) {
         app_id = App_id;
     }
     public String getAppID() {
@@ -58,7 +59,7 @@ public class NetworkClient{
             app_id = BuildConfigHelper.APP_ID;
          }
          //Get Environment
-        Log.d("TAG",BuildConfigHelper.APP_ID+ "---"+ BuildConfigHelper.ENVIRONMENT);
+        Log.d("TAG",BuildConfigHelper.APP_ID+ "---"+ BuildConfigHelper.ENVIRONMENT + "--+--" + name);
          if (BuildConfigHelper.ENVIRONMENT=="dev"){
              REST_URL = "https://dev-api.boardactive.com/";
          }
