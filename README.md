@@ -17,8 +17,7 @@ Building with Android Studio is required.
 Download and include [bakit-android.aar](https://github.com/BoardActive/BAKit-android/tree/master/aar) and import into you android project. 
 
 ### Dependencies
-You app must include Google Play Services
-[Learn More] Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
+You app must include Google Play Services.  Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
 
 We use JitPack as a repository service, you will add a few lines to the gradle files to import our SDK into your project. (Instructions for Maven, sbt, and leiningen available upon request)
 
@@ -49,7 +48,7 @@ allprojects {
 }
 ```
 
-Include the following to you App-level build.gradle
+Include the following to your App-level build.gradle
 ```javascript
 android {
     compileSdkVersion 27
@@ -79,7 +78,7 @@ environment="dev" //Set this to dev when you are testing your app, this avoids t
 ```
 
 ### Include Location permissions to your android project
-In you MainActivity.java include the following: 
+In your MainActivity.java include the following: 
 
 ```javascript
 Global Variables: 
