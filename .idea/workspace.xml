@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,25 +21,30 @@
       <file leaf-file-name="AdDropMainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="259" column="77" lean-forward="false" selection-start-line="259" selection-start-column="77" selection-end-line="259" selection-end-column="77" />
+            <state relative-caret-position="-1">
+              <caret line="240" column="64" lean-forward="false" selection-start-line="240" selection-start-column="64" selection-end-line="240" selection-end-column="64" />
               <folding>
                 <element signature="e#4503#4636#0" expanded="true" />
                 <element signature="e#4635#4636#0" expanded="true" />
-                <element signature="e#7420#7449#0" expanded="true" />
-                <element signature="e#7530#7541#0" expanded="true" />
-                <element signature="e#7543#8010#0" expanded="true" />
-                <element signature="e#8009#8010#0" expanded="true" />
-                <element signature="e#10614#10652#0" expanded="true" />
-                <element signature="e#10741#10758#0" expanded="true" />
-                <element signature="e#10760#11559#0" expanded="true" />
-                <element signature="e#11558#11559#0" expanded="true" />
+                <element signature="e#7434#7463#0" expanded="true" />
+                <element signature="e#7544#7555#0" expanded="true" />
+                <element signature="e#7557#8024#0" expanded="true" />
+                <element signature="e#8023#8024#0" expanded="true" />
+                <element signature="e#10642#10680#0" expanded="true" />
+                <element signature="e#10769#10786#0" expanded="true" />
+                <element signature="e#10788#11587#0" expanded="true" />
+                <element signature="e#11586#11587#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>mview</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2444,19 +2448,19 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="259" column="77" lean-forward="false" selection-start-line="259" selection-start-column="77" selection-end-line="259" selection-end-column="77" />
+        <state relative-caret-position="-1">
+          <caret line="240" column="64" lean-forward="false" selection-start-line="240" selection-start-column="64" selection-end-line="240" selection-end-column="64" />
           <folding>
             <element signature="e#4503#4636#0" expanded="true" />
             <element signature="e#4635#4636#0" expanded="true" />
-            <element signature="e#7420#7449#0" expanded="true" />
-            <element signature="e#7530#7541#0" expanded="true" />
-            <element signature="e#7543#8010#0" expanded="true" />
-            <element signature="e#8009#8010#0" expanded="true" />
-            <element signature="e#10614#10652#0" expanded="true" />
-            <element signature="e#10741#10758#0" expanded="true" />
-            <element signature="e#10760#11559#0" expanded="true" />
-            <element signature="e#11558#11559#0" expanded="true" />
+            <element signature="e#7434#7463#0" expanded="true" />
+            <element signature="e#7544#7555#0" expanded="true" />
+            <element signature="e#7557#8024#0" expanded="true" />
+            <element signature="e#8023#8024#0" expanded="true" />
+            <element signature="e#10642#10680#0" expanded="true" />
+            <element signature="e#10769#10786#0" expanded="true" />
+            <element signature="e#10788#11587#0" expanded="true" />
+            <element signature="e#11586#11587#0" expanded="true" />
           </folding>
         </state>
       </provider>
