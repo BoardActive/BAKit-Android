@@ -30,7 +30,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        //Add the following to you Top-Level build.gradle
+        //Add the following to your Top-Level build.gradle
         classpath 'com.google.gms:google-services:4.1.0'
     }
 }
