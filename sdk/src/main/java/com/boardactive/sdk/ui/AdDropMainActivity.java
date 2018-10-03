@@ -262,7 +262,7 @@ public class AdDropMainActivity extends AppCompatActivity {
                 // when permissions are denied. Otherwise, your app could appear unresponsive to
                 // touches or interactions which have required permissions.
                 Snackbar.make(
-                        findViewById(R.id.activity_main),
+                        findViewById(mViewPager.getId()),
                         R.string.permission_denied_explanation,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.settings, new View.OnClickListener() {
