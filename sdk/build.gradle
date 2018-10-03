@@ -63,6 +63,5 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.BoardActive'

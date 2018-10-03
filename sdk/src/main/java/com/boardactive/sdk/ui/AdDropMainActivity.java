@@ -198,7 +198,7 @@ public class AdDropMainActivity extends AppCompatActivity {
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.");
             Snackbar.make(
-                    findViewById(R.id.activity_main),
+                    findViewById(mViewPager.getId()),
                     R.string.permission_rationale,
                     Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, new View.OnClickListener() {
