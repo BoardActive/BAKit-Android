@@ -19,6 +19,7 @@ Download and include [bakit-android.aar](https://github.com/BoardActive/BAKit-an
 ### Dependencies
 You app must include Google Play Services
 [Learn More] Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
+
 We use JitPack as a repository service, you will add a few lines to the gradle files to import our SDK into your project. (Instructions for Maven, sbt, and leiningen available upon request)
 
 ```javascript
