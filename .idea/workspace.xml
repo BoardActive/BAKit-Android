@@ -26,19 +26,19 @@
       <file leaf-file-name="AdDropMainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="215" column="87" lean-forward="true" selection-start-line="215" selection-start-column="87" selection-end-line="215" selection-end-column="87" />
+            <state relative-caret-position="105">
+              <caret line="200" column="60" lean-forward="false" selection-start-line="200" selection-start-column="60" selection-end-line="200" selection-end-column="60" />
               <folding>
                 <element signature="e#4503#4636#0" expanded="true" />
                 <element signature="e#4635#4636#0" expanded="true" />
-                <element signature="e#7418#7447#0" expanded="true" />
-                <element signature="e#7528#7539#0" expanded="true" />
-                <element signature="e#7541#8008#0" expanded="true" />
-                <element signature="e#8007#8008#0" expanded="true" />
-                <element signature="e#10610#10648#0" expanded="true" />
-                <element signature="e#10737#10754#0" expanded="true" />
-                <element signature="e#10756#11555#0" expanded="true" />
-                <element signature="e#11554#11555#0" expanded="true" />
+                <element signature="e#7428#7457#0" expanded="true" />
+                <element signature="e#7538#7549#0" expanded="true" />
+                <element signature="e#7551#8018#0" expanded="true" />
+                <element signature="e#8017#8018#0" expanded="true" />
+                <element signature="e#10630#10668#0" expanded="true" />
+                <element signature="e#10757#10774#0" expanded="true" />
+                <element signature="e#10776#11575#0" expanded="true" />
+                <element signature="e#11574#11575#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,6 +50,7 @@
     <findStrings>
       <find>mview</find>
       <find>findV</find>
+      <find>getRoot</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk</dir>
@@ -2457,19 +2458,19 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="215" column="87" lean-forward="true" selection-start-line="215" selection-start-column="87" selection-end-line="215" selection-end-column="87" />
+        <state relative-caret-position="105">
+          <caret line="200" column="60" lean-forward="false" selection-start-line="200" selection-start-column="60" selection-end-line="200" selection-end-column="60" />
           <folding>
             <element signature="e#4503#4636#0" expanded="true" />
             <element signature="e#4635#4636#0" expanded="true" />
-            <element signature="e#7418#7447#0" expanded="true" />
-            <element signature="e#7528#7539#0" expanded="true" />
-            <element signature="e#7541#8008#0" expanded="true" />
-            <element signature="e#8007#8008#0" expanded="true" />
-            <element signature="e#10610#10648#0" expanded="true" />
-            <element signature="e#10737#10754#0" expanded="true" />
-            <element signature="e#10756#11555#0" expanded="true" />
-            <element signature="e#11554#11555#0" expanded="true" />
+            <element signature="e#7428#7457#0" expanded="true" />
+            <element signature="e#7538#7549#0" expanded="true" />
+            <element signature="e#7551#8018#0" expanded="true" />
+            <element signature="e#8017#8018#0" expanded="true" />
+            <element signature="e#10630#10668#0" expanded="true" />
+            <element signature="e#10757#10774#0" expanded="true" />
+            <element signature="e#10776#11575#0" expanded="true" />
+            <element signature="e#11574#11575#0" expanded="true" />
           </folding>
         </state>
       </provider>
