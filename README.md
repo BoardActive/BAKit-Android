@@ -15,7 +15,7 @@ Download and add the BoardActive SDK into your project with JitPack repository.
 Building with Android Studio is required.
 
 ### Dependencies
-You app must include Google Play Services.  Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
+Your app must include Google Play Services.  Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
 
 We use JitPack as a repository service, you will add a few lines to the gradle files to import our SDK into your project. (Instructions for Maven, sbt, and leiningen available upon request)
 
