@@ -198,7 +198,7 @@ public class AdDropMainActivity extends AppCompatActivity {
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.");
             Snackbar.make(
-                    findViewById(mViewPager.getRootView().getId()),
+                    findViewById(R.id.layout_root),
                     R.string.permission_rationale,
                     Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, new View.OnClickListener() {
@@ -262,7 +262,7 @@ public class AdDropMainActivity extends AppCompatActivity {
                 // when permissions are denied. Otherwise, your app could appear unresponsive to
                 // touches or interactions which have required permissions.
                 Snackbar.make(
-                        findViewById(mViewPager.getRootView().getId()),
+                        findViewById(R.id.layout_root),
                         R.string.permission_denied_explanation,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.settings, new View.OnClickListener() {
