@@ -14,8 +14,6 @@ BoardActive for Android supports APK 15 and greater.
 Download and add the BoardActive SDK into your project with JitPack repository.
 Building with Android Studio is required.
 
-Download and include [bakit-android.aar](https://github.com/BoardActive/BAKit-android/tree/master/aar) and import into you android project. 
-
 ### Dependencies
 You app must include Google Play Services.  Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
 
