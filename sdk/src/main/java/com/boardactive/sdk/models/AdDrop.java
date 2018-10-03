@@ -1,7 +1,5 @@
 package com.boardactive.sdk.models;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

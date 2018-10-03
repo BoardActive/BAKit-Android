@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-def String[] valuesArray = values.split(',')
-def String[] environmentArray = environment.split(',')
 
 android {
     compileSdkVersion 27
@@ -10,8 +8,8 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        buildConfigField "String[]", "VALUES_ARRAY", "{" + "\"" + valuesArray[0] + "\"," + "}"
-        buildConfigField "String[]", "ENVIRONMENT_ARRAY", "{" + "\"" + environmentArray[0] + "\"," + "}"
+        buildConfigField "String", "APP_ID", app_id
+        buildConfigField "String", "ENVIRONMENT", environment
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }

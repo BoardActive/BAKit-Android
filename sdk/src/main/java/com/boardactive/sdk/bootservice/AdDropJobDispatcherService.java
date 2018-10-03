@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.boardactive.sdk.adapters.BuildConfigReader;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropLatLng;
 import com.boardactive.sdk.network.NetworkClient;
@@ -34,6 +35,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+// This class is the Job that checks location on device from FusedLocation
 public class AdDropJobDispatcherService extends JobService implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -72,7 +74,7 @@ public class AdDropJobDispatcherService extends JobService implements
     public boolean onStartJob(JobParameters jobParameters) {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, currentDateTimeString);
-
+        BuildConfigReader.setPackage(getApplicationContext().getPackageName());
         int permissionState = ActivityCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if(permissionState == PackageManager.PERMISSION_GRANTED){
@@ -144,7 +146,6 @@ public class AdDropJobDispatcherService extends JobService implements
      */
     @SuppressLint("MissingPermission")
     private void getLastKnownLocation() {
-        //Log.d(TAG, "getLastKnownLocation()");
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if (lastLocation != null) {
 
@@ -176,8 +177,7 @@ public class AdDropJobDispatcherService extends JobService implements
      */
     @SuppressLint("SetTextI18n")
     private void writeActualLocation(Location location) {
-        Log.d(TAG, location.getLatitude() + ", " + location.getLongitude());
-        //here in this method you can use web service or any other thing
+        //here in this method we can do something with the location
     }
 
     /**
@@ -192,7 +192,6 @@ public class AdDropJobDispatcherService extends JobService implements
      */
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
-        //Log.i(TAG, "startLocationUpdates()");
         locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL)
@@ -205,7 +204,6 @@ public class AdDropJobDispatcherService extends JobService implements
      * Create google api instance
      */
     private void createGoogleApi() {
-        //Log.d(TAG, "createGoogleApi()");
         if (googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -220,9 +218,8 @@ public class AdDropJobDispatcherService extends JobService implements
     }
 
 
-    //Create GeoPoint
+    //Create GeoPoint / API data building
     private AdDropLatLng mAdDropLatLng = new AdDropLatLng();
-
 
     public Observable<AdDropBookmarkResponse> getObservable(){
         String lat = mAdDropLatLng.getLat();
@@ -233,6 +230,7 @@ public class AdDropJobDispatcherService extends JobService implements
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
 
     public DisposableObserver<AdDropBookmarkResponse> getObserver(){
         return new DisposableObserver<AdDropBookmarkResponse>() {

@@ -27,13 +27,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.boardactive.sdk.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import com.boardactive.sdk.R;
 
 public class AdDropFCMActivity extends AppCompatActivity {
 

@@ -4,11 +4,11 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import java.util.List;
-
 import com.boardactive.sdk.models.AdDrops;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

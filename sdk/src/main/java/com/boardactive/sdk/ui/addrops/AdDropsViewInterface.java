@@ -1,8 +1,8 @@
 package com.boardactive.sdk.ui.addrops;
 
-import java.util.List;
-
 import com.boardactive.sdk.models.AdDrops;
+
+import java.util.List;
 
 public interface AdDropsViewInterface {
 

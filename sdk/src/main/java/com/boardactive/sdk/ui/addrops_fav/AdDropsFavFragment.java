@@ -17,8 +17,6 @@ import android.widget.Toast;
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.adapters.AdDropsAdapter;
 import com.boardactive.sdk.models.AdDrops;
-import com.boardactive.sdk.ui.addrops.AdDropsPresenter;
-import com.boardactive.sdk.ui.addrops.AdDropsViewInterface;
 
 import java.util.List;
 

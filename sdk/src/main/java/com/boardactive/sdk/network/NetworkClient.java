@@ -29,32 +29,29 @@ public class NetworkClient{
     //private static String REST_URL = "https://dev-api.boardactive.com/"; //BA DEV URL
     private static String REST_URL = "https://api.boardactive.com/"; //BA URL
     // app_id is the Advertiser's ID from the BoardActive Platform
-    private static String app_id;
+
 
 
 
     public void NetworkClient (Context context){
         mContext = context;
     }
-    public static void setAppID (String App_id) {
-        app_id = App_id;
-    }
-    public String getAppID() {
-        return app_id;
-    }
+
 
     // This function sends out our data to the API (events, locations, favorites, ect.)
     public static Retrofit getRetrofit(   String lng ,  String lat){
+        final String app_id = (String)  BuildConfigReader.getBuildConfigValue("APP_ID");
+        final String environment = (String)  BuildConfigReader.getBuildConfigValue("ENVIRONMENT");
         final String DEVICE_TOKEN = FirebaseInstanceId.getInstance().getToken();
          mLat = lat;
          mLng = lng;
          //Get AppID from gradle.properties
          if (app_id == null) {
-            app_id = BuildConfigReader.APP_ID;
+             Log.w("MISCONFIGURATION", "App_ID was not found, did you set it in the Build.Gradle and gradle.properties?");
          }
          //Get Environment
-        Log.d("TAG", BuildConfigReader.APP_ID+ "---"+ BuildConfigReader.ENVIRONMENT + "--+--");
-         if (BuildConfigReader.ENVIRONMENT=="dev"){
+        Log.d("NetworkClient", "Advertiser ID:"+app_id+"Environment" + environment);
+         if (environment=="dev"){
              REST_URL = "https://dev-api.boardactive.com/";
          }
 

@@ -1,34 +1,34 @@
 package com.boardactive.sdk.adapters;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.boardactive.sdk.BuildConfig;
+import android.util.Log;
 
 import java.lang.reflect.Field;
 
+//This class is used to read the properties set in the Client's build.gradle / gradle.properties
 public class BuildConfigReader {
 
     private static String BUILD_CONFIG;
+    private static String TAG="BuildConfigReader";
 
-    public static final String APP_ID = (String) getBuildConfigValue("APP_ID");
-    public static final String ENVIRONMENT = (String) getBuildConfigValue("ENVIRONMENT");
-    public static  void setPackage (String packageName) {
+    public static void setPackage (String packageName) {
         BUILD_CONFIG = packageName;
     }
 
-
-    @Nullable
-    private static Object getBuildConfigValue(String fieldName) {
+    public static Object getBuildConfigValue( String fieldName) {
         try {
-            Log.d("READERS", BUILD_CONFIG);
-            Class c = Class.forName(BUILD_CONFIG);
-            Field f = c.getDeclaredField(fieldName);
-            f.setAccessible(true);
-            return f.get(null);
-        } catch (Exception e) {
+            Class<?> clazz = Class.forName(BUILD_CONFIG + ".BuildConfig");
+            Field field = clazz.getField(fieldName);
+            return field.get(null);
+        } catch (ClassNotFoundException e) {
+            Log.w(TAG, "Error setting build config values: Class not found");
             e.printStackTrace();
-            return null;
+        } catch (NoSuchFieldException e) {
+            Log.w(TAG, "Error setting build config values: No such field");
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            Log.w(TAG, "Error setting build config values: Illegal Access");
+            e.printStackTrace();
         }
+        return null;
     }
-
 }

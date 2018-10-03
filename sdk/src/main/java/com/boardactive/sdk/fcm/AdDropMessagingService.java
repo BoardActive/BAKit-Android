@@ -27,6 +27,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.boardactive.sdk.R;
 import com.boardactive.sdk.bootservice.AdDropJobDispatcherService;
 import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -34,8 +35,6 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import com.boardactive.sdk.R;
 
 public class AdDropMessagingService extends FirebaseMessagingService {
 

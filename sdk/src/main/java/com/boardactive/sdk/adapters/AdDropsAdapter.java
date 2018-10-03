@@ -1,6 +1,5 @@
 package com.boardactive.sdk.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,20 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.boardactive.sdk.R;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
+import com.boardactive.sdk.models.AdDrops;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
-import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import com.boardactive.sdk.R;
-import com.boardactive.sdk.models.AdDrops;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,6 +29,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+// This is the main AdDrops handler
 public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHolder> {
     private static final String TAG = "AdDropsAdapter";
 
@@ -58,7 +55,6 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
     @Override
     public void onBindViewHolder(final AdDropsAdapter.AdDropHolder holder, final int position) {
 
-//        final Boolean bookmark = addropList.get(position).getIsBookmarked();
         final Boolean bookmark = ((addropList.get(position).getIsBookmarked() == null) ? false : addropList.get(position).getIsBookmarked());
         mPosition = position;
 
@@ -243,8 +239,6 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
             @Override
             public void onComplete() {
                 Log.d(TAG,"Remove Bookmark onComplete");
-//                final Activity activity = (Activity) context;
-//                activity.recreate();
                 if (onFavoritesPage == false) {
                     Drawable myDrawable = context.getResources().getDrawable(R.drawable.ic_heart_outline);
                     mHolder.ivFav.setImageDrawable(myDrawable);

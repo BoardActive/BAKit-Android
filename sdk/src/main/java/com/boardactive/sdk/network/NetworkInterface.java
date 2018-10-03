@@ -1,13 +1,13 @@
 package com.boardactive.sdk.network;
 
 
-import java.util.List;
-
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropLatLng;
-import com.boardactive.sdk.models.AdDropResponse;
 import com.boardactive.sdk.models.AdDrops;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

@@ -15,34 +15,12 @@
  */
 package com.boardactive.sdk.ui;
 
-import android.app.PendingIntent;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.support.design.widget.Snackbar;
-import android.Manifest;
 
-import com.boardactive.sdk.BuildConfig;
-import com.boardactive.sdk.R;
 import com.boardactive.sdk.bootservice.AdDropJobDispatcherService;
-import com.boardactive.sdk.bootservice.AdDropJobService;
-
-import com.boardactive.sdk.bootservice.LocationJobService;
-import android.content.Context;
-import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
-import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
