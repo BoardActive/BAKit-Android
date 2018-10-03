@@ -93,6 +93,7 @@ OnCreate() check for location permissions if not prompt user for locationn permi
         if (!checkPermissions()) {
             requestPermissions();
         }
+   }
 
 Add the following functions to your MainActivity.java:
     /**
