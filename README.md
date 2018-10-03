@@ -1,7 +1,7 @@
 <img src="https://avatars0.githubusercontent.com/u/38864287?s=200&v=4" width="96" height="96"/>
 
 # BAKit-android
-BoardActive\'s Android SDK
+BoardActive's Android SDK
 
 ### Retain and engage mobile users
 Connect with customers using BoardActive's proprietary location-based marketing technology.
@@ -10,8 +10,8 @@ Connect with customers using BoardActive's proprietary location-based marketing 
 
 BoardActive for Android supports APK 15 and greater. 
 
-### AAR Library
-Download and add the BoardActive AAR into your project.
+### SDK
+Download and add the BoardActive SDK into your project with JitPack repository.
 Building with Android Studio is required.
 
 Download and include [bakit-android.aar](https://github.com/BoardActive/BAKit-android/tree/master/aar) and import into you android project. 
@@ -19,6 +19,7 @@ Download and include [bakit-android.aar](https://github.com/BoardActive/BAKit-an
 ### Dependencies
 You app must include Google Play Services
 [Learn More] Our [Google Play Services Overview](https://developers.google.com/android/guides/overview) contains full setup and initialisation instructions.
+We use JitPack as a repository service, you will add a few lines to the gradle files to import our SDK into your project. (Instructions for Maven, sbt, and leiningen available upon request)
 
 ```javascript
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -33,11 +34,47 @@ buildscript {
         classpath 'com.google.gms:google-services:4.1.0'
     }
 }
+// Add JitPack repository to top level build.gradle
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        //Add the code block below for JitPack
+        maven {
+            url "https://jitpack.io"
+            credentials { username authToken }
+        }
+    }
+}
+```
 
 Include the following to you App-level build.gradle
+```javascript
+android {
+    compileSdkVersion 27
+    ...
+    defaultConfig {
+        ...
+        // Add these two lines to reference what you will set in gradle.properties
+        buildConfigField "String", "APP_ID", app_id
+        buildConfigField "String", "ENVIRONMENT", environment
+        ...
+    }
+...
+...
 dependencies {
-    implementation project(':bakit-sdk')
+    ...
+    // This line imports the BoardActive Android SDK to your project, it acts as if you added our source code to your project
+    implementation 'com.github.BoardActive:BAKit-Android:6b2d5b1c62'
+    ...
 }
+```
+Include your Advertiser ID (aka App_ID) and environment to gradle.properties:
+```javascript
+authToken=jp_9b9qh8q80k35hirka5j7vndfqp // This is used for JitPack 
+app_id="330" //Put your app_id here
+environment="dev" //Set this to dev when you are testing your app, this avoids test data being pushed to our Production API
+//Switch it to prod when ready to switch our SDK to production.
 ```
 
 ### Include Location permissions to your android project
@@ -105,22 +142,59 @@ Add the following functions to your MainActivity.java:
 ```
 
 ## How to use this SDK
-### Setup and Launch BAKit Activity
+### Setup and Launch BAKit JobService with our Transparent Activity
+Our Transparent Activity needs to be called to start our location service
 Include the following to your MainActivity.java
 ```javascript
+import com.boardactive.sdk.adapters.BuildConfigReader;
+import com.boardactive.sdk.ui.AdDropMainActivity;
+import com.boardactive.sdk.ui.TransparentActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Intent addrop_boot = new Intent(MainActivity.this, AdDropBootActivity.class);
-        addrop_boot.putExtra(AdDropBootActivity.APP_ID, "[Add Your BA App Id]");
-        startActivity(addrop_boot);
-
+        
         // Check if the user revoked runtime permissions.
         if (!checkPermissions()) {
             requestPermissions();
         }
+        
+        // In your first Activity, send our gradle.properties Reader your App's package name 
+        BuildConfigReader.setPackage(getApplicationContext().getPackageName());
+        
+        // This will launch our Transparent activity which starts our service, the activity will immediately be destroyed and 
+        // user will remain on whichever page they were on before the intent was called
+        Intent addrop_boot = new Intent(MainActivity.this, TransparentActivity.class);
+        startActivity(addrop_boot);
+        
+    }
+```
+
+
+###  Launch BAKit Activity - AdDrops List and Favorites Views
+Include the following to your MainActivity.java
+```javascript
+import com.boardactive.sdk.adapters.BuildConfigReader;
+import com.boardactive.sdk.ui.AdDropMainActivity;
+import com.boardactive.sdk.ui.TransparentActivity;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        // Check if the user revoked runtime permissions.
+        if (!checkPermissions()) {
+            requestPermissions();
+        }
+        
+        // Make sure packageName is set before any SDK code is called, we need packageName to send/receive HTTP requests
+        BuildConfigReader.setPackage(getApplicationContext().getPackageName());
+        
+        Intent addrop_activity = new Intent(MainActivity.this, AdDropMainActivity.class);
+        startActivity(addrop_activity);
+
+        
     }
 ```
 
