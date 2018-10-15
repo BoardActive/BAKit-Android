@@ -72,6 +72,7 @@ public class NetworkClient{
                             .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
                             .addHeader("X-BoardActive-Device-Time", date)
                             .addHeader("X-BoardActive-Device-OS", "android")
+                            .addHeader("X-BoardActive-Device-Id", DEVICE_TOKEN)
                             .addHeader("X-BoardActive-Latitude", "" + mLat)
                             .addHeader("X-BoardActive-Longitude", "" + mLng)
                             .method(original.method(), original.body())
