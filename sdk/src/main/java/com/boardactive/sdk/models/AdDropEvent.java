@@ -42,12 +42,12 @@ public class AdDropEvent {
         this.name = name;
     }
 
-    public List getParams() {
+    public List<AdDropEventParams> getParams() {
         return params;
     }
 
     public void setParams(List<AdDropEventParams> params) {
         this.params = params;
     }
-    
+
 }
