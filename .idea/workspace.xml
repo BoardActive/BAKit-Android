@@ -9,9 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" />
-    </list>
+    <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,8 +86,8 @@
       <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="194" column="77" lean-forward="false" selection-start-line="194" selection-start-column="77" selection-end-line="194" selection-end-column="77" />
+            <state relative-caret-position="-70">
+              <caret line="230" column="0" lean-forward="true" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2787,8 +2785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="194" column="77" lean-forward="false" selection-start-line="194" selection-start-column="77" selection-end-line="194" selection-end-column="77" />
+        <state relative-caret-position="-70">
+          <caret line="230" column="0" lean-forward="true" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
           <folding />
         </state>
       </provider>
