@@ -27,6 +27,7 @@ import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
 import com.boardactive.sdk.ui.AdDropMainActivity;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -186,13 +187,13 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
-
+                        String token = FirebaseInstanceId.getInstance().getToken();
                         JSONObject obj = null;
                         String json = "{ name: received," +
                                 "params:{" +
                                 "promotion_id:565, " +
                                 "advertisement_id:883, " +
-                                "firebaseNotificationId:1536259012270989" +
+                                "firebaseNotificationId:"+token +
                                 "}" +
                                 "}";
 
