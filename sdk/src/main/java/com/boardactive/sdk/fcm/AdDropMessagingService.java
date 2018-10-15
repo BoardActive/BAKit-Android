@@ -103,7 +103,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
 //
             AdDropEvent event = new AdDropEvent();
             event.setName("Received");
-            AdDropEventParams params = null;
+            AdDropEventParams params = new AdDropEventParams();
             params.setAdvertisement_id("1132");
             params.setPromotion_id("845");
             params.setFirebaseNotificationId(mDeviceToken);
