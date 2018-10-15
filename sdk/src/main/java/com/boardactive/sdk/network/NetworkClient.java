@@ -49,11 +49,11 @@ public class NetworkClient{
          if (app_id == null) {
              Log.w("MISCONFIGURATION", "App_ID was not found, did you set it in the Build.Gradle and gradle.properties?");
          }
-         //Get Environment
+        //Get Environment
         Log.d("NetworkClient", "Advertiser ID:"+app_id+"Environment" + environment);
-         if (environment=="dev"){
-             REST_URL = "https://dev-api.boardactive.com/";
-         }
+        if (environment=="dev"){
+            REST_URL = "https://dev-api.boardactive.com/";
+        }
 
         if(retrofit==null){
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -68,7 +68,6 @@ public class NetworkClient{
                             .header("Content-Type", "application/json")
                             .addHeader("X-BoardActive-Application-Key", "key")
                             .addHeader("X-BoardActive-Application-Secret", "secret")
-                            .addHeader("X-BoardActive-Advertiser-Ids", app_id)
                             .addHeader("X-BoardActive-Device-Token", DEVICE_TOKEN)
                             .addHeader("X-BoardActive-Device-Time", date)
                             .addHeader("X-BoardActive-Device-OS", "android")
