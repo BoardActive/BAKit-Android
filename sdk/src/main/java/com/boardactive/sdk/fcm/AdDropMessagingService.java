@@ -110,7 +110,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             params.setFirebaseNotificationId(mDeviceToken);
 
             event.setParams(Collections.singletonList(params));
-            Log.w("FCM", "Promo: "+params.getPromotion_id() + "AdvertisementId: " +params.getAdvertisement_id() + "Event: "+  event.toString() + "---" + params.toString());
+            Log.w("FCM", "Promo: "+params.getPromotion_id() + "AdvertisementId: " +params.getAdvertisement_id() + "Event: "+  event.getParams().toString() + "---" + params.toString());
             String lat ="0";
             String lng ="0";
             getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
