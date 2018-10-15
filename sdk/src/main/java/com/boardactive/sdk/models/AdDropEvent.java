@@ -3,8 +3,6 @@ package com.boardactive.sdk.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class AdDropEvent {
 
     @SerializedName("name")
@@ -13,7 +11,7 @@ public class AdDropEvent {
 
     @SerializedName("params")
     @Expose
-    private List<AdDropEventParams> params;
+    private AdDropEventParams params;
 
 
     /**
@@ -26,10 +24,11 @@ public class AdDropEvent {
      * @param lat
      * @param lng
      * @param deviceTimeString
+     * @param params
      */
     public AdDropEvent(
             String name,
-            List<AdDropEventParams> params
+            AdDropEventParams params
     ) {
         super();
         this.name = name;
@@ -42,7 +41,7 @@ public class AdDropEvent {
         this.name = name;
     }
 
-    public List<AdDropEventParams> getParams() {
+    public AdDropEventParams getParams() {
         return params;
     }
 
