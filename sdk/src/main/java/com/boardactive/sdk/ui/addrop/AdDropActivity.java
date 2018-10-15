@@ -192,10 +192,10 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                                 "params:{" +
                                 "promotion_id:565, " +
                                 "advertisement_id:883, " +
-                                "firebaseNotificationId : 1536259012270989" +
+                                "firebaseNotificationId:1536259012270989" +
                                 "}" +
                                 "}";
-                        
+
 
                         try {
 

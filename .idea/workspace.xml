@@ -89,8 +89,8 @@
       <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="197" column="24" lean-forward="false" selection-start-line="197" selection-start-column="24" selection-end-line="197" selection-end-column="24" />
+            <state relative-caret-position="201">
+              <caret line="194" column="56" lean-forward="false" selection-start-line="194" selection-start-column="56" selection-end-line="194" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -2952,8 +2952,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="197" column="24" lean-forward="false" selection-start-line="197" selection-start-column="24" selection-end-line="197" selection-end-column="24" />
+        <state relative-caret-position="201">
+          <caret line="194" column="56" lean-forward="false" selection-start-line="194" selection-start-column="56" selection-end-line="194" selection-end-column="56" />
           <folding />
         </state>
       </provider>
