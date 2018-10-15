@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.boardactive.sdk.R;
+import com.boardactive.sdk.fcm.AdDropMessagingService;
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropEvent;
@@ -30,6 +31,7 @@ import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
 import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -189,7 +191,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
-                        Log.w("FCM", FirebaseInstanceId.getInstance().getInstanceId().toString());
+
 
 //                        AdDropRegister app = new AdDropRegister();
 //                        app.setFirebaseProjectId("boardactive-sdk");

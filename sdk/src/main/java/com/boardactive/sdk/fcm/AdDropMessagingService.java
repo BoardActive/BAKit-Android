@@ -33,6 +33,7 @@ import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -66,8 +67,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
-            Integer firebase_id = Integer.parseInt(remoteMessage.getData().get("id"));
-            Log.d(TAG, "PROMO ID:" +promotion_id + "FIREBASE ID:"+ firebase_id);
+            Log.d(TAG, "PROMO ID:" +promotion_id + "FIREBASE ID:"+ FirebaseInstanceId.getInstance().getInstanceId());
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
@@ -89,7 +89,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-
+9
     // [START on_new_token]
     /**
      * Called if InstanceID token is updated. This may occur if the security of
