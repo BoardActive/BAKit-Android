@@ -66,7 +66,8 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
-            Log.d(TAG, "PROMO ID:" +promotion_id );
+            Integer firebase_id = Integer.parseInt(remoteMessage.getData().get("id"));
+            Log.d(TAG, "PROMO ID:" +promotion_id + "FIREBASE ID:"+ firebase_id);
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
