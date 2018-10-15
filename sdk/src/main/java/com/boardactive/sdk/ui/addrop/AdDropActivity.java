@@ -183,8 +183,9 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                                 .getString("LAT", "");
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
-                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
                         getObservableSetEvent("Favorited", addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+
 
                     }
                 }
