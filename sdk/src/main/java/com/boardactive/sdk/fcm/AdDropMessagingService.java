@@ -29,6 +29,10 @@ import android.util.Log;
 
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.bootservice.AdDropJobDispatcherService;
+import com.boardactive.sdk.models.AdDropEvent;
+import com.boardactive.sdk.models.AdDropEventParams;
+import com.boardactive.sdk.network.NetworkClient;
+import com.boardactive.sdk.network.NetworkInterface;
 import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -39,10 +43,17 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class AdDropMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "AdDropMessagingService";
     Integer promotion_id;
+    String mDeviceToken;
     /**
      * Called when message is received.
      *
@@ -60,6 +71,15 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         // and data payloads are treated as notification messages. The Firebase console always sends notification
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                 mDeviceToken = instanceIdResult.getToken();
+                // Do whatever you want with your token now
+                // i.e. store it on SharedPreferences or DB
+                // or directly send it to server
+            }
+        });
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
@@ -69,17 +89,25 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
-            Log.d(TAG, "PROMO ID:" +promotion_id + "FIREBASE ID:"+ FirebaseInstanceId.getInstance().getInstanceId());
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    String deviceToken = instanceIdResult.getToken();
-                    Log.d(TAG,"deviceToken: "+ deviceToken);
-                    // Do whatever you want with your token now
-                    // i.e. store it on SharedPreferences or DB
-                    // or directly send it to server
-                }
-            });
+            Log.d(TAG, "PROMO ID:" +promotion_id );
+            //                        AdDropRegister app = new AdDropRegister();
+//                        app.setFirebaseProjectId("boardactive-sdk");
+//                        app.setFirebaseClientEmail("firebase-adminsdk-1zs9w@boardactive-sdk.iam.gserviceaccount.com");
+//                        app.setBundleIdentifier(getPackageName());
+//                        app.setName("BASDK TEST");
+//                        app.setAdvertiser_id(233);
+//                        app.setFirebasePrivateKey("-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDY4WaoSTyoeHhp\\ndabJxjMtKMsjF9ZELP1HgHixtS+A5SkwrNr1F0VR5vyCoYaoOPBOMnzTO7tZpYy3\\nsZ576Biwk9y+sYJq2mf1s66Z/1qOmJbMK45lWQIhQwuRydeTHCZiL82nKXqWQ5qz\\n4/9unfSbg4jZvC8dZcz/R/dutPzWUdWOXDArY8xYJ9LBA55xB2KXL4Frdu9wAEVz\\n+FdiSJIEZZ9hi6/N/bmse3x5M+lxtNiXd0Ok3D5NKMAlGDIVwsRzMYmOfg2f0H65\\nVnKSJkrwAvKxapNjABDml1Mdic1RhamphU9fV2M53Z5RPv392V17AGOMFgoUdYgs\\n9DnxYn/BAgMBAAECggEAFZV/FDXvr7uHjkVLc07Clpa1+rjbVd8dWNGYEWV9BAiq\\nbAHz64rklvVUQYLmRhUek0Wyhwoth8syQTDP2zh6xo38nMzJNC2mxXzbnk9buY/F\\niC24hu0QCXPk8Z4jEmythD2KK730yYISYh9Jcz6MkrKJOtQf4z7XoztMDGw+Mmz0\\n/a4TaMZLqLORfeJVGG15omeo1RTESgw8eeC3zbaMmQuR612flxoKlC3y/gMS9WS8\\nmgJeSqK/u3SnLNptpLV3gLrN30hzka4R4LvXBcNQK/laYA6F4bGmxqiHLYj8i/Gc\\nBI/GoAsq1XT+/j7EsLe3EEYQLCgdD11eYkGkXB7MbQKBgQD83+m8OQqgugHnsc5a\\nPmPxhTKTSYHvb12lsR7WCKVF46yxDnGXwg0qipJIPpkGus74QlM9fi6YcOEtwkQK\\n5lVPoM0VXVJrrWAlV3pRtI7GCYdSN4wUOtm7/2WbxSoy7ycaEFRjEZljDWQKdP5P\\nrVcwf7mrKOHv8v8y1X40PjMIBQKBgQDbj5qDnQej8IaGbvTHbj87u98IJWg76lwX\\nJWjC+C9tn8xe/DXB3SXxM0w3QzVCDfoPmZCeIL/7okWuw4SGNGr3J4il/0pP/0Sr\\n0MXGbdBHD2F2cUwEZKSUz1t8Ijsn7uibCHvGmeBPakV0h3i+HP8KFCVoodXxJ3/w\\nnt21Ar/RjQKBgQCCG9NvfQny2MHSLLI3zJIv2pDDJ7crMunELvXmulwPMa3RC9V2\\nd+m+Ub4iXdLum3+STM33fc0Lskip+qJ32Ttb1SiwLWwS6wnlLLVLBNPRIWX2742r\\nevw8tpPZKgEkY9iCmJRSxONfC6zFlJyk8lNCKPWnE0ns4+JajW56AubO4QKBgDlC\\n5oVUut1iqXL+FRC+C/fEM5KoTtrxcDsJIp1WpOfuORq8pDh/OJoDSulOueEUTBct\\nca4L1IYH+CxwCWwG167FvLmuLu9WH86/kBUEJsGhnUWKnsy2gsXcnnttYgg0Iq3s\\nNHvDPeD4Ukzl1/OdFFbIkkkLjARszM0wYZoHsYcxAoGALAJuHhSJVkHKLIvFCI2B\\nDEXd5seQSwI7InAE+pRHmrwh3LOftW0PVFVPFrHk5RgArMHapelgOuQ3BEl8E0MQ\\nunpJcvmECwuGjYEhkzzovEQ3Ornd3wbttCwX4XDE2rg47tkfUlbbpMfrSRse3uBN\\n84LVpNjNrRtn0BRleNdUZiQ=\\n-----END PRIVATE KEY-----\\n");
+//
+            AdDropEvent event = new AdDropEvent();
+            event.setName("Received");
+            AdDropEventParams params = new AdDropEventParams();
+            params.setAdvertisement_id("1132");
+            params.setPromotion_id("845");
+            params.setFirebaseNotificationId(mDeviceToken);
+            String lat ="0";
+            String lng ="0";
+            getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
+
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
@@ -189,4 +217,38 @@ public class AdDropMessagingService extends FirebaseMessagingService {
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+
+
+    public Observable<AdDropEvent> getObservableSendEvent(AdDropEvent event, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .sendEvent(event)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    public DisposableObserver<AdDropEvent> getObserverSendEvent(){
+        return new DisposableObserver<AdDropEvent>() {
+
+            @Override
+            public void onNext(@NonNull AdDropEvent adDropBookmarkResponse) {
+                Log.d(TAG,"Create Event OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Create Event onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Create Event onComplete");
+                //Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
+                //ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
+
 }

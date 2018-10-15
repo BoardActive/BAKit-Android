@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-class AdDropEventParams {
+public class AdDropEventParams {
 
     @SerializedName("promotion_id")
     @Expose
