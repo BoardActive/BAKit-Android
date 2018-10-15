@@ -109,10 +109,11 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             params.setPromotion_id("845");
             params.setFirebaseNotificationId(mDeviceToken);
 
-            List<AdDropEventParams> plap = event.getParams();
-            String plapp = plap.toString();
+
 
             event.setParams(Collections.singletonList(params));
+            List<AdDropEventParams> plap = event.getParams();
+            String plapp = plap.toString();
             Log.w("FCM", "Promo: "+params.getPromotion_id() + "AdvertisementId: " +params.getAdvertisement_id() + "Event: "+  plapp + "---" + params.toString());
             String lat ="0";
             String lng ="0";
