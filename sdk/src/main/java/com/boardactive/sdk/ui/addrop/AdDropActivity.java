@@ -184,6 +184,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
                         getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                        getObservableSetEvent("Favorited", addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
 
                     }
                 }
@@ -291,6 +292,14 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Observable<AdDropBookmarkResponse> getObservableSetEvent(String eventName, Integer promotion_id, Integer advertiser_id, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .setEvent(eventName, promotion_id, advertiser_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
     public DisposableObserver<AdDropBookmarkResponse> getObserverAddBookmark(){
         return new DisposableObserver<AdDropBookmarkResponse>() {
