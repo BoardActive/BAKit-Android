@@ -184,7 +184,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
                         getObservableSetEvent("Favorited", addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
-                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverSetEvent());
 
 
                     }
@@ -301,6 +301,29 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public DisposableObserver<AdDropBookmarkResponse> getObserverSetEvent(){
+        return new DisposableObserver<AdDropBookmarkResponse>() {
+
+            @Override
+            public void onNext(@NonNull AdDropBookmarkResponse adDropBookmarkResponse) {
+                Log.d(TAG,"Create Bookmark OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Create Bookmark onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Create Bookmark onComplete");
+                Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
+                ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
 
     public DisposableObserver<AdDropBookmarkResponse> getObserverAddBookmark(){
         return new DisposableObserver<AdDropBookmarkResponse>() {
