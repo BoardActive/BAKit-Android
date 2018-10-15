@@ -76,10 +76,12 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         // and data payloads are treated as notification messages. The Firebase console always sends notification
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
+        Log.w("FCM", "Starting getInstance");
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                  mDeviceToken = instanceIdResult.getToken();
+                Log.w("FCM", instanceIdResult.getToken());
                 // Do whatever you want with your token now
                 // i.e. store it on SharedPreferences or DB
                 // or directly send it to server
@@ -108,6 +110,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             AdDropEventParams params = new AdDropEventParams();
             params.setAdvertisement_id("1132");
             params.setPromotion_id("845");
+            Log.w("FCM", mDeviceToken);
             params.setFirebaseNotificationId(mDeviceToken);
 
 
