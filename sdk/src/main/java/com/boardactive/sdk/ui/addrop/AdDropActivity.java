@@ -30,6 +30,8 @@ import com.boardactive.sdk.ui.AdDropMainActivity;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -184,6 +186,8 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
+
+                        JSONObject obj = null;
                         String json = "{ name: received," +
                                 "params:{" +
                                 "promotion_id:565, " +
@@ -191,7 +195,17 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                                 "}" +
                                 "}";
 
-                        getObservableSetEvent(json, addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
+                        try {
+
+                             obj = new JSONObject(json);
+
+                            Log.d("My App", obj.toString());
+
+                        } catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
+                        }
+
+                        getObservableSetEvent(obj.toString(), addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
                         getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverSetEvent());
 
 
