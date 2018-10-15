@@ -12,7 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" />
-      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDropEvent.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDropEvent.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,13 +47,13 @@
       <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="117" column="28" lean-forward="true" selection-start-line="117" selection-start-column="28" selection-end-line="117" selection-end-column="28" />
+            <state relative-caret-position="205">
+              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3481#3871#0" expanded="true" />
                 <element signature="e#3870#3871#0" expanded="true" />
-                <element signature="e#10421#10472#0" expanded="true" />
+                <element signature="e#10450#10501#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3153,13 +3152,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="117" column="28" lean-forward="true" selection-start-line="117" selection-start-column="28" selection-end-line="117" selection-end-column="28" />
+        <state relative-caret-position="205">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3481#3871#0" expanded="true" />
             <element signature="e#3870#3871#0" expanded="true" />
-            <element signature="e#10421#10472#0" expanded="true" />
+            <element signature="e#10450#10501#0" expanded="true" />
           </folding>
         </state>
       </provider>
