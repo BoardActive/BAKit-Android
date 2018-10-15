@@ -10,7 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -89,8 +88,8 @@
       <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="194" column="54" lean-forward="true" selection-start-line="194" selection-start-column="54" selection-end-line="194" selection-end-column="54" />
+            <state relative-caret-position="261">
+              <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2953,8 +2952,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="194" column="54" lean-forward="true" selection-start-line="194" selection-start-column="54" selection-end-line="194" selection-end-column="54" />
+        <state relative-caret-position="261">
+          <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
           <folding />
         </state>
       </provider>
