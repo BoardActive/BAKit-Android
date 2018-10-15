@@ -296,7 +296,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
 
     public Observable<AdDropBookmarkResponse> getObservableSetEvent(String eventName, Integer promotion_id, Integer advertiser_id, String lat, String lng){
         return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
-                .setEvent(eventName, promotion_id, advertiser_id)
+                .setEvent(eventName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

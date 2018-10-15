@@ -27,7 +27,7 @@ public interface NetworkInterface {
     Observable<AdDropBookmarkResponse> createAdDropBookmark(@Path("id") int id);
 
     @POST("mobile/events")
-    Observable<AdDropBookmarkResponse> setEvent(@Body String eventName, int promotion_id, int advertisement_id);
+    Observable<AdDropBookmarkResponse> setEvent(@Body String eventName);
 
     @DELETE("mobile/promotions/{id}/bookmarks")
     Observable<AdDropBookmarkResponse> removeAdDropBookmark(@Path("id") int id);
