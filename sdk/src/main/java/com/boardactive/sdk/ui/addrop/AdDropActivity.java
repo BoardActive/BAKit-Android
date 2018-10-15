@@ -188,6 +188,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                                 .getString("LNG", "");
 
                         String token = FirebaseInstanceId.getInstance().getToken();
+                        token.replaceAll("\\s+","");
                         JSONObject obj = null;
                         String json = "{ name: received," +
                                 "params:{" +
