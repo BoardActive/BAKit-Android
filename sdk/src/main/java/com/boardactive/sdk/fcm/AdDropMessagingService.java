@@ -44,6 +44,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -108,7 +109,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             params.setPromotion_id("845");
             params.setFirebaseNotificationId(mDeviceToken);
 
-            event.setParams(params);
+            event.setParams(Collections.singletonList(params));
             String lat ="0";
             String lng ="0";
             getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
