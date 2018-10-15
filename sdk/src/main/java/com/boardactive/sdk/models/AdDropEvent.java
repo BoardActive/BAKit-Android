@@ -46,7 +46,7 @@ public class AdDropEvent {
         return params;
     }
 
-    public void setParams(List<AdDropEventParams> params) {
+    public void setParams(AdDropEventParams params) {
         this.params = params;
     }
 
