@@ -89,7 +89,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     }
     // [END receive_message]
 
-9
+
     // [START on_new_token]
     /**
      * Called if InstanceID token is updated. This may occur if the security of
