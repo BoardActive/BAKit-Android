@@ -3,7 +3,9 @@ package com.boardactive.sdk.network;
 
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
+import com.boardactive.sdk.models.AdDropEvent;
 import com.boardactive.sdk.models.AdDropLatLng;
+import com.boardactive.sdk.models.AdDropRegister;
 import com.boardactive.sdk.models.AdDrops;
 
 import java.util.List;
@@ -27,7 +29,10 @@ public interface NetworkInterface {
     Observable<AdDropBookmarkResponse> createAdDropBookmark(@Path("id") int id);
 
     @POST("mobile/events")
-    Observable<AdDropBookmarkResponse> setEvent(@Body String eventName);
+    Observable<AdDropEvent> sendEvent(@Body AdDropEvent eventObject);
+
+    @POST("web/v1/apps")
+    Observable<AdDropRegister> registerApp(@Body AdDropRegister registerObject);
 
     @DELETE("mobile/promotions/{id}/bookmarks")
     Observable<AdDropBookmarkResponse> removeAdDropBookmark(@Path("id") int id);

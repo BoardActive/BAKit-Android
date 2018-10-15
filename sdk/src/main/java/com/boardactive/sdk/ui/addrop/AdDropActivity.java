@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.boardactive.sdk.R;
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
+import com.boardactive.sdk.models.AdDropEvent;
+import com.boardactive.sdk.models.AdDropRegister;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
 import com.boardactive.sdk.ui.AdDropMainActivity;
@@ -187,30 +189,17 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
-                        String token = FirebaseInstanceId.getInstance().getToken();
-                        token.replaceAll("\\s+","");
-                        JSONObject obj = null;
-                        String json = "{ name: received," +
-                                "params:{" +
-                                "promotion_id:565, " +
-                                "advertisement_id:883, " +
-                                "firebaseNotificationId:"+"\""+token + "\"" +
-                                "}" +
-                                "}";
 
 
-                        try {
+                        AdDropRegister app = new AdDropRegister();
+                        app.setFirebaseProjectId("boardactive-sdk");
+                        app.setFirebaseClientEmail("firebase-adminsdk-1zs9w@boardactive-sdk.iam.gserviceaccount.com");
+                        app.setBundleIdentifier(getPackageName());
+                        app.setName("BASDK TEST");
+                        app.setAdvertiser_id(233);
+                        app.setFirebasePrivateKey("-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDY4WaoSTyoeHhp\\ndabJxjMtKMsjF9ZELP1HgHixtS+A5SkwrNr1F0VR5vyCoYaoOPBOMnzTO7tZpYy3\\nsZ576Biwk9y+sYJq2mf1s66Z/1qOmJbMK45lWQIhQwuRydeTHCZiL82nKXqWQ5qz\\n4/9unfSbg4jZvC8dZcz/R/dutPzWUdWOXDArY8xYJ9LBA55xB2KXL4Frdu9wAEVz\\n+FdiSJIEZZ9hi6/N/bmse3x5M+lxtNiXd0Ok3D5NKMAlGDIVwsRzMYmOfg2f0H65\\nVnKSJkrwAvKxapNjABDml1Mdic1RhamphU9fV2M53Z5RPv392V17AGOMFgoUdYgs\\n9DnxYn/BAgMBAAECggEAFZV/FDXvr7uHjkVLc07Clpa1+rjbVd8dWNGYEWV9BAiq\\nbAHz64rklvVUQYLmRhUek0Wyhwoth8syQTDP2zh6xo38nMzJNC2mxXzbnk9buY/F\\niC24hu0QCXPk8Z4jEmythD2KK730yYISYh9Jcz6MkrKJOtQf4z7XoztMDGw+Mmz0\\n/a4TaMZLqLORfeJVGG15omeo1RTESgw8eeC3zbaMmQuR612flxoKlC3y/gMS9WS8\\nmgJeSqK/u3SnLNptpLV3gLrN30hzka4R4LvXBcNQK/laYA6F4bGmxqiHLYj8i/Gc\\nBI/GoAsq1XT+/j7EsLe3EEYQLCgdD11eYkGkXB7MbQKBgQD83+m8OQqgugHnsc5a\\nPmPxhTKTSYHvb12lsR7WCKVF46yxDnGXwg0qipJIPpkGus74QlM9fi6YcOEtwkQK\\n5lVPoM0VXVJrrWAlV3pRtI7GCYdSN4wUOtm7/2WbxSoy7ycaEFRjEZljDWQKdP5P\\nrVcwf7mrKOHv8v8y1X40PjMIBQKBgQDbj5qDnQej8IaGbvTHbj87u98IJWg76lwX\\nJWjC+C9tn8xe/DXB3SXxM0w3QzVCDfoPmZCeIL/7okWuw4SGNGr3J4il/0pP/0Sr\\n0MXGbdBHD2F2cUwEZKSUz1t8Ijsn7uibCHvGmeBPakV0h3i+HP8KFCVoodXxJ3/w\\nnt21Ar/RjQKBgQCCG9NvfQny2MHSLLI3zJIv2pDDJ7crMunELvXmulwPMa3RC9V2\\nd+m+Ub4iXdLum3+STM33fc0Lskip+qJ32Ttb1SiwLWwS6wnlLLVLBNPRIWX2742r\\nevw8tpPZKgEkY9iCmJRSxONfC6zFlJyk8lNCKPWnE0ns4+JajW56AubO4QKBgDlC\\n5oVUut1iqXL+FRC+C/fEM5KoTtrxcDsJIp1WpOfuORq8pDh/OJoDSulOueEUTBct\\nca4L1IYH+CxwCWwG167FvLmuLu9WH86/kBUEJsGhnUWKnsy2gsXcnnttYgg0Iq3s\\nNHvDPeD4Ukzl1/OdFFbIkkkLjARszM0wYZoHsYcxAoGALAJuHhSJVkHKLIvFCI2B\\nDEXd5seQSwI7InAE+pRHmrwh3LOftW0PVFVPFrHk5RgArMHapelgOuQ3BEl8E0MQ\\nunpJcvmECwuGjYEhkzzovEQ3Ornd3wbttCwX4XDE2rg47tkfUlbbpMfrSRse3uBN\\n84LVpNjNrRtn0BRleNdUZiQ=\\n-----END PRIVATE KEY-----\\n");
 
-                             obj = new JSONObject(json);
-
-                            Log.d("My App", obj.toString());
-
-                        } catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
-                        }
-
-                        getObservableSetEvent(obj.toString(), addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
-                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverSetEvent());
+                        getObservableRegisterApp(app, lat, lng).subscribeWith(getObserverRegisterApp());
 
 
                     }
@@ -320,36 +309,6 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<AdDropBookmarkResponse> getObservableSetEvent(String eventName, Integer promotion_id, Integer advertiser_id, String lat, String lng){
-        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
-                .setEvent(eventName)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    public DisposableObserver<AdDropBookmarkResponse> getObserverSetEvent(){
-        return new DisposableObserver<AdDropBookmarkResponse>() {
-
-            @Override
-            public void onNext(@NonNull AdDropBookmarkResponse adDropBookmarkResponse) {
-                Log.d(TAG,"Create Bookmark OnNext");
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.d(TAG,"Create Bookmark onError"+ e);
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onComplete() {
-                Log.d(TAG,"Create Bookmark onComplete");
-                Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
-                ivFav.setImageDrawable(myDrawable);
-                //refresh();
-            }
-        };
-    }
 
     public DisposableObserver<AdDropBookmarkResponse> getObserverAddBookmark(){
         return new DisposableObserver<AdDropBookmarkResponse>() {
@@ -405,6 +364,39 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             }
         };
     }
+
+    public Observable<AdDropRegister> getObservableRegisterApp(AdDropRegister app, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .registerApp(app)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    public DisposableObserver<AdDropRegister> getObserverRegisterApp(){
+        return new DisposableObserver<AdDropRegister>() {
+
+            @Override
+            public void onNext(@NonNull AdDropRegister adDropBookmarkResponse) {
+                Log.d(TAG,"Create Event OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Create Event onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Create Event onComplete");
+                //Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
+                //ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
+
     public void refresh() {
         Intent intent = getIntent();
         overridePendingTransition(0, 0);
