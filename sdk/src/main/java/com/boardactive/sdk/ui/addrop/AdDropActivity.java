@@ -184,12 +184,11 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
-                        String json = "{\n" +
-                                "  \"name\":\"received\",\n" +
-                                "\t\"params\":{\n" +
-                                "\t  \"promotion_id\":\"565\"\n" +
-                                "\t  \"advertisement_id\":\"883\"\n" +
-                                "\t}\n" +
+                        String json = "{ name: received," +
+                                "params:{" +
+                                "promotion_id:565, " +
+                                "advertisement_id:883 " +
+                                "}" +
                                 "}";
 
                         getObservableSetEvent(json, addrop.getAdvertisement_id(), addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
