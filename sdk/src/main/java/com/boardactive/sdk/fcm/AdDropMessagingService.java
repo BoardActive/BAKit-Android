@@ -44,6 +44,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -111,10 +112,9 @@ public class AdDropMessagingService extends FirebaseMessagingService {
 
 
 
-            event.setParams(Collections.singletonList(params));
-            List<AdDropEventParams> plap = event.getParams();
-            String plapp = plap.toString();
-            Log.w("FCM", "Promo: "+params.getPromotion_id() + "AdvertisementId: " +params.getAdvertisement_id() + "Event: "+  plapp + "---" + params.toString());
+            event.setParams(Arrays.asList(params));
+
+            Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id());
             String lat ="0";
             String lng ="0";
             getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
