@@ -82,6 +82,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             public void onSuccess(InstanceIdResult instanceIdResult) {
                  mDeviceToken = instanceIdResult.getToken();
                 Log.w("FCM", instanceIdResult.getToken());
+                Log.w("FCM", mDeviceToken);
                 // Do whatever you want with your token now
                 // i.e. store it on SharedPreferences or DB
                 // or directly send it to server
