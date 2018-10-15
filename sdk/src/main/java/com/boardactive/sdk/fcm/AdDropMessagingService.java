@@ -33,7 +33,9 @@ import com.boardactive.sdk.ui.addrop.AdDropActivity;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -68,6 +70,16 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
             Log.d(TAG, "PROMO ID:" +promotion_id + "FIREBASE ID:"+ FirebaseInstanceId.getInstance().getInstanceId());
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    String deviceToken = instanceIdResult.getToken();
+                    Log.d(TAG,"deviceToken");
+                    // Do whatever you want with your token now
+                    // i.e. store it on SharedPreferences or DB
+                    // or directly send it to server
+                }
+            });
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
@@ -110,6 +122,8 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     /**
      * Schedule a job using FirebaseJobDispatcher.
      */
+
+
     private void scheduleJob() {
         // [START dispatch_job]
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
