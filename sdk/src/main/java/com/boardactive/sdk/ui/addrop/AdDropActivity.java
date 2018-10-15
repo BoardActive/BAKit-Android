@@ -191,7 +191,8 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String json = "{ name: received," +
                                 "params:{" +
                                 "promotion_id:565, " +
-                                "advertisement_id:883 " +
+                                "advertisement_id:883, " +
+                                "firebaseNotificationId : 1536259012270989" +
                                 "}" +
                                 "}";
 
