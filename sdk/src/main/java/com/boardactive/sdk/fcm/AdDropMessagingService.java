@@ -43,6 +43,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -104,6 +106,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             params.setAdvertisement_id("1132");
             params.setPromotion_id("845");
             params.setFirebaseNotificationId(mDeviceToken);
+            event.setParams((List<AdDropEventParams>) params);
             String lat ="0";
             String lng ="0";
             getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
