@@ -101,7 +101,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
                     params.setAdvertisement_id("1132");
                     params.setPromotion_id("845");
                     Log.w("FCM", "instance "+ instanceIdResult.getToken());
-                    params.setFirebaseNotificationId(instanceIdResult.getToken());
+                    params.setFirebaseNotificationId("1536259012270989");
                     Log.w("FCM","getParams" +params.getFirebaseNotificationId());
 
 
