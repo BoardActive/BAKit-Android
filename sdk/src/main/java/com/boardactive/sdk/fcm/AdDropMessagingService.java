@@ -66,7 +66,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
      */
     // [START receive_message]
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(final RemoteMessage remoteMessage) {
         // [START_EXCLUDE]
         // There are two types of messages data messages and notification messages. Data messages are handled
         // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
@@ -102,7 +102,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
                     params.setPromotion_id("845");
                     Log.w("FCM", "instance "+ instanceIdResult.getToken());
                     params.setFirebaseNotificationId("1536259012270989");
-                    Log.w("FCM","getParams" +params.getFirebaseNotificationId());
+                    Log.w("FCM","getID" +remoteMessage.getMessageId());
 
 
                     event.setParams(params);
