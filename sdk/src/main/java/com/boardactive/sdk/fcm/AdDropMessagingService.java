@@ -59,6 +59,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     private static final String TAG = "AdDropMessagingService";
     Integer promotion_id;
     String mDeviceToken;
+    String mNotificationTitle;
     /**
      * Called when message is received.
      *
@@ -95,16 +96,20 @@ public class AdDropMessagingService extends FirebaseMessagingService {
                     mDeviceToken = instanceIdResult.getToken();
                     Log.w("FCM", instanceIdResult.getToken());
 
+                    //Register AdDropEvent model for POST request JSON build, assign the variables
                     AdDropEvent event = new AdDropEvent();
                     event.setName("Received");
                     AdDropEventParams params = new AdDropEventParams();
-                    params.setAdvertisement_id("1132");
-                    params.setPromotion_id("845");
-                    Log.w("FCM", "instance "+ instanceIdResult.getToken());
-                    params.setFirebaseNotificationId("1536259012270989");
+                    params.setAdvertisement_id(remoteMessage.getData().get("advertisement_id"));
+                    params.setPromotion_id(promotion_id.toString());
+                    Log.w("FCM", "getInstance "+ instanceIdResult.getToken());
+                    params.setFirebaseNotificationId(remoteMessage.getMessageId());
                     Log.w("FCM","getID" +remoteMessage.getMessageId());
 
                     event.setParams(params);
+
+                    mNotificationTitle = remoteMessage.getData().get("title");
+
 
                     Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FCM Token: "+mDeviceToken );
                     String lat ="0";
