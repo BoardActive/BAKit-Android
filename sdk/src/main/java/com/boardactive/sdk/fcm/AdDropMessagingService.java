@@ -86,8 +86,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
-            Integer firebaseID = Integer.parseInt(remoteMessage.getData().get("id"));
-            Log.d(TAG, "PROMO ID:" +promotion_id +"ID: "+firebaseID);
+            Log.d(TAG, "PROMO ID:" +promotion_id );
 
             Log.w("FCM", "Starting getInstance");
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
@@ -104,7 +103,6 @@ public class AdDropMessagingService extends FirebaseMessagingService {
                     Log.w("FCM", "instance "+ instanceIdResult.getToken());
                     params.setFirebaseNotificationId("1536259012270989");
                     Log.w("FCM","getID" +remoteMessage.getMessageId());
-
 
                     event.setParams(params);
 
@@ -206,6 +204,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
+        Log.w("FCM", "ChannelId: "+channelId);
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)

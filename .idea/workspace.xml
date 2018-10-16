@@ -47,13 +47,13 @@
       <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="89" column="50" lean-forward="false" selection-start-line="89" selection-start-column="50" selection-end-line="89" selection-end-column="50" />
+            <state relative-caret-position="173">
+              <caret line="104" column="71" lean-forward="false" selection-start-line="104" selection-start-column="71" selection-end-line="104" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4161#5346#0" expanded="true" />
-                <element signature="e#5345#5346#0" expanded="true" />
-                <element signature="e#8507#8558#0" expanded="true" />
+                <element signature="e#4057#5241#0" expanded="true" />
+                <element signature="e#5240#5241#0" expanded="true" />
+                <element signature="e#8402#8453#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3023,13 +3023,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="89" column="50" lean-forward="false" selection-start-line="89" selection-start-column="50" selection-end-line="89" selection-end-column="50" />
+        <state relative-caret-position="173">
+          <caret line="104" column="71" lean-forward="false" selection-start-line="104" selection-start-column="71" selection-end-line="104" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4161#5346#0" expanded="true" />
-            <element signature="e#5345#5346#0" expanded="true" />
-            <element signature="e#8507#8558#0" expanded="true" />
+            <element signature="e#4057#5241#0" expanded="true" />
+            <element signature="e#5240#5241#0" expanded="true" />
+            <element signature="e#8402#8453#0" expanded="true" />
           </folding>
         </state>
       </provider>
