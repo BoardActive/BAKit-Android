@@ -86,7 +86,8 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
-            Log.d(TAG, "PROMO ID:" +promotion_id );
+            Integer firebaseID = Integer.parseInt(remoteMessage.getData().get("id"));
+            Log.d(TAG, "PROMO ID:" +promotion_id +"ID: "+firebaseID);
 
             Log.w("FCM", "Starting getInstance");
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
