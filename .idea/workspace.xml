@@ -10,8 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" />
+      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,27 +43,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+            <state relative-caret-position="236">
+              <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4088#5524#0" expanded="true" />
-                <element signature="e#5523#5524#0" expanded="true" />
-                <element signature="e#8685#8736#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkClient.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NetworkClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="74" column="76" lean-forward="false" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
-              <folding />
+            <state relative-caret-position="180">
+              <caret line="70" column="82" lean-forward="true" selection-start-line="70" selection-start-column="82" selection-end-line="70" selection-end-column="82" />
+              <folding>
+                <element signature="e#2194#3702#0" expanded="true" />
+                <element signature="e#3701#3702#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2347,8 +2346,8 @@
         <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDrop.java" />
         <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDropEventParams.java" />
         <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDropEvent.java" />
-        <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" />
         <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" />
+        <option value="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java" />
       </list>
     </option>
   </component>
@@ -2705,6 +2704,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2726,6 +2726,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="245" column="45" lean-forward="false" selection-start-line="245" selection-start-column="45" selection-end-line="245" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2761,7 +2762,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="55" column="9" lean-forward="false" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
+          <folding>
+            <element signature="e#2194#3702#0" expanded="true" />
+            <element signature="e#3701#3702#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2861,6 +2865,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2882,6 +2887,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
           <caret line="245" column="45" lean-forward="false" selection-start-line="245" selection-start-column="45" selection-end-line="245" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2897,6 +2903,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="160" column="19" lean-forward="false" selection-start-line="160" selection-start-column="19" selection-end-line="160" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3006,14 +3013,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="74" column="76" lean-forward="false" selection-start-line="74" selection-start-column="76" selection-end-line="74" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2460">
@@ -3024,13 +3023,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="107" column="0" lean-forward="true" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        <state relative-caret-position="236">
+          <caret line="67" column="30" lean-forward="true" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4088#5524#0" expanded="true" />
-            <element signature="e#5523#5524#0" expanded="true" />
-            <element signature="e#8685#8736#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/network/NetworkClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="70" column="82" lean-forward="true" selection-start-line="70" selection-start-column="82" selection-end-line="70" selection-end-column="82" />
+          <folding>
+            <element signature="e#2194#3702#0" expanded="true" />
+            <element signature="e#3701#3702#0" expanded="true" />
           </folding>
         </state>
       </provider>
