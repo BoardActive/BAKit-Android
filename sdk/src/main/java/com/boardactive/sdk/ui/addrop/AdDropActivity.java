@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.boardactive.sdk.R;
+import com.boardactive.sdk.adapters.BuildConfigReader;
 import com.boardactive.sdk.fcm.AdDropMessagingService;
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
@@ -115,12 +116,14 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     if (promotion_id == null){
                         Integer temp2 = Integer.valueOf(extras.getString("promotion_id"));
                         mAdDrop_id = temp2;
-                        Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
-                        AdDropActivity.this.startActivity(myIntent);
                     }
                     else {
                         mAdDrop_id = promotion_id;
                         getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
+                    }
+                    if (BuildConfigReader.getBuildConfigValue("APP_ID") == null){
+                        Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
+                        AdDropActivity.this.startActivity(myIntent);
                     }
                 }catch (Exception e) {
                     Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
