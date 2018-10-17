@@ -106,7 +106,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     String lat ="0";
                     String lng ="0";
                     if (promotion_id == null){
-                        Integer temp2 = extras.getInt("promotion_id");
+                        Integer temp2 = Integer.valueOf(extras.getString("promotion_id"));
                         mAdDrop_id = temp2;
                     }
                     else {
