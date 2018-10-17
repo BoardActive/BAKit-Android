@@ -80,7 +80,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 //a string instead of an int...
                 try {
                     String temp = extras.getString("promotion_id");
-                    Log.w("FCM",extras.get("data").toString());
+                    Log.w("FCM",extras.toString());
                     if (temp == null){
                         Integer temp2 = extras.getInt("promotion_id");
                         mAdDrop_id = temp2;
