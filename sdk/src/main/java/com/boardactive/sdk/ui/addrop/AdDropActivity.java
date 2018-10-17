@@ -216,7 +216,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         String lng = PreferenceManager.getDefaultSharedPreferences(mContext)
                                 .getString("LNG", "");
 
-
+                        getObservableAddBookmark(addrop.getPromotion_id(), lat, lng).subscribeWith(getObserverAddBookmark());
                     }
                 }
             });

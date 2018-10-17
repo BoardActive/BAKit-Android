@@ -37,8 +37,8 @@
       <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+            <state relative-caret-position="293">
+              <caret line="215" column="48" lean-forward="true" selection-start-line="215" selection-start-column="48" selection-end-line="215" selection-end-column="48" />
               <folding>
                 <element signature="e#5386#5387#0" expanded="true" />
                 <element signature="e#5445#5446#0" expanded="true" />
@@ -50,12 +50,12 @@
                 <element signature="e#5869#5870#0" expanded="true" />
                 <element signature="e#5920#5921#0" expanded="true" />
                 <element signature="e#5972#5973#0" expanded="true" />
-                <element signature="e#7733#9154#0" expanded="true" />
-                <element signature="e#9153#9154#0" expanded="true" />
-                <element signature="e#9203#9936#0" expanded="true" />
-                <element signature="e#9935#9936#0" expanded="true" />
-                <element signature="e#10171#10354#0" expanded="true" />
-                <element signature="e#10353#10354#0" expanded="true" />
+                <element signature="e#7733#9279#0" expanded="true" />
+                <element signature="e#9278#9279#0" expanded="true" />
+                <element signature="e#9328#10061#0" expanded="true" />
+                <element signature="e#10060#10061#0" expanded="true" />
+                <element signature="e#10296#10479#0" expanded="true" />
+                <element signature="e#10478#10479#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2852,12 +2852,12 @@
             <element signature="e#5869#5870#0" expanded="true" />
             <element signature="e#5920#5921#0" expanded="true" />
             <element signature="e#5972#5973#0" expanded="true" />
-            <element signature="e#7733#9154#0" expanded="true" />
-            <element signature="e#9153#9154#0" expanded="true" />
-            <element signature="e#9203#9936#0" expanded="true" />
-            <element signature="e#9935#9936#0" expanded="true" />
-            <element signature="e#10171#10354#0" expanded="true" />
-            <element signature="e#10353#10354#0" expanded="true" />
+            <element signature="e#7733#9279#0" expanded="true" />
+            <element signature="e#9278#9279#0" expanded="true" />
+            <element signature="e#9328#10061#0" expanded="true" />
+            <element signature="e#10060#10061#0" expanded="true" />
+            <element signature="e#10296#10479#0" expanded="true" />
+            <element signature="e#10478#10479#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3165,8 +3165,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+        <state relative-caret-position="293">
+          <caret line="215" column="48" lean-forward="true" selection-start-line="215" selection-start-column="48" selection-end-line="215" selection-end-column="48" />
           <folding>
             <element signature="e#5386#5387#0" expanded="true" />
             <element signature="e#5445#5446#0" expanded="true" />
@@ -3178,12 +3178,12 @@
             <element signature="e#5869#5870#0" expanded="true" />
             <element signature="e#5920#5921#0" expanded="true" />
             <element signature="e#5972#5973#0" expanded="true" />
-            <element signature="e#7733#9154#0" expanded="true" />
-            <element signature="e#9153#9154#0" expanded="true" />
-            <element signature="e#9203#9936#0" expanded="true" />
-            <element signature="e#9935#9936#0" expanded="true" />
-            <element signature="e#10171#10354#0" expanded="true" />
-            <element signature="e#10353#10354#0" expanded="true" />
+            <element signature="e#7733#9279#0" expanded="true" />
+            <element signature="e#9278#9279#0" expanded="true" />
+            <element signature="e#9328#10061#0" expanded="true" />
+            <element signature="e#10060#10061#0" expanded="true" />
+            <element signature="e#10296#10479#0" expanded="true" />
+            <element signature="e#10478#10479#0" expanded="true" />
           </folding>
         </state>
       </provider>
