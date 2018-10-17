@@ -60,6 +60,9 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     Integer promotion_id;
     String mDeviceToken;
     String mNotificationTitle;
+    String mPromotion_id;
+    String mAdvertisement_id;
+    String mFirebase_notification_id;
     /**
      * Called when message is received.
      *
@@ -92,6 +95,9 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             Log.w("FCM", "Sending Received Event to BA API");
 
             //Register AdDropEvent model for POST request JSON build, assign the variables
+            mPromotion_id = remoteMessage.getData().get("promotion_id");
+            mAdvertisement_id = remoteMessage.getData().get("advertisement_id");
+            mFirebase_notification_id = remoteMessage.getMessageId();
             AdDropEvent event = new AdDropEvent();
             event.setName("Received");
             AdDropEventParams params = new AdDropEventParams();
@@ -192,6 +198,8 @@ public class AdDropMessagingService extends FirebaseMessagingService {
     public void sendNotification(String messageBody, Integer promotion_id) {
         Intent intent = new Intent(this, AdDropActivity.class);
         intent.putExtra("promotion_id", promotion_id);
+        intent.putExtra("advertisement_id", mAdvertisement_id);
+        intent.putExtra("firebase_notification_id", mFirebase_notification_id);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
