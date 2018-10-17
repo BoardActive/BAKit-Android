@@ -11,8 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b6cdcad-0aa9-4e12-9582-967d434f05cb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java" />
-      <change beforePath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" afterPath="$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdDropActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="82" column="85" lean-forward="false" selection-start-line="82" selection-start-column="85" selection-end-line="82" selection-end-column="85" />
+            <state relative-caret-position="292">
+              <caret line="80" column="47" lean-forward="true" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
               <folding>
                 <element signature="e#5474#5475#0" expanded="true" />
                 <element signature="e#5533#5534#0" expanded="true" />
@@ -86,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdDropMessagingService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="106">
@@ -97,6 +96,16 @@
                 <element signature="e#7430#7431#0" expanded="true" />
                 <element signature="e#8589#8640#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sdk/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="60" column="66" lean-forward="false" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,21 +131,6 @@
               <folding>
                 <element signature="e#2194#3702#0" expanded="true" />
                 <element signature="e#3701#3702#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdDrops.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/models/AdDrops.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3345">
-              <caret line="290" column="16" lean-forward="false" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
-              <folding>
-                <element signature="e#6514#6515#0" expanded="true" />
-                <element signature="e#6546#6547#0" expanded="true" />
-                <element signature="e#6611#6612#0" expanded="true" />
-                <element signature="e#6653#6654#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -209,10 +203,10 @@
       <find>FCM Me</find>
       <find>mAdDro</find>
       <find>addrop</find>
-      <find>mNot</find>
       <find>airplane</find>
       <find>settings</find>
       <find>sending</find>
+      <find>mNot</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk</dir>
@@ -2756,10 +2750,10 @@
         <state relative-caret-position="-2750">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="e#6514#6515#0" expanded="true" />
-            <element signature="e#6546#6547#0" expanded="true" />
-            <element signature="e#6611#6612#0" expanded="true" />
-            <element signature="e#6653#6654#0" expanded="true" />
+            <element signature="e#6514#6515#0" expanded="false" />
+            <element signature="e#6546#6547#0" expanded="false" />
+            <element signature="e#6611#6612#0" expanded="false" />
+            <element signature="e#6653#6654#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2925,14 +2919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sdk/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="46" column="58" lean-forward="false" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/AdDropMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -3047,10 +3033,10 @@
         <state relative-caret-position="3345">
           <caret line="290" column="16" lean-forward="false" selection-start-line="290" selection-start-column="16" selection-end-line="290" selection-end-column="16" />
           <folding>
-            <element signature="e#6514#6515#0" expanded="true" />
-            <element signature="e#6546#6547#0" expanded="true" />
-            <element signature="e#6611#6612#0" expanded="true" />
-            <element signature="e#6653#6654#0" expanded="true" />
+            <element signature="e#6514#6515#0" expanded="false" />
+            <element signature="e#6546#6547#0" expanded="false" />
+            <element signature="e#6611#6612#0" expanded="false" />
+            <element signature="e#6653#6654#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3141,10 +3127,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="197" column="74" lean-forward="false" selection-start-line="197" selection-start-column="74" selection-end-line="197" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7375#7376#0" expanded="true" />
+            <element signature="e#7430#7431#0" expanded="true" />
+            <element signature="e#8589#8640#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdk/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="60" column="66" lean-forward="false" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/ui/addrop/AdDropActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="82" column="85" lean-forward="false" selection-start-line="82" selection-start-column="85" selection-end-line="82" selection-end-column="85" />
+        <state relative-caret-position="292">
+          <caret line="80" column="47" lean-forward="true" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
           <folding>
             <element signature="e#5474#5475#0" expanded="true" />
             <element signature="e#5533#5534#0" expanded="true" />
@@ -3156,19 +3163,6 @@
             <element signature="e#5957#5958#0" expanded="true" />
             <element signature="e#6008#6009#0" expanded="true" />
             <element signature="e#6060#6061#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sdk/src/main/java/com/boardactive/sdk/fcm/AdDropMessagingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="197" column="74" lean-forward="false" selection-start-line="197" selection-start-column="74" selection-end-line="197" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7375#7376#0" expanded="true" />
-            <element signature="e#7430#7431#0" expanded="true" />
-            <element signature="e#8589#8640#0" expanded="true" />
           </folding>
         </state>
       </provider>
