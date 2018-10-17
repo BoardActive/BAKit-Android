@@ -79,7 +79,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             if(extras != null) {
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
                 //a string instead of an int...
-                try {
+                //try {
                     Integer promotion_id = extras.getInt("promotion_id") == 0 ? Integer.valueOf(extras.getString("promotion_id")) : null ;
                     String advertiser_id = extras.getString("advertisement_id");
                     String firebase_notification_id = extras.getString("google.message_id");
@@ -113,12 +113,12 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         mAdDrop_id = promotion_id;
                         getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
                     }
-                }catch (Exception e) {
-                    Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
-                    //Lets spit out main list view instead of loading null promo
-                    Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
-                    AdDropActivity.this.startActivity(myIntent);
-                }
+//                }catch (Exception e) {
+//                    Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
+//                    //Lets spit out main list view instead of loading null promo
+//                    Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
+//                    AdDropActivity.this.startActivity(myIntent);
+//                }
 
 
             }
