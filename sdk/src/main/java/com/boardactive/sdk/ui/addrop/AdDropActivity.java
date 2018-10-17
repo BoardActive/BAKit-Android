@@ -115,6 +115,8 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     if (promotion_id == null){
                         Integer temp2 = Integer.valueOf(extras.getString("promotion_id"));
                         mAdDrop_id = temp2;
+                        Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
+                        AdDropActivity.this.startActivity(myIntent);
                     }
                     else {
                         mAdDrop_id = promotion_id;
