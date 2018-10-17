@@ -221,9 +221,6 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
-    public void sendEvent(){
-
-    }
 
     public Observable<AdDropEvent> getObservableSendEvent(AdDropEvent event, String lat, String lng){
         return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)

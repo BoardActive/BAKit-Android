@@ -26,6 +26,7 @@ import com.boardactive.sdk.fcm.AdDropMessagingService;
 import com.boardactive.sdk.models.AdDrop;
 import com.boardactive.sdk.models.AdDropBookmarkResponse;
 import com.boardactive.sdk.models.AdDropEvent;
+import com.boardactive.sdk.models.AdDropEventParams;
 import com.boardactive.sdk.models.AdDropRegister;
 import com.boardactive.sdk.network.NetworkClient;
 import com.boardactive.sdk.network.NetworkInterface;
@@ -79,14 +80,40 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
                 //a string instead of an int...
                 try {
-                    String temp = extras.getString("promotion_id");
+                    String promotion_id = extras.getString("promotion_id");
+                    String advertiser_id = extras.getString("advertiser_id");
+                    String firebase_notification_id = extras.getString("google.message_id");
                     Log.w("FCM",extras.toString());
-                    if (temp == null){
+
+
+                    Log.d(TAG, "PROMO ID:" +promotion_id );
+
+                    Log.w("FCM", "Sending Received Event to BA API");
+
+                    //Register AdDropEvent model for POST request JSON build, assign the variables
+                    AdDropEvent event = new AdDropEvent();
+                    event.setName("Opened");
+                    AdDropEventParams params = new AdDropEventParams();
+                    params.setAdvertisement_id(advertiser_id);
+                    params.setPromotion_id(promotion_id);
+                    params.setFirebaseNotificationId(firebase_notification_id);
+                    Log.w("FCM","getID: " +firebase_notification_id);
+
+                    event.setParams(params);
+
+
+                    Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id()  );
+                    String lat ="0";
+                    String lng ="0";
+
+                    getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
+
+                    if (promotion_id == null){
                         Integer temp2 = extras.getInt("promotion_id");
                         mAdDrop_id = temp2;
                     }
                     else {
-                        mAdDrop_id = Integer.parseInt(temp);
+                        mAdDrop_id = Integer.parseInt(promotion_id);
                     }
                 }catch (Exception e) {
                     Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
@@ -380,6 +407,38 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
 
             @Override
             public void onNext(@NonNull AdDropRegister adDropBookmarkResponse) {
+                Log.d(TAG,"Create Event OnNext");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.d(TAG,"Create Event onError"+ e);
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Create Event onComplete");
+                //Drawable myDrawable = getBaseContext().getResources().getDrawable(R.drawable.ic_heart);
+                //ivFav.setImageDrawable(myDrawable);
+                //refresh();
+            }
+        };
+    }
+
+    public Observable<AdDropEvent> getObservableSendEvent(AdDropEvent event, String lat, String lng){
+        return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
+                .sendEvent(event)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    public DisposableObserver<AdDropEvent> getObserverSendEvent(){
+        return new DisposableObserver<AdDropEvent>() {
+
+            @Override
+            public void onNext(@NonNull AdDropEvent adDropBookmarkResponse) {
                 Log.d(TAG,"Create Event OnNext");
             }
 
