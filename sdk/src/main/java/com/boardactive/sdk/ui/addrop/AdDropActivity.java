@@ -106,7 +106,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     String lat ="0";
                     String lng ="0";
                     if (promotion_id != null) {
-                        getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
+
                     }
                     if (promotion_id == null){
                         Integer temp2 = extras.getInt("promotion_id");
@@ -114,6 +114,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     }
                     else {
                         mAdDrop_id = promotion_id;
+                        getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
                     }
                 }catch (Exception e) {
                     Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
