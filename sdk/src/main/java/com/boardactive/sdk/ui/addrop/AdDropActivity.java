@@ -79,7 +79,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
             if(extras != null) {
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
                 //a string instead of an int...
-                try {
+              //  try {
                     Integer promotion_id = extras.getInt("promotion_id");
                     String advertiser_id = extras.getString("advertisement_id");
                     String firebase_notification_id = extras.getString("google.message_id");
@@ -105,9 +105,6 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FirebaseID: " + firebase_notification_id == null ? firebase_id_alt : firebase_notification_id);
                     String lat ="0";
                     String lng ="0";
-                    if (promotion_id != null) {
-
-                    }
                     if (promotion_id == null){
                         Integer temp2 = extras.getInt("promotion_id");
                         mAdDrop_id = temp2;
@@ -116,12 +113,12 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                         mAdDrop_id = promotion_id;
                         getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
                     }
-                }catch (Exception e) {
-                    Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
-                    //Lets spit out main list view instead of loading null promo
-                    Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
-                    AdDropActivity.this.startActivity(myIntent);
-                }
+//                }catch (Exception e) {
+//                    Log.w(TAG,"ERROR getting AdDrop ID from Intent/FCM Notification: " + e.getMessage());
+//                    //Lets spit out main list view instead of loading null promo
+//                    Intent myIntent = new Intent(AdDropActivity.this, AdDropMainActivity.class);
+//                    AdDropActivity.this.startActivity(myIntent);
+//                }
 
 
             }
