@@ -102,7 +102,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     event.setParams(params);
 
 
-                    Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FirebaseID: " + firebase_notification_id == null ? firebase_id_alt : firebase_notification_id);
+                    //Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FirebaseID: " + firebase_notification_id == null ? firebase_id_alt : firebase_notification_id);
                     String lat ="0";
                     String lng ="0";
                     if (promotion_id == null){
