@@ -64,7 +64,7 @@ public class AdDropsAdapter extends RecyclerView.Adapter<AdDropsAdapter.AdDropHo
                 Log.d("AdDropsAdapter", "position = " + addropList.get(position).getPromotion_id());
                 Intent intent = new Intent(context.getApplicationContext(), AdDropActivity.class);
                 intent.putExtra("promotion_id", addropList.get(position).getPromotion_id());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.getApplicationContext().startActivity(intent);
             }
         });
