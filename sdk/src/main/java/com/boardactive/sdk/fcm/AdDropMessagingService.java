@@ -89,37 +89,25 @@ public class AdDropMessagingService extends FirebaseMessagingService {
             promotion_id = Integer.parseInt(remoteMessage.getData().get("promotion_id"));
             Log.d(TAG, "PROMO ID:" +promotion_id );
 
-            Log.w("FCM", "Starting getInstance");
-            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( new OnSuccessListener<InstanceIdResult>() {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    mDeviceToken = instanceIdResult.getToken();
-                    Log.w("FCM", instanceIdResult.getToken());
+            Log.w("FCM", "Sending Received Event to BA API");
 
-                    //Register AdDropEvent model for POST request JSON build, assign the variables
-                    AdDropEvent event = new AdDropEvent();
-                    event.setName("Received");
-                    AdDropEventParams params = new AdDropEventParams();
-                    params.setAdvertisement_id(remoteMessage.getData().get("advertisement_id"));
-                    params.setPromotion_id(promotion_id.toString());
-                    Log.w("FCM", "getInstance "+ instanceIdResult.getToken());
-                    params.setFirebaseNotificationId(remoteMessage.getMessageId());
-                    Log.w("FCM","getID" +remoteMessage.getMessageId());
+            //Register AdDropEvent model for POST request JSON build, assign the variables
+            AdDropEvent event = new AdDropEvent();
+            event.setName("Received");
+            AdDropEventParams params = new AdDropEventParams();
+            params.setAdvertisement_id(remoteMessage.getData().get("advertisement_id"));
+            params.setPromotion_id(promotion_id.toString());
+            params.setFirebaseNotificationId(remoteMessage.getMessageId());
+            Log.w("FCM","getID: " +remoteMessage.getMessageId());
 
-                    event.setParams(params);
+            event.setParams(params);
 
-                    mNotificationTitle = remoteMessage.getData().get("title");
+            mNotificationTitle = remoteMessage.getData().get("title");
 
-
-                    Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FCM Token: "+mDeviceToken );
-                    String lat ="0";
-                    String lng ="0";
-                    getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
-                }
-            });
-
-
-
+            Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id()  );
+            String lat ="0";
+            String lng ="0";
+            getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
 
 
             if (/* Check if data needs to be processed by long running job */ true) {
@@ -233,6 +221,9 @@ public class AdDropMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
+    public void sendEvent(){
+
+    }
 
     public Observable<AdDropEvent> getObservableSendEvent(AdDropEvent event, String lat, String lng){
         return NetworkClient.getRetrofit(lat, lng).create(NetworkInterface.class)
