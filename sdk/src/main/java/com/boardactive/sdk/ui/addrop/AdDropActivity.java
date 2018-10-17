@@ -89,7 +89,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
 
                     Log.d(TAG, "PROMO ID:" +promotion_id );
 
-                    Log.w("FCM", "Sending Received Event to BA API");
+                    Log.w("FCM", "Sending Opened Event to BA API");
 
                     //Register AdDropEvent model for POST request JSON build, assign the variables
                     AdDropEvent event = new AdDropEvent();
@@ -98,17 +98,16 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                     params.setAdvertisement_id(advertiser_id);
                     params.setPromotion_id(promotion_id);
                     params.setFirebaseNotificationId(firebase_notification_id == null ? firebase_id_alt : firebase_notification_id);
-                    Log.w("FCM","getID: " +firebase_notification_id);
 
                     event.setParams(params);
 
 
-                    Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id()  );
+                    Log.w("FCM", "Promo: "+params.getPromotion_id() + " AdvertisementId: " +params.getAdvertisement_id() + "FirebaseID: " + firebase_notification_id == null ? firebase_id_alt : firebase_notification_id);
                     String lat ="0";
                     String lng ="0";
-
-                    getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
-
+                    if (promotion_id != null) {
+                        getObservableSendEvent(event, lat, lng).subscribeWith(getObserverSendEvent());
+                    }
                     if (promotion_id == null){
                         Integer temp2 = extras.getInt("promotion_id");
                         mAdDrop_id = temp2;
