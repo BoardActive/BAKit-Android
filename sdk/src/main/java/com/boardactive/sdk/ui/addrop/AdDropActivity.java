@@ -80,7 +80,7 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
                 //a string instead of an int...
                 try {
-                    String promotion_id = extras.getString("promotion_id");
+                    String promotion_id = extras.getString("promotion_id").toString();
                     String advertiser_id = extras.getString("advertisement_id");
                     String firebase_notification_id = extras.getString("google.message_id");
                     String firebase_id_alt = extras.getString("firebase_notification_id");

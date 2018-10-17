@@ -197,7 +197,7 @@ public class AdDropMessagingService extends FirebaseMessagingService {
      */
     public void sendNotification(String messageBody, Integer promotion_id) {
         Intent intent = new Intent(this, AdDropActivity.class);
-        intent.putExtra("promotion_id", mPromotion_id);
+        intent.putExtra("promotion_id", promotion_id == null ? mPromotion_id : promotion_id );
         intent.putExtra("advertisement_id", mAdvertisement_id);
         intent.putExtra("firebase_notification_id", mFirebase_notification_id);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
