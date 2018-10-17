@@ -80,7 +80,10 @@ public class AdDropActivity extends AppCompatActivity implements AdDropViewInter
                 //Nathan: Get additional data from FCM notification, for some reason it comes in as
                 //a string instead of an int...
                 //try {
-                    Integer promotion_id = Integer.parseInt(extras.getString("promotion_id"));
+                    Integer promotion_id = null;
+                    try {
+                         promotion_id = Integer.parseInt(extras.getString("promotion_id"));
+                    }catch (Exception e) {}
                     if (promotion_id == null){
                         promotion_id = extras.getInt("promotion_id");
                     mAdDrop_id = promotion_id;
