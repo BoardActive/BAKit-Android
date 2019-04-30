@@ -36,9 +36,12 @@ import io.reactivex.schedulers.Schedulers;
 public class BoardActive extends Application {
     private static final String JOB_TAG = "BoardActive";
 
+    /** Service to track and post device location */
     private FirebaseJobDispatcher mDispatcher;
+
     private Context mContext;
 
+    /** Class to store Global Constants */
     private BAKitConstants mBAKitConstants = new BAKitConstants();
 
     public BoardActive(Context context) {
@@ -49,7 +52,7 @@ public class BoardActive extends Application {
 
     }
 
-    /** Set SDK Core Variables and launch Job Dispatcher */
+    /** Set SDK Core Variables and launches Job Dispatcher */
     public void initialize(String fcmToken, String AppKey, String AppId, String AppVersion) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = preferences.edit();
@@ -74,19 +77,23 @@ public class BoardActive extends Application {
         Logg.d();
     }
 
+    /** RegisterDevice Callback providing HTTP Response */
     public interface RegisterCallback<T> {
         void onResponse(T value);
     }
 
-    public interface EventCallback<T> {
-        void onResponse(T value);
-    }
-
+    /** RegisterDevice Function - Registers device to BoardActive Platform*/
     public void RegisterDevice(RegisterCallback callback) {
         putMe().subscribeWith(putMe(callback));
         Logg.d("RegisterDevice()");
     }
 
+    /** CreateEvent Callback providing HTTP Response */
+    public interface EventCallback<T> {
+        void onResponse(T value);
+    }
+
+    /** createEvent Function */
     public void createEvent(EventCallback callback, String eventName, String fcm_notificationId, String mesageId) {
         mEvent.setname(eventName);
         mEvent.setfirebaseNotificationId(fcm_notificationId);
@@ -95,7 +102,7 @@ public class BoardActive extends Application {
         Logg.d("postEvent()");
     }
 
-
+    /** Private Function to launch serve to get location and send to BoaradActive Platform */
     private void StartJob() {
         mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
         Job myJob = mDispatcher.newJobBuilder()
@@ -112,6 +119,7 @@ public class BoardActive extends Application {
 
     }
 
+    /** Private Observable to Register Device */
     private Observable<User> putMe(){
         return NetworkClient.getRetrofit(mContext).create(NetworkInterface.class)
                 .putMe()
@@ -119,6 +127,7 @@ public class BoardActive extends Application {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /** Private Observable to Register Device */
     private DisposableObserver<User> putMe(final RegisterCallback callback){
         return new DisposableObserver<User>() {
 
@@ -142,8 +151,10 @@ public class BoardActive extends Application {
         };
     }
 
+    /** Private Event Object that will be sent BoardActive and record event */
     private Event mEvent = new Event();
 
+    /** Private Observable to Create Event */
     private Observable<Response> postEvent(){
         return NetworkClient.getRetrofit(mContext).create(NetworkInterface.class)
                 .postEvent(mEvent)
@@ -151,6 +162,7 @@ public class BoardActive extends Application {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /** Private Observable to Create Event */
     private DisposableObserver<Response> postEvent(final EventCallback callback){
         return new DisposableObserver<Response>() {
 
@@ -174,6 +186,7 @@ public class BoardActive extends Application {
         };
     }
 
+    /** Private Function to get Device UUID to Create Event */
     private String getUUID(Context context) {
         String uniqueID = null;
         String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
@@ -193,49 +206,56 @@ public class BoardActive extends Application {
         return uniqueID;
     }
 
-
+    /** Public getter for REST API URL */
     public String getApiUrl() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.API_URL,"");
         return value;
     }
 
+    /** Public getter for AppKey */
     public String getAppKey() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.APP_KEY,"");
         return value;
     }
 
+    /** Public getter for AppId */
     public String getAppId() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.APP_ID,"");
         return value;
     }
 
+    /** Public getter for AppVersion */
     public String getAppVersion() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.APP_VERSION,"");
         return value;
     }
 
+    /** Public getter for FCM Token */
     public String getDeviceToken() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.DEVICE_TOKEN,"");
         return value;
     }
 
+    /** Public getter for Device OS Version */
     public String getDeviceOSVersion() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.DEVICE_OS_VERSION,"");
         return value;
     }
 
+    /** Public getter for Device ID */
     public String getDeviceID() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.DEVICE_ID,"");
         return value;
     }
 
+    /** Public getter for Device OS */
     public String getDeviceOS() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(mBAKitConstants.DEVICE_OS,"");
