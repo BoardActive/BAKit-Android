@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "717902897693",
+    "firebase_url": "https://boardactive-bakit.firebaseio.com",
+    "project_id": "boardactive-bakit",
+    "storage_bucket": "boardactive-bakit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717902897693:android:db0bb2c860379de7",
+        "android_client_info": {
+          "package_name": "com.boardactive.bakit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717902897693-4nl8cou5nc0qm6p7r0i1du66v0bchd3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzaK7Pu6ntsdlnbsacdLdT5Yku7Xs7GDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717902897693-4nl8cou5nc0qm6p7r0i1du66v0bchd3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "717902897693-q07kb5mpd9k0t443t7ih950ulgef352f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.boardactive.bakit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
