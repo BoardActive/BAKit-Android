@@ -106,11 +106,6 @@ public class BoardActive {
         void onResponse(T value);
     }
 
-    /** CreateEvent Callback providing HTTP Response */
-    public interface ImageCallback<T> {
-        void onResponse(T value);
-    }
-
     /** Private Function to launch serve to get location and send to BoaradActive Platform */
     private void StartJob() {
         mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
