@@ -306,22 +306,6 @@ public class BoardActive {
         return value;
     }
 
-    private void getImage(final ImageCallback callback, final String Image_URL, final Integer width, final Integer height) {
-        RequestQueue queue = AppController.getInstance().getRequestQueue();
-        ImageRequest imageRequest = new ImageRequest(Image_URL, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap response) {
-
-                if (response != null) {
-                    callback.onResponse(response);
-                }
-
-            }
-        }, width, height, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.ARGB_8888, errorListener);
-
-        queue.add(imageRequest);
-    }
-
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
