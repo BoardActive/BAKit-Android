@@ -42,14 +42,14 @@ public class BoardActive {
 
     private static Context mContext;
 
-    public final static String API_URL = "API_URL";
-    public final static String APP_KEY = "APP_KEY";
-    public final static String APP_ID = "APP_ID";
-    public final static String APP_VERSION = "APP_VERSION";
-    public final static String DEVICE_ID = "DEVICE_ID";
-    public final static String DEVICE_OS = "DEVICE_OS";
-    public final static String DEVICE_TOKEN = "DEVICE_TOKEN";
-    public final static String DEVICE_OS_VERSION = "DEVICE_OS_VERSION";
+    private final static String API_URL = "API_URL";
+    private final static String APP_KEY = "APP_KEY";
+    private final static String APP_ID = "APP_ID";
+    private final static String APP_VERSION = "APP_VERSION";
+    private final static String DEVICE_ID = "DEVICE_ID";
+    private final static String DEVICE_OS = "DEVICE_OS";
+    private final static String DEVICE_TOKEN = "DEVICE_TOKEN";
+    private final static String DEVICE_OS_VERSION = "DEVICE_OS_VERSION";
 
     private static final String TAG = "BoardActive";
 
