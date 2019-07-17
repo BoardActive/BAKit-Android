@@ -58,7 +58,7 @@ public class JobDispatcherService extends JobService implements
      */
     private android.location.Location lastLocation;
 
-    private BoardActive mBoardActive = new BoardActive();
+    private BoardActive mBoardActive = new BoardActive(this);
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
@@ -69,7 +69,7 @@ public class JobDispatcherService extends JobService implements
         if (permissionState == PackageManager.PERMISSION_GRANTED) {
             createGoogleApi();
         } else {
-            Log.d(TAG, "No Location Permissions" + currentDateTimeString);
+            Log.d(TAG, "[BAKit] JobDispatcherService  No Location Permissions" + currentDateTimeString);
         }
 
         return false;
@@ -88,7 +88,7 @@ public class JobDispatcherService extends JobService implements
      */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Log.d(TAG, "onConnected()");
+        Log.d(TAG, "[BAKit] JobDispatcherService onConnected()");
         getLastKnownLocation();
     }
 
@@ -109,7 +109,7 @@ public class JobDispatcherService extends JobService implements
      */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d(TAG, "connection failed");
+        Log.d(TAG, "[BAKit] JobDispatcherService  connection failed");
     }
 
     /**
@@ -119,7 +119,7 @@ public class JobDispatcherService extends JobService implements
      */
     @Override
     public void onResult(@NonNull Status status) {
-        Log.d(TAG, "result of google api client : " + status);
+        Log.d(TAG, "[BAKit] JobDispatcherService  result of google api client : " + status);
     }
 
     /**
@@ -130,7 +130,7 @@ public class JobDispatcherService extends JobService implements
     @Override
     public void onLocationChanged(android.location.Location location) {
 
-        Log.d(TAG, "onLocationChanged [" + location + "]");
+        Log.d(TAG, "[BAKit] JobDispatcherService onLocationChanged [" + location + "]");
         lastLocation = location;
         writeActualLocation(location);
     }
@@ -141,31 +141,29 @@ public class JobDispatcherService extends JobService implements
     @SuppressLint("MissingPermission")
     private void getLastKnownLocation() {
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
         if (lastLocation != null) {
 
-            Log.d(TAG, "LastKnown location. " +
+            Log.d(TAG, "[BAKit] JobDispatcherService LastKnown location. " +
                     "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
             writeLastLocation();
             startLocationUpdates();
 
             DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
             String date = df.format(Calendar.getInstance().getTime());
-            Double latitude = lastLocation.getLatitude();
-            Double longitude = lastLocation.getLongitude();
 
-            mBoardActive.postLocation(new BoardActive.LocationCallback() {
+            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                 @Override
                 public void onResponse(Object value) {
-                    Log.d(TAG, "onResponse" + value.toString());
+                    Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
                 }
-            }, latitude.toString(), longitude.toString(), date);
-
-            Log.d(TAG, "LATLNG" + latitude.toString() + latitude.toString());
+            }, lastLocation.getLatitude(), lastLocation.getLongitude(), date);
 
         } else {
-            Log.d(TAG, "No location retrieved yet");
+            Log.d(TAG, "[BAKit] JobDispatcherService No location retrieved yet");
             startLocationUpdates();
         }
+
     }
 
     /**
@@ -176,6 +174,9 @@ public class JobDispatcherService extends JobService implements
     @SuppressLint("SetTextI18n")
     private void writeActualLocation(android.location.Location location) {
         //here in this method we can do something with the location
+        Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation [" + location + "]");
+        Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation " +
+                "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
     }
 
     /**
