@@ -61,6 +61,7 @@ public class BoardActive {
     public final static String BAKIT_DEVICE_TOKEN = "BAKIT_DEVICE_TOKEN";
     public final static String BAKIT_DEVICE_OS_VERSION = "BAKIT_DEVICE_OS_VERSION";
     public final static String BAKIT_APP_TEST = "BAKIT_APP_TEST";
+    public final static String BAKIT_USER_EMAIL = "BAKIT_USER_EMAIL";
 
     private static final String TAG = "[BAKit] BoardActive";
 
@@ -364,7 +365,7 @@ public class BoardActive {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", "");
+                params.put("email", getSharedPrecerence(BAKIT_USER_EMAIL));
                 params.put("deviceOS", getSharedPrecerence(BAKIT_DEVICE_OS));
                 params.put("deviceOSVersion", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
                 Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
@@ -376,7 +377,7 @@ public class BoardActive {
 
                 JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("email", "");
+                    jsonObject.put("email", getSharedPrecerence(BAKIT_USER_EMAIL));
                     jsonObject.put("deviceOS", getSharedPrecerence(BAKIT_DEVICE_OS));
                     jsonObject.put("deviceOSVersion", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
                 } catch (JSONException e) {
@@ -410,7 +411,6 @@ public class BoardActive {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "postEvent onResponse: " + response.toString());
-                VolleyLog.wtf(response);
                 callback.onResponse(response);
             }
         }, new Response.ErrorListener() {
@@ -438,7 +438,7 @@ public class BoardActive {
         }) {
             @Override
             public Priority getPriority() {
-                return Priority.LOW;
+                return Priority.HIGH;
             }
 
             @Override
@@ -447,7 +447,6 @@ public class BoardActive {
                 params.put("name", name);
                 params.put("messageId", messageId);
                 params.put("firebaseNotificationId", firebaseNotificationId);
-                params.put("testMsg", null);
                 return params;
             }
 
@@ -500,7 +499,7 @@ public class BoardActive {
         }) {
             @Override
             public Priority getPriority() {
-                return Priority.LOW;
+                return Priority.HIGH;
             }
 
             @Override

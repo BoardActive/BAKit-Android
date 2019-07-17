@@ -11,7 +11,7 @@ BoardActive's platform connects brands to consumers using location-based engagem
 
 Use your BoardActive account to create Places (geo-fenced areas) and Messages (notifications) to deliver custom messages to your app users. 
 
-[Click Here to get a BoardActive account](https://www.boardactive.com)
+[Click Here to get a BoardActive account](https://app.boardactive.com/login)
 
 The BAKit SDK will use a device's location to know when an app user passes into a geo-fence. Passing into a geo-fence can trigger an event allowing you to deliver notifications to your app users.  
 
@@ -309,8 +309,10 @@ There is an example app provided [here](https://github.com/BoardActive/BAAdDrop-
 ## Ask for Help
 
 Our team wants to help. Please contact us 
-* Call us: [(678) 383-2200](tel:+6494461709)
-* Email Us [support@boardactive.com](mailto:info@boardactive.com)
+
+* Help Documentation: [http://help.boardactive.com/en/](http://help.boardactive.com/en/)
+* Call us: [(657)229-4669](tel:+6572294669)
+* Email Us [taylor@boardactive.com](mailto:taylor@boardactive.com)
 * Online Support [Web Site](https://www.boardactive.com/)
 
 
