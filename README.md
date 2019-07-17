@@ -309,7 +309,7 @@ There is an example app provided [here](https://github.com/BoardActive/BAAdDrop-
 ## Ask for Help
 
 Our team wants to help. Please contact us 
-* Call us: [678) 383-2200](tel:+6494461709)
+* Call us: [(678) 383-2200](tel:+6494461709)
 * Email Us [support@boardactive.com](mailto:info@boardactive.com)
 * Online Support [Web Site](https://www.boardactive.com/)
 
