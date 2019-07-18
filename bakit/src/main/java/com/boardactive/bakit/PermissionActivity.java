@@ -6,6 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * Transparent Activity to prompt user for location permissions
+ *
+ * */
 public class PermissionActivity extends AppCompatActivity {
 
     private String[] permissions;

@@ -24,6 +24,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * JobDispatcher to poll the device location and posts that location
+ * to the BoardActive server.
+ *
+ * AndroidManifest Entries:
+ *
+ *  <service android:name=".JobDispatcherService" android:exported="false">
+ *      <intent-filter>
+ *          <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+ *      </intent-filter>
+ *  </service>
+ *
+ * */
 public class JobDispatcherService extends JobService implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,

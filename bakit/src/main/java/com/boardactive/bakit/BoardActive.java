@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
@@ -29,8 +28,6 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -43,6 +40,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * NOTE: In the class constructor you will need to pass in the getApplicationContext() from the main app
+ *
+ * This SDK will track the device location and post the location to the BoardActive API
+ * For it to operate correctly is requires:
+ *   User must allow location permissions
+ *   AppUrl is set by the main app and points to the correct BoardActive server
+ *   AppID is set by the main app (provided by BoardActive)
+ *   AppKey is set by the main app (provided by BoardActive)
+ *   AppToken is set by the main app (generated from Firebase service)
+ *   AppVersion is set by the main app (the current version of the main app)
+ *
+ *  You will need to initialize() from the main app to start the JobDispatcher
+ *
+ *  The main app will need to support Firebase Cloud Messaging. There can only be on service to receive
+ *  FCM messages. If multiple are declared in the MAnifest the only the first one will be chosen.
+ *  For this reason we have not incorporated Firebase Messaging in the SDK
+ *
+ *  All http calls use a callback to send reponse to main app
+ *
+ *  The JobDispatcher service will poll the device location and post it to the BoardActive server
+ *  The JobDispatcher is launched using the initialize() function. It also starts automatically at boot
+ *  using the BootReceiver BroadcastReceiver
+ */
 public class BoardActive {
 
     private final Context mContext;
@@ -52,6 +73,9 @@ public class BoardActive {
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
 
+    public final static String BAKIT_USER_DATA = "BAKIT_USER_DATA";
+    public final static String BAKIT_USER_EMAIL = "BAKIT_USER_EMAIL";
+    public final static String BAKIT_USER_PASSWORD = "BAKIT_USER_PASSWORD";
     public final static String BAKIT_URL = "BAKIT_URL";
     public final static String BAKIT_APP_KEY = "BAKIT_APP_KEY";
     public final static String BAKIT_APP_ID = "BAKIT_APP_ID";
@@ -61,21 +85,24 @@ public class BoardActive {
     public final static String BAKIT_DEVICE_TOKEN = "BAKIT_DEVICE_TOKEN";
     public final static String BAKIT_DEVICE_OS_VERSION = "BAKIT_DEVICE_OS_VERSION";
     public final static String BAKIT_APP_TEST = "BAKIT_APP_TEST";
-    public final static String BAKIT_USER_EMAIL = "BAKIT_USER_EMAIL";
+    public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
+    public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
 
     private static final String TAG = "[BAKit] BoardActive";
-
-    public LocationCallback BAKIT_LOCATION;
 
     /** Service to track and post device location */
     private FirebaseJobDispatcher mDispatcher;
 
+    /** Constuctor
+     * @param context Pass in the Application Context from the main app
+     */
     public BoardActive(Context context) {
         mContext = context;
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
     }
 
+    /** Set and Get variables */
     public void setAppUrl(String URL){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = preferences.edit();
@@ -160,13 +187,37 @@ public class BoardActive {
         editor.commit();
     }
 
+    public void setLatitude(String AppTest){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BAKIT_LOCATION_LATITUDE, AppTest);
+        editor.commit();
+    }
+
+    public String getLatitude() {
+        return getSharedPrecerence(BAKIT_LOCATION_LATITUDE);
+    }
+
+    public void setLongitude(String AppTest){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BAKIT_LOCATION_LONGITUDE, AppTest);
+        editor.commit();
+    }
+
+    public String getLongitude() {
+        return getSharedPrecerence(BAKIT_LOCATION_LONGITUDE);
+    }
+
     public String getAppTest() {
         return getSharedPrecerence(BAKIT_APP_TEST);
     }
 
-    /** Set SDK Core Variables and launches Job Dispatcher */
+    /** Set SDK Core Variables and launches Job Dispatcher
+     * Checks is location permissions are on if not it will prompt user to turn on location
+     * permissions.
+     * */
     public void initialize() {
-        Log.d(TAG, "initialize()");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(BAKIT_DEVICE_OS, "android");
@@ -174,6 +225,7 @@ public class BoardActive {
         editor.putString(BAKIT_DEVICE_ID, getUUID(mContext));
         editor.commit();
 
+        /** Check for Location permission. If not then prompt to ask */
         int permissionState = ActivityCompat.checkSelfPermission(mContext,
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -183,17 +235,12 @@ public class BoardActive {
             mContext.startActivity(intent);
         }
 
-        if (getSharedPrecerence(BAKIT_URL).isEmpty() || getSharedPrecerence(BAKIT_URL) == null) {
-            setAppUrl(APP_URL_PROD);
-        }
-
-        if (isRegisteredDevice()) {
-            StartJob();
-        } else {
-            Log.d(TAG, "DEVICE IS NOT REGISTERED Please set SDK Variables ");
-        }
+        /** Start the JobDispatcher to check for and post location */
+        StartJob();
+        Log.d(TAG, "[BAKit]  initialize()");
     }
 
+    /** Check is all required variables are set */
     public Boolean isRegisteredDevice() {
         Boolean isLoggedIn = true;
         String APP_URL = getAppUrl();
@@ -206,50 +253,44 @@ public class BoardActive {
 
         if(APP_URL.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The APP URL is not set");
+            Log.d(TAG, "[BAKit] AppUrl is empty");
         }
 
         if(APP_KEY.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The APP KEY is not set");
+            Log.d(TAG, "[BAKit] AppKey is empty");
         }
 
         if(APP_ID.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The APP ID is not set");
+            Log.d(TAG, "[BAKit] AppId is empty");
         }
 
         if(APP_VERSION.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The APP VERSION is not set");
+            Log.d(TAG, "[BAKit] AppVersion is empty");
         }
 
         if(APP_TOKEN.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The DEVICE TOKEN is not set");
+            Log.d(TAG, "[BAKit] AppToken is empty");
         }
 
         if(APP_OS.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The DEVICE OS is not set");
+            Log.d(TAG, "[BAKit] AppOS is empty");
         }
 
         if(APP_OS_VERSION.isEmpty()) {
             isLoggedIn = false;
-        } else {
-            Log.d(TAG, "The DEVICE OS VERSION is not set");
+            Log.d(TAG, "[BAKit] AppOSVersion is empty");
         }
 
         return isLoggedIn;
 
     }
 
+    /** Empty required variables */
     public void unRegisterDevice() {
         setAppKey("");
         setAppId("");
@@ -264,22 +305,22 @@ public class BoardActive {
         void onResponse(T value);
     }
 
-    /** PostEvent Callback providing HTTP Response */
+    /** postEvent Callback providing HTTP Response */
     public interface PostEventCallback<T> {
         void onResponse(T value);
     }
 
-    /** PostLocation Callback providing HTTP Response */
+    /** postLocation Callback providing HTTP Response */
     public interface PostLocationCallback<T> {
         void onResponse(T value);
     }
 
-    /** CurrentLocation Callback providing HTTP Response */
-    public interface CurrentLocationCallback<T> {
+    /** postLogin Callback providing HTTP Response */
+    public interface PostLoginCallback<T> {
         void onResponse(T value);
     }
 
-    /** Private Function to launch serve to get location and send to BoaradActive Platform */
+    /** Private Function to launch serve to get and post location to BoaradActive Platform */
     private void StartJob() {
         mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
         Job myJob = mDispatcher.newJobBuilder()
@@ -295,7 +336,7 @@ public class BoardActive {
         mDispatcher.mustSchedule(myJob);
     }
 
-    /** Private Function to get Device UUID to Create Event */
+    /** get Device UUID to Create Event */
     private String getUUID(Context context) {
         String uniqueID = null;
         String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
@@ -315,7 +356,10 @@ public class BoardActive {
         return uniqueID;
     }
 
-    public void RegisterDevice(final PostRegisterCallback callback) {
+    /** post RegisterDevice with BoardActive Platform
+     * @param callback to return response from server
+     */
+    public void registerDevice(final PostRegisterCallback callback) {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
@@ -400,6 +444,12 @@ public class BoardActive {
         queue.add(str);
     }
 
+    /** post Event and log in the BoardActive Platform
+     * @param callback to return response from server
+     * @param name type of Event to log
+     * @param messageId the id of the message to log event
+     * @param firebaseNotificationId firebase notification id to log the event
+     */
     public void postEvent(final PostEventCallback callback, final String name, final String messageId, final String firebaseNotificationId) {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
@@ -460,7 +510,16 @@ public class BoardActive {
         queue.add(stringRequest);
     }
 
+    /** post Location and record in the BoardActive Platform
+     * @param callback to return response from server
+     * @param latitude current latitude
+     * @param longitude current longitude
+     * @param deviceTime current Date and Time
+     */
     public void postLocation(final PostLocationCallback callback, final Double latitude, final Double longitude, final String deviceTime) {
+        setLatitude(latitude.toString());
+        setLongitude(longitude.toString());
+
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
@@ -522,6 +581,80 @@ public class BoardActive {
         queue.add(stringRequest);
     }
 
+    /** post Login to retrieve detail of a registered user in BoardActive Platform
+     * This is only used by the Demo App
+     * @param callback to return response from server
+     * @param email registered email
+     * @param password password of registered email
+     */
+    public void postLogin(final PostLoginCallback callback, final String email, final String password) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = getSharedPrecerence(BAKIT_URL) + "login";
+        Log.d(TAG, "[BAKit] postLogin uri: " + uri);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson = new Gson();
+                LoginPayload loginPayload = gson.fromJson(response.toString(), LoginPayload.class);
+                String AppId = loginPayload.apps[0].id.toString();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(BAKIT_USER_DATA, response.toString());
+                editor.putString(BAKIT_USER_EMAIL, email);
+                editor.putString(BAKIT_USER_PASSWORD, password);
+                editor.putString(BAKIT_APP_ID, AppId);
+                editor.commit();
+
+                Log.d(TAG, "[BAKit] postLogin onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NetworkError) {
+                    Log.d(TAG, "[BAkit] postLogin No network available");
+                } else if (error instanceof AuthFailureError) {
+                    Log.d(TAG, "[BAkit] postLogin Error AuthFailureError: " + error.toString());
+                } else if (error instanceof ServerError) {
+                    Log.d(TAG, "[BAkit] postLogin Error ServerError: " + error.toString());
+                } else if (error instanceof ParseError) {
+                    Log.d(TAG, "[BAkit] postLogin Error ParseError: " + error.toString());
+                } else {
+                    Log.d(TAG, "[BAkit] postLogin Error: " + error.toString());
+                }
+
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                    callback.onResponse(networkResponse.statusCode);
+                }
+            }
+        }) {
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("password", password);
+                Log.d(TAG, "[BAKit] postLogin params: " + params.toString());
+                return params;
+            }
+
+        };
+
+        queue.add(stringRequest);
+    }
+
+    /** Generate Headers required to use BoardActive API Endpoints */
     private Map<String, String> GenerateHeaders() {
 
         HashMap<String, String> headers = new HashMap<>();
@@ -533,32 +666,298 @@ public class BoardActive {
         headers.put("X-BoardActive-Device-OS", getSharedPrecerence(BAKIT_DEVICE_OS));
         headers.put("X-BoardActive-Device-OS-Version", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
         headers.put("X-BoardActive-Is-Test-App", getSharedPrecerence(BAKIT_APP_TEST));
+        headers.put("X-BoardActive-Latitude", getSharedPrecerence(BAKIT_LOCATION_LATITUDE));
+        headers.put("X-BoardActive-Longitude", getSharedPrecerence(BAKIT_LOCATION_LONGITUDE));
         Log.d(TAG, "[BAKit] GenerateHeaders: " + headers.toString());
 
         return headers;
     }
 
+    /** Get shared preference value
+     * @param name the key of the value to get
+     *  */
     private String getSharedPrecerence(String name) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
         final String value = settings.getString(name,"");
         return value;
     }
 
-    public void CurrentLocation(final CurrentLocationCallback callback){
+    /** class Models of the Login Payload response for postLogin */
+    private class LoginPayload {
+        private App[] apps;
+        private Boolean isClaimed;
+        private Long id;
+        private String guid;
+        private String email;
+        private String firstName;
+        private String lastName;
+        private Object avatarURL;
+        private Object avatarImageID;
+        private Object googleAvatarURL;
+        private String customerID;
+        private Boolean isCompliant;
+        private Boolean isGod;
+        private Boolean isApprovedByDoug;
+        private Boolean isRejectedByDoug;
+        private Boolean isVerified;
+        private String dateCreated;
+        private String dateLastUpdated;
+        private Object dateDeleted;
+        private CreatedByInbox inbox;
 
-        BAKIT_LOCATION = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    callback.onResponse(location);
-                }
-            };
-        };
+        public App[] getApps() { return apps; }
+        public void setApps(App[] value) { this.apps = value; }
+
+        public Boolean getIsClaimed() { return isClaimed; }
+        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
+
+        public Long getID() { return id; }
+        public void setID(Long value) { this.id = value; }
+
+        public String getGUID() { return guid; }
+        public void setGUID(String value) { this.guid = value; }
+
+        public String getEmail() { return email; }
+        public void setEmail(String value) { this.email = value; }
+
+        public String getFirstName() { return firstName; }
+        public void setFirstName(String value) { this.firstName = value; }
+
+        public String getLastName() { return lastName; }
+        public void setLastName(String value) { this.lastName = value; }
+
+        public Object getAvatarURL() { return avatarURL; }
+        public void setAvatarURL(Object value) { this.avatarURL = value; }
+
+        public Object getAvatarImageID() { return avatarImageID; }
+        public void setAvatarImageID(Object value) { this.avatarImageID = value; }
+
+        public Object getGoogleAvatarURL() { return googleAvatarURL; }
+        public void setGoogleAvatarURL(Object value) { this.googleAvatarURL = value; }
+
+        public String getCustomerID() { return customerID; }
+        public void setCustomerID(String value) { this.customerID = value; }
+
+        public Boolean getIsCompliant() { return isCompliant; }
+        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
+
+        public Boolean getIsGod() { return isGod; }
+        public void setIsGod(Boolean value) { this.isGod = value; }
+
+        public Boolean getIsApprovedByDoug() { return isApprovedByDoug; }
+        public void setIsApprovedByDoug(Boolean value) { this.isApprovedByDoug = value; }
+
+        public Boolean getIsRejectedByDoug() { return isRejectedByDoug; }
+        public void setIsRejectedByDoug(Boolean value) { this.isRejectedByDoug = value; }
+
+        public Boolean getIsVerified() { return isVerified; }
+        public void setIsVerified(Boolean value) { this.isVerified = value; }
+
+        public String getDateCreated() { return dateCreated; }
+        public void setDateCreated(String value) { this.dateCreated = value; }
+
+        public String getDateLastUpdated() { return dateLastUpdated; }
+        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
+
+        public Object getDateDeleted() { return dateDeleted; }
+        public void setDateDeleted(Object value) { this.dateDeleted = value; }
+
+        public CreatedByInbox getInbox() { return inbox; }
+        public void setInbox(CreatedByInbox value) { this.inbox = value; }
     }
 
+    private class App {
+        private Long id;
+        private String name;
+        private String guid;
+        private Object iconURL;
+        private String itunesURL;
+        private Object playStoreURL;
+        private String dateCreated;
+        private String dateLastUpdated;
+        private AtedBy createdBy;
+        private AtedBy lastUpdatedBy;
+        private User[] users;
+        private AppInbox inbox;
+
+        public Long getID() { return id; }
+        public void setID(Long value) { this.id = value; }
+
+        public String getName() { return name; }
+        public void setName(String value) { this.name = value; }
+
+        public String getGUID() { return guid; }
+        public void setGUID(String value) { this.guid = value; }
+
+        public Object getIconURL() { return iconURL; }
+        public void setIconURL(Object value) { this.iconURL = value; }
+
+        public String getItunesURL() { return itunesURL; }
+        public void setItunesURL(String value) { this.itunesURL = value; }
+
+        public Object getPlayStoreURL() { return playStoreURL; }
+        public void setPlayStoreURL(Object value) { this.playStoreURL = value; }
+
+        public String getDateCreated() { return dateCreated; }
+        public void setDateCreated(String value) { this.dateCreated = value; }
+
+        public String getDateLastUpdated() { return dateLastUpdated; }
+        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
+
+        public AtedBy getCreatedBy() { return createdBy; }
+        public void setCreatedBy(AtedBy value) { this.createdBy = value; }
+
+        public AtedBy getLastUpdatedBy() { return lastUpdatedBy; }
+        public void setLastUpdatedBy(AtedBy value) { this.lastUpdatedBy = value; }
+
+        public User[] getUsers() { return users; }
+        public void setUsers(User[] value) { this.users = value; }
+
+        public AppInbox getInbox() { return inbox; }
+        public void setInbox(AppInbox value) { this.inbox = value; }
+    }
+
+    private class AtedBy {
+        private Long id;
+        private String email;
+        private String firstName;
+        private String lastName;
+        private Object avatarURL;
+        private String dateCreated;
+        private String dateLastUpdated;
+        private Object dateDeleted;
+        private Boolean isClaimed;
+        private Boolean isVerified;
+        private Boolean isCompliant;
+        private Boolean isApprovedByDoug;
+        private Boolean isRejectedByDoug;
+        private CreatedByInbox inbox;
+
+        public Long getID() { return id; }
+        public void setID(Long value) { this.id = value; }
+
+        public String getEmail() { return email; }
+        public void setEmail(String value) { this.email = value; }
+
+        public String getFirstName() { return firstName; }
+        public void setFirstName(String value) { this.firstName = value; }
+
+        public String getLastName() { return lastName; }
+        public void setLastName(String value) { this.lastName = value; }
+
+        public Object getAvatarURL() { return avatarURL; }
+        public void setAvatarURL(Object value) { this.avatarURL = value; }
+
+        public String getDateCreated() { return dateCreated; }
+        public void setDateCreated(String value) { this.dateCreated = value; }
+
+        public String getDateLastUpdated() { return dateLastUpdated; }
+        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
+
+        public Object getDateDeleted() { return dateDeleted; }
+        public void setDateDeleted(Object value) { this.dateDeleted = value; }
+
+        public Boolean getIsClaimed() { return isClaimed; }
+        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
+
+        public Boolean getIsVerified() { return isVerified; }
+        public void setIsVerified(Boolean value) { this.isVerified = value; }
+
+        public Boolean getIsCompliant() { return isCompliant; }
+        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
+
+        public Boolean getIsApprovedByDoug() { return isApprovedByDoug; }
+        public void setIsApprovedByDoug(Boolean value) { this.isApprovedByDoug = value; }
+
+        public Boolean getIsRejectedByDoug() { return isRejectedByDoug; }
+        public void setIsRejectedByDoug(Boolean value) { this.isRejectedByDoug = value; }
+
+        public CreatedByInbox getInbox() { return inbox; }
+        public void setInbox(CreatedByInbox value) { this.inbox = value; }
+    }
+
+    private class CreatedByInbox {
+    }
+
+    private class AppInbox {
+        private Onboarding onboarding;
+
+        public Onboarding getOnboarding() { return onboarding; }
+        public void setOnboarding(Onboarding value) { this.onboarding = value; }
+    }
+
+    private class Onboarding {
+        private Long step0;
+        private Long downloadedTestApp;
+        private Long receivedTestMessage;
+        private Long geofencedTestMessage;
+        private Long receivedGeofencedTestMessage;
+        private Test test;
+
+        public Long getStep0() { return step0; }
+        public void setStep0(Long value) { this.step0 = value; }
+
+        public Long getDownloadedTestApp() { return downloadedTestApp; }
+        public void setDownloadedTestApp(Long value) { this.downloadedTestApp = value; }
+
+        public Long getReceivedTestMessage() { return receivedTestMessage; }
+        public void setReceivedTestMessage(Long value) { this.receivedTestMessage = value; }
+
+        public Long getGeofencedTestMessage() { return geofencedTestMessage; }
+        public void setGeofencedTestMessage(Long value) { this.geofencedTestMessage = value; }
+
+        public Long getReceivedGeofencedTestMessage() { return receivedGeofencedTestMessage; }
+        public void setReceivedGeofencedTestMessage(Long value) { this.receivedGeofencedTestMessage = value; }
+
+        public Test getTest() { return test; }
+        public void setTest(Test value) { this.test = value; }
+    }
+
+    private class Test {
+        private String dumb;
+
+        public String getDumb() { return dumb; }
+        public void setDumb(String value) { this.dumb = value; }
+    }
+
+    private class User {
+        private Long id;
+        private String email;
+        private String firstName;
+        private String lastName;
+        private Boolean isClaimed;
+        private Boolean isVerified;
+        private Boolean isCompliant;
+        private String role;
+        private CreatedByInbox inbox;
+
+        public Long getID() { return id; }
+        public void setID(Long value) { this.id = value; }
+
+        public String getEmail() { return email; }
+        public void setEmail(String value) { this.email = value; }
+
+        public String getFirstName() { return firstName; }
+        public void setFirstName(String value) { this.firstName = value; }
+
+        public String getLastName() { return lastName; }
+        public void setLastName(String value) { this.lastName = value; }
+
+        public Boolean getIsClaimed() { return isClaimed; }
+        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
+
+        public Boolean getIsVerified() { return isVerified; }
+        public void setIsVerified(Boolean value) { this.isVerified = value; }
+
+        public Boolean getIsCompliant() { return isCompliant; }
+        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
+
+        public String getRole() { return role; }
+        public void setRole(String value) { this.role = value; }
+
+        public CreatedByInbox getInbox() { return inbox; }
+        public void setInbox(CreatedByInbox value) { this.inbox = value; }
+    }
 }
 
 

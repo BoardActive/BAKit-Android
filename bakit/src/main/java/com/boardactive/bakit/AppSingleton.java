@@ -9,6 +9,7 @@
     import com.android.volley.toolbox.ImageLoader;
     import com.android.volley.toolbox.Volley;
 
+    /** Singleton for Volley http calls */
     public final class AppSingleton {
         private static volatile AppSingleton mAppSingletonInstance;
         private RequestQueue mRequestQueue;
