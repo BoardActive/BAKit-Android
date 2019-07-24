@@ -187,6 +187,28 @@ public class BoardActive {
         editor.commit();
     }
 
+    public void setUserEmail(String AppTest){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BAKIT_USER_EMAIL, AppTest);
+        editor.commit();
+    }
+
+    public String getUserEmail() {
+        return getSharedPrecerence(BAKIT_USER_EMAIL);
+    }
+
+    public void setUserPassword(String AppTest){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BAKIT_USER_PASSWORD, AppTest);
+        editor.commit();
+    }
+
+    public String getUserPassword() {
+        return getSharedPrecerence(BAKIT_USER_PASSWORD);
+    }
+
     public void setLatitude(String AppTest){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = preferences.edit();
@@ -365,7 +387,7 @@ public class BoardActive {
         VolleyLog.DEBUG = true;
         String uri = getSharedPrecerence(BAKIT_URL) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
+        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
