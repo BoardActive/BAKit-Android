@@ -7,8 +7,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -437,30 +438,6 @@ public class BoardActive {
                 Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
                 return params;
             }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("email", getSharedPrecerence(BAKIT_USER_EMAIL));
-                    jsonObject.put("deviceOS", getSharedPrecerence(BAKIT_DEVICE_OS));
-                    jsonObject.put("deviceOSVersion", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                String requestBody = jsonObject.toString();
-                Log.d(TAG, "[BAKit] RegisterDevice requestBody: " + requestBody);
-
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                    return null;
-                }
-            }
-
         };
 
         queue.add(str);
