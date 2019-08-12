@@ -3,6 +3,7 @@ package com.boardactive.bakit;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -70,9 +72,12 @@ public class JobDispatcherService extends JobService implements
     /**
      * Location instance
      */
-    private android.location.Location lastLocation;
+    private Location lastLocation;
 
     private BoardActive mBoardActive = new BoardActive(this);
+
+    private FusedLocationProviderClient mFusedLocationClient;
+    private Location mGetLocation;
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
@@ -142,7 +147,7 @@ public class JobDispatcherService extends JobService implements
      * @param location - location from fused location provider
      */
     @Override
-    public void onLocationChanged(android.location.Location location) {
+    public void onLocationChanged(Location location) {
 
         Log.d(TAG, "[BAKit] JobDispatcherService onLocationChanged [" + location + "]");
         lastLocation = location;
@@ -154,6 +159,19 @@ public class JobDispatcherService extends JobService implements
      */
     @SuppressLint("MissingPermission")
     private void getLastKnownLocation() {
+
+//        FusedLocationProviderClient client =
+//                LocationServices.getFusedLocationProviderClient(this);
+//
+//        // Get the last known location
+//        client.getLastLocation()
+//                .addOnCompleteListener(this, new OnCompleteListener<Location>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Location> task) {
+//                        // ...
+//                    }
+//                });
+
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
         if (lastLocation != null) {
@@ -186,7 +204,7 @@ public class JobDispatcherService extends JobService implements
      * @param location - location from fused location provider
      */
     @SuppressLint("SetTextI18n")
-    private void writeActualLocation(android.location.Location location) {
+    private void writeActualLocation(Location location) {
         //here in this method we can do something with the location
         Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation [" + location + "]");
         Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation " +

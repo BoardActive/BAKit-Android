@@ -41,8 +41,9 @@ public class PermissionActivity extends AppCompatActivity {
                 permissionListener.permissionResult(true);
                 finish();
             }
-        }else
+        } else {
             finish();
+        }
     }
 
     @Override

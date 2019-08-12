@@ -29,12 +29,7 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,11 +64,13 @@ public class BoardActive {
 
     private final Context mContext;
 
+    /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
     public final static String APP_URL_DEV = "https://springer-api.boardactive.com/mobile/v1/";
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
 
+    /** Global keys */
     public final static String BAKIT_USER_DATA = "BAKIT_USER_DATA";
     public final static String BAKIT_USER_EMAIL = "BAKIT_USER_EMAIL";
     public final static String BAKIT_USER_PASSWORD = "BAKIT_USER_PASSWORD";
@@ -504,6 +501,29 @@ public class BoardActive {
                 return GenerateHeaders();
             }
 
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//
+//                JSONObject jsonObject = new JSONObject();
+//                try {
+//                    jsonObject.put("name", name);
+//                    jsonObject.put("messageId", messageId);
+//                    jsonObject.put("firebaseNotificationId", firebaseNotificationId);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                String requestBody = jsonObject.toString();
+//
+//                try {
+//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+//                } catch (UnsupportedEncodingException uee) {
+//                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+//                    return null;
+//                }
+//            }
+
+
         };
 
         queue.add(stringRequest);
@@ -596,17 +616,6 @@ public class BoardActive {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Gson gson = new Gson();
-                LoginPayload loginPayload = gson.fromJson(response.toString(), LoginPayload.class);
-                String AppId = loginPayload.apps[0].id.toString();
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(BAKIT_USER_DATA, response.toString());
-                editor.putString(BAKIT_USER_EMAIL, email);
-                editor.putString(BAKIT_USER_PASSWORD, password);
-                editor.putString(BAKIT_APP_ID, AppId);
-                editor.commit();
-
                 Log.d(TAG, "[BAKit] postLogin onResponse: " + response.toString());
                 VolleyLog.wtf(response);
                 callback.onResponse(response);
@@ -630,7 +639,7 @@ public class BoardActive {
                 NetworkResponse networkResponse = error.networkResponse;
                 if (networkResponse != null) {
                     Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
+                    callback.onResponse(networkResponse);
                 }
             }
         }) {
@@ -681,282 +690,6 @@ public class BoardActive {
         return value;
     }
 
-    /** class Models of the Login Payload response for postLogin */
-    private class LoginPayload {
-        private App[] apps;
-        private Boolean isClaimed;
-        private Long id;
-        private String guid;
-        private String email;
-        private String firstName;
-        private String lastName;
-        private Object avatarURL;
-        private Object avatarImageID;
-        private Object googleAvatarURL;
-        private String customerID;
-        private Boolean isCompliant;
-        private Boolean isGod;
-        private Boolean isApprovedByDoug;
-        private Boolean isRejectedByDoug;
-        private Boolean isVerified;
-        private String dateCreated;
-        private String dateLastUpdated;
-        private Object dateDeleted;
-        private CreatedByInbox inbox;
-
-        public App[] getApps() { return apps; }
-        public void setApps(App[] value) { this.apps = value; }
-
-        public Boolean getIsClaimed() { return isClaimed; }
-        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
-
-        public Long getID() { return id; }
-        public void setID(Long value) { this.id = value; }
-
-        public String getGUID() { return guid; }
-        public void setGUID(String value) { this.guid = value; }
-
-        public String getEmail() { return email; }
-        public void setEmail(String value) { this.email = value; }
-
-        public String getFirstName() { return firstName; }
-        public void setFirstName(String value) { this.firstName = value; }
-
-        public String getLastName() { return lastName; }
-        public void setLastName(String value) { this.lastName = value; }
-
-        public Object getAvatarURL() { return avatarURL; }
-        public void setAvatarURL(Object value) { this.avatarURL = value; }
-
-        public Object getAvatarImageID() { return avatarImageID; }
-        public void setAvatarImageID(Object value) { this.avatarImageID = value; }
-
-        public Object getGoogleAvatarURL() { return googleAvatarURL; }
-        public void setGoogleAvatarURL(Object value) { this.googleAvatarURL = value; }
-
-        public String getCustomerID() { return customerID; }
-        public void setCustomerID(String value) { this.customerID = value; }
-
-        public Boolean getIsCompliant() { return isCompliant; }
-        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
-
-        public Boolean getIsGod() { return isGod; }
-        public void setIsGod(Boolean value) { this.isGod = value; }
-
-        public Boolean getIsApprovedByDoug() { return isApprovedByDoug; }
-        public void setIsApprovedByDoug(Boolean value) { this.isApprovedByDoug = value; }
-
-        public Boolean getIsRejectedByDoug() { return isRejectedByDoug; }
-        public void setIsRejectedByDoug(Boolean value) { this.isRejectedByDoug = value; }
-
-        public Boolean getIsVerified() { return isVerified; }
-        public void setIsVerified(Boolean value) { this.isVerified = value; }
-
-        public String getDateCreated() { return dateCreated; }
-        public void setDateCreated(String value) { this.dateCreated = value; }
-
-        public String getDateLastUpdated() { return dateLastUpdated; }
-        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
-
-        public Object getDateDeleted() { return dateDeleted; }
-        public void setDateDeleted(Object value) { this.dateDeleted = value; }
-
-        public CreatedByInbox getInbox() { return inbox; }
-        public void setInbox(CreatedByInbox value) { this.inbox = value; }
-    }
-
-    private class App {
-        private Long id;
-        private String name;
-        private String guid;
-        private Object iconURL;
-        private String itunesURL;
-        private Object playStoreURL;
-        private String dateCreated;
-        private String dateLastUpdated;
-        private AtedBy createdBy;
-        private AtedBy lastUpdatedBy;
-        private User[] users;
-        private AppInbox inbox;
-
-        public Long getID() { return id; }
-        public void setID(Long value) { this.id = value; }
-
-        public String getName() { return name; }
-        public void setName(String value) { this.name = value; }
-
-        public String getGUID() { return guid; }
-        public void setGUID(String value) { this.guid = value; }
-
-        public Object getIconURL() { return iconURL; }
-        public void setIconURL(Object value) { this.iconURL = value; }
-
-        public String getItunesURL() { return itunesURL; }
-        public void setItunesURL(String value) { this.itunesURL = value; }
-
-        public Object getPlayStoreURL() { return playStoreURL; }
-        public void setPlayStoreURL(Object value) { this.playStoreURL = value; }
-
-        public String getDateCreated() { return dateCreated; }
-        public void setDateCreated(String value) { this.dateCreated = value; }
-
-        public String getDateLastUpdated() { return dateLastUpdated; }
-        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
-
-        public AtedBy getCreatedBy() { return createdBy; }
-        public void setCreatedBy(AtedBy value) { this.createdBy = value; }
-
-        public AtedBy getLastUpdatedBy() { return lastUpdatedBy; }
-        public void setLastUpdatedBy(AtedBy value) { this.lastUpdatedBy = value; }
-
-        public User[] getUsers() { return users; }
-        public void setUsers(User[] value) { this.users = value; }
-
-        public AppInbox getInbox() { return inbox; }
-        public void setInbox(AppInbox value) { this.inbox = value; }
-    }
-
-    private class AtedBy {
-        private Long id;
-        private String email;
-        private String firstName;
-        private String lastName;
-        private Object avatarURL;
-        private String dateCreated;
-        private String dateLastUpdated;
-        private Object dateDeleted;
-        private Boolean isClaimed;
-        private Boolean isVerified;
-        private Boolean isCompliant;
-        private Boolean isApprovedByDoug;
-        private Boolean isRejectedByDoug;
-        private CreatedByInbox inbox;
-
-        public Long getID() { return id; }
-        public void setID(Long value) { this.id = value; }
-
-        public String getEmail() { return email; }
-        public void setEmail(String value) { this.email = value; }
-
-        public String getFirstName() { return firstName; }
-        public void setFirstName(String value) { this.firstName = value; }
-
-        public String getLastName() { return lastName; }
-        public void setLastName(String value) { this.lastName = value; }
-
-        public Object getAvatarURL() { return avatarURL; }
-        public void setAvatarURL(Object value) { this.avatarURL = value; }
-
-        public String getDateCreated() { return dateCreated; }
-        public void setDateCreated(String value) { this.dateCreated = value; }
-
-        public String getDateLastUpdated() { return dateLastUpdated; }
-        public void setDateLastUpdated(String value) { this.dateLastUpdated = value; }
-
-        public Object getDateDeleted() { return dateDeleted; }
-        public void setDateDeleted(Object value) { this.dateDeleted = value; }
-
-        public Boolean getIsClaimed() { return isClaimed; }
-        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
-
-        public Boolean getIsVerified() { return isVerified; }
-        public void setIsVerified(Boolean value) { this.isVerified = value; }
-
-        public Boolean getIsCompliant() { return isCompliant; }
-        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
-
-        public Boolean getIsApprovedByDoug() { return isApprovedByDoug; }
-        public void setIsApprovedByDoug(Boolean value) { this.isApprovedByDoug = value; }
-
-        public Boolean getIsRejectedByDoug() { return isRejectedByDoug; }
-        public void setIsRejectedByDoug(Boolean value) { this.isRejectedByDoug = value; }
-
-        public CreatedByInbox getInbox() { return inbox; }
-        public void setInbox(CreatedByInbox value) { this.inbox = value; }
-    }
-
-    private class CreatedByInbox {
-    }
-
-    private class AppInbox {
-        private Onboarding onboarding;
-
-        public Onboarding getOnboarding() { return onboarding; }
-        public void setOnboarding(Onboarding value) { this.onboarding = value; }
-    }
-
-    private class Onboarding {
-        private Long step0;
-        private Long downloadedTestApp;
-        private Long receivedTestMessage;
-        private Long geofencedTestMessage;
-        private Long receivedGeofencedTestMessage;
-        private Test test;
-
-        public Long getStep0() { return step0; }
-        public void setStep0(Long value) { this.step0 = value; }
-
-        public Long getDownloadedTestApp() { return downloadedTestApp; }
-        public void setDownloadedTestApp(Long value) { this.downloadedTestApp = value; }
-
-        public Long getReceivedTestMessage() { return receivedTestMessage; }
-        public void setReceivedTestMessage(Long value) { this.receivedTestMessage = value; }
-
-        public Long getGeofencedTestMessage() { return geofencedTestMessage; }
-        public void setGeofencedTestMessage(Long value) { this.geofencedTestMessage = value; }
-
-        public Long getReceivedGeofencedTestMessage() { return receivedGeofencedTestMessage; }
-        public void setReceivedGeofencedTestMessage(Long value) { this.receivedGeofencedTestMessage = value; }
-
-        public Test getTest() { return test; }
-        public void setTest(Test value) { this.test = value; }
-    }
-
-    private class Test {
-        private String dumb;
-
-        public String getDumb() { return dumb; }
-        public void setDumb(String value) { this.dumb = value; }
-    }
-
-    private class User {
-        private Long id;
-        private String email;
-        private String firstName;
-        private String lastName;
-        private Boolean isClaimed;
-        private Boolean isVerified;
-        private Boolean isCompliant;
-        private String role;
-        private CreatedByInbox inbox;
-
-        public Long getID() { return id; }
-        public void setID(Long value) { this.id = value; }
-
-        public String getEmail() { return email; }
-        public void setEmail(String value) { this.email = value; }
-
-        public String getFirstName() { return firstName; }
-        public void setFirstName(String value) { this.firstName = value; }
-
-        public String getLastName() { return lastName; }
-        public void setLastName(String value) { this.lastName = value; }
-
-        public Boolean getIsClaimed() { return isClaimed; }
-        public void setIsClaimed(Boolean value) { this.isClaimed = value; }
-
-        public Boolean getIsVerified() { return isVerified; }
-        public void setIsVerified(Boolean value) { this.isVerified = value; }
-
-        public Boolean getIsCompliant() { return isCompliant; }
-        public void setIsCompliant(Boolean value) { this.isCompliant = value; }
-
-        public String getRole() { return role; }
-        public void setRole(String value) { this.role = value; }
-
-        public CreatedByInbox getInbox() { return inbox; }
-        public void setInbox(CreatedByInbox value) { this.inbox = value; }
-    }
 }
 
 
