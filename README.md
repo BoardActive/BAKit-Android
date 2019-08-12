@@ -70,7 +70,7 @@ Include the following to your App-level build.gradle
 dependencies {
     ...
     // This line imports the BAKit-Android to your project.
-    implementation 'com.github.BoardActive:BAKit-Android:1.0.0'
+    implementation 'com.github.BoardActive:BAKit-Android:1.0.3'
     ...
 }
 ```
