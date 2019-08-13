@@ -50,7 +50,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
         //Add the following to your Top-Level build.gradle
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.0.0'        
     }
 }
 // Add JitPack repository to top level build.gradle
@@ -75,6 +75,27 @@ dependencies {
 }
 ```
 
+Include the following to your gradle.properties
+
+```java
+...
+# Project-wide Gradle settings.
+# IDE (e.g. Android Studio) users:
+# Gradle settings configured through the IDE *will override*
+# any settings specified in this file.
+# For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+android.enableJetifier=true
+android.useAndroidX=true
+org.gradle.jvmargs=-Xmx1536m
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. More details, visit
+# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+# org.gradle.parallel=true}
+```
+
 ### Include Location permissions to your android project
 The BAKit SDK will check if permissions are allowed. If not, the SDK will automatically ask for location permissions. 
 
@@ -91,6 +112,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-iid:17.1.2'
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
+    implementation 'android.arch.work:work-runtime:1.0.1'
     ...
 }
 // Include Google Play Services
@@ -99,6 +121,115 @@ apply plugin: 'com.google.gms.google-services'
 
 ### Add the Firebase Messaging Service and Worker Classes
 If you app does not already support Firebase messaging you can follow these instructions to add to your app.
+
+#### Notification Builder Class
+```javascript
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    private static final String TAG = "MyFirebaseMsgService";
+
+    // [START receive_message]
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+
+        // TODO(developer): Handle FCM messages here.
+
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
+            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+
+            if (/* Check if data needs to be processed by long running job */ true) {
+                // For long-running tasks (10 seconds or more) use WorkManager.
+                scheduleJob();
+            } else {
+                // Handle message within 10 seconds
+                handleNow();
+            }
+
+        }
+
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+        }
+
+        // Also if you intend on generating your own notifications as a result of a received FCM
+        // message, here is where that should be initiated. See sendNotification method below.
+    }
+    // [END receive_message]
+
+
+    // [START on_new_token]
+    @Override
+    public void onNewToken(String token) {
+        Log.d(TAG, "Refreshed token: " + token);
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        sendRegistrationToServer(token);
+    }
+    // [END on_new_token]
+
+    /**
+     * Schedule async work using WorkManager.
+     */
+    private void scheduleJob() {
+        // [START dispatch_job]
+        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
+                .build();
+        WorkManager.getInstance().beginWith(work).enqueue();
+        // [END dispatch_job]
+    }
+
+    /**
+     * Handle time allotted to BroadcastReceivers.
+     */
+    private void handleNow() {
+        Log.d(TAG, "Short lived task is done.");
+    }
+
+    private void sendRegistrationToServer(String token) {
+        // TODO: Implement this method to send token to your app server.
+    }
+
+    /**
+     * Create and show a simple notification containing the received FCM message.
+     *
+     * @param messageBody FCM message body received.
+     */
+    private void sendNotification(String messageBody) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this, channelId)
+                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                        .setContentTitle(getString(R.string.fcm_message))
+                        .setContentText(messageBody)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+}
+```
 
 #### Messaging Service Class
 ```javascript
@@ -208,6 +339,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 }
 ```
+
 #### Schedule Worker Class
 
 ```java
@@ -292,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.initialize();
 
 							 // Register the device with BoardActive
-                        mBoardActive.RegisterDevice(new BoardActive.PostRegisterCallback() {
+                        mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                             @Override
                             public void onResponse(Object value) {
                                 Log.d("[BAkit]", value.toString());
