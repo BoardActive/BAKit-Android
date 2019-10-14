@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">267385072538-mq9fdcgl85h9uk7dnjs9f53jpgaq3dhq.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://boardactive-bakit-app.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">267385072538</string>
+    <string name="google_api_key" translatable="false">AIzaSyAsYsbzhQjxHmV1TfKyou8in4OVcIeCtU4</string>
+    <string name="google_app_id" translatable="false">1:267385072538:android:4a97b55dc47eca9f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAsYsbzhQjxHmV1TfKyou8in4OVcIeCtU4</string>
+    <string name="google_storage_bucket" translatable="false">boardactive-bakit-app.appspot.com</string>
+    <string name="project_id" translatable="false">boardactive-bakit-app</string>
+</resources>

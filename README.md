@@ -124,110 +124,153 @@ If you app does not already support Firebase messaging you can follow these inst
 
 #### Notification Builder Class
 ```javascript
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
+    private static final String TAG = "MyNotificationBuilder";
+    private Bitmap mBitmap;
 
-    private static final String TAG = "MyFirebaseMsgService";
+    private Context mContext;
+    private MessageModel mObj;
+    private PendingIntent mPendingIntent;
+    private int mType;
 
-    // [START receive_message]
+    public static final String NOTIFICATION_KEY = "NOTIFICATION_KEY";
+    public static final int NOTIFICATION_BASIC = 0;
+    public static final int NOTIFICATION_BIG_PIC = 1;
+    public static final int NOTIFICATION_ACTION_BUTTON = 2;
+    public static final int NOTIFICATION_BIG_TEXT = 3;
+    public static final int NOTIFICATION_INBOX = 4;
+
+    public NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type) {
+        super();
+        this.mContext = context;
+        this.mObj = obj;
+        this.mPendingIntent = pendingIntent;
+        this.mType = type;
+    }
+
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
-
-        // TODO(developer): Handle FCM messages here.
-
-        // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use WorkManager.
-                scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
-            }
-
+    protected Bitmap doInBackground(String... params) {
+        try {
+            mBitmap = Glide.
+                    with(mContext).
+                    load(mObj.getImageUrl()).
+                    asBitmap().
+                    into(100, 100). // Width and height
+                    get();
+        } catch (Exception e) {
+            Log.d(TAG, e.toString());
         }
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-        }
-
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
+        return null;
     }
-    // [END receive_message]
 
-
-    // [START on_new_token]
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
+    protected void onPostExecute(Bitmap result) {
+        super.onPostExecute(result);
 
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        sendRegistrationToServer(token);
-    }
-    // [END on_new_token]
-
-    /**
-     * Schedule async work using WorkManager.
-     */
-    private void scheduleJob() {
-        // [START dispatch_job]
-        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
-                .build();
-        WorkManager.getInstance().beginWith(work).enqueue();
-        // [END dispatch_job]
-    }
-
-    /**
-     * Handle time allotted to BroadcastReceivers.
-     */
-    private void handleNow() {
-        Log.d(TAG, "Short lived task is done.");
-    }
-
-    private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
-    }
-
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        String channelId = getString(R.string.default_notification_channel_id);
+        String channelId = mContext.getString(R.string.default_notification_channel_id);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle(getString(R.string.fcm_message))
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+        NotificationCompat.Builder notificationBuilder;
+        switch(mType) {
+            case NOTIFICATION_BASIC: //Basic Notification
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent);
+                break;
+            case NOTIFICATION_BIG_PIC: //Big Pic Notification
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent)
+                                .setLargeIcon(mBitmap)
+                                .setStyle(new NotificationCompat.BigPictureStyle()
+                                        .bigPicture(mBitmap)
+                                        .bigLargeIcon(mBitmap));
+
+                break;
+            case NOTIFICATION_ACTION_BUTTON: //Action Button Notification
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent)
+                                .setLargeIcon(mBitmap)
+                                .addAction(R.drawable.ic_notification, "Action Button",
+                                        mPendingIntent);;
+                break;
+            case NOTIFICATION_BIG_TEXT: //Big Text Notification
+                String bigText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent)
+                                .setLargeIcon(mBitmap)
+                                .setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText(bigText));
+                break;
+            case NOTIFICATION_INBOX: //Inbox Style Notification
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent)
+                                .setLargeIcon(mBitmap)
+                                .setStyle(new NotificationCompat.InboxStyle()
+                                        .addLine("Sample MessageModel #1")
+                                        .addLine("Sample MessageModel #2")
+                                        .addLine("Sample MessageModel #3"))
+                                .setContentIntent(mPendingIntent);
+                break;
+            default:
+                notificationBuilder =
+                        new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.drawable.ic_notification)
+                                .setContentTitle(mObj.getTitle())
+                                .setContentText(mObj.getBody())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                .setContentIntent(mPendingIntent);
+                break;
+        }
 
         NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(mObj.getId() /* ID of notification */, notificationBuilder.build());
     }
+}
 }
 ```
 
