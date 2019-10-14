@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         mBoardActive = new BoardActive(getApplicationContext());
 
         // Add URL to point to BoardActive REST API
-        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
+        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD);
 
         // Add AppID provided by BoardActive
-        mBoardActive.setAppId("164");
+        mBoardActive.setAppId("ADD_APP_ID");
 
         // Add AppKey provided by BoardActive
-        mBoardActive.setAppKey("72ea9cca-3d0a-439f-bcde-1b771630d60a");
+        mBoardActive.setAppKey("ADD_APP_KEY");
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");

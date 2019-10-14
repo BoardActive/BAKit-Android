@@ -271,24 +271,62 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
         notificationManager.notify(mObj.getId() /* ID of notification */, notificationBuilder.build());
     }
 }
-}
 ```
 
 #### Messaging Service Class
 ```javascript
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+/**
+ * NOTE: There can only be one service in each app that receives FCM messages. If multiple
+ * are declared in the Manifest then the first one will be chosen.
+ *
+ * In order to make this Java sample functional, you must remove the following from the Kotlin messaging
+ * service in the AndroidManifest.xml:
+ *
+ * <intent-filter>
+ *   <action android:name="com.google.firebase.MESSAGING_EVENT" />
+ * </intent-filter>
+ */
+public class FCMService extends FirebaseMessagingService {
 
-    private static final String TAG = "MyFirebaseMsgService";
+    private static final String TAG = "FCMService";
+    public static final String EXTRA_OBJECT = "key.EXTRA_OBJECT";
+    public static final String EXTRA_MESSADE_ID = "key.EXTRA_MESSADE_ID";
+    private static final String MESSAGE_ID = "MESSAGE_ID";
 
+    /**
+     * Called when message is received.
+     *
+     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
+     */
     // [START receive_message]
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        // [START_EXCLUDE]
+        // There are two types of messages data messages and notification messages. Data messages
+        // are handled
+        // here in onMessageReceived whether the app is in the foreground or background. Data
+        // messages are the type
+        // traditionally used with GCM. Notification messages are only received here in
+        // onMessageReceived when the app
+        // is in the foreground. When the app is in the background an automatically generated
+        // notification is displayed.
+        // When the user taps on the notification they are returned to the app. Messages
+        // containing both notification
+        // and data payloads are treated as notification messages. The Firebase console always
+        // sends notification
+        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
+        // [END_EXCLUDE]
 
-        // TODO(developer): Handle FCM messages here.
+
+
+        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
+        Log.d(TAG, "[BAAdDrop] From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Log.d(TAG, "[BAAdDrop] MessageModel data payload: " + remoteMessage.getData());
+            sendNotification(remoteMessage);
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
@@ -297,12 +335,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 // Handle message within 10 seconds
                 handleNow();
             }
-
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(TAG, "[BAAdDrop] MessageModel Notification Body: " + remoteMessage);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -312,9 +349,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     // [START on_new_token]
+
+    /**
+     * Called if InstanceID token is updated. This may occur if the security of
+     * the previous token had been compromised. Note that this is called when the InstanceID token
+     * is initially generated so this is where you would retrieve the token.
+     */
     @Override
     public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
+        Log.d(TAG, "[BAAdDrop] Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
@@ -341,45 +384,73 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Short lived task is done.");
     }
 
+    /**
+     * Persist token to third-party servers.
+     *
+     * Modify this method to associate the user's FCM InstanceID token with any server-side account
+     * maintained by your application.
+     *
+     * @param token The new token.
+     */
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
     }
 
     /**
      * Create and show a simple notification containing the received FCM message.
+     * Set notification's tap action.
      *
-     * @param messageBody FCM message body received.
+     * @param remoteNotification FCM notification.
      */
-    private void sendNotification(String messageBody) {
+    private void sendNotification(final RemoteMessage remoteNotification) {
+        Long currentDateandTime = System.currentTimeMillis();
+        MessageModel obj = new MessageModel();
+
+        int id = 1;
+        obj.setId(id);
+        obj.setMessageId(remoteNotification.getData().get("messageId"));
+        obj.setNotificationId(remoteNotification.getMessageId());
+        obj.setTitle(remoteNotification.getData().get("title"));
+        obj.setBody(remoteNotification.getData().get("body"));
+        obj.setImageUrl(remoteNotification.getData().get("imageUrl"));
+        obj.setLatitude(remoteNotification.getData().get("latitude"));
+        obj.setLongitude(remoteNotification.getData().get("longitude"));
+        obj.setMessageData(remoteNotification.getData().get("messageData"));
+        obj.setIsTestMessage(remoteNotification.getData().get("isTestMessage"));
+        obj.setDateCreated(currentDateandTime);
+        obj.setDateLastUpdated(currentDateandTime);
+        obj.setIsRead(false);
+
+        BoardActive mBoardActive = new BoardActive(getApplicationContext());
+        mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+            @Override
+            public void onResponse(Object value) {
+                Log.d(TAG, "Received Event: " + value.toString());
+            }
+        }, "received", obj.getMessageId(), obj.getNotificationId());
+
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        intent.putExtra(EXTRA_MESSADE_ID, id);
+//        intent.putExtra(EXTRA_OBJECT, obj);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NO_HISTORY
+        );
+        intent.setAction(Intent.ACTION_VIEW);
 
-        String channelId = getString(R.string.default_notification_channel_id);
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                        .setContentTitle(getString(R.string.fcm_message))
-                        .setContentText(messageBody)
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(intent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+        new NotificationBuilder(this,pendingIntent, obj, notificationType).execute();
+
     }
+
 }
 ```
 
@@ -403,6 +474,225 @@ public class MyWorker extends Worker {
     }
 }
 ```
+
+#### Message Model Class
+
+```java
+public class MessageModel {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    @SerializedName("messageId")
+    @Expose
+    private String messageId;
+
+    @SerializedName("notificationId")
+    @Expose
+    private String notificationId;
+
+    @SerializedName("body")
+    @Expose
+    private String body;
+
+    @SerializedName("title")
+    @Expose
+    private String title;
+
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+
+    @SerializedName("messageData")
+    @Expose
+    private String messageData;
+
+    @SerializedName("isTestMessage")
+    @Expose
+    private String isTestMessage;
+
+    @SerializedName("isRead")
+    @Expose
+    private Boolean isRead;
+
+    @SerializedName("dateCreated")
+    @Expose
+    private Long dateCreated;
+
+    @SerializedName("dateLastUpdated")
+    @Expose
+    private Long dateLastUpdated;
+
+
+    /**
+     * No args constructor for use in serialization
+     */
+    public MessageModel() {
+    }
+
+    /**
+     * @param id
+     * @param messageId
+     * @param notificationId
+     * @param title
+     * @param body
+     * @param imageUrl
+     * @param latitude
+     * @param longitude
+     * @param messageData
+     * @param isTestMessage
+     * @param isRead
+     * @param dateCreated
+     * @param dateLastUpdated
+     */
+    public MessageModel(
+            Integer id,
+            String messageId,
+            String notificationId,
+            String title,
+            String body,
+            String imageUrl,
+            String latitude,
+            String longitude,
+            String messageData,
+            String isTestMessage,
+            Boolean isRead,
+            Long dateCreated,
+            Long dateLastUpdated
+    ) {
+        super();
+        this.id = id;
+        this.messageId = messageId;
+        this.notificationId = notificationId;
+        this.title = title;
+        this.body = body;
+        this.imageUrl = imageUrl;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.messageData = messageData;
+        this.isTestMessage = isTestMessage;
+        this.isRead = isRead;
+        this.dateCreated = dateCreated;
+        this.dateLastUpdated = dateLastUpdated;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(String notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getMessageData() {
+        return messageData;
+    }
+
+    public void setMessageData(String messageData) {
+        this.messageData = messageData;
+    }
+
+    public String getIsTestMessage() {
+        return isTestMessage;
+    }
+
+    public void setIsRead(Boolean isRead) {
+        this.isRead = isRead;
+    }
+
+    public Boolean getIsRead() {
+        return isRead;
+    }
+
+    public void setIsTestMessage(String isTestMessage) {
+        this.isTestMessage = isTestMessage;
+    }
+
+    public Long getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Long getDateLastUpdated() {
+        return dateLastUpdated;
+    }
+
+    public void setDateLastUpdated(Long dateLastUpdated) {
+        this.dateLastUpdated = dateLastUpdated;
+    }
+
+
+}
+```
+
 #### Add to your AndroidManifest.xml
 
 ```xml
@@ -425,30 +715,32 @@ import com.boardactive.bakit.BoardActive;
 
 public class MainActivity extends AppCompatActivity {
 
-	//Add the BoardActive Object
-	private BoardActive mBoardActive;
+    private static final String TAG = "MainActivity";
+
+    //Add the BoardActive Object
+    private BoardActive mBoardActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
-		
-		 // Add URL to point to BoardActive REST API
-	    mBoardActive.setAppUrl("https://api.boardactive.com/mobile/v1/");
 
-	    // Add AppID provided by BoardActive
-      	mBoardActive.setAppId("ADD_APP_ID");
+        // Add URL to point to BoardActive REST API
+        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD);
 
-      	// Add AppKey provided by BoardActive
-       mBoardActive.setAppKey("ADD_APP_KEY");
+        // Add AppID provided by BoardActive
+        mBoardActive.setAppId("ADD_APP_ID");
 
-		// Add the version of your App
-       mBoardActive.setAppVersion("1.0.0");
-       
-       // Get Firebase Token
+        // Add AppKey provided by BoardActive
+        mBoardActive.setAppKey("ADD_APP_KEY");
+
+        // Add the version of your App
+        mBoardActive.setAppVersion("1.0.0");
+
+        // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -463,10 +755,10 @@ public class MainActivity extends AppCompatActivity {
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
-							 // Initialize BoardActive
+                        // Initialize BoardActive
                         mBoardActive.initialize();
 
-							 // Register the device with BoardActive
+                        // Register the device with BoardActive
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                             @Override
                             public void onResponse(Object value) {
@@ -477,6 +769,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+}
 ```
 
 ## Download Example App Source Code
