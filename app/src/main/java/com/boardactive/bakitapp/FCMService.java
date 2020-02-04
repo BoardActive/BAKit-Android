@@ -75,11 +75,11 @@ public class FCMService extends FirebaseMessagingService {
 
 
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "[BAAdDrop] From: " + remoteMessage.getFrom());
+        Log.d(TAG, "[BAKitApp] From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "[BAAdDrop] MessageModel data payload: " + remoteMessage.getData());
+            Log.d(TAG, "[BAKitApp] MessageModel data payload: " + remoteMessage.getData());
             sendNotification(remoteMessage);
 
             if (/* Check if data needs to be processed by long running job */ true) {
@@ -93,7 +93,7 @@ public class FCMService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "[BAAdDrop] MessageModel Notification Body: " + remoteMessage);
+            Log.d(TAG, "[BAKitApp] MessageModel Notification Body: " + remoteMessage);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -111,7 +111,7 @@ public class FCMService extends FirebaseMessagingService {
      */
     @Override
     public void onNewToken(String token) {
-        Log.d(TAG, "[BAAdDrop] Refreshed token: " + token);
+        Log.d(TAG, "[BAKitApp] Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
@@ -179,14 +179,14 @@ public class FCMService extends FirebaseMessagingService {
         mBoardActive.postEvent(new BoardActive.PostEventCallback() {
             @Override
             public void onResponse(Object value) {
-                Log.d(TAG, "Received Event: " + value.toString());
+                Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
             }
         }, "received", obj.getMessageId(), obj.getNotificationId());
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_MESSADE_ID, id);
 //        intent.putExtra(EXTRA_OBJECT, obj);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT   
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -3,12 +3,12 @@ package com.boardactive.bakit;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+
 import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -21,6 +21,9 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.boardactive.bakit.Utils.SharedPreferenceHelper;
+import com.boardactive.bakit.models.Me;
+import com.boardactive.bakit.models.MeRequest;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -28,7 +31,15 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -59,9 +70,16 @@ import java.util.UUID;
  *  The JobDispatcher is launched using the initialize() function. It also starts automatically at boot
  *  using the BootReceiver BroadcastReceiver
  */
+
+@SuppressWarnings("unchecked")
 public class BoardActive {
 
     private final Context mContext;
+
+    protected GsonBuilder gsonBuilder = new GsonBuilder();
+    protected Gson gson;
+
+    private static final int SAMPLE_API_RESPONSE_CODE = 0;
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
@@ -85,7 +103,7 @@ public class BoardActive {
     public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
     public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
 
-    private static final String TAG = "[BAKit] BoardActive";
+    public static final String TAG = BoardActive.class.getName();
 
     /** Service to track and post device location */
     private FirebaseJobDispatcher mDispatcher;
@@ -97,139 +115,107 @@ public class BoardActive {
         mContext = context;
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
+        gson = gsonBuilder.create();
     }
 
     /** Set and Get variables */
     public void setAppUrl(String URL){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_URL, URL);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_URL, URL);
     }
 
     public String getAppUrl() {
-        return getSharedPrecerence(BAKIT_URL);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_URL, null);
     }
 
     public void setAppKey(String AppKey){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_APP_KEY, AppKey);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_KEY, AppKey);
     }
 
     public String getAppKey() {
-        return getSharedPrecerence(BAKIT_APP_KEY);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null);
+
     }
 
     public void setAppId(String AppId){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_APP_ID, AppId);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_ID, AppId);
     }
 
     public String getAppId() {
-        return getSharedPrecerence(BAKIT_APP_ID);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_APP_ID, null);
     }
 
     public void setAppToken(String AppToken){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_DEVICE_TOKEN, AppToken);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_TOKEN, AppToken);
     }
 
     public String getAppToken() {
-        return getSharedPrecerence(BAKIT_DEVICE_TOKEN);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_TOKEN, null);
+
     }
 
     public void setAppVersion(String AppVersion){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_APP_VERSION, AppVersion);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_VERSION, AppVersion);
     }
 
     public String getAppVersion() {
-        return getSharedPrecerence(BAKIT_APP_VERSION);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_APP_VERSION, null);
+
     }
 
     public void setAppOSVersion(String AppOSVersion){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_DEVICE_OS_VERSION, AppOSVersion);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, AppOSVersion);
     }
 
     public String getAppOSVersion() {
-        return getSharedPrecerence(BAKIT_DEVICE_OS_VERSION);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null);
     }
 
     public void setAppOS(String AppOS){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_DEVICE_OS, AppOS);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, AppOS);
     }
 
     public String getAppOS() {
-        return getSharedPrecerence(BAKIT_DEVICE_OS);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null);
     }
 
     public void setAppTest(String AppTest){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_APP_TEST, AppTest);
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_TEST, AppTest);
     }
 
-    public void setUserEmail(String AppTest){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_USER_EMAIL, AppTest);
-        editor.commit();
+    public void setUserEmail(String AppUSerEmail){
+        SharedPreferenceHelper.putString(mContext, BAKIT_USER_EMAIL, AppUSerEmail);
     }
 
     public String getUserEmail() {
-        return getSharedPrecerence(BAKIT_USER_EMAIL);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null);
     }
 
-    public void setUserPassword(String AppTest){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_USER_PASSWORD, AppTest);
-        editor.commit();
+    public void setUserPassword(String AppUserPassword){
+        SharedPreferenceHelper.putString(mContext, BAKIT_USER_PASSWORD, AppUserPassword);
     }
 
     public String getUserPassword() {
-        return getSharedPrecerence(BAKIT_USER_PASSWORD);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_USER_PASSWORD, null);
     }
 
-    public void setLatitude(String AppTest){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_LOCATION_LATITUDE, AppTest);
-        editor.commit();
+    public void setLatitude(String Latitude){
+        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LATITUDE, Latitude);
     }
 
     public String getLatitude() {
-        return getSharedPrecerence(BAKIT_LOCATION_LATITUDE);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LATITUDE, null);
     }
 
-    public void setLongitude(String AppTest){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_LOCATION_LONGITUDE, AppTest);
-        editor.commit();
+    public void setLongitude(String Longitude){
+        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LONGITUDE, Longitude);
     }
 
     public String getLongitude() {
-        return getSharedPrecerence(BAKIT_LOCATION_LONGITUDE);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LONGITUDE, null);
     }
 
     public String getAppTest() {
-        return getSharedPrecerence(BAKIT_APP_TEST);
+        return SharedPreferenceHelper.getString(mContext, BAKIT_APP_TEST, null);
     }
 
     /** Set SDK Core Variables and launches Job Dispatcher
@@ -237,12 +223,9 @@ public class BoardActive {
      * permissions.
      * */
     public void initialize() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(BAKIT_DEVICE_OS, "android");
-        editor.putString(BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
-        editor.putString(BAKIT_DEVICE_ID, getUUID(mContext));
-        editor.commit();
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
 
         /** Check for Location permission. If not then prompt to ask */
         int permissionState = ActivityCompat.checkSelfPermission(mContext,
@@ -311,16 +294,26 @@ public class BoardActive {
 
     /** Empty required variables */
     public void unRegisterDevice() {
-        setAppKey("");
-        setAppId("");
-        setAppToken("");
-        setAppUrl("");
-        setAppOS("");
-        setAppOSVersion("");
+        setAppKey(null);
+        setAppId(null);
+        setAppToken(null);
+        setAppUrl(null);
+        setAppOS(null);
+        setAppOSVersion(null);
     }
 
     /** RegisterDevice Callback providing HTTP Response */
     public interface PostRegisterCallback<T> {
+        void onResponse(T value);
+    }
+
+    /** getMe Callback providing HTTP Response */
+    public interface GetMeCallback<T> {
+        void onResponse(T value);
+    }
+
+    /** putMe Callback providing HTTP Response */
+    public interface PutMeCallback<T> {
         void onResponse(T value);
     }
 
@@ -361,14 +354,16 @@ public class BoardActive {
         String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
         if (uniqueID == null) {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(
-                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+//            SharedPreferences sharedPrefs = context.getSharedPreferences(
+//                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+//            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            uniqueID = SharedPreferenceHelper.getString(mContext, PREF_UNIQUE_ID, null);
             if (uniqueID == null) {
                 uniqueID = UUID.randomUUID().toString();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(PREF_UNIQUE_ID, uniqueID);
-                editor.commit();
+                SharedPreferenceHelper.putString(mContext, PREF_UNIQUE_ID, uniqueID);
+//                SharedPreferences.Editor editor = sharedPrefs.edit();
+//                editor.putString(PREF_UNIQUE_ID, uniqueID);
+//                editor.commit();
             }
         }
 
@@ -382,7 +377,145 @@ public class BoardActive {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
-        String uri = getSharedPrecerence(BAKIT_URL) + "me";
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+
+        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NetworkError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
+                } else if (error instanceof AuthFailureError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
+                } else if (error instanceof ServerError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
+                } else if (error instanceof ParseError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
+                } else {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
+                }
+
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                    callback.onResponse(networkResponse.statusCode);
+                }
+            }
+        }) {
+
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return GenerateHeaders();
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("email", SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
+//                params.put("deviceOS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+//                params.put("deviceOSVersion", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+//                Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
+//                return params;
+//            }
+        };
+
+        queue.add(str);
+    }
+
+
+    /** post Event and log in the BoardActive Platform
+     * @param callback to return response from server
+     */
+    public void getMe(final GetMeCallback callback) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+
+        StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NetworkError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
+                } else if (error instanceof AuthFailureError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
+                } else if (error instanceof ServerError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
+                } else if (error instanceof ParseError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
+                } else {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
+                }
+
+                NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                    callback.onResponse(networkResponse.statusCode);
+                }
+            }
+        }) {
+
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return GenerateHeaders();
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                return params;
+            }
+
+        };
+
+        queue.add(str);
+    }
+
+//    public void getMe(final GetMeCallback callback) {
+//        MeApiHelper.getInstance().call(mContext,
+//                Request.Method.GET,
+//                "me",
+//                null,
+//                SampleResponse.class,
+//                SAMPLE_API_RESPONSE_CODE,
+//                this);
+//    }
+
+
+    /** post Event and log in the BoardActive Platform
+     * @param callback to return response from server
+     */
+    public void putMe(final PutMeCallback callback) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
         StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
             @Override
@@ -428,12 +561,235 @@ public class BoardActive {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", getSharedPrecerence(BAKIT_USER_EMAIL));
-                params.put("deviceOS", getSharedPrecerence(BAKIT_DEVICE_OS));
-                params.put("deviceOSVersion", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
+                params.put("email", SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
+                params.put("deviceOS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                params.put("deviceOSVersion", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
                 Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
                 return params;
+}
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                    try {
+                        String json = "{" +
+                                "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+                                "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+                                "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+                                "attributes:" +  "{ " +
+                                "stock:" +  "{)," +
+                                "custom:" +  "{} " +
+                                "}" +
+                                "}";
+
+                        //parse request object to json format and send as request body
+                        return gson.toJson(json).getBytes();
+                    } catch (Exception e) {
+                        Log.e(TAG, "error parsing request body to json");
+
+                    }
+                return super.getBody();
             }
+
+
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//
+//                try {
+//                    String json = "{" +
+//                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+//                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+//                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+//                            "attributes:" +  "{ " +
+//                            "stock:" +  "{)," +
+//                            "custom:" +  "{} " +
+//                            "}" +
+//                            "}";
+//
+//                    JSONObject jsonObject = new JSONObject(json);
+//
+//                    try {
+//                        String requestBody = jsonObject.toString();
+//                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+//                    } catch (UnsupportedEncodingException uee) {
+//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", uee, "utf-8");
+//                        return null;
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//            }
+        };
+
+        queue.add(str);
+    }
+
+    /** post Event and log in the BoardActive Platform
+     * @param callback to return response from server
+     * @param me type of Event to log
+     */
+    public void putMe(final PutMeCallback callback, final Me me) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+
+        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof NetworkError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
+                } else if (error instanceof AuthFailureError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
+                } else if (error instanceof ServerError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
+                } else if (error instanceof ParseError) {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
+                } else {
+                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
+                }
+
+                callback.onResponse(error.toString());
+
+//                NetworkResponse networkResponse = error.networkResponse;
+//                if (networkResponse != null) {
+//                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+//                    callback.onResponse(networkResponse.statusCode);
+//                }
+            }
+        }) {
+
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return GenerateHeaders();
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("email", getSharedPreference(BAKIT_USER_EMAIL));
+//                params.put("deviceOS", getSharedPreference(BAKIT_DEVICE_OS));
+//                params.put("deviceOSVersion", getSharedPreference(BAKIT_DEVICE_OS_VERSION));
+//                Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
+//                return params;
+//            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+
+//                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//                    JsonParser parser = new JsonParser();
+//                    JsonElement je = parser.parse(value.toString());
+//                    httpReponse.setText(gson.toJson(je));
+
+                    Gson gson = new Gson();
+                    MeRequest meRequest = new MeRequest();
+                    meRequest.setEmail(null);
+                    meRequest.setDeviceOS( SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
+                    meRequest.setDeviceOSVersion( SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                    meRequest.setAttributes(me.getAttributes());
+
+                    String json = gson.toJson(meRequest);
+                    Log.d(TAG, json);
+
+//                    String json = "{" +
+//                            "'email': '" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + "', " +
+//                            "'deviceOS':'" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + "', " +
+//                            "'deviceOSVersion':'" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + "', " +
+//                            "'attributes':" +  "{ " +
+//                            "'stock':" +  "{" +
+//                            "'name':'" + me.getAttributes().getStock().getName() + "', " +
+//                            "'email':'" + me.getAttributes().getStock().getEmail() + "', " +
+//                            "'phone':'" + me.getAttributes().getStock().getPhone() + "', " +
+//                            "'dateBorn':'" + me.getAttributes().getStock().getDateBorn() + "', " +
+//                            "'gender':'" + me.getAttributes().getStock().getGender() + "', " +
+//                            "'facebookUrl':'" + me.getAttributes().getStock().getFacebookUrl() + "', " +
+//                            "'linkedInUrl':'" + me.getAttributes().getStock().getLinkedInUrl() + "', " +
+//                            "'twitterUrl':'" + me.getAttributes().getStock().getTwitterUrl() + "', " +
+//                            "'instagramUrl':'" + me.getAttributes().getStock().getInstagramUrl() + "', " +
+//                            "'avatarUrl':'" + me.getAttributes().getStock().getAvatarUrl() + "', " +
+//                            "'locationPermission':'" + me.getAttributes().getStock().getLocationPermission() + "', " +
+//                            "'notificationPermission':'" + me.getAttributes().getStock().getNotificationPermission() + "'" +
+//                            "}," +
+//                            "custom:" +  "{} " +
+//                            "}" +
+//                            "}";
+
+                    //parse request object to json format and send as request body
+                    return gson.toJson(meRequest).getBytes();
+                } catch (Exception e) {
+                    Log.e(TAG, "error parsing request body to json");
+                }
+                return super.getBody();
+            }
+
+
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//
+//                try {
+//
+//                    String json = "{" +
+//                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+//                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+//                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+//                            "attributes:" +  "{ " +
+//                                "stock:" +  "{" +
+//                                    "name:'" + me.getAttributes().getStock().getName() + "'" +
+//                                    "email:'" + me.getAttributes().getStock().getEmail() + "'" +
+//                                    "phone:'" + me.getAttributes().getStock().getPhone() + "'" +
+//                                    "dateBorn:'" + me.getAttributes().getStock().getDateBorn() + "'" +
+//                                    "gender:'" + me.getAttributes().getStock().getGender() + "'" +
+//                                    "facebookUrl:'" + me.getAttributes().getStock().getFacebookUrl() + "'" +
+//                                    "linkedInUrl:'" + me.getAttributes().getStock().getLinkedInUrl() + "'" +
+//                                    "twitterUrl:'" + me.getAttributes().getStock().getTwitterUrl() + "'" +
+//                                    "instagramUrl:'" + me.getAttributes().getStock().getInstagramUrl() + "'" +
+//                                    "avatarUrl:'" + me.getAttributes().getStock().getAvatarUrl() + "'" +
+//                                    "locationPermission:'" + me.getAttributes().getStock().getLocationPermission() + "'" +
+//                                    "notificationPermission:'" + me.getAttributes().getStock().getNotificationPermission() +
+//                                "}," +
+//                                "custom:" +  "{} " +
+//                                "}" +
+//                            "}";
+//
+////                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+////                    JsonParser parser = new JsonParser();
+////                    JsonElement je = parser.parse(json);
+////                    Log.d(TAG, gson.toJson(je));
+//
+//                    JSONObject jsonObject = new JSONObject(json);
+//
+//                    try {
+//                        String requestBody = jsonObject.toString();
+//                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+//                    } catch (UnsupportedEncodingException uee) {
+//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", uee, "utf-8");
+//                        return null;
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    return null;
+//                }
+//
+//            }
         };
 
         queue.add(str);
@@ -450,7 +806,7 @@ public class BoardActive {
 
         VolleyLog.DEBUG = true;
 
-        String uri = getSharedPrecerence(BAKIT_URL) + "events";
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "events";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
             @Override
@@ -541,7 +897,8 @@ public class BoardActive {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
-        String uri = getSharedPrecerence(BAKIT_URL) + "locations";
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "locations";
+
         Log.d(TAG, "[BAKit] postLocation uri: " + uri);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
@@ -609,7 +966,8 @@ public class BoardActive {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
-        String uri = getSharedPrecerence(BAKIT_URL) + "login";
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "login";
+
         Log.d(TAG, "[BAKit] postLogin uri: " + uri);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
@@ -666,29 +1024,22 @@ public class BoardActive {
 
         HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-        headers.put("X-BoardActive-App-Key", getSharedPrecerence(BAKIT_APP_KEY));
-        headers.put("X-BoardActive-App-Id", getSharedPrecerence(BAKIT_APP_ID));
-        headers.put("X-BoardActive-App-Version", getSharedPrecerence(BAKIT_APP_VERSION));
-        headers.put("X-BoardActive-Device-Token", getSharedPrecerence(BAKIT_DEVICE_TOKEN));
-        headers.put("X-BoardActive-Device-OS", getSharedPrecerence(BAKIT_DEVICE_OS));
-        headers.put("X-BoardActive-Device-OS-Version", getSharedPrecerence(BAKIT_DEVICE_OS_VERSION));
-        headers.put("X-BoardActive-Is-Test-App", getSharedPrecerence(BAKIT_APP_TEST));
-        headers.put("X-BoardActive-Latitude", getSharedPrecerence(BAKIT_LOCATION_LATITUDE));
-        headers.put("X-BoardActive-Longitude", getSharedPrecerence(BAKIT_LOCATION_LONGITUDE));
+        headers.put("X-BoardActive-App-Key", SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null));
+        headers.put("X-BoardActive-App-Id", SharedPreferenceHelper.getString(mContext, BAKIT_APP_ID, null));
+        headers.put("X-BoardActive-App-Version", SharedPreferenceHelper.getString(mContext, BAKIT_APP_VERSION, null));
+        headers.put("X-BoardActive-Device-Token", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_TOKEN, null));
+        headers.put("X-BoardActive-Device-OS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+        headers.put("X-BoardActive-Device-OS-Version", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+        headers.put("X-BoardActive-Is-Test-App", SharedPreferenceHelper.getString(mContext, BAKIT_APP_TEST, null));
+        headers.put("X-BoardActive-Latitude", SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LATITUDE, null));
+        headers.put("X-BoardActive-Longitude", SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LONGITUDE, null));
         Log.d(TAG, "[BAKit] GenerateHeaders: " + headers.toString());
 
         return headers;
     }
 
-    /** Get shared preference value
-     * @param name the key of the value to get
-     *  */
-    private String getSharedPrecerence(String name) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
-        final String value = settings.getString(name,"");
-        return value;
-    }
-
 }
+
+
 
 

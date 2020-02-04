@@ -17,7 +17,8 @@ import androidx.core.app.NotificationCompat;
 import com.bumptech.glide.Glide;
 
 public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
-    private static final String TAG = "MyNotificationBuilder";
+    public static final String TAG = NotificationBuilder.class.getName();
+
     private Bitmap mBitmap;
 
     private Context mContext;

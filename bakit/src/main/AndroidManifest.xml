@@ -5,7 +5,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <application>
+    <application
+        android:name="com.boardactive.bakit.App"
+        >
 
         <!-- [START BOOT/DEFAULT SERVICE] -->
         <receiver android:name=".BootReceiver" android:enabled="true"

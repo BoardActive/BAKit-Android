@@ -9,7 +9,7 @@ import androidx.work.WorkerParameters;
 
 public class MyWorker extends Worker {
 
-    private static final String TAG = "MyWorker";
+    public static final String TAG = MyWorker.class.getName();
 
     public MyWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
         super(appContext, workerParams);

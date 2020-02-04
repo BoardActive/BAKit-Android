@@ -1,0 +1,4 @@
+# Referenced at /Users/boardactive/github/BAKit-Android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:25
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+# Referenced at /Users/boardactive/github/BAKit-Android/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml:25
+-keep class com.boardactive.bakit.App { <init>(); }

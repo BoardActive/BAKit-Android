@@ -5,11 +5,12 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
@@ -18,8 +19,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import java.text.DateFormat;
@@ -48,6 +51,8 @@ public class JobDispatcherService extends JobService implements
 {
 
     public static final String TAG = JobDispatcherService.class.getSimpleName();
+
+    private LocationCallback locationCallback;
 
     /**
      * Update interval of location request
@@ -172,29 +177,49 @@ public class JobDispatcherService extends JobService implements
 //                    }
 //                });
 
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+//        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
-        if (lastLocation != null) {
-
-            Log.d(TAG, "[BAKit] JobDispatcherService LastKnown location. " +
-                    "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
-            writeLastLocation();
-            startLocationUpdates();
-
-            DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
-            String date = df.format(Calendar.getInstance().getTime());
-
-            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-                @Override
-                public void onResponse(Object value) {
-                    Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
                 }
-            }, lastLocation.getLatitude(), lastLocation.getLongitude(), date);
+                for (Location location : locationResult.getLocations()) {
+                    DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+                    String date = df.format(Calendar.getInstance().getTime());
 
-        } else {
-            Log.d(TAG, "[BAKit] JobDispatcherService No location retrieved yet");
-            startLocationUpdates();
-        }
+                    mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+                        @Override
+                        public void onResponse(Object value) {
+                            Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
+                        }
+                    }, location.getLatitude(), location.getLongitude(), date);
+                }
+            };
+        };
+
+//        if (lastLocation != null) {
+//
+//            Log.d(TAG, "[BAKit] JobDispatcherService LastKnown location. " +
+//                    "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
+//            writeLastLocation();
+//            startLocationUpdates();
+//
+//            DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+//            String date = df.format(Calendar.getInstance().getTime());
+//
+//            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+//                @Override
+//                public void onResponse(Object value) {
+//                    Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
+//                }
+//            }, lastLocation.getLatitude(), lastLocation.getLongitude(), date);
+//
+//        } else {
+//            Log.d(TAG, "[BAKit] JobDispatcherService No location retrieved yet");
+//            startLocationUpdates();
+//        }
 
     }
 
@@ -228,7 +253,7 @@ public class JobDispatcherService extends JobService implements
                 .setInterval(UPDATE_INTERVAL)
                 .setFastestInterval(FASTEST_INTERVAL);
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+//        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
     }
 
     /**
