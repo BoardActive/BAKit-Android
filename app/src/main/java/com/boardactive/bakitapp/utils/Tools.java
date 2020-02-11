@@ -161,10 +161,10 @@ public class Tools {
 //        return newFormat.format(new Date(dateTime));
 //    }
 
-//    public static String getFormattedDateSimple(Long dateTime) {
-//        SimpleDateFormat newFormat = new SimpleDateFormat("MMMM dd, yyyy");
-//        return newFormat.format(new Date(dateTime));
-//    }
+    public static String getFormattedDateSimple(Long dateTime) {
+        SimpleDateFormat newFormat = new SimpleDateFormat("mm/dd/yyyy");
+        return newFormat.format(new Date(dateTime));
+    }
 
 //    public static String getFormattedDateEvent(Long dateTime) {
 //        SimpleDateFormat newFormat = new SimpleDateFormat("EEE, MMM dd yyyy");

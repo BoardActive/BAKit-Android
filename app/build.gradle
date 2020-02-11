@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.boardactive.bakitapp"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -53,6 +53,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
     implementation 'androidx.work:work-runtime:2.0.1'
     implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'         // date & time picker
 
 }
 

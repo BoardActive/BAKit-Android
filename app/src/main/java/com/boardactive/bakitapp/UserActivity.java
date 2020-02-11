@@ -1,5 +1,6 @@
 package com.boardactive.bakitapp;
 
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -8,16 +9,23 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import androidx.appcompat.widget.AppCompatRadioButton;
-import android.widget.RadioGroup;
+
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.boardactive.bakit.BoardActive;
 import com.boardactive.bakit.models.Me;
+import com.boardactive.bakitapp.utils.Tools;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -28,7 +36,10 @@ public class UserActivity extends AppCompatActivity {
     private BoardActive mBoardActive;
     private Me mMe;
 
-    private AutoCompleteTextView name, email, phone, dateBorn, facebookUrl, linkedInUrl, twitterUrl, instagramUrl, avatarUrl;
+    private AutoCompleteTextView name, email, phone, facebookUrl, linkedInUrl, twitterUrl, instagramUrl, avatarUrl;
+//    private TextView dateBorn;
+    private Calendar calendar;
+    private int year, month, day;
     private AppCompatRadioButton radioFemale, radioMale;
 
     @Override
@@ -39,18 +50,24 @@ public class UserActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
         radioFemale = (AppCompatRadioButton) findViewById(R.id.radio_female);
         radioMale = (AppCompatRadioButton) findViewById(R.id.radio_male);
 
         name = (AutoCompleteTextView) findViewById(R.id.name);
         email = (AutoCompleteTextView) findViewById(R.id.email);
         phone = (AutoCompleteTextView) findViewById(R.id.phone);
-        dateBorn = (AutoCompleteTextView) findViewById(R.id.dateBorn);
         facebookUrl = (AutoCompleteTextView) findViewById(R.id.facebookUrl);
         linkedInUrl = (AutoCompleteTextView) findViewById(R.id.linkedInUrl);
         twitterUrl = (AutoCompleteTextView) findViewById(R.id.twitterUrl);
         instagramUrl = (AutoCompleteTextView) findViewById(R.id.instagramUrl);
         avatarUrl = (AutoCompleteTextView) findViewById(R.id.avatarUrl);
+//        dateBorn = (TextView) findViewById(R.id.avatarUrl);
 
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
@@ -77,12 +94,14 @@ public class UserActivity extends AppCompatActivity {
                 name.setText(mMe.getAttributes().getStock().getName());
                 email.setText(mMe.getAttributes().getStock().getEmail());
                 phone.setText(mMe.getAttributes().getStock().getPhone());
-                dateBorn.setText(mMe.getAttributes().getStock().getDateBorn());
                 facebookUrl.setText(mMe.getAttributes().getStock().getFacebookUrl());
                 linkedInUrl.setText(mMe.getAttributes().getStock().getLinkedInUrl());
                 twitterUrl.setText(mMe.getAttributes().getStock().getTwitterUrl());
                 instagramUrl.setText(mMe.getAttributes().getStock().getInstagramUrl());
                 avatarUrl.setText(mMe.getAttributes().getStock().getAvatarUrl());
+
+                ((TextView) findViewById(R.id.dateBorn)).setText(mMe.getAttributes().getStock().getDateBorn());
+
                 if(mMe.getAttributes().getStock().getGender() == "f"){
                     radioFemale.setChecked(true);
                     radioMale.setChecked(false);
@@ -102,7 +121,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        initComponent();
 
 
     }
@@ -150,12 +169,13 @@ public class UserActivity extends AppCompatActivity {
                 }
                 mMe.getAttributes().getStock().setEmail(email.getText().toString());
                 mMe.getAttributes().getStock().setPhone(phone.getText().toString());
-                mMe.getAttributes().getStock().setDateBorn(dateBorn.getText().toString());
+                mMe.getAttributes().getStock().setDateBorn(((TextView) findViewById(R.id.dateBorn)).getText().toString());
                 mMe.getAttributes().getStock().setFacebookUrl(facebookUrl.getText().toString());
                 mMe.getAttributes().getStock().setLinkedInUrl(linkedInUrl.getText().toString());
                 mMe.getAttributes().getStock().setTwitterUrl(twitterUrl.getText().toString());
                 mMe.getAttributes().getStock().setInstagramUrl(instagramUrl.getText().toString());
                 mMe.getAttributes().getStock().setAvatarUrl(avatarUrl.getText().toString());
+
                 if(radioFemale.isChecked()) {
                     mMe.getAttributes().getStock().setGender("f");
                 } else {
@@ -181,6 +201,40 @@ public class UserActivity extends AppCompatActivity {
             }
         }, mMe);
 
+    }
+
+    private void initComponent() {
+        ((Button) findViewById(R.id.bt_pick)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogDatePickerLight((Button) view);
+            }
+        });
+    }
+
+    private void dialogDatePickerLight(final Button bt) {
+        Calendar cur_calender = Calendar.getInstance();
+        DatePickerDialog datePicker = DatePickerDialog.newInstance(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        long date_ship_millis = calendar.getTimeInMillis();
+                        ((TextView) findViewById(R.id.dateBorn)).setText(monthOfYear + 1  + "/" + dayOfMonth + "/" + year);
+                    }
+                },
+                cur_calender.get(Calendar.YEAR),
+                cur_calender.get(Calendar.MONTH),
+                cur_calender.get(Calendar.DAY_OF_MONTH)
+        );
+        //set dark light
+        datePicker.setThemeDark(false);
+        datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
+        datePicker.setMinDate(cur_calender);
+        datePicker.show(getFragmentManager(), "Datepickerdialog");
     }
 
 }
