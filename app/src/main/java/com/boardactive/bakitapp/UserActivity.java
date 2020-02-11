@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import androidx.appcompat.widget.AppCompatRadioButton;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +29,7 @@ public class UserActivity extends AppCompatActivity {
     private Me mMe;
 
     private AutoCompleteTextView name, email, phone, dateBorn, facebookUrl, linkedInUrl, twitterUrl, instagramUrl, avatarUrl;
+    private AppCompatRadioButton radioFemale, radioMale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class UserActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        radioFemale = (AppCompatRadioButton) findViewById(R.id.radio_female);
+        radioMale = (AppCompatRadioButton) findViewById(R.id.radio_male);
 
         name = (AutoCompleteTextView) findViewById(R.id.name);
         email = (AutoCompleteTextView) findViewById(R.id.email);
@@ -76,7 +82,16 @@ public class UserActivity extends AppCompatActivity {
                 linkedInUrl.setText(mMe.getAttributes().getStock().getLinkedInUrl());
                 twitterUrl.setText(mMe.getAttributes().getStock().getTwitterUrl());
                 instagramUrl.setText(mMe.getAttributes().getStock().getInstagramUrl());
-                avatarUrl.setText(mMe.getAttributes().getStock().getAvatarUrl());                onResume();
+                avatarUrl.setText(mMe.getAttributes().getStock().getAvatarUrl());
+                if(mMe.getAttributes().getStock().getGender() == "f"){
+                    radioFemale.setChecked(true);
+                    radioMale.setChecked(false);
+                } else {
+                    radioFemale.setChecked(false);
+                    radioMale.setChecked(true);
+                }
+
+                onResume();
             }
         });
 
@@ -128,7 +143,11 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                mMe.getAttributes().getStock().setName(name.getText().toString());
+                if (name.getText().equals("")){
+                    mMe.getAttributes().getStock().setName(null);
+                } else {
+                    mMe.getAttributes().getStock().setName(name.getText().toString());
+                }
                 mMe.getAttributes().getStock().setEmail(email.getText().toString());
                 mMe.getAttributes().getStock().setPhone(phone.getText().toString());
                 mMe.getAttributes().getStock().setDateBorn(dateBorn.getText().toString());
@@ -137,6 +156,11 @@ public class UserActivity extends AppCompatActivity {
                 mMe.getAttributes().getStock().setTwitterUrl(twitterUrl.getText().toString());
                 mMe.getAttributes().getStock().setInstagramUrl(instagramUrl.getText().toString());
                 mMe.getAttributes().getStock().setAvatarUrl(avatarUrl.getText().toString());
+                if(radioFemale.isChecked()) {
+                    mMe.getAttributes().getStock().setGender("f");
+                } else {
+                    mMe.getAttributes().getStock().setGender("m");
+                }
 
                 putMe();
             }
@@ -153,6 +177,7 @@ public class UserActivity extends AppCompatActivity {
         mBoardActive.putMe(new BoardActive.PutMeCallback() {
             @Override
             public void onResponse(Object value) {
+                finish();
             }
         }, mMe);
 

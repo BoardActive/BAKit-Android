@@ -3,31 +3,31 @@
 3    package="com.boardactive.bakitapp.test" >
 4
 5    <uses-sdk
-5-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:5:5-74
+5-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:5:5-74
 6        android:minSdkVersion="19"
-6-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:5:15-41
+6-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:5:42-71
+7-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:5:42-71
 8
 9    <instrumentation
-9-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:11:5-15:74
+9-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:11:5-15:74
 10        android:name="com.android.test.runner.MultiDexTestRunner"
-10-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:11:22-79
+10-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:11:22-79
 11        android:functionalTest="false"
-11-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:14:22-52
+11-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:13:22-53
+12-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:13:22-53
 13        android:label="Tests for com.boardactive.bakitapp"
-13-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:15:22-72
+13-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:15:22-72
 14        android:targetPackage="com.boardactive.bakitapp" />
-14-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:12:22-70
+14-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:12:22-70
 15
 16    <application android:debuggable="true" >
-16-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:7:5-9:19
-16-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:7:18-43
+16-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:7:5-9:19
+16-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:7:18-43
 17        <uses-library android:name="android.test.runner" />
-17-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:8:9-60
-17-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6836139224317565647.xml:8:23-57
+17-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:8:9-60
+17-->/Users/boardactive/github/BAKit-Android/app/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger6231836755933501591.xml:8:23-57
 18    </application>
 19
 20</manifest>

@@ -11,7 +11,6 @@ public class Stock {
     private String twitterUrl;
     private String instagramUrl;
     private String avatarUrl;
-
     private String locationPermission;
     private String notificationPermission;
 

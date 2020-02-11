@@ -22,8 +22,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.boardactive.bakit.Utils.SharedPreferenceHelper;
+import com.boardactive.bakit.models.Attributes;
+import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
+import com.boardactive.bakit.models.Stock;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -33,13 +36,6 @@ import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,7 +67,6 @@ import java.util.UUID;
  *  using the BootReceiver BroadcastReceiver
  */
 
-@SuppressWarnings("unchecked")
 public class BoardActive {
 
     private final Context mContext;
@@ -133,7 +128,6 @@ public class BoardActive {
 
     public String getAppKey() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null);
-
     }
 
     public void setAppId(String AppId){
@@ -354,16 +348,10 @@ public class BoardActive {
         String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
         if (uniqueID == null) {
-//            SharedPreferences sharedPrefs = context.getSharedPreferences(
-//                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-//            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
             uniqueID = SharedPreferenceHelper.getString(mContext, PREF_UNIQUE_ID, null);
             if (uniqueID == null) {
                 uniqueID = UUID.randomUUID().toString();
                 SharedPreferenceHelper.putString(mContext, PREF_UNIQUE_ID, uniqueID);
-//                SharedPreferences.Editor editor = sharedPrefs.edit();
-//                editor.putString(PREF_UNIQUE_ID, uniqueID);
-//                editor.commit();
             }
         }
 
@@ -566,8 +554,12 @@ public class BoardActive {
                 params.put("deviceOSVersion", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
                 Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
                 return params;
-}
+            }
 
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
 
             @Override
             public byte[] getBody() throws AuthFailureError {
@@ -590,37 +582,6 @@ public class BoardActive {
                     }
                 return super.getBody();
             }
-
-
-//            @Override
-//            public byte[] getBody() throws AuthFailureError {
-//
-//                try {
-//                    String json = "{" +
-//                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
-//                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
-//                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
-//                            "attributes:" +  "{ " +
-//                            "stock:" +  "{)," +
-//                            "custom:" +  "{} " +
-//                            "}" +
-//                            "}";
-//
-//                    JSONObject jsonObject = new JSONObject(json);
-//
-//                    try {
-//                        String requestBody = jsonObject.toString();
-//                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-//                    } catch (UnsupportedEncodingException uee) {
-//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", uee, "utf-8");
-//                        return null;
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//            }
         };
 
         queue.add(str);
@@ -691,46 +652,109 @@ public class BoardActive {
 
 
             @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
             public byte[] getBody() throws AuthFailureError {
                 try {
-
-//                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//                    JsonParser parser = new JsonParser();
-//                    JsonElement je = parser.parse(value.toString());
-//                    httpReponse.setText(gson.toJson(je));
-
                     Gson gson = new Gson();
+
+                    Attributes attributes = new Attributes();
+                    Stock stock = new Stock();
+                    Custom custom = new Custom();
+
+                    /** Check for Location permission. If not then prompt to ask */
+                    int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                            Manifest.permission.ACCESS_FINE_LOCATION);
+
+                    if(permissionState != PackageManager.PERMISSION_GRANTED){
+                        stock.setLocationPermission("false");
+                    } else {
+                        stock.setLocationPermission("true");
+                    }
+
+                    stock.setNotificationPermission("true");
+
+                    stock.setName(me.getAttributes().getStock().getName() + "");
+                    stock.setEmail(me.getAttributes().getStock().getEmail() + "");
+                    stock.setPhone(me.getAttributes().getStock().getPhone() + "");
+                    stock.setDateBorn(me.getAttributes().getStock().getDateBorn() + "");
+                    stock.setGender(me.getAttributes().getStock().getGender() + "");
+                    stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
+                    stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
+                    stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
+                    stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
+                    stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
+
+                    if (me.getAttributes().getStock().getName().equals("")) {
+                        stock.setName(null);
+                    } else {
+                        stock.setName(me.getAttributes().getStock().getName() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getEmail().equals("")) {
+                        stock.setEmail(null);
+                    } else {
+                        stock.setEmail(me.getAttributes().getStock().getEmail() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getPhone().equals("")) {
+                        stock.setPhone(null);
+                    } else {
+                        stock.setPhone(me.getAttributes().getStock().getPhone() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getDateBorn().equals("")) {
+                        stock.setDateBorn(null);
+                    } else {
+                        stock.setDateBorn(me.getAttributes().getStock().getDateBorn() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getGender().equals("")) {
+                        stock.setGender(null);
+                    } else {
+                        stock.setGender(me.getAttributes().getStock().getGender() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getFacebookUrl().equals("")) {
+                        stock.setFacebookUrl(null);
+                    } else {
+                        stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getLinkedInUrl().equals("")) {
+                        stock.setLinkedInUrl(null);
+                    } else {
+                        stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getTwitterUrl().equals("")) {
+                        stock.setTwitterUrl(null);
+                    } else {
+                        stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getInstagramUrl().equals("")) {
+                        stock.setInstagramUrl(null);
+                    } else {
+                        stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
+                    }
+
+                    if (me.getAttributes().getStock().getAvatarUrl().length() == 0) {
+                        stock.setAvatarUrl(null);
+                    } else {
+                        stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
+                    }
+
+                    attributes.setStock(stock);
+
                     MeRequest meRequest = new MeRequest();
-                    meRequest.setEmail(null);
-                    meRequest.setDeviceOS( SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
+                    meRequest.setEmail("");
+                    meRequest.setDeviceOS( SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
                     meRequest.setDeviceOSVersion( SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-                    meRequest.setAttributes(me.getAttributes());
-
-                    String json = gson.toJson(meRequest);
-                    Log.d(TAG, json);
-
-//                    String json = "{" +
-//                            "'email': '" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + "', " +
-//                            "'deviceOS':'" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + "', " +
-//                            "'deviceOSVersion':'" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + "', " +
-//                            "'attributes':" +  "{ " +
-//                            "'stock':" +  "{" +
-//                            "'name':'" + me.getAttributes().getStock().getName() + "', " +
-//                            "'email':'" + me.getAttributes().getStock().getEmail() + "', " +
-//                            "'phone':'" + me.getAttributes().getStock().getPhone() + "', " +
-//                            "'dateBorn':'" + me.getAttributes().getStock().getDateBorn() + "', " +
-//                            "'gender':'" + me.getAttributes().getStock().getGender() + "', " +
-//                            "'facebookUrl':'" + me.getAttributes().getStock().getFacebookUrl() + "', " +
-//                            "'linkedInUrl':'" + me.getAttributes().getStock().getLinkedInUrl() + "', " +
-//                            "'twitterUrl':'" + me.getAttributes().getStock().getTwitterUrl() + "', " +
-//                            "'instagramUrl':'" + me.getAttributes().getStock().getInstagramUrl() + "', " +
-//                            "'avatarUrl':'" + me.getAttributes().getStock().getAvatarUrl() + "', " +
-//                            "'locationPermission':'" + me.getAttributes().getStock().getLocationPermission() + "', " +
-//                            "'notificationPermission':'" + me.getAttributes().getStock().getNotificationPermission() + "'" +
-//                            "}," +
-//                            "custom:" +  "{} " +
-//                            "}" +
-//                            "}";
+                    meRequest.setAttributes(attributes);
 
                     //parse request object to json format and send as request body
                     return gson.toJson(meRequest).getBytes();
@@ -739,57 +763,6 @@ public class BoardActive {
                 }
                 return super.getBody();
             }
-
-
-//            @Override
-//            public byte[] getBody() throws AuthFailureError {
-//
-//                try {
-//
-//                    String json = "{" +
-//                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
-//                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
-//                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
-//                            "attributes:" +  "{ " +
-//                                "stock:" +  "{" +
-//                                    "name:'" + me.getAttributes().getStock().getName() + "'" +
-//                                    "email:'" + me.getAttributes().getStock().getEmail() + "'" +
-//                                    "phone:'" + me.getAttributes().getStock().getPhone() + "'" +
-//                                    "dateBorn:'" + me.getAttributes().getStock().getDateBorn() + "'" +
-//                                    "gender:'" + me.getAttributes().getStock().getGender() + "'" +
-//                                    "facebookUrl:'" + me.getAttributes().getStock().getFacebookUrl() + "'" +
-//                                    "linkedInUrl:'" + me.getAttributes().getStock().getLinkedInUrl() + "'" +
-//                                    "twitterUrl:'" + me.getAttributes().getStock().getTwitterUrl() + "'" +
-//                                    "instagramUrl:'" + me.getAttributes().getStock().getInstagramUrl() + "'" +
-//                                    "avatarUrl:'" + me.getAttributes().getStock().getAvatarUrl() + "'" +
-//                                    "locationPermission:'" + me.getAttributes().getStock().getLocationPermission() + "'" +
-//                                    "notificationPermission:'" + me.getAttributes().getStock().getNotificationPermission() +
-//                                "}," +
-//                                "custom:" +  "{} " +
-//                                "}" +
-//                            "}";
-//
-////                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-////                    JsonParser parser = new JsonParser();
-////                    JsonElement je = parser.parse(json);
-////                    Log.d(TAG, gson.toJson(je));
-//
-//                    JSONObject jsonObject = new JSONObject(json);
-//
-//                    try {
-//                        String requestBody = jsonObject.toString();
-//                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-//                    } catch (UnsupportedEncodingException uee) {
-//                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", uee, "utf-8");
-//                        return null;
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    return null;
-//                }
-//
-//            }
         };
 
         queue.add(str);
@@ -855,30 +828,6 @@ public class BoardActive {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 return GenerateHeaders();
             }
-
-//            @Override
-//            public byte[] getBody() throws AuthFailureError {
-//
-//                JSONObject jsonObject = new JSONObject();
-//                try {
-//                    jsonObject.put("name", name);
-//                    jsonObject.put("messageId", messageId);
-//                    jsonObject.put("firebaseNotificationId", firebaseNotificationId);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                String requestBody = jsonObject.toString();
-//
-//                try {
-//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-//                    return null;
-//                }
-//            }
-
-
         };
 
         queue.add(stringRequest);
@@ -1023,7 +972,7 @@ public class BoardActive {
     private Map<String, String> GenerateHeaders() {
 
         HashMap<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        headers.put("Content-Type","application/json; charset=utf-8");
         headers.put("X-BoardActive-App-Key", SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null));
         headers.put("X-BoardActive-App-Id", SharedPreferenceHelper.getString(mContext, BAKIT_APP_ID, null));
         headers.put("X-BoardActive-App-Version", SharedPreferenceHelper.getString(mContext, BAKIT_APP_VERSION, null));
