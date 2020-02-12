@@ -99,8 +99,10 @@ public class UserActivity extends AppCompatActivity {
                 twitterUrl.setText(mMe.getAttributes().getStock().getTwitterUrl());
                 instagramUrl.setText(mMe.getAttributes().getStock().getInstagramUrl());
                 avatarUrl.setText(mMe.getAttributes().getStock().getAvatarUrl());
+                String d = mMe.getAttributes().getStock().getDateBorn().toString();
+                ((TextView) findViewById(R.id.dateBorn)).setText(d);
 
-                ((TextView) findViewById(R.id.dateBorn)).setText(mMe.getAttributes().getStock().getDateBorn());
+//                ((TextView) findViewById(R.id.dateBorn)).setText(mMe.getAttributes().getStock().getDateBorn());
 
                 if(mMe.getAttributes().getStock().getGender() == "f"){
                     radioFemale.setChecked(true);
@@ -169,7 +171,8 @@ public class UserActivity extends AppCompatActivity {
                 }
                 mMe.getAttributes().getStock().setEmail(email.getText().toString());
                 mMe.getAttributes().getStock().setPhone(phone.getText().toString());
-                mMe.getAttributes().getStock().setDateBorn(((TextView) findViewById(R.id.dateBorn)).getText().toString());
+                String d = ((TextView) findViewById(R.id.dateBorn)).getText().toString();
+                mMe.getAttributes().getStock().setDateBorn(d);
                 mMe.getAttributes().getStock().setFacebookUrl(facebookUrl.getText().toString());
                 mMe.getAttributes().getStock().setLinkedInUrl(linkedInUrl.getText().toString());
                 mMe.getAttributes().getStock().setTwitterUrl(twitterUrl.getText().toString());
@@ -223,7 +226,7 @@ public class UserActivity extends AppCompatActivity {
                         calendar.set(Calendar.MONTH, monthOfYear);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         long date_ship_millis = calendar.getTimeInMillis();
-                        ((TextView) findViewById(R.id.dateBorn)).setText(monthOfYear + 1  + "/" + dayOfMonth + "/" + year);
+                        ((TextView) findViewById(R.id.dateBorn)).setText(Tools.getFormattedDateSimple(date_ship_millis));
                     }
                 },
                 cur_calender.get(Calendar.YEAR),

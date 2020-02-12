@@ -37,9 +37,12 @@ import com.firebase.jobdispatcher.Trigger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 
 /**
@@ -680,7 +683,7 @@ public class BoardActive {
                     stock.setName(me.getAttributes().getStock().getName() + "");
                     stock.setEmail(me.getAttributes().getStock().getEmail() + "");
                     stock.setPhone(me.getAttributes().getStock().getPhone() + "");
-                    stock.setDateBorn(me.getAttributes().getStock().getDateBorn() + "");
+                    stock.setPhone(me.getAttributes().getStock().getDateBorn() + "");
                     stock.setGender(me.getAttributes().getStock().getGender() + "");
                     stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
                     stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
@@ -709,7 +712,7 @@ public class BoardActive {
                     if (me.getAttributes().getStock().getDateBorn().equals("")) {
                         stock.setDateBorn(null);
                     } else {
-                        stock.setDateBorn(me.getAttributes().getStock().getDateBorn() + "");
+                        stock.setDateBorn(me.getAttributes().getStock().getDateBorn());
                     }
 
                     if (me.getAttributes().getStock().getGender().equals("")) {

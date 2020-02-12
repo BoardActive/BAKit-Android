@@ -1,5 +1,7 @@
 package com.boardactive.bakit.models;
 
+import java.util.Date;
+
 public class Stock {
     private String name;
     private String email;
