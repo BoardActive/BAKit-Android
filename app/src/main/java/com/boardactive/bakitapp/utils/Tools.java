@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Tools {
 
@@ -126,8 +128,13 @@ public class Tools {
 //    }
 
     public static String getFormattedDateSimple(Long dateTime) {
-        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        return newFormat.format(new Date(dateTime));
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+        df.setTimeZone(tz);
+        String nowAsISO = df.format(dateTime);
+        return nowAsISO;
+//        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//        return newFormat.format(new Date(dateTime));
     }
 
     public static String getFormattedDateSimple(String dateTime) {

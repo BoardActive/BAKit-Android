@@ -37,12 +37,9 @@ import com.firebase.jobdispatcher.Trigger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.UUID;
 
 /**

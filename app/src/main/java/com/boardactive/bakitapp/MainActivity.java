@@ -47,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
         btn_userAttributes();
         btn_getMe();
+        init();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
+    public void init() {
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
 
@@ -92,17 +102,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Object value) {
 
-                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                            Me me = gson.fromJson(value.toString(), Me.class);
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                Me me = gson.fromJson(value.toString(), Me.class);
 
-                            JsonParser parser = new JsonParser();
-                            JsonElement je = parser.parse(value.toString());
-                            httpReponse.setText(gson.toJson(je));
-                            onResume();
+                                JsonParser parser = new JsonParser();
+                                JsonElement je = parser.parse(value.toString());
+                                httpReponse.setText(gson.toJson(je));
+                                onResume();
                             }
                         });
                     }
                 });
+
     }
 
 
