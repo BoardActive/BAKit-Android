@@ -87,7 +87,7 @@ public class CustomActivity extends AppCompatActivity {
             public void onResponse(Object value) {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 mMe = gson.fromJson(value.toString(), Me.class);
-                name.setText(mMe.getAttributes().getCustom().getName());
+//                name.setText(mMe.getAttributes().getCustom().getName());
                 email.setText(mMe.getAttributes().getStock().getEmail());
                 phone.setText(mMe.getAttributes().getStock().getPhone());
                 facebookUrl.setText(mMe.getAttributes().getStock().getFacebookUrl());
