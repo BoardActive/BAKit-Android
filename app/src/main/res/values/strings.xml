@@ -2,4 +2,5 @@
     <string name="app_name">BAKit App</string>
     <string name="default_notification_channel_id">BAKit</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_custom">CustomActivity</string>
 </resources>

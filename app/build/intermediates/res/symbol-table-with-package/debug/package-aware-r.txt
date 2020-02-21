@@ -2010,11 +2010,12 @@ id barrier
 id beginning
 id blocking
 id bottom
-id brn_userAttributes
 id bt_pick
 id btn_cancel
+id btn_customAttributes
 id btn_getMe
 id btn_save
+id btn_userAttributes
 id buttonPanel
 id cancel_action
 id center
@@ -2321,6 +2322,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_custom
 layout activity_main
 layout activity_user
 layout custom_dialog
@@ -2503,6 +2505,7 @@ string project_id
 string sample_endpoint
 string search_menu_title
 string status_bar_notification_info_overflow
+string title_activity_custom
 string title_activity_user
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

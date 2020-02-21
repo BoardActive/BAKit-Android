@@ -1,8 +1,6 @@
 package com.boardactive.bakitapp;
 
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,15 +19,13 @@ import com.boardactive.bakitapp.utils.Tools;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 public class UserActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getName();
+    public static final String TAG = UserActivity.class.getName();
     private static final int ME_API_RESPONSE_CODE = 0;
 
     private Button btn_save, btn_cancel;

@@ -1,16 +1,11 @@
 package com.boardactive.bakit.models;
 
-public class Custom {
+public class Custom<T> {
 
-    private String test;
+    // T stands for "Type"
+    private T t;
 
-    //Getters and setters
-    public String getTest() {
-        return test;
-    }
+    public void set(T t) { this.t = t; }
 
-    public void setTest(String name) {
-        this.test = test;
-    }
-
+    public T get() { return t; }
 }

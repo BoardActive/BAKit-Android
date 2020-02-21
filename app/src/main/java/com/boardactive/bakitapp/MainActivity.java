@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Add the BoardActive Object
     private BoardActive mBoardActive;
-    private Button btn_userAttributes, btn_getMe;
+    private Button btn_userAttributes, btn_customAttributes, btn_getMe;
     private EditText httpReponse;
 
     @Override
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         httpReponse = (EditText) findViewById(R.id.httpResponse);
 
         btn_userAttributes();
+        btn_customAttributes();
         btn_getMe();
         init();
 
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btn_userAttributes() {
 
-        btn_userAttributes = (Button) findViewById(R.id.brn_userAttributes);
+        btn_userAttributes = (Button) findViewById(R.id.btn_userAttributes);
 
         btn_userAttributes.setOnClickListener(new View.OnClickListener() {
 
@@ -133,6 +134,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void btn_customAttributes() {
+
+        btn_customAttributes = (Button) findViewById(R.id.btn_customAttributes);
+
+        btn_customAttributes.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getBaseContext(), CustomActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+    }
 
     public void btn_getMe() {
 

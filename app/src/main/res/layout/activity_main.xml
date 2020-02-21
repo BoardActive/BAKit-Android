@@ -41,7 +41,7 @@
                 android:padding="@dimen/spacing_xlarge">
 
                 <Button
-                    android:id="@+id/brn_userAttributes"
+                    android:id="@+id/btn_userAttributes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_large"
@@ -49,6 +49,14 @@
                     android:text="User Attributes"
                     android:textColor="@android:color/white" />
 
+                <Button
+                    android:id="@+id/btn_customAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:background="@drawable/btn_rounded_accent"
+                    android:text="Custom Attributes"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/btn_getMe"
