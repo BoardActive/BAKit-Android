@@ -1,12 +1,14 @@
 package com.boardactive.bakit;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
@@ -27,13 +29,9 @@ import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
 import com.boardactive.bakit.models.Stock;
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
-import com.firebase.jobdispatcher.Lifetime;
-import com.firebase.jobdispatcher.RetryStrategy;
-import com.firebase.jobdispatcher.Trigger;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.text.DateFormat;
@@ -74,7 +72,32 @@ public class BoardActive {
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
 
-    private static final int SAMPLE_API_RESPONSE_CODE = 0;
+    /**
+     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
+     */
+    private static final long UPDATE_INTERVAL = 10000; // Every 60 seconds.
+
+    /**
+     * The fastest rate for active location updates. Updates will never be more frequent
+     * than this value, but they may be less frequent.
+     */
+    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 30 seconds
+
+    /**
+     * The max time before batched results are delivered by location services. Results may be
+     * delivered sooner than this interval.
+     */
+    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1; // Every 5 minutes.
+
+    /**
+     * Stores parameters for requests to the FusedLocationProviderApi.
+     */
+    private LocationRequest mLocationRequest;
+
+    /**
+     * Provides access to the Fused Location Provider API.
+     */
+    private FusedLocationProviderClient mFusedLocationClient;
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
@@ -101,7 +124,6 @@ public class BoardActive {
     public static final String TAG = BoardActive.class.getName();
 
     /** Service to track and post device location */
-    private FirebaseJobDispatcher mDispatcher;
 
     /** Constuctor
      * @param context Pass in the Application Context from the main app
@@ -111,6 +133,8 @@ public class BoardActive {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
         gson = gsonBuilder.create();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
+
     }
 
     /** Set and Get variables */
@@ -217,6 +241,27 @@ public class BoardActive {
      * permissions.
      * */
     public void initialize() {
+
+        mLocationRequest = new LocationRequest();
+
+        // Sets the desired interval for active location updates. This interval is
+        // inexact. You may not receive updates at all if no location sources are available, or
+        // you may receive them slower than requested. You may also receive updates faster than
+        // requested if other applications are requesting location at a faster interval.
+        // Note: apps running on "O" devices (regardless of targetSdkVersion) may receive updates
+        // less frequently than this interval when the app is no longer in the foreground.
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+
+        // Sets the fastest rate for active location updates. This interval is exact, and your
+        // application will never receive updates faster than this value.
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
+
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        // Sets the maximum time when batched location updates are delivered. Updates may be
+        // delivered sooner than this interval.
+        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
@@ -232,7 +277,8 @@ public class BoardActive {
         }
 
         /** Start the JobDispatcher to check for and post location */
-        StartJob();
+//        StartJob();
+        requestLocationUpdates(null);
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
@@ -328,18 +374,54 @@ public class BoardActive {
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
     private void StartJob() {
-        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
-        Job myJob = mDispatcher.newJobBuilder()
-                .setService(JobDispatcherService.class)
-                .setTag(TAG)
-                .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(5, 30))
-                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-                .setReplaceCurrent(false)
-                .setConstraints(Constraint.ON_ANY_NETWORK)
-                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                .build();
-        mDispatcher.mustSchedule(myJob);
+
+//        Intent intent = new Intent(mContext, LocationService.class);
+//        Log.d(TAG, "StartJob() intent");
+//        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
+//        Log.d(TAG, "StartJob() intent.setAction");
+//        PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Log.d(TAG, "StartJob() PendingIntent");
+
+//        Intent intent = new Intent(mContext, LocationUpdatesBroadcastReceiver.class);
+//        intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
+//        PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+//        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
+//        Job myJob = mDispatcher.newJobBuilder()
+//                .setService(JobDispatcherService.class)
+//                .setTag(TAG)
+//                .setRecurring(true)
+//                .setTrigger(Trigger.executionWindow(5, 30))
+//                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+//                .setReplaceCurrent(false)
+//                .setConstraints(Constraint.ON_ANY_NETWORK)
+//                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+//                .build();
+//        mDispatcher.mustSchedule(myJob);
+    }
+
+    public void requestLocationUpdates(View view) {
+        try {
+            Log.i(TAG, "Starting location updates");
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private PendingIntent getPendingIntent() {
+        // Note: for apps targeting API level 25 ("Nougat") or lower, either
+        // PendingIntent.getService() or PendingIntent.getBroadcast() may be used when requesting
+        // location updates. For apps targeting API level O, only
+        // PendingIntent.getBroadcast() should be used. This is due to the limits placed on services
+        // started in the background in "O".
+
+        // TODO(developer): uncomment to use PendingIntent.getService().
+        Intent intent = new Intent(mContext, LocationService.class);
+        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
     }
 
     /** get Device UUID to Create Event */
@@ -563,23 +645,23 @@ public class BoardActive {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                    try {
-                        String json = "{" +
-                                "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
-                                "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
-                                "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
-                                "attributes:" +  "{ " +
-                                "stock:" +  "{)," +
-                                "custom:" +  "{} " +
-                                "}" +
-                                "}";
+                try {
+                    String json = "{" +
+                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+                            "attributes:" +  "{ " +
+                            "stock:" +  "{)," +
+                            "custom:" +  "{} " +
+                            "}" +
+                            "}";
 
-                        //parse request object to json format and send as request body
-                        return gson.toJson(json).getBytes();
-                    } catch (Exception e) {
-                        Log.e(TAG, "error parsing request body to json");
+                    //parse request object to json format and send as request body
+                    return gson.toJson(json).getBytes();
+                } catch (Exception e) {
+                    Log.e(TAG, "error parsing request body to json");
 
-                    }
+                }
                 return super.getBody();
             }
         };
@@ -860,7 +942,6 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 if (error instanceof NetworkError) {
                     Log.d(TAG, "[BAkit] postLocation No network available");
                 } else if (error instanceof AuthFailureError) {

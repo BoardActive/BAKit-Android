@@ -2,10 +2,7 @@ package com.boardactive.bakitapp;
 
 import android.app.Application;
 import android.util.Log;
-
-import androidx.lifecycle.ProcessLifecycleOwner;
-
-import com.boardactive.bakit.App;
+import com.google.firebase.FirebaseApp;
 
 public class MyApp extends Application {
 
@@ -16,10 +13,7 @@ public class MyApp extends Application {
         super.onCreate();
 
         Log.d(TAG, "[BAKitApp] MyApp onCreate()");
-
-        MyAppLifecycleObserver appLifecycleObserver = new MyAppLifecycleObserver();
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
-
+        FirebaseApp.initializeApp(this.getApplicationContext());
 
     }
 

@@ -11,6 +11,8 @@
 
     /** Singleton for Volley http calls */
     public final class AppSingleton {
+        public static final String TAG = AppSingleton.class.getName();
+
         private static volatile AppSingleton mAppSingletonInstance;
         private RequestQueue mRequestQueue;
         private ImageLoader mImageLoader;
