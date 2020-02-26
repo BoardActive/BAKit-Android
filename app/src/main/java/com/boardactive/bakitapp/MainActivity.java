@@ -1,16 +1,21 @@
 package com.boardactive.bakitapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.boardactive.bakit.models.Me;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,15 +28,21 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
+
+    private static final int NOTIFICATION_PERMISSION_CODE = 123;
 
     private View parent_view;
 
     //Add the BoardActive Object
     private BoardActive mBoardActive;
-    private Button btn_userAttributes, btn_customAttributes, btn_getMe;
+    private Button btn_userAttributes, btn_customAttributes, btn_getMe, btn_postEvent, btn_postLocation;
     private EditText httpReponse;
 
     @Override
@@ -45,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         httpReponse = (EditText) findViewById(R.id.httpResponse);
 
+//        requestNotificationPermission();
         btn_userAttributes();
         btn_customAttributes();
+        btn_postEvent();
+        btn_postLocation();
         btn_getMe();
         init();
 
@@ -72,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Add AppKey provided by BoardActive
 //        mBoardActive.setAppKey("ADD_APP_KEY");
-        mBoardActive.setAppKey("bb85c28a-0ac4-439d-ad9c-5527be3cafdd");
+        mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
@@ -172,6 +186,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void btn_postEvent() {
+
+        btn_postEvent = (Button) findViewById(R.id.btn_postEvent);
+
+        btn_postEvent.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+                    @Override
+                    public void onResponse(Object value) {
+                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
+                    }
+                }, "received", "", "");
+            }
+
+        });
+
+    }
+
+    public void btn_postLocation() {
+
+        btn_postLocation = (Button) findViewById(R.id.btn_postLocation);
+
+        btn_postLocation.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+                String date = df.format(Calendar.getInstance().getTime());
+
+                mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+                    @Override
+                    public void onResponse(Object value) {
+                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
+                    }
+                }, 33.893402, -84.474600, date);
+            }
+
+        });
+
+    }
+
     private void alertDialog(Object value) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(value.toString());
@@ -185,4 +242,32 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("CANCEL", null);
         builder.show();
     }
+
+//    private void requestNotificationPermission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
+//            return;
+//
+//        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+//
+//        }
+//
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CODE );
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//
+//        //Checking the request code of our request
+//        if (requestCode == NOTIFICATION_PERMISSION_CODE ) {
+//
+//            //If permission is granted
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                //Displaying a toast
+//                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+//            } else {
+//                //Displaying another toast if permission is not granted
+//                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//    }
 }

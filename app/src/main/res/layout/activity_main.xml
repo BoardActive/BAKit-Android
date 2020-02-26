@@ -69,8 +69,8 @@
 
 
                 <Button
-                    android:id="@+id/postEvent"
-                    android:visibility="gone"
+                    android:id="@+id/btn_postEvent"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_rounded_primary"
@@ -78,8 +78,8 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/postLocation"
-                    android:visibility="gone"
+                    android:id="@+id/btn_postLocation"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_rounded_primary"

@@ -21,8 +21,10 @@
             android:name="com.boardactive.bakit.LocationService"
             android:exported="false" />
 
-        <activity android:name=".PermissionActivity">
-        </activity>
+        <activity
+            android:name=".PermissionActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
     </application>
 
 </manifest>

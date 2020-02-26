@@ -56,7 +56,7 @@ public class LocationService extends IntentService {
                     mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                         @Override
                         public void onResponse(Object value) {
-                            Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
+                            Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
                         }
                     }, location.getLatitude(), location.getLongitude(), date);
                     Log.d(TAG, result.toString());

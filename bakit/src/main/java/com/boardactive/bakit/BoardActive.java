@@ -34,6 +34,11 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -373,34 +378,6 @@ public class BoardActive {
     }
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
-    private void StartJob() {
-
-//        Intent intent = new Intent(mContext, LocationService.class);
-//        Log.d(TAG, "StartJob() intent");
-//        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
-//        Log.d(TAG, "StartJob() intent.setAction");
-//        PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        Log.d(TAG, "StartJob() PendingIntent");
-
-//        Intent intent = new Intent(mContext, LocationUpdatesBroadcastReceiver.class);
-//        intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
-//        PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-//        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
-//        Job myJob = mDispatcher.newJobBuilder()
-//                .setService(JobDispatcherService.class)
-//                .setTag(TAG)
-//                .setRecurring(true)
-//                .setTrigger(Trigger.executionWindow(5, 30))
-//                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-//                .setReplaceCurrent(false)
-//                .setConstraints(Constraint.ON_ANY_NETWORK)
-//                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-//                .build();
-//        mDispatcher.mustSchedule(myJob);
-    }
-
     public void requestLocationUpdates(View view) {
         try {
             Log.i(TAG, "Starting location updates");
@@ -907,6 +884,51 @@ public class BoardActive {
             }
 
             @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//                try {
+//                    String json = "{" +
+//                            "name:" +  name + ", " +
+//                            "messageId:" +  messageId + ", " +
+//                            "firebaseNotificationId:" +  firebaseNotificationId +
+//                            "}";
+//
+//                    //parse request object to json format and send as request body
+//                    return gson.toJson(json).getBytes();
+//                } catch (Exception e) {
+//                    Log.e(TAG, "error parsing request body to json");
+//
+//                }
+//                return super.getBody();
+//            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("name", name);
+                    jsonObject.put("messageId", messageId);
+                    jsonObject.put("firebaseNotificationId", firebaseNotificationId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String requestBody = jsonObject.toString();
+
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 return GenerateHeaders();
             }
@@ -956,7 +978,7 @@ public class BoardActive {
 
                 NetworkResponse networkResponse = error.networkResponse;
                 if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
+                    Log.e(TAG, "[BAkit] postLocation Error CODE: " + String.valueOf(networkResponse.statusCode));
                     callback.onResponse(networkResponse.statusCode);
                 }
             }
@@ -966,14 +988,57 @@ public class BoardActive {
                 return Priority.HIGH;
             }
 
+//            @Override
+//            public Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("latitude", latitude.toString());
+//                params.put("longitude", longitude.toString());
+//                params.put("deviceTime", deviceTime);
+//                Log.d(TAG, "[BAKit] postLocation params: " + params.toString());
+//                return params;
+//            }
+
             @Override
-            public Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("latitude", latitude.toString());
-                params.put("longitude", longitude.toString());
-                params.put("deviceTime", deviceTime);
-                Log.d(TAG, "[BAKit] postLocation params: " + params.toString());
-                return params;
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//                try {
+//                    String json = "{" +
+//                            "latitude:" +  latitude.toString() + ", " +
+//                            "longitude:" +  longitude.toString() + ", " +
+//                            "deviceTime:" +  deviceTime +
+//                            "}";
+//                    //parse request object to json format and send as request body
+//                    return gson.toJson(json).getBytes();
+//                } catch (Exception e) {
+//                    Log.e(TAG, "error parsing request body to json");
+//                }
+//                return super.getBody();
+//            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("latitude", latitude.toString());
+                    jsonObject.put("longitude", longitude.toString());
+                    jsonObject.put("deviceTime", deviceTime);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String requestBody = jsonObject.toString();
+
+                try {
+                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
             }
 
             @Override
@@ -1060,7 +1125,7 @@ public class BoardActive {
         headers.put("X-BoardActive-Device-Token", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_TOKEN, null));
         headers.put("X-BoardActive-Device-OS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
         headers.put("X-BoardActive-Device-OS-Version", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-        headers.put("X-BoardActive-Is-Test-App", SharedPreferenceHelper.getString(mContext, BAKIT_APP_TEST, null));
+        headers.put("X-BoardActive-Is-Test-App", SharedPreferenceHelper.getString(mContext, BAKIT_APP_TEST, "0"));
         headers.put("X-BoardActive-Latitude", SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LATITUDE, null));
         headers.put("X-BoardActive-Longitude", SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LONGITUDE, null));
         Log.d(TAG, "[BAKit] GenerateHeaders: " + headers.toString());

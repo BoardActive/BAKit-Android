@@ -2337,6 +2337,8 @@ id bt_pick
 id btn_cancel
 id btn_customAttributes
 id btn_getMe
+id btn_postEvent
+id btn_postLocation
 id btn_save
 id btn_userAttributes
 id buttonPanel
@@ -2532,8 +2534,6 @@ id places_autocomplete_search_button
 id places_autocomplete_search_input
 id places_autocomplete_separator
 id places_autocomplete_try_again
-id postEvent
-id postLocation
 id progress_circular
 id progress_horizontal
 id radio

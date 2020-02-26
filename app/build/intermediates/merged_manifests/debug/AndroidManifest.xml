@@ -58,6 +58,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.boardactive.bakitapp.FCMService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <!-- Autocomplete -->
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
@@ -82,8 +90,9 @@
             android:name="com.boardactive.bakit.LocationService"
             android:exported="false" />
 
-        <activity android:name="com.boardactive.bakit.PermissionActivity" >
-        </activity>
+        <activity
+            android:name="com.boardactive.bakit.PermissionActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <!--
              FirebaseMessagingService performs security checks at runtime,
              but set to not exported to explicitly avoid allowing another app to call it.

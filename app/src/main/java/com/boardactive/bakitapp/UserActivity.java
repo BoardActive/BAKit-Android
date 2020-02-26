@@ -95,9 +95,10 @@ public class UserActivity extends AppCompatActivity {
                 twitterUrl.setText(mMe.getAttributes().getStock().getTwitterUrl());
                 instagramUrl.setText(mMe.getAttributes().getStock().getInstagramUrl());
                 avatarUrl.setText(mMe.getAttributes().getStock().getAvatarUrl());
-                String d = mMe.getAttributes().getStock().getDateBorn().toString();
-                ((TextView) findViewById(R.id.dateBorn)).setText(d);
-
+                if(mMe.getAttributes().getStock().getDateBorn() != null) {
+                    String d = mMe.getAttributes().getStock().getDateBorn().toString();
+                    ((TextView) findViewById(R.id.dateBorn)).setText(d);
+                }
 //                ((TextView) findViewById(R.id.dateBorn)).setText(mMe.getAttributes().getStock().getDateBorn());
 
                 if(mMe.getAttributes().getStock().getGender() == "f"){

@@ -39,10 +39,12 @@ public class PermissionActivity extends AppCompatActivity {
                 requestPermissions(permissions, pCode);
             } else {
                 permissionListener.permissionResult(true);
-                finish();
+                onBackPressed();
+//                finish();
             }
         } else {
-            finish();
+            onBackPressed();
+//            finish();
         }
     }
 
@@ -59,7 +61,8 @@ public class PermissionActivity extends AppCompatActivity {
                     permissionListener.permissionResult(true);
             } else if (permissionListener != null)
                 permissionListener.permissionResult(false);
-            finish();
+            onBackPressed();
+//            finish();
         }
     }
 }
