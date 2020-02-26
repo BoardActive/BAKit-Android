@@ -5,25 +5,45 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application>
 
         <!-- [START BOOT/DEFAULT SERVICE] -->
-        <receiver android:name=".BootReceiver" android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+<!--        <receiver android:name=".BootReceiver" android:enabled="true"-->
+<!--            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
+        <receiver android:name=".BootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
-        <service
-            android:name="com.boardactive.bakit.LocationService"
-            android:exported="false" />
+<!--        <service-->
+<!--            android:name="com.boardactive.bakit.Service.LocationService"-->
+<!--            android:exported="false" />-->
+
+
+        <receiver android:name=".oreo.AlarmReceiver">
+            <intent-filter>
+                <action android:name="com.test.intent.action.ALARM" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".PermissionActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
+
+        <service
+            android:name=".oreo.MyJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
     </application>
 

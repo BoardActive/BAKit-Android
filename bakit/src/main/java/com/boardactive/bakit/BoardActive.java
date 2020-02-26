@@ -29,6 +29,7 @@ import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
 import com.boardactive.bakit.models.Stock;
+import com.boardactive.bakit.oreo.AlarmJobIntentService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -282,10 +283,25 @@ public class BoardActive {
         }
 
         /** Start the JobDispatcher to check for and post location */
-//        StartJob();
-        requestLocationUpdates(null);
+
+//        requestLocationUpdates(null);
         Log.d(TAG, "[BAKit]  initialize()");
     }
+
+//    public void launchAlarm() {
+//        AlarmReceiver alarmManager = new AlarmReceiver();
+//
+//        int SDK_INT = Build.VERSION.SDK_INT;
+//        if (SDK_INT < Build.VERSION_CODES.KITKAT)
+//            alarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
+//        else if (Build.VERSION_CODES.KITKAT <= SDK_INT && SDK_INT < Build.VERSION_CODES.M)
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, when, pendingIntent);
+//        else if (SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, when, pendingIntent);
+//        }
+//
+//    }
+
 
     /** Check is all required variables are set */
     public Boolean isRegisteredDevice() {
@@ -395,10 +411,13 @@ public class BoardActive {
         // started in the background in "O".
 
         // TODO(developer): uncomment to use PendingIntent.getService().
-        Intent intent = new Intent(mContext, LocationService.class);
-        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
-        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent intent = new Intent(mContext, LocationService.class);
+//        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
+//        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Intent intent = new Intent(mContext, AlarmJobIntentService.class);
+        intent.setAction(AlarmJobIntentService.CUSTOM_INTENT);
+        return PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /** get Device UUID to Create Event */

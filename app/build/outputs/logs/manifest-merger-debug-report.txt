@@ -6,7 +6,7 @@ INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManife
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-47:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/af502843a250d406ebae42d3f4079425/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-39:12
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-53:12
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -127,8 +127,8 @@ application
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-45:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-37:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-37:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-51:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-51:19
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:22:5-20
@@ -479,36 +479,54 @@ uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
 ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-85
 	android:name
 		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:22-82
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
+MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31eb20e4bf7c1fdeea830bef7d165037/play-services-measurement-impl-17.2.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31eb20e4bf7c1fdeea830bef7d165037/play-services-measurement-impl-17.2.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/08e5ab55bcfafa0ef1249a5090a8d0c4/play-services-measurement-sdk-api-17.2.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/08e5ab55bcfafa0ef1249a5090a8d0c4/play-services-measurement-sdk-api-17.2.2/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-65
 receiver#com.boardactive.bakit.BootReceiver
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:9-28:20
-	android:enabled
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:13-35
-	android:permission
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-75
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:9-32:20
 	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:13-62
-intent-filter#action:name:android.intent.action.BOOT_COMPLETED+category:name:android.intent.category.DEFAULT
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-27:29
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:19-68
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:13-31:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:17-79
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:17-79
 	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:25-76
-category#android.intent.category.DEFAULT
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:17-76
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:25-76
+receiver#com.boardactive.bakit.oreo.AlarmReceiver
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:9-42:20
 	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:27-73
-service#com.boardactive.bakit.LocationService
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:9-32:40
-	android:exported
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:32:13-37
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:19-74
+intent-filter#action:name:com.test.intent.action.ALARM
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:13-41:29
+action#com.test.intent.action.ALARM
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:17-71
 	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:13-65
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:25-68
 activity#com.boardactive.bakit.PermissionActivity
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:9-36:86
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:9-46:86
 	android:theme
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:13-83
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-83
 	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:13-68
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:13-68
+service#com.boardactive.bakit.oreo.MyJobIntentService
+ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:48:9-50:72
+	android:permission
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:50:13-69
+	android:name
+		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:49:13-73
 uses-permission#android.permission.VIBRATE
 ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:5-66
 	android:name
@@ -563,20 +581,6 @@ MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/bo
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/de57d140c5b40ac4922d63a6d65b36af/transport-runtime-2.2.0/AndroidManifest.xml:22:5-79
 	android:name
 		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:23:22-76
-uses-permission#android.permission.WAKE_LOCK
-ADDED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:24:5-68
-MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
-MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31eb20e4bf7c1fdeea830bef7d165037/play-services-measurement-impl-17.2.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31eb20e4bf7c1fdeea830bef7d165037/play-services-measurement-impl-17.2.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/08e5ab55bcfafa0ef1249a5090a8d0c4/play-services-measurement-sdk-api-17.2.2/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/08e5ab55bcfafa0ef1249a5090a8d0c4/play-services-measurement-sdk-api-17.2.2/AndroidManifest.xml:25:5-68
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:24:22-65
 meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
 ADDED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:30:13-32:85
 	android:value

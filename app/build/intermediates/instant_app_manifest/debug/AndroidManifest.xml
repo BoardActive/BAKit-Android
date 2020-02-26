@@ -14,9 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -76,24 +76,33 @@
             android:theme="@style/PlacesAutocompleteThemeOverlay"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" >
         </activity> <!-- [START BOOT/DEFAULT SERVICE] -->
-        <receiver
-            android:name="com.boardactive.bakit.BootReceiver"
-            android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+        <!-- <receiver android:name=".BootReceiver" android:enabled="true" -->
+        <!-- android:permission="android.permission.RECEIVE_BOOT_COMPLETED"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <receiver android:name="com.boardactive.bakit.BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver> <!-- <service -->
+        <!-- android:name="com.boardactive.bakit.Service.LocationService" -->
+        <!-- android:exported="false" /> -->
+        <receiver android:name="com.boardactive.bakit.oreo.AlarmReceiver" >
+            <intent-filter>
+                <action android:name="com.test.intent.action.ALARM" />
             </intent-filter>
         </receiver>
-
-        <service
-            android:name="com.boardactive.bakit.LocationService"
-            android:exported="false" />
 
         <activity
             android:name="com.boardactive.bakit.PermissionActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+
+        <service
+            android:name="com.boardactive.bakit.oreo.MyJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <!--
              FirebaseMessagingService performs security checks at runtime,
              but set to not exported to explicitly avoid allowing another app to call it.

@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.boardactive.bakit.models.Me;
+import com.boardactive.bakit.oreo.MyJobIntentService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -193,13 +194,17 @@ public class MainActivity extends AppCompatActivity {
         btn_postEvent.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View arg0) {
-                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
-                    @Override
-                    public void onResponse(Object value) {
-                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
-                    }
-                }, "received", "", "");
+            public void onClick(View view) {
+                Intent mIntent = new Intent(getApplicationContext(), MyJobIntentService.class);
+                mIntent.putExtra("maxCountValue", 1000);
+                MyJobIntentService.enqueueWork(getApplicationContext(), mIntent);
+
+//                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+//                    @Override
+//                    public void onResponse(Object value) {
+//                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
+//                    }
+//                }, "received", "", "");
             }
 
         });
