@@ -2803,6 +2803,7 @@ layout toolbar
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+plurals num_locations_reported
 raw keep
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -2834,6 +2835,7 @@ string abc_toolbar_collapse_description
 string api_domain
 string app_name
 string appbar_scrolling_view_behavior
+string batched_location_updates
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_overflowed_content_description
@@ -2943,11 +2945,14 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string ok
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string permission_denied_explanation
+string permission_rationale
 string places_autocomplete_clear_button
 string places_autocomplete_label
 string places_autocomplete_no_results_for_query
@@ -2957,11 +2962,15 @@ string places_powered_by_google
 string places_search_error
 string places_try_again
 string project_id
+string remove_updates
+string request_updates
 string sample_endpoint
 string search_menu_title
+string settings
 string status_bar_notification_info_overflow
 string title_activity_custom
 string title_activity_user
+string unknown_location
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

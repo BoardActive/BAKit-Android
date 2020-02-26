@@ -23,7 +23,7 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.boardactive.bakit.Utils.SharedPreferenceHelper;
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.models.Attributes;
 import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;

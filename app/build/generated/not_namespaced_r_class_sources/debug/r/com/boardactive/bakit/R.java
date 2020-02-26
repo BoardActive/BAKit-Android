@@ -918,6 +918,17 @@ public final class R {
         public static final int select_dialog_singlechoice_material = 0x7f0c0073;
         public static final int support_simple_spinner_dropdown_item = 0x7f0c0074;
     }
+    public static final class mipmap {
+        private mipmap() {}
+
+        public static final int ic_launcher = 0x7f0d0000;
+        public static final int ic_launcher_round = 0x7f0d0001;
+    }
+    public static final class plurals {
+        private plurals() {}
+
+        public static final int num_locations_reported = 0x7f0e0001;
+    }
     public static final class string {
         private string() {}
 
@@ -950,27 +961,35 @@ public final class R {
         public static final int abc_toolbar_collapse_description = 0x7f10001a;
         public static final int api_domain = 0x7f10001b;
         public static final int app_name = 0x7f10001c;
-        public static final int common_google_play_services_enable_button = 0x7f100024;
-        public static final int common_google_play_services_enable_text = 0x7f100025;
-        public static final int common_google_play_services_enable_title = 0x7f100026;
-        public static final int common_google_play_services_install_button = 0x7f100027;
-        public static final int common_google_play_services_install_text = 0x7f100028;
-        public static final int common_google_play_services_install_title = 0x7f100029;
-        public static final int common_google_play_services_notification_channel_name = 0x7f10002a;
-        public static final int common_google_play_services_notification_ticker = 0x7f10002b;
-        public static final int common_google_play_services_unknown_issue = 0x7f10002c;
-        public static final int common_google_play_services_unsupported_text = 0x7f10002d;
-        public static final int common_google_play_services_update_button = 0x7f10002e;
-        public static final int common_google_play_services_update_text = 0x7f10002f;
-        public static final int common_google_play_services_update_title = 0x7f100030;
-        public static final int common_google_play_services_updating_text = 0x7f100031;
-        public static final int common_google_play_services_wear_update_text = 0x7f100032;
-        public static final int common_open_on_phone = 0x7f100033;
-        public static final int common_signin_button_text = 0x7f100034;
-        public static final int common_signin_button_text_long = 0x7f100035;
-        public static final int sample_endpoint = 0x7f100099;
-        public static final int search_menu_title = 0x7f10009a;
-        public static final int status_bar_notification_info_overflow = 0x7f10009b;
+        public static final int batched_location_updates = 0x7f10001e;
+        public static final int common_google_play_services_enable_button = 0x7f100025;
+        public static final int common_google_play_services_enable_text = 0x7f100026;
+        public static final int common_google_play_services_enable_title = 0x7f100027;
+        public static final int common_google_play_services_install_button = 0x7f100028;
+        public static final int common_google_play_services_install_text = 0x7f100029;
+        public static final int common_google_play_services_install_title = 0x7f10002a;
+        public static final int common_google_play_services_notification_channel_name = 0x7f10002b;
+        public static final int common_google_play_services_notification_ticker = 0x7f10002c;
+        public static final int common_google_play_services_unknown_issue = 0x7f10002d;
+        public static final int common_google_play_services_unsupported_text = 0x7f10002e;
+        public static final int common_google_play_services_update_button = 0x7f10002f;
+        public static final int common_google_play_services_update_text = 0x7f100030;
+        public static final int common_google_play_services_update_title = 0x7f100031;
+        public static final int common_google_play_services_updating_text = 0x7f100032;
+        public static final int common_google_play_services_wear_update_text = 0x7f100033;
+        public static final int common_open_on_phone = 0x7f100034;
+        public static final int common_signin_button_text = 0x7f100035;
+        public static final int common_signin_button_text_long = 0x7f100036;
+        public static final int ok = 0x7f10008c;
+        public static final int permission_denied_explanation = 0x7f100092;
+        public static final int permission_rationale = 0x7f100093;
+        public static final int remove_updates = 0x7f10009d;
+        public static final int request_updates = 0x7f10009e;
+        public static final int sample_endpoint = 0x7f10009f;
+        public static final int search_menu_title = 0x7f1000a0;
+        public static final int settings = 0x7f1000a1;
+        public static final int status_bar_notification_info_overflow = 0x7f1000a2;
+        public static final int unknown_location = 0x7f1000a5;
     }
     public static final class style {
         private style() {}

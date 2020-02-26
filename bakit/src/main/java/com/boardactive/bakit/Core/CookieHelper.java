@@ -3,7 +3,7 @@ package com.boardactive.bakit.Core;
 import android.content.Context;
 import android.util.Log;
 
-import com.boardactive.bakit.Utils.SharedPreferenceHelper;
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 
 import java.util.Map;
 
