@@ -75,16 +75,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13e18317-ea65-4d94-9c7c-46b3dce1fc93" name="Default" comment="Update AndroidManifest to add JobScheduler">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Service/LocationUpdatesBroadcastReceiver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Service/LocationUpdatesIntentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Tools/MyLocationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Tools/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/oreo/AlarmJobIntentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/oreo/AlarmReceiver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/oreo/MyJobIntentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bakit/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/build.gradle" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +101,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -122,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="191" selection-start-line="191" selection-end-line="191" />
+            <state relative-caret-position="141">
+              <caret line="226" column="37" selection-start-line="226" selection-start-column="17" selection-end-line="226" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3583#3584#0" expanded="true" />
@@ -137,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bakit/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="35" column="41" lean-forward="true" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+            <state relative-caret-position="235">
+              <caret line="34" column="52" lean-forward="true" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -192,8 +183,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>StartJob</find>
-      <find>MAinActivity</find>
       <find>httpReponse</find>
       <find>bakit</find>
       <find>TAG</find>
@@ -222,6 +211,8 @@
       <find>getLastKnownLocation</find>
       <find>mDispatcher</find>
       <find>Pending</find>
+      <find>writeLastLocation</find>
+      <find>startLocationUpdates</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -258,7 +249,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/MyApp.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/bakit/build.gradle" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/AppSingleton.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/PermissionActivity.java" />
@@ -281,6 +271,7 @@
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BootReceiver.java" />
         <option value="$PROJECT_DIR$/bakit/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" />
+        <option value="$PROJECT_DIR$/bakit/build.gradle" />
       </list>
     </option>
   </component>
@@ -1279,35 +1270,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bakit/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="35" column="41" lean-forward="true" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BootReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="50" column="37" selection-start-line="50" selection-start-column="37" selection-end-line="50" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3583#3584#0" expanded="true" />
-            <element signature="e#3633#3634#0" expanded="true" />
-            <element signature="e#5805#6052#0" expanded="true" />
-            <element signature="e#6051#6052#0" expanded="true" />
-            <element signature="e#6968#6969#0" expanded="true" />
-            <element signature="e#7017#7018#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1344,6 +1312,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="226" column="37" selection-start-line="226" selection-start-column="17" selection-end-line="226" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3583#3584#0" expanded="true" />
+            <element signature="e#3633#3634#0" expanded="true" />
+            <element signature="e#5805#6052#0" expanded="true" />
+            <element signature="e#6051#6052#0" expanded="true" />
+            <element signature="e#6968#6969#0" expanded="true" />
+            <element signature="e#7017#7018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bakit/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="34" column="52" lean-forward="true" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
         </state>
       </provider>
     </entry>
