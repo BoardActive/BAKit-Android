@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.boardactive.bakit.Service.LocationUpdatesIntentService;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.oreo.MyJobIntentService;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -195,14 +196,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(getApplicationContext(), MyJobIntentService.class);
+                Intent mIntent = new Intent(getApplicationContext(), LocationUpdatesIntentService.class);
                 mIntent.putExtra("maxCountValue", 1000);
                 MyJobIntentService.enqueueWork(getApplicationContext(), mIntent);
 
 //                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
 //                    @Override
 //                    public void onResponse(Object value) {
-//                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
+//                        Log.d(TAG, "[BAKit] LocationUpdatesIntentService onResponse" + value.toString());
 //                    }
 //                }, "received", "", "");
             }
@@ -225,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                     @Override
                     public void onResponse(Object value) {
-                        Log.d(TAG, "[BAKit] LocationService onResponse" + value.toString());
+                        Log.d(TAG, "[BAKit] LocationUpdatesIntentService onResponse" + value.toString());
                     }
                 }, 33.893402, -84.474600, date);
             }

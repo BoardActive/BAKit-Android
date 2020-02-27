@@ -23,13 +23,20 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.boardactive.bakit.Service.LocationUpdatesIntentService;
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.models.Attributes;
 import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
 import com.boardactive.bakit.models.Stock;
-import com.boardactive.bakit.oreo.AlarmJobIntentService;
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.RetryStrategy;
+import com.firebase.jobdispatcher.Trigger;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -78,32 +85,35 @@ public class BoardActive {
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
 
-    /**
-     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
-     */
-    private static final long UPDATE_INTERVAL = 10000; // Every 60 seconds.
-
-    /**
-     * The fastest rate for active location updates. Updates will never be more frequent
-     * than this value, but they may be less frequent.
-     */
-    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 30 seconds
-
-    /**
-     * The max time before batched results are delivered by location services. Results may be
-     * delivered sooner than this interval.
-     */
-    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1; // Every 5 minutes.
-
-    /**
-     * Stores parameters for requests to the FusedLocationProviderApi.
-     */
-    private LocationRequest mLocationRequest;
-
-    /**
-     * Provides access to the Fused Location Provider API.
-     */
-    private FusedLocationProviderClient mFusedLocationClient;
+//    /** Service to track and post device location */
+    private FirebaseJobDispatcher mDispatcher;
+//
+//    /**
+//     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
+//     */
+//    private static final long UPDATE_INTERVAL = 10000; // Every 60 seconds.
+//
+//    /**
+//     * The fastest rate for active location updates. Updates will never be more frequent
+//     * than this value, but they may be less frequent.
+//     */
+//    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 30 seconds
+//
+//    /**
+//     * The max time before batched results are delivered by location services. Results may be
+//     * delivered sooner than this interval.
+//     */
+//    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1; // Every 5 minutes.
+//
+//    /**
+//     * Stores parameters for requests to the FusedLocationProviderApi.
+//     */
+//    private LocationRequest mLocationRequest;
+//
+//    /**
+//     * Provides access to the Fused Location Provider API.
+//     */
+//    private FusedLocationProviderClient mFusedLocationClient;
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
@@ -139,7 +149,7 @@ public class BoardActive {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
         gson = gsonBuilder.create();
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
 
     }
 
@@ -248,7 +258,7 @@ public class BoardActive {
      * */
     public void initialize() {
 
-        mLocationRequest = new LocationRequest();
+//        mLocationRequest = new LocationRequest();
 
         // Sets the desired interval for active location updates. This interval is
         // inexact. You may not receive updates at all if no location sources are available, or
@@ -256,17 +266,17 @@ public class BoardActive {
         // requested if other applications are requesting location at a faster interval.
         // Note: apps running on "O" devices (regardless of targetSdkVersion) may receive updates
         // less frequently than this interval when the app is no longer in the foreground.
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
+//        mLocationRequest.setInterval(UPDATE_INTERVAL);
 
         // Sets the fastest rate for active location updates. This interval is exact, and your
         // application will never receive updates faster than this value.
-        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
+//        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
 
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         // Sets the maximum time when batched location updates are delivered. Updates may be
         // delivered sooner than this interval.
-        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
 
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
@@ -283,7 +293,7 @@ public class BoardActive {
         }
 
         /** Start the JobDispatcher to check for and post location */
-
+        StartJob();
 //        requestLocationUpdates(null);
         Log.d(TAG, "[BAKit]  initialize()");
     }
@@ -303,6 +313,21 @@ public class BoardActive {
 //    }
 
 
+    /** Private Function to launch serve to get and post location to BoaradActive Platform */
+    private void StartJob() {
+        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
+        Job myJob = mDispatcher.newJobBuilder()
+                .setService(JobDispatcherService.class)
+                .setTag(TAG)
+                .setRecurring(true)
+                .setTrigger(Trigger.executionWindow(5, 30))
+                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+                .setReplaceCurrent(false)
+                .setConstraints(Constraint.ON_ANY_NETWORK)
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .build();
+        mDispatcher.mustSchedule(myJob);
+    }
     /** Check is all required variables are set */
     public Boolean isRegisteredDevice() {
         Boolean isLoggedIn = true;
@@ -394,14 +419,14 @@ public class BoardActive {
     }
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
-    public void requestLocationUpdates(View view) {
-        try {
-            Log.i(TAG, "Starting location updates");
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void requestLocationUpdates(View view) {
+//        try {
+//            Log.i(TAG, "Starting location updates");
+//            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+//        } catch (SecurityException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private PendingIntent getPendingIntent() {
         // Note: for apps targeting API level 25 ("Nougat") or lower, either
@@ -411,13 +436,19 @@ public class BoardActive {
         // started in the background in "O".
 
         // TODO(developer): uncomment to use PendingIntent.getService().
-//        Intent intent = new Intent(mContext, LocationService.class);
-//        intent.setAction(LocationService.ACTION_PROCESS_UPDATES);
-//        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(mContext, LocationUpdatesIntentService.class);
+        intent.setAction(LocationUpdatesIntentService.ACTION_PROCESS_UPDATES);
+        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent intent = new Intent(mContext, AlarmJobIntentService.class);
-        intent.setAction(AlarmJobIntentService.CUSTOM_INTENT);
-        return PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent intent = new Intent(mContext, AlarmJobIntentService.class);
+//        intent.setAction(AlarmJobIntentService.CUSTOM_INTENT);
+//        return PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+//        Intent mIntent = new Intent(mContext, LocationUpdatesIntentService.class);
+//        mIntent.putExtra("maxCountValue", 1000);
+//        MyJobIntentService.enqueueWork(mContext, mIntent);
+
+
     }
 
     /** get Device UUID to Create Event */

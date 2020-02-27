@@ -76,33 +76,43 @@
             android:theme="@style/PlacesAutocompleteThemeOverlay"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" >
         </activity> <!-- [START BOOT/DEFAULT SERVICE] -->
-        <!-- <receiver android:name=".BootReceiver" android:enabled="true" -->
-        <!-- android:permission="android.permission.RECEIVE_BOOT_COMPLETED"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-        <receiver android:name="com.boardactive.bakit.BootReceiver" >
+        <receiver
+            android:name="com.boardactive.bakit.BootReceiver"
+            android:enabled="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver> <!-- <service -->
-        <!-- android:name="com.boardactive.bakit.Service.LocationService" -->
-        <!-- android:exported="false" /> -->
-        <receiver android:name="com.boardactive.bakit.oreo.AlarmReceiver" >
-            <intent-filter>
-                <action android:name="com.test.intent.action.ALARM" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.boardactive.bakit.JobDispatcherService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service> <!-- [END BOOT/DEFAULT SERVICE] -->
+        <!-- <receiver android:name=".BootReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <!-- <service -->
+        <!-- android:name=".Service.LocationUpdatesIntentService" -->
+        <!-- android:exported="false" /> -->
+        <!-- <service -->
+        <!-- android:name=".oreo.AlarmJobIntentService" -->
+        <!-- android:exported="false" /> -->
+        <!-- <receiver android:name=".oreo.AlarmReceiver"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.test.intent.action.ALARM" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
         <activity
             android:name="com.boardactive.bakit.PermissionActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-
-        <service
-            android:name="com.boardactive.bakit.oreo.MyJobIntentService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
         <!--
              FirebaseMessagingService performs security checks at runtime,
              but set to not exported to explicitly avoid allowing another app to call it.

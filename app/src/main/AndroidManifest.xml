@@ -12,18 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".UserActivity"
             android:label="@string/title_activity_user"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".CustomActivity"
             android:label="@string/title_activity_custom"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"

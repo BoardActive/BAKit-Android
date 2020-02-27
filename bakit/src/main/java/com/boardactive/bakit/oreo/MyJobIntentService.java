@@ -2,6 +2,7 @@ package com.boardactive.bakit.oreo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,15 +10,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
-import com.boardactive.bakit.Tools.Utils;
+import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.Service.LocationUpdatesIntentService;
+import com.google.android.gms.location.LocationResult;
+
 
 public class MyJobIntentService extends JobIntentService {
     final Handler mHandler = new Handler();
-    private static final String TAG = "MyJobIntentService";
     /**
      * Unique job ID for this service.
      */
     private static final int JOB_ID = 2;
+
+    public static final String TAG = LocationUpdatesIntentService.class.getName();
+
+    public static final String ACTION_PROCESS_UPDATES =
+            "com.boardactive.bakit.action" +
+                    ".PROCESS_UPDATES";
+
+    private BoardActive mBoardActive;
+
 
     public static void enqueueWork(Context context, Intent intent) {
         enqueueWork(context, MyJobIntentService.class, JOB_ID, intent);
@@ -41,13 +53,13 @@ public class MyJobIntentService extends JobIntentService {
          */
         for (int i = 0; i < maxCount; i++) {
             Log.d(TAG, "onHandleWork: The number is: " + i);
-//            Utils.sendNotification(this, "onHandleWork: The number is: " + i);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     @Override
