@@ -1,14 +1,12 @@
 package com.boardactive.bakit;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
@@ -23,7 +21,6 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.boardactive.bakit.Service.LocationUpdatesIntentService;
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.models.Attributes;
 import com.boardactive.bakit.models.Custom;
@@ -37,9 +34,6 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -298,20 +292,6 @@ public class BoardActive {
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
-//    public void launchAlarm() {
-//        AlarmReceiver alarmManager = new AlarmReceiver();
-//
-//        int SDK_INT = Build.VERSION.SDK_INT;
-//        if (SDK_INT < Build.VERSION_CODES.KITKAT)
-//            alarmManager.set(AlarmManager.RTC_WAKEUP, when, pendingIntent);
-//        else if (Build.VERSION_CODES.KITKAT <= SDK_INT && SDK_INT < Build.VERSION_CODES.M)
-//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, when, pendingIntent);
-//        else if (SDK_INT >= Build.VERSION_CODES.M) {
-//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, when, pendingIntent);
-//        }
-//
-//    }
-
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
     private void StartJob() {
@@ -419,38 +399,6 @@ public class BoardActive {
     }
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
-//    public void requestLocationUpdates(View view) {
-//        try {
-//            Log.i(TAG, "Starting location updates");
-//            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
-//        } catch (SecurityException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    private PendingIntent getPendingIntent() {
-        // Note: for apps targeting API level 25 ("Nougat") or lower, either
-        // PendingIntent.getService() or PendingIntent.getBroadcast() may be used when requesting
-        // location updates. For apps targeting API level O, only
-        // PendingIntent.getBroadcast() should be used. This is due to the limits placed on services
-        // started in the background in "O".
-
-        // TODO(developer): uncomment to use PendingIntent.getService().
-        Intent intent = new Intent(mContext, LocationUpdatesIntentService.class);
-        intent.setAction(LocationUpdatesIntentService.ACTION_PROCESS_UPDATES);
-        return PendingIntent.getService(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-//        Intent intent = new Intent(mContext, AlarmJobIntentService.class);
-//        intent.setAction(AlarmJobIntentService.CUSTOM_INTENT);
-//        return PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-//        Intent mIntent = new Intent(mContext, LocationUpdatesIntentService.class);
-//        mIntent.putExtra("maxCountValue", 1000);
-//        MyJobIntentService.enqueueWork(mContext, mIntent);
-
-
-    }
-
     /** get Device UUID to Create Event */
     private String getUUID(Context context) {
         String uniqueID = null;
