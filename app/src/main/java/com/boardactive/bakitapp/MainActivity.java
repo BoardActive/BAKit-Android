@@ -1,25 +1,18 @@
 package com.boardactive.bakitapp;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import com.boardactive.bakit.Service.LocationUpdatesIntentService;
 import com.boardactive.bakit.models.Me;
-import com.boardactive.bakit.oreo.MyJobIntentService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -196,10 +189,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(getApplicationContext(), LocationUpdatesIntentService.class);
-                mIntent.putExtra("maxCountValue", 1000);
-                MyJobIntentService.enqueueWork(getApplicationContext(), mIntent);
-
 //                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
 //                    @Override
 //                    public void onResponse(Object value) {
