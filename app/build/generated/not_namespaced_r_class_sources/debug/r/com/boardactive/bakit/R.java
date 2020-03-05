@@ -138,7 +138,6 @@ public final class R {
         public static final int contentInsetStart = 0x7f0400c7;
         public static final int contentInsetStartWithNavigation = 0x7f0400c8;
         public static final int controlBackground = 0x7f0400cf;
-        public static final int coordinatorLayoutStyle = 0x7f0400d0;
         public static final int customNavigationLayout = 0x7f0400e2;
         public static final int defaultQueryHint = 0x7f0400e7;
         public static final int dialogCornerRadius = 0x7f0400e8;
@@ -195,15 +194,8 @@ public final class R {
         public static final int initialActivityCount = 0x7f040156;
         public static final int isLightTheme = 0x7f040158;
         public static final int itemPadding = 0x7f040162;
-        public static final int keylines = 0x7f040172;
         public static final int lastBaselineToBottomHeight = 0x7f040174;
         public static final int layout = 0x7f040179;
-        public static final int layout_anchor = 0x7f04017b;
-        public static final int layout_anchorGravity = 0x7f04017c;
-        public static final int layout_behavior = 0x7f04017d;
-        public static final int layout_dodgeInsetEdges = 0x7f0401a9;
-        public static final int layout_insetEdge = 0x7f0401b2;
-        public static final int layout_keyline = 0x7f0401b3;
         public static final int lineHeight = 0x7f0401b9;
         public static final int listChoiceBackgroundIndicator = 0x7f0401bb;
         public static final int listChoiceIndicatorMultipleAnimated = 0x7f0401bc;
@@ -268,7 +260,6 @@ public final class R {
         public static final int splitTrack = 0x7f04022e;
         public static final int srcCompat = 0x7f04022f;
         public static final int state_above_anchor = 0x7f040236;
-        public static final int statusBarBackground = 0x7f04023c;
         public static final int subMenuArrow = 0x7f040241;
         public static final int submitBackground = 0x7f040242;
         public static final int subtitle = 0x7f040243;
@@ -756,7 +747,6 @@ public final class R {
         public static final int async = 0x7f090045;
         public static final int auto = 0x7f090046;
         public static final int blocking = 0x7f09004a;
-        public static final int bottom = 0x7f09004b;
         public static final int buttonPanel = 0x7f090054;
         public static final int checkbox = 0x7f09005b;
         public static final int checked = 0x7f09005c;
@@ -770,7 +760,6 @@ public final class R {
         public static final int default_activity_button = 0x7f090070;
         public static final int dialog_button = 0x7f090076;
         public static final int edit_query = 0x7f09007b;
-        public static final int end = 0x7f09007e;
         public static final int expand_activities_button = 0x7f090083;
         public static final int expanded_menu = 0x7f090084;
         public static final int forever = 0x7f09008e;
@@ -782,7 +771,6 @@ public final class R {
         public static final int image = 0x7f09009e;
         public static final int info = 0x7f09009f;
         public static final int italic = 0x7f0900a2;
-        public static final int left = 0x7f0900a6;
         public static final int light = 0x7f0900a7;
         public static final int line1 = 0x7f0900a8;
         public static final int line3 = 0x7f0900a9;
@@ -801,7 +789,6 @@ public final class R {
         public static final int progress_circular = 0x7f090115;
         public static final int progress_horizontal = 0x7f090116;
         public static final int radio = 0x7f090117;
-        public static final int right = 0x7f09011a;
         public static final int right_icon = 0x7f09011b;
         public static final int right_side = 0x7f09011c;
         public static final int screen = 0x7f090122;
@@ -826,7 +813,6 @@ public final class R {
         public static final int src_in = 0x7f090144;
         public static final int src_over = 0x7f090145;
         public static final int standard = 0x7f090146;
-        public static final int start = 0x7f090147;
         public static final int submenuarrow = 0x7f09014a;
         public static final int submit_area = 0x7f09014b;
         public static final int tabMode = 0x7f09014c;
@@ -846,7 +832,6 @@ public final class R {
         public static final int title = 0x7f090164;
         public static final int titleDividerNoCustom = 0x7f090165;
         public static final int title_template = 0x7f090166;
-        public static final int top = 0x7f090168;
         public static final int topPanel = 0x7f090169;
         public static final int unchecked = 0x7f090171;
         public static final int uniform = 0x7f090172;
@@ -1343,7 +1328,6 @@ public final class R {
         public static final int Widget_AppCompat_Toolbar_Button_Navigation = 0x7f110242;
         public static final int Widget_Compat_NotificationActionContainer = 0x7f110243;
         public static final int Widget_Compat_NotificationActionText = 0x7f110244;
-        public static final int Widget_Support_CoordinatorLayout = 0x7f1102ab;
     }
     public static final class styleable {
         private styleable() {}
@@ -1594,17 +1578,6 @@ public final class R {
         public static final int CompoundButton_buttonCompat = 1;
         public static final int CompoundButton_buttonTint = 2;
         public static final int CompoundButton_buttonTintMode = 3;
-        public static final int[] CoordinatorLayout = { 0x7f040172, 0x7f04023c };
-        public static final int CoordinatorLayout_keylines = 0;
-        public static final int CoordinatorLayout_statusBarBackground = 1;
-        public static final int[] CoordinatorLayout_Layout = { 0x10100b3, 0x7f04017b, 0x7f04017c, 0x7f04017d, 0x7f0401a9, 0x7f0401b2, 0x7f0401b3 };
-        public static final int CoordinatorLayout_Layout_android_layout_gravity = 0;
-        public static final int CoordinatorLayout_Layout_layout_anchor = 1;
-        public static final int CoordinatorLayout_Layout_layout_anchorGravity = 2;
-        public static final int CoordinatorLayout_Layout_layout_behavior = 3;
-        public static final int CoordinatorLayout_Layout_layout_dodgeInsetEdges = 4;
-        public static final int CoordinatorLayout_Layout_layout_insetEdge = 5;
-        public static final int CoordinatorLayout_Layout_layout_keyline = 6;
         public static final int[] DrawerArrowToggle = { 0x7f04002d, 0x7f04002e, 0x7f040043, 0x7f0400a7, 0x7f0400f4, 0x7f040137, 0x7f04022b, 0x7f040285 };
         public static final int DrawerArrowToggle_arrowHeadLength = 0;
         public static final int DrawerArrowToggle_arrowShaftLength = 1;

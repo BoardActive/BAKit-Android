@@ -19,7 +19,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -78,8 +77,8 @@ public class JobDispatcherService extends JobService implements
 
     private BoardActive mBoardActive = new BoardActive(this);
 
-    private FusedLocationProviderClient mFusedLocationClient;
-    private Location mGetLocation;
+//    private FusedLocationProviderClient mFusedLocationClient;
+//    private Location mGetLocation;
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
@@ -211,6 +210,7 @@ public class JobDispatcherService extends JobService implements
         Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation [" + location + "]");
         Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation " +
                 "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
+
     }
 
     /**
