@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-public class SharedPreferenceHelper {
+public class
+SharedPreferenceHelper {
 
     private static final String TAG = SharedPreferenceHelper.class.getSimpleName();
 
