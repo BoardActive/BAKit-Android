@@ -169,8 +169,8 @@ public class UserActivity extends AppCompatActivity {
                 mMe.getAttributes().getStock().setEmail(email.getText().toString());
                 mMe.getAttributes().getStock().setPhone(phone.getText().toString());
                 String d = ((TextView) findViewById(R.id.dateBorn)).getText().toString();
-                mMe.getAttributes().getStock().setDateBorn(Tools.getFormattedDateSimple(d));
-//                mMe.getAttributes().getStock().setDateBorn(d);
+//                mMe.getAttributes().getStock().setDateBorn(Tools.getFormattedDateSimple(d));
+                mMe.getAttributes().getStock().setDateBorn(d);
                 mMe.getAttributes().getStock().setFacebookUrl(facebookUrl.getText().toString());
                 mMe.getAttributes().getStock().setLinkedInUrl(linkedInUrl.getText().toString());
                 mMe.getAttributes().getStock().setTwitterUrl(twitterUrl.getText().toString());

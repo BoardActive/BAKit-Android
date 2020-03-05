@@ -24,24 +24,24 @@
         "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/res/drawable-xxxhdpi-v4/quantum_ic_arrow_back_grey600_24.png"
     },
     {
-        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/b989d78505a527364775fcd163b70614/play-services-base-17.0.0/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
-    },
-    {
         "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
-        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_googleg_disabled_color_18.png.flat",
+        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/b989d78505a527364775fcd163b70614/play-services-base-17.0.0/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png"
+    },
+    {
+        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/color_switch_thumb_material_dark.xml.flat",
+        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/color/switch_thumb_material_dark.xml"
     },
     {
         "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/anim_abc_popup_exit.xml.flat",
         "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/anim/abc_popup_exit.xml"
     },
     {
-        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/color_switch_thumb_material_dark.xml.flat",
-        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/color/switch_thumb_material_dark.xml"
+        "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
+        "source": "/Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
         "merged": "/Users/boardactive/github/BAKit-Android/app/build/intermediates/res/merged/debug/layout_places_autocomplete_progress.xml.flat",
