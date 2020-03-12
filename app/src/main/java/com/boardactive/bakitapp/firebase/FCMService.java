@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.boardactive.bakitapp;
+package com.boardactive.bakitapp.firebase;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -131,7 +131,7 @@ public class FCMService extends FirebaseMessagingService {
      */
     private void scheduleJob() {
         // [START dispatch_job]
-        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
+        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(FCMWorker.class)
                 .build();
         WorkManager.getInstance().beginWith(work).enqueue();
         // [END dispatch_job]

@@ -15,7 +15,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import com.boardactive.bakitapp.FCMService;
+import com.boardactive.bakitapp.firebase.FCMService;
 import com.boardactive.bakitapp.R;
 
 import com.boardactive.bakit.BoardActive;

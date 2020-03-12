@@ -1,4 +1,4 @@
-package com.boardactive.bakitapp;
+package com.boardactive.bakitapp.firebase;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,11 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-public class MyWorker extends Worker {
+public class FCMWorker extends Worker {
 
-    public static final String TAG = MyWorker.class.getName();
+    public static final String TAG = FCMWorker.class.getName();
 
-    public MyWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
+    public FCMWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
         super(appContext, workerParams);
     }
 

@@ -1,4 +1,4 @@
-package com.boardactive.bakitapp;
+package com.boardactive.bakitapp.firebase;
 
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -14,6 +14,7 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.boardactive.bakitapp.R;
 import com.boardactive.bakitapp.room.table.MessageEntity;
 import com.bumptech.glide.Glide;
 

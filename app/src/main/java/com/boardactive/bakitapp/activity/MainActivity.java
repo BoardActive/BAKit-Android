@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                             @Override
                             public void onResponse(Object value) {
-
+                            Log.d(TAG, value.toString());
                             Gson gson = new GsonBuilder().setPrettyPrinting().create();
                             Me me = gson.fromJson(value.toString(), Me.class);
 

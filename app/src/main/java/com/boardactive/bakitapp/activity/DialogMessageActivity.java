@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.boardactive.bakitapp.FCMService;
+import com.boardactive.bakitapp.firebase.FCMService;
 import com.boardactive.bakitapp.R;
 
 import com.boardactive.bakitapp.models.NotifType;
