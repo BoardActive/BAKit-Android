@@ -6,7 +6,7 @@ INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManife
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/af502843a250d406ebae42d3f4079425/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-45:12
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-42:12
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -126,8 +126,8 @@ application
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-97:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-43:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-43:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-40:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-40:19
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:22:5-20
@@ -213,7 +213,7 @@ MERGED from [com.android.volley:volley:1.1.1] /Users/boardactive/.gradle/caches/
 	android:theme
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:14:9-40
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:8:9-54
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:8:9-57
 activity#com.boardactive.bakitapp.activity.UserActivity
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:16:9-21:68
 	android:screenOrientation
@@ -318,12 +318,12 @@ ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:76:13-36
 	android:name
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:71:13-59
-service#com.boardactive.bakitapp.FCMService
+service#com.boardactive.bakitapp.firebase.FCMService
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:79:9-85:19
 	android:exported
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:13-37
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-39
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-48
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:82:13-84:29
 action#com.google.firebase.MESSAGING_EVENT
@@ -596,12 +596,6 @@ action#com.firebase.jobdispatcher.ACTION_EXECUTE
 ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:17-84
 	android:name
 		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:25-81
-activity#com.boardactive.bakit.PermissionActivity
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:9-42:86
-	android:theme
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-83
-	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:13-68
 uses-permission#android.permission.VIBRATE
 ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:5-66
 	android:name

@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application>
-
         <!-- [START BOOT/DEFAULT SERVICE] -->
         <receiver android:name=".BootReceiver" android:enabled="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -24,10 +23,6 @@
             </intent-filter>
         </service>
         <!-- [END BOOT/DEFAULT SERVICE] -->
-
-        <activity
-            android:name=".PermissionActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
 
     </application>
 

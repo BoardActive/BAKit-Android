@@ -2,7 +2,6 @@ package com.boardactive.bakit;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
@@ -11,13 +10,10 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
@@ -81,33 +77,6 @@ public class BoardActive {
 
     //    /** Service to track and post device location */
     private FirebaseJobDispatcher mDispatcher;
-//
-//    /**
-//     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
-//     */
-//    private static final long UPDATE_INTERVAL = 10000; // Every 60 seconds.
-//
-//    /**
-//     * The fastest rate for active location updates. Updates will never be more frequent
-//     * than this value, but they may be less frequent.
-//     */
-//    private static final long FASTEST_UPDATE_INTERVAL = 5000; // Every 30 seconds
-//
-//    /**
-//     * The max time before batched results are delivered by location services. Results may be
-//     * delivered sooner than this interval.
-//     */
-//    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1; // Every 5 minutes.
-//
-//    /**
-//     * Stores parameters for requests to the FusedLocationProviderApi.
-//     */
-//    private LocationRequest mLocationRequest;
-//
-//    /**
-//     * Provides access to the Fused Location Provider API.
-//     */
-//    private FusedLocationProviderClient mFusedLocationClient;
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
@@ -143,8 +112,6 @@ public class BoardActive {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
         gson = gsonBuilder.create();
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
-
     }
 
     /** Set and Get variables */
@@ -252,43 +219,12 @@ public class BoardActive {
      * */
     public void initialize() {
 
-//        mLocationRequest = new LocationRequest();
-
-        // Sets the desired interval for active location updates. This interval is
-        // inexact. You may not receive updates at all if no location sources are available, or
-        // you may receive them slower than requested. You may also receive updates faster than
-        // requested if other applications are requesting location at a faster interval.
-        // Note: apps running on "O" devices (regardless of targetSdkVersion) may receive updates
-        // less frequently than this interval when the app is no longer in the foreground.
-//        mLocationRequest.setInterval(UPDATE_INTERVAL);
-
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
-//        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
-
-//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        // Sets the maximum time when batched location updates are delivered. Updates may be
-        // delivered sooner than this interval.
-//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
-
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
 
-        /** Check for Location permission. If not then prompt to ask */
-        int permissionState = ActivityCompat.checkSelfPermission(mContext,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-
-        if(permissionState != PackageManager.PERMISSION_GRANTED){
-            Intent intent = new Intent(mContext, PermissionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            mContext.startActivity(intent);
-        }
-
         /** Start the JobDispatcher to check for and post location */
         StartJob();
-//        requestLocationUpdates(null);
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
@@ -442,10 +378,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
 
@@ -493,10 +428,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
 
@@ -522,17 +456,6 @@ public class BoardActive {
         queue.add(str);
     }
 
-//    public void getMe(final GetMeCallback callback) {
-//        MeApiHelper.getInstance().call(mContext,
-//                Request.Method.GET,
-//                "me",
-//                null,
-//                SampleResponse.class,
-//                SAMPLE_API_RESPONSE_CODE,
-//                this);
-//    }
-
-
     /** post Event and log in the BoardActive Platform
      * @param callback to return response from server
      */
@@ -552,10 +475,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
 
@@ -630,10 +552,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
 
@@ -798,10 +719,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
             @Override
@@ -901,10 +821,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
             @Override
@@ -999,10 +918,9 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
                 String readableError = handleServerError(error);
-                Log.d(TAG, response.statusCode + " - " + readableError);
-                callback.onResponse(response.statusCode + " - " + readableError);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
             }
         }) {
             @Override
@@ -1052,15 +970,16 @@ public class BoardActive {
      */
     private static String handleServerError(Object err) {
         VolleyError error = (VolleyError) err;
+        NetworkResponse response = error.networkResponse;
 
         try {
             String string = new String(error.networkResponse.data);
             JSONObject object = new JSONObject(string);
             if (object.has("message")) {
-                return object.get("message").toString();
+                return response.statusCode + " - " + object.get("message").toString();
             }
             else if(object.has("error_description")) {
-                return object.get("error_description").toString();
+                return response.statusCode + " - " + object.get("error_description").toString();
             }
         }catch (JSONException e)
         {

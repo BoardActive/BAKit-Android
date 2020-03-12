@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.boardactive.bakit.CheckPermissions;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakitapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
+        // Check for Location Permissions
+        CheckPermissions.checkForLocationPermissions(this);
+
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
 

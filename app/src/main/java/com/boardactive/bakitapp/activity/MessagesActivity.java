@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,12 +27,8 @@ import com.boardactive.bakitapp.room.AppDatabase;
 import com.boardactive.bakitapp.room.MessageDAO;
 import com.boardactive.bakitapp.room.table.MessageEntity;
 import com.boardactive.bakitapp.utils.Tools;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,8 +81,9 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         actionBar = getSupportActionBar();
         if(Tools.getSharedPrecerenceBoolean(getApplicationContext(), "DEV")) {
             actionBar.setDisplayHomeAsUpEnabled(true);

@@ -33,7 +33,15 @@ public class UserActivity extends AppCompatActivity {
     private BoardActive mBoardActive;
     private Me mMe;
 
-    private AutoCompleteTextView name, email, phone, facebookUrl, linkedInUrl, twitterUrl, instagramUrl, avatarUrl;
+    private AutoCompleteTextView
+            name,
+            email,
+            phone,
+            facebookUrl,
+            linkedInUrl,
+            twitterUrl,
+            instagramUrl,
+            avatarUrl;
 //    private TextView dateBorn;
     private Calendar calendar;
     private int year, month, day;
@@ -43,45 +51,50 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
+        initBAKit();
+        initForm();
+        initToolbar();
+        btn_save();
+        btn_cancel();
+    }
 
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initComponent();
+    }
 
-        radioFemale = (AppCompatRadioButton) findViewById(R.id.radio_female);
-        radioMale = (AppCompatRadioButton) findViewById(R.id.radio_male);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
 
-        name = (AutoCompleteTextView) findViewById(R.id.name);
-        email = (AutoCompleteTextView) findViewById(R.id.email);
-        phone = (AutoCompleteTextView) findViewById(R.id.phone);
-        facebookUrl = (AutoCompleteTextView) findViewById(R.id.facebookUrl);
-        linkedInUrl = (AutoCompleteTextView) findViewById(R.id.linkedInUrl);
-        twitterUrl = (AutoCompleteTextView) findViewById(R.id.twitterUrl);
-        instagramUrl = (AutoCompleteTextView) findViewById(R.id.instagramUrl);
-        avatarUrl = (AutoCompleteTextView) findViewById(R.id.avatarUrl);
-//        dateBorn = (TextView) findViewById(R.id.avatarUrl);
+        return super.onOptionsItemSelected(item);
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    private void initBAKit() {
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
 
-        // Add URL to point to BoardActive REST API
-        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
-
-        // Add AppID provided by BoardActive
-        mBoardActive.setAppId("164");
-
-        // Add AppKey provided by BoardActive
-        mBoardActive.setAppKey("bb85c28a-0ac4-439d-ad9c-5527be3cafdd");
-
-        // Add the version of your App
-        mBoardActive.setAppVersion("1.0.0");
-
-//        mStockAttributes = new Stock();
+//        // Add URL to point to BoardActive REST API
+//        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
+//
+//        // Add AppID provided by BoardActive
+//        mBoardActive.setAppId("164");
+//
+//        // Add AppKey provided by BoardActive
+//        mBoardActive.setAppKey("bb85c28a-0ac4-439d-ad9c-5527be3cafdd");
+//
+//        // Add the version of your App
+//        mBoardActive.setAppVersion("1.0.0");
 
         mBoardActive.getMe(new BoardActive.GetMeCallback() {
             @Override
@@ -114,33 +127,36 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        btn_save();
-        btn_cancel();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initComponent();
-
-
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Tools.setSystemBarColor(this);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
+    private void initForm() {
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
 
-        return super.onOptionsItemSelected(item);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        radioFemale = (AppCompatRadioButton) findViewById(R.id.radio_female);
+        radioMale = (AppCompatRadioButton) findViewById(R.id.radio_male);
+
+        name = (AutoCompleteTextView) findViewById(R.id.name);
+        email = (AutoCompleteTextView) findViewById(R.id.email);
+        phone = (AutoCompleteTextView) findViewById(R.id.phone);
+        facebookUrl = (AutoCompleteTextView) findViewById(R.id.facebookUrl);
+        linkedInUrl = (AutoCompleteTextView) findViewById(R.id.linkedInUrl);
+        twitterUrl = (AutoCompleteTextView) findViewById(R.id.twitterUrl);
+        instagramUrl = (AutoCompleteTextView) findViewById(R.id.instagramUrl);
+        avatarUrl = (AutoCompleteTextView) findViewById(R.id.avatarUrl);
+//        dateBorn = (TextView) findViewById(R.id.avatarUrl);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
 
     public void btn_cancel() {
 
