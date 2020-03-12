@@ -442,24 +442,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
 
@@ -507,24 +493,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
 
@@ -580,24 +552,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
 
@@ -672,26 +630,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] RegisterDevice Error: " + error.toString());
-                }
-
-                callback.onResponse(error.toString());
-
-//                NetworkResponse networkResponse = error.networkResponse;
-//                if (networkResponse != null) {
-//                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-//                    callback.onResponse(networkResponse.statusCode);
-//                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
 
@@ -856,24 +798,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] postEvent No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] postEvent Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] postEvent Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] postEvent Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] postEvent Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
             @Override
@@ -973,23 +901,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] postLocation No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] postLocation Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] postLocation Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] postLocation Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] postLocation Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e(TAG, "[BAkit] postLocation Error CODE: " + String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse.statusCode);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
             @Override
@@ -1084,24 +999,10 @@ public class BoardActive {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof NetworkError) {
-                    Log.d(TAG, "[BAkit] postLogin No network available");
-                } else if (error instanceof AuthFailureError) {
-                    Log.d(TAG, "[BAkit] postLogin Error AuthFailureError: " + error.toString());
-                } else if (error instanceof ServerError) {
-                    Log.d(TAG, "[BAkit] postLogin Error ServerError: " + error.toString());
-                } else if (error instanceof ParseError) {
-                    Log.d(TAG, "[BAkit] postLogin Error ParseError: " + error.toString());
-                } else {
-                    Log.d(TAG, "[BAkit] postLogin Error: " + error.toString());
-                }
-
-                NetworkResponse networkResponse = error.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Status code", String.valueOf(networkResponse.statusCode));
-                    callback.onResponse(networkResponse);
-                }
+                NetworkResponse response = error.networkResponse;
+                String readableError = handleServerError(error);
+                Log.d(TAG, response.statusCode + " - " + readableError);
+                callback.onResponse(response.statusCode + " - " + readableError);
             }
         }) {
             @Override
@@ -1142,6 +1043,33 @@ public class BoardActive {
         return headers;
     }
 
+    /**
+     * Handles the server error, tries to determine whether to show a stock message or to
+     * show a message retrieved from the server.
+     *
+     * @param err Volley error
+     * @return String
+     */
+    private static String handleServerError(Object err) {
+        VolleyError error = (VolleyError) err;
+
+        try {
+            String string = new String(error.networkResponse.data);
+            JSONObject object = new JSONObject(string);
+            if (object.has("message")) {
+                return object.get("message").toString();
+            }
+            else if(object.has("error_description")) {
+                return object.get("error_description").toString();
+            }
+        }catch (JSONException e)
+        {
+            return "Could not parse response";
+        }
+        // invalid request
+        return error.getMessage();
+
+    }
 }
 
 
