@@ -79,7 +79,7 @@ public class BoardActive {
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
 
-//    /** Service to track and post device location */
+    //    /** Service to track and post device location */
     private FirebaseJobDispatcher mDispatcher;
 //
 //    /**
@@ -111,7 +111,7 @@ public class BoardActive {
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
-    public final static String APP_URL_DEV = "https://springer-api.boardactive.com/mobile/v1/";
+    public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
 
@@ -319,39 +319,47 @@ public class BoardActive {
         String APP_OS = getAppOS();
         String APP_OS_VERSION = getAppOSVersion();
 
-        if(APP_URL.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppUrl is empty");
-        }
+        try {
+            if(APP_URL.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppUrl is empty");
+            }
 
-        if(APP_KEY.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppKey is empty");
-        }
+            if(APP_KEY.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppKey is empty");
+            }
 
-        if(APP_ID.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppId is empty");
-        }
+            if(APP_ID.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppId is empty");
+            }
 
-        if(APP_VERSION.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppVersion is empty");
-        }
+            if(APP_VERSION.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppVersion is empty");
+            }
 
-        if(APP_TOKEN.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppToken is empty");
-        }
+            if(APP_TOKEN.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppToken is empty");
+            }
 
-        if(APP_OS.isEmpty()) {
-            isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppOS is empty");
-        }
+            if(APP_OS.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppOS is empty");
+            }
 
-        if(APP_OS_VERSION.isEmpty()) {
+            if(APP_OS_VERSION.isEmpty()) {
+                isLoggedIn = false;
+                Log.d(TAG, "[BAKit] AppOSVersion is empty");
+            }
+
+        } catch(Exception e) {
+            // This will catch any exception, because they are all descended from Exception
+            System.out.println("Error " + e.getMessage());
             isLoggedIn = false;
-            Log.d(TAG, "[BAKit] AppOSVersion is empty");
+            return isLoggedIn;
         }
 
         return isLoggedIn;
@@ -828,10 +836,11 @@ public class BoardActive {
     /** post Event and log in the BoardActive Platform
      * @param callback to return response from server
      * @param name type of Event to log
-     * @param messageId the id of the message to log event
+     * @param baMessageId the id of the message to log event
+     * @param baNotificationId the id of the message to log event
      * @param firebaseNotificationId firebase notification id to log the event
      */
-    public void postEvent(final PostEventCallback callback, final String name, final String messageId, final String firebaseNotificationId) {
+    public void postEvent(final PostEventCallback callback, final String name, final String baMessageId, final String baNotificationId, final String firebaseNotificationId) {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
         VolleyLog.DEBUG = true;
@@ -876,7 +885,8 @@ public class BoardActive {
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("name", name);
-                params.put("messageId", messageId);
+                params.put("baMessageId", baMessageId);
+                params.put("bNotificationId", baNotificationId);
                 params.put("firebaseNotificationId", firebaseNotificationId);
                 return params;
             }
@@ -910,7 +920,8 @@ public class BoardActive {
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("name", name);
-                    jsonObject.put("messageId", messageId);
+                    jsonObject.put("baMessageId", baMessageId);
+                    jsonObject.put("baNotificationId", baNotificationId);
                     jsonObject.put("firebaseNotificationId", firebaseNotificationId);
                 } catch (JSONException e) {
                     e.printStackTrace();

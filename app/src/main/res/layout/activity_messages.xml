@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <!--navigation drawer menu-->
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:background="@color/colorBackground"-->
+<!--            android:fitsSystemWindows="false"-->
+<!--            app:headerLayout="@layout/drawer_nav_header"-->
+<!--            app:itemIconTint="@color/colorText"-->
+<!--            app:itemTextAppearance="@style/TextAppearance.AppCompat.Menu"-->
+<!--            app:itemTextColor="@color/colorDark"-->
+<!--            app:menu="@menu/menu_activity_messages_nav"-->
+<!--            app:theme="@style/Drawer.Custom.Dark" />-->
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:scrollingCache="true" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

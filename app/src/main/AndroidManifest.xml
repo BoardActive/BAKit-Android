@@ -14,20 +14,20 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".UserActivity"
+            android:name=".activity.UserActivity"
             android:label="@string/title_activity_user"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".CustomActivity"
+            android:name=".activity.CustomActivity"
             android:label="@string/title_activity_custom"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             >
@@ -38,6 +38,44 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.MessagesActivity"
+            android:enabled="true"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:taskAffinity="">
+        </activity>
+
+        <activity
+            android:name=".activity.MessageActivity"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activity.MessagesActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity="">
+
+             <meta-data
+             android:name="android.support.PARENT_ACTIVITY"
+             android:value=".activity.MainActivity"/>
+
+            <intent-filter>
+                <action android:name="MessageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.DialogMessageActivity"
+            android:enabled="true"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/AppTheme.Dialog.NoActionBar" />
+
         <service
             android:name=".FCMService"
             android:exported="false">
@@ -45,6 +83,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
     </application>
 
 </manifest>

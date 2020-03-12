@@ -41,6 +41,15 @@
                 android:padding="@dimen/spacing_xlarge">
 
                 <Button
+                    android:id="@+id/btn_messages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:background="@drawable/btn_rounded_accent"
+                    android:text="Messages"
+                    android:textColor="@android:color/white" />
+
+                <Button
                     android:id="@+id/btn_userAttributes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

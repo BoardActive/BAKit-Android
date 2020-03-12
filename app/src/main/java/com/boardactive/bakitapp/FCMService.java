@@ -25,6 +25,10 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakitapp.activity.MainActivity;
+import com.boardactive.bakitapp.room.AppDatabase;
+import com.boardactive.bakitapp.room.MessageDAO;
+import com.boardactive.bakitapp.room.table.MessageEntity;
 import com.boardactive.bakitapp.utils.Tools;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -42,10 +46,12 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 public class FCMService extends FirebaseMessagingService {
 
-    private static final String TAG = "FCMService";
+    public static final String TAG = FCMService.class.getSimpleName();
     public static final String EXTRA_OBJECT = "key.EXTRA_OBJECT";
     public static final String EXTRA_MESSADE_ID = "key.EXTRA_MESSADE_ID";
     private static final String MESSAGE_ID = "MESSAGE_ID";
+
+    private MessageDAO mMessageDAO;
 
     /**
      * Called when message is received.
@@ -71,10 +77,10 @@ public class FCMService extends FirebaseMessagingService {
         // sends notification
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
-
-
-
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
+        Log.d(TAG, "[BAKitApp] Payload getMessageId: " + remoteMessage.getMessageId());
+        Log.d(TAG, "[BAKitApp] Payload getData: " + remoteMessage.getData().toString());
+        Log.d(TAG, "[BAKitApp] Payload getNotification: " + remoteMessage.getNotification().getBody().toString());
         Log.d(TAG, "[BAKitApp] From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
@@ -93,7 +99,7 @@ public class FCMService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "[BAKitApp] MessageModel Notification Body: " + remoteMessage);
+            Log.d(TAG, "[BAKitApp] MessageModel Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -158,12 +164,21 @@ public class FCMService extends FirebaseMessagingService {
      */
     private void sendNotification(final RemoteMessage remoteNotification) {
         Long currentDateandTime = System.currentTimeMillis();
-        MessageModel obj = new MessageModel();
+        MessageEntity obj = new MessageEntity();
 
-        int id = 1;
+        mMessageDAO = AppDatabase.getDb(this).getMessageDAO();
+        int id;
+        Integer count = mMessageDAO.getMaxId();
+        if (count == null) {
+            id = 1;
+        } else {
+            id = count + 1;
+        }
         obj.setId(id);
-        obj.setMessageId(remoteNotification.getData().get("messageId"));
-        obj.setNotificationId(remoteNotification.getMessageId());
+        Log.d(TAG, "SetID(): " + count);
+        obj.setBaMessageId(remoteNotification.getData().get("baMessageId"));
+        obj.setBaNotificationId(remoteNotification.getData().get("baNotificationId"));
+        obj.setFirebaseNotificationId(remoteNotification.getMessageId());
         obj.setTitle(remoteNotification.getData().get("title"));
         obj.setBody(remoteNotification.getData().get("body"));
         obj.setImageUrl(remoteNotification.getData().get("imageUrl"));
@@ -174,6 +189,7 @@ public class FCMService extends FirebaseMessagingService {
         obj.setDateCreated(currentDateandTime);
         obj.setDateLastUpdated(currentDateandTime);
         obj.setIsRead(false);
+        mMessageDAO.insertMessage(obj);
 
         BoardActive mBoardActive = new BoardActive(getApplicationContext());
         mBoardActive.postEvent(new BoardActive.PostEventCallback() {
@@ -181,7 +197,7 @@ public class FCMService extends FirebaseMessagingService {
             public void onResponse(Object value) {
                 Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
             }
-        }, "received", obj.getMessageId(), obj.getNotificationId());
+        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId());
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_MESSADE_ID, id);
@@ -198,7 +214,6 @@ public class FCMService extends FirebaseMessagingService {
         stackBuilder.addNextIntentWithParentStack(intent);
 
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
-
 
         int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
         new NotificationBuilder(this,pendingIntent, obj, notificationType).execute();

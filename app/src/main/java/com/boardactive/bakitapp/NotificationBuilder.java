@@ -14,15 +14,15 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.boardactive.bakitapp.room.table.MessageEntity;
 import com.bumptech.glide.Glide;
 
 public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
-    public static final String TAG = NotificationBuilder.class.getName();
-
+    private static final String TAG = "MyNotificationBuilder";
     private Bitmap mBitmap;
 
     private Context mContext;
-    private MessageModel mObj;
+    private MessageEntity mObj;
     private PendingIntent mPendingIntent;
     private int mType;
 
@@ -33,7 +33,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     public static final int NOTIFICATION_BIG_TEXT = 3;
     public static final int NOTIFICATION_INBOX = 4;
 
-    public NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type) {
+    public NotificationBuilder(Context context, PendingIntent pendingIntent, MessageEntity obj, int type) {
         super();
         this.mContext = context;
         this.mObj = obj;
@@ -103,7 +103,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
-                                .addAction(R.drawable.ic_notification, "Action Button",
+                                .addAction(R.drawable.ic_notifications, "Action Button",
                                         mPendingIntent);;
                 break;
             case NOTIFICATION_BIG_TEXT: //Big Text Notification
@@ -133,9 +133,9 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
                                 .setStyle(new NotificationCompat.InboxStyle()
-                                        .addLine("Sample MessageModel #1")
-                                        .addLine("Sample MessageModel #2")
-                                        .addLine("Sample MessageModel #3"))
+                                        .addLine("Sample Message #1")
+                                        .addLine("Sample Message #2")
+                                        .addLine("Sample Message #3"))
                                 .setContentIntent(mPendingIntent);
                 break;
             default:

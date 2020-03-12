@@ -38,19 +38,19 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.boardactive.bakitapp.UserActivity"
+            android:name="com.boardactive.bakitapp.activity.UserActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.boardactive.bakitapp.CustomActivity"
+            android:name="com.boardactive.bakitapp.activity.CustomActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_custom"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.boardactive.bakitapp.MainActivity"
+            android:name="com.boardactive.bakitapp.activity.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -59,6 +59,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.boardactive.bakitapp.activity.MessagesActivity"
+            android:enabled="true"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:taskAffinity="" >
+        </activity>
+        <activity
+            android:name="com.boardactive.bakitapp.activity.MessageActivity"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.boardactive.bakitapp.activity.MessagesActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity="" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+
+            <intent-filter>
+                <action android:name="MessageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.boardactive.bakitapp.activity.DialogMessageActivity"
+            android:enabled="true"
+            android:excludeFromRecents="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/AppTheme.Dialog.NoActionBar" />
 
         <service
             android:name="com.boardactive.bakitapp.FCMService"
@@ -67,6 +101,17 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
         <!-- Autocomplete -->
         <activity
             android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
@@ -224,6 +269,10 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:exported="false" />
+
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
             android:authorities="com.boardactive.bakitapp.firebaseinitprovider"
@@ -290,10 +339,6 @@
 
         <receiver
             android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-            android:exported="false" />
-
-        <service
-            android:name="androidx.room.MultiInstanceInvalidationService"
             android:exported="false" />
     </application>
 

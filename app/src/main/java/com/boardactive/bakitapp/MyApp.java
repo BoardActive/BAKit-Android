@@ -2,6 +2,9 @@ package com.boardactive.bakitapp;
 
 import android.app.Application;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.FirebaseApp;
 
 public class MyApp extends Application {
@@ -14,7 +17,6 @@ public class MyApp extends Application {
 
         Log.d(TAG, "[BAKitApp] MyApp onCreate()");
         FirebaseApp.initializeApp(this.getApplicationContext());
-
     }
 
 }
