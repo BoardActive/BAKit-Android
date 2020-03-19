@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/af502843a250d406ebae42d3f4079425/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
 MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-42:12
@@ -83,20 +83,20 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/ca
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.volley:volley:1.1.1] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f6542eb33cc72def63a895ecdbc656d4/jetified-volley-1.1.1/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2416b0e023089ab2d02c9cadfe321f31/transport-api-2.2.0/AndroidManifest.xml:15:1-22:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
-INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
+INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
 	package
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-99:12
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
 		INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:11-69
@@ -123,7 +123,7 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /User
 	android:name
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-97:19
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-95:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-40:19
@@ -271,7 +271,7 @@ ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.
 	android:name
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:42:13-54
 activity#com.boardactive.bakitapp.activity.MessageActivity
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:50:9-68:20
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:50:9-66:20
 	android:screenOrientation
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:56:13-49
 	android:enabled
@@ -287,67 +287,67 @@ ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.
 	android:name
 		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:51:13-53
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:59:14-61:54
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:58:14-60:58
 	android:value
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:61:14-52
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:60:14-56
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:60:14-60
-intent-filter#action:name:MessageActivity+category:name:android.intent.category.DEFAULT
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:13-67:29
-action#MessageActivity
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:17-58
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:59:14-60
+intent-filter#action:name:OPEN_MESSAGE+category:name:android.intent.category.DEFAULT
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:62:13-65:29
+action#OPEN_MESSAGE
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:17-55
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:25-55
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:25-52
 category#android.intent.category.DEFAULT
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:17-76
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:17-76
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:27-73
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:27-73
 activity#com.boardactive.bakitapp.activity.DialogMessageActivity
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:70:9-77:66
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:68:9-75:66
 	android:screenOrientation
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:75:13-49
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:73:13-49
 	android:enabled
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:72:13-35
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:70:13-35
 	android:excludeFromRecents
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:73:13-47
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:71:13-47
 	android:launchMode
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:74:13-43
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:72:13-43
 	android:theme
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:77:13-63
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:75:13-63
 	android:taskAffinity
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:76:13-36
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:74:13-36
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:71:13-59
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:69:13-59
 service#com.boardactive.bakitapp.firebase.FCMService
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:79:9-85:19
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:77:9-83:19
 	android:exported
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:13-37
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:79:13-37
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-48
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:78:13-48
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:82:13-84:29
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-82:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:17-78
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:17-78
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:25-75
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:25-75
 meta-data#com.google.firebase.messaging.default_notification_icon
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:87:9-89:60
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:85:9-87:60
 	android:resource
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:89:13-57
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:87:13-57
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:88:13-83
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:86:13-83
 meta-data#com.google.firebase.messaging.default_notification_color
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:90:9-92:53
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:88:9-90:53
 	android:resource
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:92:13-50
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:90:13-50
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:91:13-84
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:89:13-84
 meta-data#com.google.firebase.messaging.default_notification_channel_id
-ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:93:9-95:71
+ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:91:9-93:71
 	android:value
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:95:13-68
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:93:13-68
 	android:name
-		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:94:13-89
+		ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:92:13-89
 uses-sdk
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml

@@ -26,6 +26,7 @@ import androidx.work.WorkManager;
 
 import com.boardactive.bakit.BoardActive;
 import com.boardactive.bakitapp.activity.MainActivity;
+import com.boardactive.bakitapp.activity.MessageActivity;
 import com.boardactive.bakitapp.room.AppDatabase;
 import com.boardactive.bakitapp.room.MessageDAO;
 import com.boardactive.bakitapp.room.table.MessageEntity;
@@ -201,7 +202,7 @@ public class FCMService extends FirebaseMessagingService {
      */
     private void sendNotification(final MessageEntity obj, final int id) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MessageActivity.class);
         intent.putExtra(EXTRA_MESSADE_ID, id);
 //        intent.putExtra(EXTRA_OBJECT, obj);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT   

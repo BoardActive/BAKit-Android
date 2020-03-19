@@ -76,10 +76,10 @@
             android:taskAffinity="" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".activity.MessagesActivity" />
 
             <intent-filter>
-                <action android:name="MessageActivity" />
+                <action android:name="OPEN_MESSAGE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

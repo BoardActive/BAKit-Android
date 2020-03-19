@@ -769,9 +769,7 @@ public class BoardActive {
                 try {
                     jsonObject.put("name", name);
                     jsonObject.put("baMessageId", baMessageId);
-                    if(baNotificationId != null) {
-                        jsonObject.put("baNotificationId", baNotificationId);
-                    }
+                    jsonObject.put("baNotificationId", baNotificationId);
                     jsonObject.put("firebaseNotificationId", firebaseNotificationId);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -973,7 +971,6 @@ public class BoardActive {
     private static String handleServerError(Object err) {
         VolleyError error = (VolleyError) err;
         NetworkResponse response = error.networkResponse;
-
         try {
             String string = new String(error.networkResponse.data);
             JSONObject object = new JSONObject(string);
@@ -983,9 +980,10 @@ public class BoardActive {
             else if(object.has("error_description")) {
                 return response.statusCode + " - " + object.get("error_description").toString();
             }
-        }catch (JSONException e)
+//        } catch (JSONException e)
+            } catch (Exception e)
         {
-            return "Could not parse response";
+            return "Could not parse response: " + e.toString();
         }
         // invalid request
         return error.getMessage();

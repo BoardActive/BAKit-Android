@@ -53,7 +53,7 @@
 26-->[com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:26:22-107
 27
 28    <application
-28-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-97:19
+28-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-95:19
 29        android:name="com.boardactive.bakitapp.BAKitApp"
 29-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:8:9-57
 30        android:allowBackup="true"
@@ -131,7 +131,7 @@
 67-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:47:13-36
 68        </activity>
 69        <activity
-69-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:50:9-68:20
+69-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:50:9-66:20
 70            android:name="com.boardactive.bakitapp.activity.MessageActivity"
 70-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:51:13-53
 71            android:enabled="true"
@@ -147,72 +147,72 @@
 76            android:taskAffinity="" >
 76-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:57:13-36
 77            <meta-data
-77-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:59:14-61:54
+77-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:58:14-60:58
 78                android:name="android.support.PARENT_ACTIVITY"
-78-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:60:14-60
-79                android:value=".activity.MainActivity" />
-79-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:61:14-52
+78-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:59:14-60
+79                android:value=".activity.MessagesActivity" />
+79-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:60:14-56
 80
 81            <intent-filter>
-81-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:13-67:29
-82                <action android:name="MessageActivity" />
-82-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:17-58
-82-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:25-55
+81-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:62:13-65:29
+82                <action android:name="OPEN_MESSAGE" />
+82-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:17-55
+82-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:63:25-52
 83
 84                <category android:name="android.intent.category.DEFAULT" />
-84-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:17-76
-84-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:27-73
+84-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:17-76
+84-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:27-73
 85            </intent-filter>
 86        </activity>
 87        <activity
-87-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:70:9-77:66
+87-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:68:9-75:66
 88            android:name="com.boardactive.bakitapp.activity.DialogMessageActivity"
-88-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:71:13-59
+88-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:69:13-59
 89            android:enabled="true"
-89-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:72:13-35
+89-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:70:13-35
 90            android:excludeFromRecents="false"
-90-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:73:13-47
+90-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:71:13-47
 91            android:launchMode="singleTop"
-91-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:74:13-43
+91-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:72:13-43
 92            android:screenOrientation="portrait"
-92-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:75:13-49
+92-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:73:13-49
 93            android:taskAffinity=""
-93-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:76:13-36
+93-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:74:13-36
 94            android:theme="@style/AppTheme.Dialog.NoActionBar" />
-94-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:77:13-63
+94-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:75:13-63
 95
 96        <service
-96-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:79:9-85:19
+96-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:77:9-83:19
 97            android:name="com.boardactive.bakitapp.firebase.FCMService"
-97-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-48
+97-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:78:13-48
 98            android:exported="false" >
-98-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:13-37
+98-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:79:13-37
 99            <intent-filter>
-99-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:82:13-84:29
+99-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-82:29
 100                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-100-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:17-78
-100-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:25-75
+100-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:17-78
+100-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:25-75
 101            </intent-filter>
 102        </service>
 103
 104        <meta-data
-104-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:87:9-89:60
+104-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:85:9-87:60
 105            android:name="com.google.firebase.messaging.default_notification_icon"
-105-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:88:13-83
+105-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:86:13-83
 106            android:resource="@drawable/ic_notification" />
-106-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:89:13-57
+106-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:87:13-57
 107        <meta-data
-107-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:90:9-92:53
+107-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:88:9-90:53
 108            android:name="com.google.firebase.messaging.default_notification_color"
-108-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:91:13-84
+108-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:89:13-84
 109            android:resource="@color/colorAccent" />
-109-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:92:13-50
+109-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:90:13-50
 110        <meta-data
-110-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:93:9-95:71
+110-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:91:9-93:71
 111            android:name="com.google.firebase.messaging.default_notification_channel_id"
-111-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:94:13-89
+111-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:92:13-89
 112            android:value="@string/default_notification_channel_id" />
-112-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:95:13-68
+112-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:93:13-68
 113
 114        <!-- Autocomplete -->
 115        <activity
@@ -245,8 +245,8 @@
 128-->[:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:25-76
 129
 130                <category android:name="android.intent.category.DEFAULT" />
-130-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:17-76
-130-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:66:27-73
+130-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:17-76
+130-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:64:27-73
 131            </intent-filter>
 132        </receiver>
 133
@@ -274,10 +274,10 @@
 147            android:exported="false" >
 147-->[com.google.firebase:firebase-messaging:20.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9c657630ba5d9806201a11b8495bb180/jetified-firebase-messaging-20.1.0/AndroidManifest.xml:30:13-37
 148            <intent-filter android:priority="-500" >
-148-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:82:13-84:29
+148-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:80:13-82:29
 149                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-149-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:17-78
-149-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:83:25-75
+149-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:17-78
+149-->/Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:81:25-75
 150            </intent-filter>
 151        </service>
 152        <service

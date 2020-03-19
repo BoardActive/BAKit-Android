@@ -92,7 +92,7 @@ public class MessageActivity extends AppCompatActivity {
 
         mMessageData = gson.fromJson(messageData, MessageData.class);
 
-//        if (!mMessageEntity.getIsRead()){
+        if (!mMessageEntity.getIsRead()){
             BoardActive mBoardActive = new BoardActive(getApplicationContext());
             mBoardActive.postEvent(new BoardActive.PostEventCallback() {
                 @Override
@@ -102,7 +102,7 @@ public class MessageActivity extends AppCompatActivity {
             }, "opened", mMessageEntity.getBaMessageId(), mMessageEntity.getBaNotificationId(), mMessageEntity.getFirebaseNotificationId());
             mMessageEntity.setIsRead(true);;
             mMessageDAO.insertMessage(mMessageEntity);
-//        }
+        }
 
         TextView titleTextView = (TextView) findViewById(R.id.textView1);
         titleTextView.setText(mMessageEntity.getTitle());
