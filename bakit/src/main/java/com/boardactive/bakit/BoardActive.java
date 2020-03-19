@@ -734,7 +734,7 @@ public class BoardActive {
                 Map<String, String> params = new HashMap<>();
                 params.put("name", name);
                 params.put("baMessageId", baMessageId);
-                params.put("bNotificationId", baNotificationId);
+                params.put("baNotificationId", baNotificationId);
                 params.put("firebaseNotificationId", firebaseNotificationId);
                 return params;
             }
@@ -769,7 +769,9 @@ public class BoardActive {
                 try {
                     jsonObject.put("name", name);
                     jsonObject.put("baMessageId", baMessageId);
-                    jsonObject.put("baNotificationId", baNotificationId);
+                    if(baNotificationId != null) {
+                        jsonObject.put("baNotificationId", baNotificationId);
+                    }
                     jsonObject.put("firebaseNotificationId", firebaseNotificationId);
                 } catch (JSONException e) {
                     e.printStackTrace();
