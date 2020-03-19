@@ -83,10 +83,47 @@ public class FCMService extends FirebaseMessagingService {
         Log.d(TAG, "[BAKitApp] Payload getNotification: " + remoteMessage.getNotification().getBody().toString());
         Log.d(TAG, "[BAKitApp] From: " + remoteMessage.getFrom());
 
+        Long currentDateandTime = System.currentTimeMillis();
+        MessageEntity obj = new MessageEntity();
+
+        mMessageDAO = AppDatabase.getDb(this).getMessageDAO();
+        int id;
+        Integer count = mMessageDAO.getMaxId();
+        if (count == null) {
+            id = 1;
+        } else {
+            id = count + 1;
+        }
+        obj.setId(id);
+        Log.d(TAG, "SetID(): " + count);
+        obj.setBaMessageId(remoteMessage.getData().get("baMessageId"));
+        obj.setBaNotificationId(remoteMessage.getData().get("baNotificationId"));
+        obj.setFirebaseNotificationId(remoteMessage.getMessageId());
+        obj.setTitle(remoteMessage.getData().get("title"));
+        obj.setBody(remoteMessage.getData().get("body"));
+        obj.setImageUrl(remoteMessage.getData().get("imageUrl"));
+        obj.setLatitude(remoteMessage.getData().get("latitude"));
+        obj.setLongitude(remoteMessage.getData().get("longitude"));
+        obj.setMessageData(remoteMessage.getData().get("messageData"));
+        obj.setIsTestMessage(remoteMessage.getData().get("isTestMessage"));
+        obj.setDateCreated(currentDateandTime);
+        obj.setDateLastUpdated(currentDateandTime);
+        obj.setIsRead(false);
+        mMessageDAO.insertMessage(obj);
+
+        BoardActive mBoardActive = new BoardActive(getApplicationContext());
+        mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+            @Override
+            public void onResponse(Object value) {
+                Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
+            }
+        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId());
+
+
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "[BAKitApp] MessageModel data payload: " + remoteMessage.getData());
-            sendNotification(remoteMessage);
+            sendNotification(obj, id);
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
@@ -160,44 +197,9 @@ public class FCMService extends FirebaseMessagingService {
      * Create and show a simple notification containing the received FCM message.
      * Set notification's tap action.
      *
-     * @param remoteNotification FCM notification.
+     * @param obj FCM notification.
      */
-    private void sendNotification(final RemoteMessage remoteNotification) {
-        Long currentDateandTime = System.currentTimeMillis();
-        MessageEntity obj = new MessageEntity();
-
-        mMessageDAO = AppDatabase.getDb(this).getMessageDAO();
-        int id;
-        Integer count = mMessageDAO.getMaxId();
-        if (count == null) {
-            id = 1;
-        } else {
-            id = count + 1;
-        }
-        obj.setId(id);
-        Log.d(TAG, "SetID(): " + count);
-        obj.setBaMessageId(remoteNotification.getData().get("baMessageId"));
-        obj.setBaNotificationId(remoteNotification.getData().get("baNotificationId"));
-        obj.setFirebaseNotificationId(remoteNotification.getMessageId());
-        obj.setTitle(remoteNotification.getData().get("title"));
-        obj.setBody(remoteNotification.getData().get("body"));
-        obj.setImageUrl(remoteNotification.getData().get("imageUrl"));
-        obj.setLatitude(remoteNotification.getData().get("latitude"));
-        obj.setLongitude(remoteNotification.getData().get("longitude"));
-        obj.setMessageData(remoteNotification.getData().get("messageData"));
-        obj.setIsTestMessage(remoteNotification.getData().get("isTestMessage"));
-        obj.setDateCreated(currentDateandTime);
-        obj.setDateLastUpdated(currentDateandTime);
-        obj.setIsRead(false);
-        mMessageDAO.insertMessage(obj);
-
-        BoardActive mBoardActive = new BoardActive(getApplicationContext());
-        mBoardActive.postEvent(new BoardActive.PostEventCallback() {
-            @Override
-            public void onResponse(Object value) {
-                Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
-            }
-        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId());
+    private void sendNotification(final MessageEntity obj, final int id) {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_MESSADE_ID, id);
