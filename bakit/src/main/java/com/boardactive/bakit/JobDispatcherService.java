@@ -175,9 +175,11 @@ public class JobDispatcherService extends JobService implements
 
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
 
+        Log.d(TAG, "[BAKit] JobDispatcherService getLastKnownLocation [" + lastLocation + "]");
+
         if (lastLocation != null) {
 
-            Log.d(TAG, "[BAKit] JobDispatcherService LastKnown location. " +
+            Log.d(TAG, "[BAKit] LastKnown location. " +
                     "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
             writeLastLocation();
             startLocationUpdates();
@@ -188,12 +190,12 @@ public class JobDispatcherService extends JobService implements
             mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                 @Override
                 public void onResponse(Object value) {
-                    Log.d(TAG, "[BAKit] JobDispatcherService onResponse" + value.toString());
+                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
                 }
             }, lastLocation.getLatitude(), lastLocation.getLongitude(), date);
 
         } else {
-            Log.d(TAG, "[BAKit] JobDispatcherService No location retrieved yet");
+            Log.d(TAG, "[BAKit] No location retrieved yet");
             startLocationUpdates();
         }
 
@@ -207,8 +209,7 @@ public class JobDispatcherService extends JobService implements
     @SuppressLint("SetTextI18n")
     private void writeActualLocation(Location location) {
         //here in this method we can do something with the location
-        Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation [" + location + "]");
-        Log.d(TAG, "[BAKit] JobDispatcherService writeActualLocation " +
+        Log.d(TAG, "[BAKit]  writeActualLocation " +
                 "  Lat: " + lastLocation.getLatitude() + " | Long: " + lastLocation.getLongitude());
 
     }

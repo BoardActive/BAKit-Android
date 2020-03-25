@@ -85,10 +85,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/FCMService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/FCMService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/boardactive/bakitapp/R$menu.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/boardactive/bakitapp/R$menu.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,11 +115,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="975" column="55" lean-forward="true" selection-start-line="975" selection-start-column="55" selection-end-line="975" selection-end-column="55" />
+            <state relative-caret-position="1925">
+              <caret line="705" column="25" selection-start-line="705" selection-start-column="16" selection-end-line="705" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -126,12 +127,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="190" selection-start-line="190" selection-end-line="190" />
+            <state relative-caret-position="254">
+              <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
               <folding>
+                <element signature="e#3519#3520#0" expanded="true" />
+                <element signature="e#3569#3570#0" expanded="true" />
                 <element signature="e#5741#5988#0" expanded="true" />
                 <element signature="e#5987#5988#0" expanded="true" />
               </folding>
@@ -142,7 +145,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
+            <state relative-caret-position="1740">
               <caret line="116" selection-start-line="116" selection-end-line="116" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -154,7 +157,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/FCMService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
+            <state relative-caret-position="130">
               <caret line="112" selection-start-line="112" selection-end-line="112" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -165,19 +168,19 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="62" column="54" lean-forward="true" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
+            <state relative-caret-position="930">
+              <caret line="62" column="54" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
             </state>
           </provider>
-          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/NotificationBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+            <state relative-caret-position="210">
+              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -185,8 +188,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="1365">
+              <caret line="91" selection-start-line="91" selection-end-line="91" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -198,7 +201,7 @@
         <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/CheckPermissions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -209,8 +212,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessagesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="85" column="62" lean-forward="true" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
+            <state relative-caret-position="735">
+              <caret line="85" column="62" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -230,9 +233,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>NotifType</find>
-      <find>bumptech</find>
-      <find>material</find>
       <find>MessagesActivity</find>
       <find>R.menu</find>
       <find>action_apps</find>
@@ -260,6 +260,9 @@
       <find>posteve</find>
       <find>baNotificationId</find>
       <find>postEvent</find>
+      <find>getLastKnownLocation</find>
+      <find>onResponse</find>
+      <find>JobDispatcherService</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -275,7 +278,6 @@
       <list>
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Service/LocationUpdatesIntentService.java" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BootReceiver.java" />
-        <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/Tools/SharedPreferenceHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/UserActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/MessageModel.java" />
@@ -324,13 +326,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java" />
+        <option value="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="122" />
+    <option name="x" value="7" />
     <option name="y" value="23" />
-    <option name="width" value="1318" />
+    <option name="width" value="1382" />
     <option name="height" value="817" />
   </component>
   <component name="ProjectView">
@@ -338,18 +341,47 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="bakit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="BAKit-Android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="BAKit-Android" type="1abcf292:AndroidViewProjectNode" />
@@ -385,15 +417,6 @@
               <item name="boardactive" type="462c0819:PsiDirectoryNode" />
               <item name="bakitapp" type="462c0819:PsiDirectoryNode" />
               <item name="activity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="boardactive" type="462c0819:PsiDirectoryNode" />
-              <item name="bakitapp" type="462c0819:PsiDirectoryNode" />
-              <item name="firebase" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BAKit-Android" type="1abcf292:AndroidViewProjectNode" />
@@ -433,41 +456,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BAKit-Android" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BAKit-Android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="bakit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -480,7 +469,7 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="device.picker.selection" value="Pixel_3_API_28" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Variables" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -706,10 +695,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="122" y="23" width="1318" height="817" extended-state="0" />
+    <frame x="7" y="23" width="1382" height="817" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3448276" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28432837" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -721,11 +710,11 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32827586" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8111285" visible="true" weight="0.39586207" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8111285" weight="0.39586207" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.4976489" weight="0.4662069" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="7" sideWeight="0.4976489" visible="true" weight="0.4662069" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32275862" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5023511" side_tool="true" weight="0.26621622" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.36548913" />
@@ -740,7 +729,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Android WiFi ADB" order="8" visible="true" weight="0.03291536" />
+      <window_info anchor="right" id="Android WiFi ADB" order="8" visible="true" weight="0.20298508" />
       <window_info anchor="right" id="Preview" order="9" weight="0.329718" />
     </layout>
     <layout-to-restore>
@@ -901,6 +890,42 @@
           <line>112</line>
           <properties />
           <option name="timeStamp" value="631" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>131</line>
+          <properties />
+          <option name="timeStamp" value="636" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>141</line>
+          <properties />
+          <option name="timeStamp" value="637" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>192</line>
+          <properties />
+          <option name="timeStamp" value="644" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>179</line>
+          <properties />
+          <option name="timeStamp" value="647" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>189</line>
+          <properties />
+          <option name="timeStamp" value="648" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java</url>
+          <line>177</line>
+          <properties />
+          <option name="timeStamp" value="651" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1192,17 +1217,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/PermissionActivity.java" />
     <entry file="file://$PROJECT_DIR$/bakit/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessagesActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/google-services.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="85" column="62" lean-forward="true" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
+        <state relative-caret-position="1925">
+          <caret line="705" column="25" selection-start-line="705" selection-start-column="16" selection-end-line="705" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1740">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="62" column="54" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/NotificationBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="91" selection-start-line="91" selection-end-line="91" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1212,35 +1275,17 @@
     <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/CheckPermissions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessagesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="190" selection-start-line="190" selection-end-line="190" />
-          <folding>
-            <element signature="e#5741#5988#0" expanded="true" />
-            <element signature="e#5987#5988#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/NotificationBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MessageActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="735">
+          <caret line="85" column="62" selection-start-line="85" selection-start-column="62" selection-end-line="85" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1249,7 +1294,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/firebase/FCMService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
+        <state relative-caret-position="130">
           <caret line="112" selection-start-line="112" selection-end-line="112" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1257,33 +1302,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/google-services.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/boardactive/bakitapp/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/JobDispatcherService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="116" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="254">
+          <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="62" column="54" lean-forward="true" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="54" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="975" column="55" lean-forward="true" selection-start-line="975" selection-start-column="55" selection-end-line="975" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3519#3520#0" expanded="true" />
+            <element signature="e#3569#3570#0" expanded="true" />
+            <element signature="e#5741#5988#0" expanded="true" />
+            <element signature="e#5987#5988#0" expanded="true" />
           </folding>
         </state>
       </provider>
