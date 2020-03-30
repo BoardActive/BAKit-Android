@@ -128,14 +128,13 @@ public class MyWorker extends Worker {
 											channel.setDescription(description);
 											// Register the channel with the system; you can't change the importance
 											// or other notification behaviors after this
-//											NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
-//											notificationManager.createNotificationChannel(channel);
+											NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
+											notificationManager.createNotificationChannel(channel);
 										}
 
 
 										DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
 										String date = df.format(Calendar.getInstance().getTime());
-
 										mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
 											@Override
 											public void onResponse(Object value) {
@@ -143,17 +142,17 @@ public class MyWorker extends Worker {
 											}
 										}, mLocation.getLatitude(), mLocation.getLongitude(), date);
 
-//										NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, mContext.getString(R.string.app_name))
-//												.setSmallIcon(android.R.drawable.ic_menu_mylocation)
-//												.setContentTitle("New Location Update")
-//												.setContentText("You are at " + getCompleteAddressString(mLocation.getLatitude(), mLocation.getLongitude()))
-//												.setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//												.setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getCompleteAddressString(mLocation.getLatitude(), mLocation.getLongitude())));
-//
-//										NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mContext);
-//
-//										// notificationId is a unique int for each notification that you must define
-//										notificationManager.notify(1001, builder.build());
+										NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, mContext.getString(R.string.app_name))
+												.setSmallIcon(android.R.drawable.ic_menu_mylocation)
+												.setContentTitle("New Location Update")
+												.setContentText("You are at " + getCompleteAddressString(mLocation.getLatitude(), mLocation.getLongitude()))
+												.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+												.setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getCompleteAddressString(mLocation.getLatitude(), mLocation.getLongitude())));
+
+										NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mContext);
+
+										// notificationId is a unique int for each notification that you must define
+										notificationManager.notify(1001, builder.build());
 
 										mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 									} else {

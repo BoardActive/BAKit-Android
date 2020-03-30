@@ -54,9 +54,14 @@ public class BootReceiver extends BroadcastReceiver {
     }
 
     private void startWorker(){
-        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
+        //Flex Interval
+        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .build();
+        //No Flex Interval
+//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
+//                .addTag(TAG)
+//                .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
 
     }
