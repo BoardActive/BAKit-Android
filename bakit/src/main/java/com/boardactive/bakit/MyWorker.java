@@ -128,8 +128,8 @@ public class MyWorker extends Worker {
 											channel.setDescription(description);
 											// Register the channel with the system; you can't change the importance
 											// or other notification behaviors after this
-											NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
-											notificationManager.createNotificationChannel(channel);
+//											NotificationManager notificationManager = mContext.getSystemService(NotificationManager.class);
+//											notificationManager.createNotificationChannel(channel);
 										}
 
 
