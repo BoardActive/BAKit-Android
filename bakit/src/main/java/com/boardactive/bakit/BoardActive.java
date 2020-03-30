@@ -8,6 +8,9 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -23,13 +26,6 @@ import com.boardactive.bakit.models.Custom;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
 import com.boardactive.bakit.models.Stock;
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
-import com.firebase.jobdispatcher.Lifetime;
-import com.firebase.jobdispatcher.RetryStrategy;
-import com.firebase.jobdispatcher.Trigger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,6 +38,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * NOTE: In the class constructor you will need to pass in the getApplicationContext() from the main app
@@ -74,9 +71,6 @@ public class BoardActive {
 
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
-
-    //    /** Service to track and post device location */
-    private FirebaseJobDispatcher mDispatcher;
 
     /** Default API Global values */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
@@ -224,26 +218,21 @@ public class BoardActive {
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
 
         /** Start the JobDispatcher to check for and post location */
-        StartJob();
+        StartWorker();
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
-    private void StartJob() {
-        mDispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(mContext));
-        Job myJob = mDispatcher.newJobBuilder()
-                .setService(JobDispatcherService.class)
-                .setTag(TAG)
-                .setRecurring(true)
-                .setTrigger(Trigger.executionWindow(5, 30))
-                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-                .setReplaceCurrent(false)
-                .setConstraints(Constraint.ON_ANY_NETWORK)
-                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+    private void StartWorker() {
+        Log.d(TAG, "[BAKit]  StartWorker()");
+        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
+                .addTag(TAG)
                 .build();
-        mDispatcher.mustSchedule(myJob);
+        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+
     }
+
     /** Check is all required variables are set */
     public Boolean isRegisteredDevice() {
         Boolean isLoggedIn = true;

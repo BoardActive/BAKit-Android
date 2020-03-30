@@ -331,6 +331,10 @@ public final class R {
         public static final int abc_action_bar_embed_tabs = 0x7f050000;
         public static final int abc_allow_stacked_button_bar = 0x7f050001;
         public static final int abc_config_actionMenuItemAllCaps = 0x7f050002;
+        public static final int enable_system_alarm_service_default = 0x7f050003;
+        public static final int enable_system_foreground_service_default = 0x7f050004;
+        public static final int enable_system_job_service_default = 0x7f050005;
+        public static final int workmanager_test_configuration = 0x7f050007;
     }
     public static final class color {
         private color() {}

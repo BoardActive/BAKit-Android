@@ -6,7 +6,7 @@ INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManife
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/af502843a250d406ebae42d3f4079425/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-42:12
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-35:12
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/fb8f7031ef66b8147647717c2aecca12/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -19,7 +19,7 @@ MERGED from [com.google.firebase:firebase-messaging:20.1.0] /Users/boardactive/.
 MERGED from [com.google.firebase:firebase-analytics:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f15f2c10dd03afadad158d010498ad07/firebase-analytics-17.2.2/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:17:1-36:12
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:17:1-47:12
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:17:1-132:12
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:17:1-132:12
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6afa830f3b6a6c462e62621d8755ac6f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/a94ea308923e6b7b453faf821994e230/jetified-play-services-maps-16.0.0/AndroidManifest.xml:17:1-32:12
@@ -47,7 +47,6 @@ MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/boardactive/.g
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/32d6d4909a16d2ee7ad0c6d18077c046/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media:media:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2423a3e8c7d595310e6661cc5002b018/media-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/b18a22a7d488d5a4c630bd657737271b/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:17:1-42:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/cceabc3c8dee5ebd8cd6698cb762f1fb/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.transition:transition:1.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6b4351a8fb7ff3bebd2f5bef251ea683/transition-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/05209a9bf6c0004aab305c3d2c2ddb5c/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -67,20 +66,20 @@ MERGED from [com.google.firebase:firebase-components:16.0.0] /Users/boardactive/
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/77181b27b36cb37ae3fc9cbfe9ccb0de/transport-backend-cct-2.2.0/AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/de57d140c5b40ac4922d63a6d65b36af/transport-runtime-2.2.0/AndroidManifest.xml:15:1-41:12
 MERGED from [com.google.firebase:firebase-encoders-json:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/baa3e78332db17aa9cd097e174ded426/firebase-encoders-json-16.0.0/AndroidManifest.xml:15:1-23:12
-MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f3d3c9ef953af10d388177573d1cb616/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/a072b7027d050ba4a28e8ed0f5aedf24/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31e1e0ea40abf50bc1f09972fcda6618/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9a92904b990e3cb14e2f3d12a60bfcf2/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/5080ea4c3a94602e590d65de9668e7d9/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/187406cd55354acfeea1b9c899513172/lifecycle-livedata-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9de62dabd65ba4e4982b1e9ed3084e88/lifecycle-livedata-core-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6bd259217fb3b4cda99149799acc223e/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.volley:volley:1.1.1] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f6542eb33cc72def63a895ecdbc656d4/jetified-volley-1.1.1/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2416b0e023089ab2d02c9cadfe321f31/transport-api-2.2.0/AndroidManifest.xml:15:1-22:12
 INJECTED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-97:12
@@ -126,8 +125,8 @@ application
 ADDED from /Users/boardactive/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-95:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-40:19
-MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-40:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-33:19
+MERGED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-33:19
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/88b8882e6a15c728169a63194a12dedc/material-1.1.0/AndroidManifest.xml:22:5-20
@@ -146,8 +145,8 @@ MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:26:5-34:19
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:28:5-45:19
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:28:5-45:19
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:30:5-130:19
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:30:5-130:19
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:30:5-130:19
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:30:5-130:19
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
 MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6afa830f3b6a6c462e62621d8755ac6f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:22:5-20
@@ -186,8 +185,6 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/bb7f6bd7a0a2da7328d8fd0afe87a97a/play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70047f0f30dc7d1e1ac614d0c154e013/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70047f0f30dc7d1e1ac614d0c154e013/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
-MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:26:5-40:19
-MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:26:5-40:19
 MERGED from [androidx.core:core:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/331630a23dfa1f0594bcf54d5352aa36/core-1.1.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/331630a23dfa1f0594bcf54d5352aa36/core-1.1.0/AndroidManifest.xml:24:5-89
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/77181b27b36cb37ae3fc9cbfe9ccb0de/transport-backend-cct-2.2.0/AndroidManifest.xml:28:5-36:19
@@ -382,8 +379,8 @@ MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:20:5-44
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6afa830f3b6a6c462e62621d8755ac6f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:20:5-44
@@ -438,8 +435,6 @@ MERGED from [androidx.media:media:1.0.0] /Users/boardactive/.gradle/caches/trans
 MERGED from [androidx.media:media:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2423a3e8c7d595310e6661cc5002b018/media-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/b18a22a7d488d5a4c630bd657737271b/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/b18a22a7d488d5a4c630bd657737271b/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:22:5-24:41
-MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:22:5-24:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/cceabc3c8dee5ebd8cd6698cb762f1fb/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/cceabc3c8dee5ebd8cd6698cb762f1fb/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.transition:transition:1.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6b4351a8fb7ff3bebd2f5bef251ea683/transition-1.2.0/AndroidManifest.xml:20:5-22:41
@@ -478,10 +473,6 @@ MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/bo
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/de57d140c5b40ac4922d63a6d65b36af/transport-runtime-2.2.0/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-encoders-json:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/baa3e78332db17aa9cd097e174ded426/firebase-encoders-json-16.0.0/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-encoders-json:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/baa3e78332db17aa9cd097e174ded426/firebase-encoders-json-16.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f3d3c9ef953af10d388177573d1cb616/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f3d3c9ef953af10d388177573d1cb616/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/a072b7027d050ba4a28e8ed0f5aedf24/documentfile-1.0.0/AndroidManifest.xml:20:5-44
@@ -492,20 +483,24 @@ MERGED from [androidx.print:print:1.0.0] /Users/boardactive/.gradle/caches/trans
 MERGED from [androidx.print:print:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9a92904b990e3cb14e2f3d12a60bfcf2/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/5080ea4c3a94602e590d65de9668e7d9/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/5080ea4c3a94602e590d65de9668e7d9/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/afef82a8f88f83685a84d04966645045/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70915645c880aff576fdef248d06dc72/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/187406cd55354acfeea1b9c899513172/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/187406cd55354acfeea1b9c899513172/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9de62dabd65ba4e4982b1e9ed3084e88/lifecycle-livedata-core-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/9de62dabd65ba4e4982b1e9ed3084e88/lifecycle-livedata-core-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6bd259217fb3b4cda99149799acc223e/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6bd259217fb3b4cda99149799acc223e/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/c430b469d4ba717296e18471694774ac/lifecycle-service-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/eacaec61a98c327bdb4a7a1173d930da/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/6518c549eca7c8c139a4cbcfbf192b2e/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3576101df1addecb45ee4a121a0809b3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.android.volley:volley:1.1.1] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f6542eb33cc72def63a895ecdbc656d4/jetified-volley-1.1.1/AndroidManifest.xml:7:5-43
 MERGED from [com.android.volley:volley:1.1.1] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f6542eb33cc72def63a895ecdbc656d4/jetified-volley-1.1.1/AndroidManifest.xml:7:5-43
 MERGED from [com.google.android.datatransport:transport-api:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2416b0e023089ab2d02c9cadfe321f31/transport-api-2.2.0/AndroidManifest.xml:18:5-20:41
@@ -546,8 +541,8 @@ ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive
 		ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/7b0fb5af4b6c25a1fa5e333bf50f0ec1/jetified-places-1.0.0/AndroidManifest.xml:17:13-91
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-81
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:27:5-81
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:27:5-81
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
 	android:name
 		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-78
 uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
@@ -560,8 +555,8 @@ MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:24:5-68
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/31eb20e4bf7c1fdeea830bef7d165037/play-services-measurement-impl-17.2.2/AndroidManifest.xml:25:5-68
@@ -584,18 +579,6 @@ action#android.intent.action.BOOT_COMPLETED
 ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:17-79
 	android:name
 		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:25-76
-service#com.boardactive.bakit.JobDispatcherService
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:9-37:19
-	android:exported
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:33:13-37
-	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:32:13-70
-intent-filter#action:name:com.firebase.jobdispatcher.ACTION_EXECUTE
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:13-36:29
-action#com.firebase.jobdispatcher.ACTION_EXECUTE
-ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:17-84
-	android:name
-		ADDED from [:bakit] /Users/boardactive/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:25-81
 uses-permission#android.permission.VIBRATE
 ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/f574823d69b4430076e4767091ebd16c/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:5-66
 	android:name
@@ -634,8 +617,8 @@ uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-measurement-api:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/3d8bed9a53529358f2c71b6407804b7b/play-services-measurement-api-17.2.2/AndroidManifest.xml:23:5-79
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:22:5-79
 MERGED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:22:5-79
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:26:5-79
-MERGED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:26:5-79
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:26:5-79
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:26:5-79
 MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/a94ea308923e6b7b453faf821994e230/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/a94ea308923e6b7b453faf821994e230/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-measurement:17.2.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/ac2605da77983b497481f9e2091aefdd/play-services-measurement-17.2.2/AndroidManifest.xml:24:5-79
@@ -681,197 +664,197 @@ ADDED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/
 	android:name
 		ADDED from [com.google.firebase:firebase-iid:20.0.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/946a39d7756c6b05aa38a853bdffc128/firebase-iid-20.0.2/AndroidManifest.xml:42:25-78
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:28:5-77
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:28:5-77
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:28:22-74
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:28:22-74
 provider#androidx.work.impl.WorkManagerInitializer
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:31:9-37:35
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:31:9-37:35
 	android:authorities
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:33:13-68
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:33:13-68
 	android:multiprocess
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:36:13-40
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:36:13-40
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:35:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:35:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:37:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:37:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:34:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:34:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:32:13-69
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:32:13-69
 service#androidx.work.impl.background.systemalarm.SystemAlarmService
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:39:9-44:35
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:39:9-44:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:42:13-72
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:42:13-72
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:43:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:43:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:44:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:44:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:41:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:41:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:40:13-88
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:40:13-88
 service#androidx.work.impl.background.systemjob.SystemJobService
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:45:9-51:35
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:45:9-51:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:48:13-70
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:48:13-70
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:49:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:49:13-36
 	android:permission
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:50:13-69
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:50:13-69
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:51:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:51:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:47:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:47:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:46:13-84
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:46:13-84
 service#androidx.work.impl.foreground.SystemForegroundService
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:52:9-57:35
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:52:9-57:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:55:13-77
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:55:13-77
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:56:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:56:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:57:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:57:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:54:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:54:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:53:13-81
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:53:13-81
 receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:59:9-64:35
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:59:9-64:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:62:13-35
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:62:13-35
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:63:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:63:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:64:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:64:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:61:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:61:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:60:13-88
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:60:13-88
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:65:9-75:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:65:9-75:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:68:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:68:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:69:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:69:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:70:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:70:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:67:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:67:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:66:13-106
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:66:13-106
 intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:71:13-74:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:71:13-74:29
 action#android.intent.action.ACTION_POWER_CONNECTED
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:72:17-87
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:72:17-87
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:72:25-84
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:72:25-84
 action#android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:73:17-90
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:73:17-90
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:73:25-87
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:73:25-87
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:76:9-86:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:76:9-86:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:79:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:79:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:80:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:80:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:81:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:81:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:78:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:78:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:77:13-104
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:77:13-104
 intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:82:13-85:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:82:13-85:29
 action#android.intent.action.BATTERY_OKAY
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:83:17-77
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:83:17-77
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:83:25-74
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:83:25-74
 action#android.intent.action.BATTERY_LOW
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:84:17-76
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:84:17-76
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:84:25-73
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:84:25-73
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:87:9-97:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:87:9-97:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:90:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:90:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:91:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:91:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:92:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:92:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:89:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:89:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:88:13-104
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:88:13-104
 intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:93:13-96:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:93:13-96:29
 action#android.intent.action.DEVICE_STORAGE_LOW
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:94:17-83
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:94:17-83
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:94:25-80
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:94:25-80
 action#android.intent.action.DEVICE_STORAGE_OK
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:95:17-82
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:95:17-82
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:95:25-79
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:95:25-79
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:98:9-107:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:98:9-107:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:101:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:101:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:102:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:102:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:103:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:103:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:100:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:100:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:99:13-103
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:99:13-103
 intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:104:13-106:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:104:13-106:29
 action#android.net.conn.CONNECTIVITY_CHANGE
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:105:17-79
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:105:17-79
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:105:25-76
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:105:25-76
 receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:108:9-119:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:108:9-119:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:111:13-36
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:111:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:112:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:112:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:113:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:113:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:110:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:110:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:109:13-88
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:109:13-88
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:114:13-118:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:114:13-118:29
 action#android.intent.action.TIME_SET
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:116:17-73
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:116:17-73
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:116:25-70
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:116:25-70
 action#android.intent.action.TIMEZONE_CHANGED
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:117:17-81
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:117:17-81
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:117:25-78
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:117:25-78
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:120:9-129:20
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:120:9-129:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:123:13-72
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:123:13-72
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:124:13-37
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:124:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:125:13-32
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:125:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:122:13-44
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:122:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:121:13-99
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:121:13-99
 intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:126:13-128:29
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:126:13-128:29
 action#androidx.work.impl.background.systemalarm.UpdateProxies
-ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:127:17-98
+ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:127:17-98
 	android:name
-		ADDED from [androidx.work:work-runtime:2.3.2] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/2a3c2b74cf65295c2a0dae1a92919340/work-runtime-2.3.2/AndroidManifest.xml:127:25-95
+		ADDED from [androidx.work:work-runtime:2.3.4] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/8c6b419271019f1e78faa29387b2894f/work-runtime-2.3.4/AndroidManifest.xml:127:25-95
 service#androidx.room.MultiInstanceInvalidationService
 ADDED from [androidx.room:room-runtime:2.2.3] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/148a1d25960bbccc0dde5a1d90b41452/room-runtime-2.2.3/AndroidManifest.xml:25:9-27:40
 	android:exported
@@ -964,20 +947,6 @@ ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/boardac
 		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70047f0f30dc7d1e1ac614d0c154e013/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/70047f0f30dc7d1e1ac614d0c154e013/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-service#com.firebase.jobdispatcher.GooglePlayReceiver
-ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:32:9-39:19
-	android:exported
-		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:34:13-36
-	android:permission
-		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:35:13-93
-	android:name
-		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:33:13-73
-intent-filter#action:name:com.google.android.gms.gcm.ACTION_TASK_READY
-ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:36:13-38:29
-action#com.google.android.gms.gcm.ACTION_TASK_READY
-ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:17-87
-	android:name
-		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/d6ff3d8e30535bc8f96a0aa4a7c33683/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:25-84
 service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
 ADDED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/77181b27b36cb37ae3fc9cbfe9ccb0de/transport-backend-cct-2.2.0/AndroidManifest.xml:29:9-35:19
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/boardactive/.gradle/caches/transforms-2/files-2.1/de57d140c5b40ac4922d63a6d65b36af/transport-runtime-2.2.0/AndroidManifest.xml:36:9-38:40
