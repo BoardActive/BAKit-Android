@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -226,7 +228,12 @@ public class BoardActive {
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
     private void StartWorker() {
         Log.d(TAG, "[BAKit]  StartWorker()");
-        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
+
+//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
+//                .addTag(TAG)
+//                .build();
+
+        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
