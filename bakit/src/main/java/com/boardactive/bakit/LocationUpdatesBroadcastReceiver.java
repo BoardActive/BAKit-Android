@@ -10,6 +10,9 @@ import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.google.android.gms.location.LocationResult;
 
 import java.io.BufferedWriter;
@@ -30,6 +33,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     static String addressFragments = "";
     static List<Address> addresses = null;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -63,6 +67,19 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 //            LocationRequestHelper.getInstance(context).setValue("locationTextInApp","You are at "+getAddress(firstLocation,context)+"("+nowDate+") with accuracy "+firstLocation.getAccuracy()
 //            +" Latitude:"+firstLocation.getLatitude()+" Longitude:"+firstLocation.getLongitude()+" Speed:"+firstLocation.getSpeed()+" Bearing:"+firstLocation.getBearing());
             Log.d("Dhruvit Test::::::"," Latitude:"+firstLocation.getLatitude()+" Longitude:"+firstLocation.getLongitude());
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
+                    .setSmallIcon(android.R.drawable.ic_menu_mylocation)
+                    .setContentTitle("New Location Update")
+                    .setContentText("You are at " + getAddress(firstLocation, context))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context)));
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+            // notificationId is a unique int for each notification that you must define
+            notificationManager.notify(1001, builder.build());
+
             updateLocation(context,firstLocation);
         }
     }
