@@ -58,7 +58,7 @@ public class FCMService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-        android.os.Debug.waitForDebugger();  // this line is key
+//        android.os.Debug.waitForDebugger();  // this line is key
     }
 
     /**
