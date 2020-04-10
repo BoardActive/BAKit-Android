@@ -8,6 +8,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
+import androidx.work.BackoffPolicy;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
@@ -44,43 +45,41 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * NOTE: In the class constructor you will need to pass in the getApplicationContext() from the main app
- *
+ * <p>
  * This SDK will track the device location and post the location to the BoardActive API
  * For it to operate correctly is requires:
- *   User must allow location permissions
- *   AppUrl is set by the main app and points to the correct BoardActive server
- *   AppID is set by the main app (provided by BoardActive)
- *   AppKey is set by the main app (provided by BoardActive)
- *   AppToken is set by the main app (generated from Firebase service)
- *   AppVersion is set by the main app (the current version of the main app)
- *
- *  You will need to initialize() from the main app to start the JobDispatcher
- *
- *  The main app will need to support Firebase Cloud Messaging. There can only be on service to receive
- *  FCM messages. If multiple are declared in the MAnifest the only the first one will be chosen.
- *  For this reason we have not incorporated Firebase Messaging in the SDK
- *
- *  All http calls use a callback to send reponse to main app
- *
- *  The JobDispatcher service will poll the device location and post it to the BoardActive server
- *  The JobDispatcher is launched using the initialize() function. It also starts automatically at boot
- *  using the BootReceiver BroadcastReceiver
+ * User must allow location permissions
+ * AppUrl is set by the main app and points to the correct BoardActive server
+ * AppID is set by the main app (provided by BoardActive)
+ * AppKey is set by the main app (provided by BoardActive)
+ * AppToken is set by the main app (generated from Firebase service)
+ * AppVersion is set by the main app (the current version of the main app)
+ * <p>
+ * You will need to initialize() from the main app to start the JobDispatcher
+ * <p>
+ * The main app will need to support Firebase Cloud Messaging. There can only be on service to receive
+ * FCM messages. If multiple are declared in the MAnifest the only the first one will be chosen.
+ * For this reason we have not incorporated Firebase Messaging in the SDK
+ * <p>
+ * All http calls use a callback to send reponse to main app
+ * <p>
+ * The JobDispatcher service will poll the device location and post it to the BoardActive server
+ * The JobDispatcher is launched using the initialize() function. It also starts automatically at boot
+ * using the BootReceiver BroadcastReceiver
  */
 
 public class BoardActive {
 
-    private final Context mContext;
-
-    protected GsonBuilder gsonBuilder = new GsonBuilder();
-    protected Gson gson;
-
-    /** Default API Global values */
+    /**
+     * Default API Global values
+     */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
     public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
-
-    /** Global keys */
+    /**
+     * Global keys
+     */
     public final static String BAKIT_USER_DATA = "BAKIT_USER_DATA";
     public final static String BAKIT_USER_EMAIL = "BAKIT_USER_EMAIL";
     public final static String BAKIT_USER_PASSWORD = "BAKIT_USER_PASSWORD";
@@ -95,12 +94,16 @@ public class BoardActive {
     public final static String BAKIT_APP_TEST = "BAKIT_APP_TEST";
     public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
     public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
-
     public static final String TAG = BoardActive.class.getName();
+    private final Context mContext;
+    protected GsonBuilder gsonBuilder = new GsonBuilder();
+    protected Gson gson;
 
     /** Service to track and post device location */
 
-    /** Constuctor
+    /**
+     * Constuctor
+     *
      * @param context Pass in the Application Context from the main app
      */
     public BoardActive(Context context) {
@@ -110,33 +113,58 @@ public class BoardActive {
         gson = gsonBuilder.create();
     }
 
-    /** Set and Get variables */
-    public void setAppUrl(String URL){
-        SharedPreferenceHelper.putString(mContext, BAKIT_URL, URL);
+    /**
+     * Handles the server error, tries to determine whether to show a stock message or to
+     * show a message retrieved from the server.
+     *
+     * @param err Volley error
+     * @return String
+     */
+    private static String handleServerError(Object err) {
+        VolleyError error = (VolleyError) err;
+        NetworkResponse response = error.networkResponse;
+        try {
+            String string = new String(error.networkResponse.data);
+            JSONObject object = new JSONObject(string);
+            if (object.has("message")) {
+                return response.statusCode + " - " + object.get("message").toString();
+            } else if (object.has("error_description")) {
+                return response.statusCode + " - " + object.get("error_description").toString();
+            }
+//        } catch (JSONException e)
+        } catch (Exception e) {
+            return "Could not parse response: " + e.toString();
+        }
+        // invalid request
+        return error.getMessage();
+
     }
 
     public String getAppUrl() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_URL, null);
     }
 
-    public void setAppKey(String AppKey){
-        SharedPreferenceHelper.putString(mContext, BAKIT_APP_KEY, AppKey);
+    /**
+     * Set and Get variables
+     */
+    public void setAppUrl(String URL) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_URL, URL);
     }
 
     public String getAppKey() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null);
     }
 
-    public void setAppId(String AppId){
-        SharedPreferenceHelper.putString(mContext, BAKIT_APP_ID, AppId);
+    public void setAppKey(String AppKey) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_KEY, AppKey);
     }
 
     public String getAppId() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_APP_ID, null);
     }
 
-    public void setAppToken(String AppToken){
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_TOKEN, AppToken);
+    public void setAppId(String AppId) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_ID, AppId);
     }
 
     public String getAppToken() {
@@ -144,8 +172,8 @@ public class BoardActive {
 
     }
 
-    public void setAppVersion(String AppVersion){
-        SharedPreferenceHelper.putString(mContext, BAKIT_APP_VERSION, AppVersion);
+    public void setAppToken(String AppToken) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_TOKEN, AppToken);
     }
 
     public String getAppVersion() {
@@ -153,66 +181,71 @@ public class BoardActive {
 
     }
 
-    public void setAppOSVersion(String AppOSVersion){
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, AppOSVersion);
+    public void setAppVersion(String AppVersion) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_VERSION, AppVersion);
     }
 
     public String getAppOSVersion() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null);
     }
 
-    public void setAppOS(String AppOS){
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, AppOS);
+    public void setAppOSVersion(String AppOSVersion) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, AppOSVersion);
     }
 
     public String getAppOS() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null);
     }
 
-    public void setAppTest(String AppTest){
-        SharedPreferenceHelper.putString(mContext, BAKIT_APP_TEST, AppTest);
-    }
-
-    public void setUserEmail(String AppUSerEmail){
-        SharedPreferenceHelper.putString(mContext, BAKIT_USER_EMAIL, AppUSerEmail);
+    public void setAppOS(String AppOS) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, AppOS);
     }
 
     public String getUserEmail() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null);
     }
 
-    public void setUserPassword(String AppUserPassword){
-        SharedPreferenceHelper.putString(mContext, BAKIT_USER_PASSWORD, AppUserPassword);
+    public void setUserEmail(String AppUSerEmail) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_USER_EMAIL, AppUSerEmail);
     }
 
     public String getUserPassword() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_USER_PASSWORD, null);
     }
 
-    public void setLatitude(String Latitude){
-        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LATITUDE, Latitude);
+    public void setUserPassword(String AppUserPassword) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_USER_PASSWORD, AppUserPassword);
     }
 
     public String getLatitude() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LATITUDE, null);
     }
 
-    public void setLongitude(String Longitude){
-        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LONGITUDE, Longitude);
+    public void setLatitude(String Latitude) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LATITUDE, Latitude);
     }
 
     public String getLongitude() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_LOCATION_LONGITUDE, null);
     }
 
+    public void setLongitude(String Longitude) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_LOCATION_LONGITUDE, Longitude);
+    }
+
     public String getAppTest() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_APP_TEST, null);
     }
 
-    /** Set SDK Core Variables and launches Job Dispatcher
+    public void setAppTest(String AppTest) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_APP_TEST, AppTest);
+    }
+
+    /**
+     * Set SDK Core Variables and launches Job Dispatcher
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
-     * */
+     */
     public void initialize() {
 
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
@@ -224,8 +257,9 @@ public class BoardActive {
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
-
-    /** Private Function to launch serve to get and post location to BoaradActive Platform */
+    /**
+     * Private Function to launch serve to get and post location to BoaradActive Platform
+     */
     private void StartWorker() {
         Log.d(TAG, "[BAKit]  StartWorker()");
 
@@ -235,12 +269,17 @@ public class BoardActive {
 
         PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                 .addTag(TAG)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
+                        2,
+                        TimeUnit.MINUTES)
                 .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
 
     }
 
-    /** Check is all required variables are set */
+    /**
+     * Check is all required variables are set
+     */
     public Boolean isRegisteredDevice() {
         Boolean isLoggedIn = true;
         String APP_URL = getAppUrl();
@@ -252,42 +291,42 @@ public class BoardActive {
         String APP_OS_VERSION = getAppOSVersion();
 
         try {
-            if(APP_URL.isEmpty()) {
+            if (APP_URL.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppUrl is empty");
             }
 
-            if(APP_KEY.isEmpty()) {
+            if (APP_KEY.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppKey is empty");
             }
 
-            if(APP_ID.isEmpty()) {
+            if (APP_ID.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppId is empty");
             }
 
-            if(APP_VERSION.isEmpty()) {
+            if (APP_VERSION.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppVersion is empty");
             }
 
-            if(APP_TOKEN.isEmpty()) {
+            if (APP_TOKEN.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppToken is empty");
             }
 
-            if(APP_OS.isEmpty()) {
+            if (APP_OS.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppOS is empty");
             }
 
-            if(APP_OS_VERSION.isEmpty()) {
+            if (APP_OS_VERSION.isEmpty()) {
                 isLoggedIn = false;
                 Log.d(TAG, "[BAKit] AppOSVersion is empty");
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             // This will catch any exception, because they are all descended from Exception
             System.out.println("Error " + e.getMessage());
             isLoggedIn = false;
@@ -298,7 +337,9 @@ public class BoardActive {
 
     }
 
-    /** Empty required variables */
+    /**
+     * Empty required variables
+     */
     public void unRegisterDevice() {
         setAppKey(null);
         setAppId(null);
@@ -308,38 +349,9 @@ public class BoardActive {
         setAppOSVersion(null);
     }
 
-    /** RegisterDevice Callback providing HTTP Response */
-    public interface PostRegisterCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** getMe Callback providing HTTP Response */
-    public interface GetMeCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** putMe Callback providing HTTP Response */
-    public interface PutMeCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** postEvent Callback providing HTTP Response */
-    public interface PostEventCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** postLocation Callback providing HTTP Response */
-    public interface PostLocationCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** postLogin Callback providing HTTP Response */
-    public interface PostLoginCallback<T> {
-        void onResponse(T value);
-    }
-
-    /** Private Function to launch serve to get and post location to BoaradActive Platform */
-    /** get Device UUID to Create Event */
+    /**
+     * get Device UUID to Create Event
+     */
     private String getUUID(Context context) {
         String uniqueID = null;
         String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
@@ -355,7 +367,9 @@ public class BoardActive {
         return uniqueID;
     }
 
-    /** post RegisterDevice with BoardActive Platform
+    /**
+     * post RegisterDevice with BoardActive Platform
+     *
      * @param callback to return response from server
      */
     public void registerDevice(final PostRegisterCallback callback) {
@@ -404,8 +418,9 @@ public class BoardActive {
         queue.add(str);
     }
 
-
-    /** post Event and log in the BoardActive Platform
+    /**
+     * post Event and log in the BoardActive Platform
+     *
      * @param callback to return response from server
      */
     public void getMe(final GetMeCallback callback) {
@@ -452,7 +467,9 @@ public class BoardActive {
         queue.add(str);
     }
 
-    /** post Event and log in the BoardActive Platform
+    /**
+     * post Event and log in the BoardActive Platform
+     *
      * @param callback to return response from server
      */
     public void putMe(final PutMeCallback callback) {
@@ -506,12 +523,12 @@ public class BoardActive {
             public byte[] getBody() throws AuthFailureError {
                 try {
                     String json = "{" +
-                            "email:" +  SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
-                            "deviceOS:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
-                            "deviceOSVersion:" +  SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
-                            "attributes:" +  "{ " +
-                            "stock:" +  "{)," +
-                            "custom:" +  "{} " +
+                            "email:" + SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+                            "deviceOS:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+                            "deviceOSVersion:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+                            "attributes:" + "{ " +
+                            "stock:" + "{)," +
+                            "custom:" + "{} " +
                             "}" +
                             "}";
 
@@ -528,9 +545,11 @@ public class BoardActive {
         queue.add(str);
     }
 
-    /** post Event and log in the BoardActive Platform
+    /**
+     * post Event and log in the BoardActive Platform
+     *
      * @param callback to return response from server
-     * @param me type of Event to log
+     * @param me       type of Event to log
      */
     public void putMe(final PutMeCallback callback, final Me me) {
         RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
@@ -593,7 +612,7 @@ public class BoardActive {
                     int permissionState = ActivityCompat.checkSelfPermission(mContext,
                             Manifest.permission.ACCESS_FINE_LOCATION);
 
-                    if(permissionState != PackageManager.PERMISSION_GRANTED){
+                    if (permissionState != PackageManager.PERMISSION_GRANTED) {
                         stock.setLocationPermission("false");
                     } else {
                         stock.setLocationPermission("true");
@@ -676,8 +695,8 @@ public class BoardActive {
 
                     MeRequest meRequest = new MeRequest();
                     meRequest.setEmail("");
-                    meRequest.setDeviceOS( SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
-                    meRequest.setDeviceOSVersion( SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                    meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                    meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
                     meRequest.setAttributes(attributes);
 
                     //parse request object to json format and send as request body
@@ -692,11 +711,15 @@ public class BoardActive {
         queue.add(str);
     }
 
-    /** post Event and log in the BoardActive Platform
-     * @param callback to return response from server
-     * @param name type of Event to log
-     * @param baMessageId the id of the message to log event
-     * @param baNotificationId the id of the message to log event
+    /** Private Function to launch serve to get and post location to BoaradActive Platform */
+
+    /**
+     * post Event and log in the BoardActive Platform
+     *
+     * @param callback               to return response from server
+     * @param name                   type of Event to log
+     * @param baMessageId            the id of the message to log event
+     * @param baNotificationId       the id of the message to log event
      * @param firebaseNotificationId firebase notification id to log the event
      */
     public void postEvent(final PostEventCallback callback, final String name, final String baMessageId, final String baNotificationId, final String firebaseNotificationId) {
@@ -790,10 +813,12 @@ public class BoardActive {
         queue.add(stringRequest);
     }
 
-    /** post Location and record in the BoardActive Platform
-     * @param callback to return response from server
-     * @param latitude current latitude
-     * @param longitude current longitude
+    /**
+     * post Location and record in the BoardActive Platform
+     *
+     * @param callback   to return response from server
+     * @param latitude   current latitude
+     * @param longitude  current longitude
      * @param deviceTime current Date and Time
      */
     public void postLocation(final PostLocationCallback callback, final Double latitude, final Double longitude, final String deviceTime) {
@@ -890,10 +915,12 @@ public class BoardActive {
         queue.add(stringRequest);
     }
 
-    /** post Login to retrieve detail of a registered user in BoardActive Platform
+    /**
+     * post Login to retrieve detail of a registered user in BoardActive Platform
      * This is only used by the Demo App
+     *
      * @param callback to return response from server
-     * @param email registered email
+     * @param email    registered email
      * @param password password of registered email
      */
     public void postLogin(final PostLoginCallback callback, final String email, final String password) {
@@ -938,11 +965,13 @@ public class BoardActive {
         queue.add(stringRequest);
     }
 
-    /** Generate Headers required to use BoardActive API Endpoints */
+    /**
+     * Generate Headers required to use BoardActive API Endpoints
+     */
     private Map<String, String> GenerateHeaders() {
 
         HashMap<String, String> headers = new HashMap<>();
-        headers.put("Content-Type","application/json; charset=utf-8");
+        headers.put("Content-Type", "application/json; charset=utf-8");
         headers.put("X-BoardActive-App-Key", SharedPreferenceHelper.getString(mContext, BAKIT_APP_KEY, null));
         headers.put("X-BoardActive-App-Id", SharedPreferenceHelper.getString(mContext, BAKIT_APP_ID, null));
         headers.put("X-BoardActive-App-Version", SharedPreferenceHelper.getString(mContext, BAKIT_APP_VERSION, null));
@@ -958,32 +987,45 @@ public class BoardActive {
     }
 
     /**
-     * Handles the server error, tries to determine whether to show a stock message or to
-     * show a message retrieved from the server.
-     *
-     * @param err Volley error
-     * @return String
+     * RegisterDevice Callback providing HTTP Response
      */
-    private static String handleServerError(Object err) {
-        VolleyError error = (VolleyError) err;
-        NetworkResponse response = error.networkResponse;
-        try {
-            String string = new String(error.networkResponse.data);
-            JSONObject object = new JSONObject(string);
-            if (object.has("message")) {
-                return response.statusCode + " - " + object.get("message").toString();
-            }
-            else if(object.has("error_description")) {
-                return response.statusCode + " - " + object.get("error_description").toString();
-            }
-//        } catch (JSONException e)
-            } catch (Exception e)
-        {
-            return "Could not parse response: " + e.toString();
-        }
-        // invalid request
-        return error.getMessage();
+    public interface PostRegisterCallback<T> {
+        void onResponse(T value);
+    }
 
+    /**
+     * getMe Callback providing HTTP Response
+     */
+    public interface GetMeCallback<T> {
+        void onResponse(T value);
+    }
+
+    /**
+     * putMe Callback providing HTTP Response
+     */
+    public interface PutMeCallback<T> {
+        void onResponse(T value);
+    }
+
+    /**
+     * postEvent Callback providing HTTP Response
+     */
+    public interface PostEventCallback<T> {
+        void onResponse(T value);
+    }
+
+    /**
+     * postLocation Callback providing HTTP Response
+     */
+    public interface PostLocationCallback<T> {
+        void onResponse(T value);
+    }
+
+    /**
+     * postLogin Callback providing HTTP Response
+     */
+    public interface PostLoginCallback<T> {
+        void onResponse(T value);
     }
 }
 

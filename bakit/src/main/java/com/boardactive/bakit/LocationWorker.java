@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
+import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
@@ -16,10 +18,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
 
+
 public class LocationWorker extends Worker {
 
     public static final String TAG = LocationWorker.class.getName();
-    private SettingsClient mSettingsClient;
     private LocationSettingsRequest mLocationSettingsRequest;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
@@ -38,24 +40,30 @@ public class LocationWorker extends Worker {
         context = appContext;
     }
 
+    @SuppressLint("MissingPermission")
     @NonNull
     @Override
     public Result doWork() {
         Log.d(TAG, "[BAAdDrop] Performing long running task in scheduled job");
         // TODO(developer): add long running task here.
+        if(!PermissionExceptionHandler.with(context).wantToStartWorker()){
+            return Result.failure();
+        }
+
+
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
-        mSettingsClient = LocationServices.getSettingsClient(context);
 
         createLocationRequest();
         buildLocationSettingsRequest();
 
         try {
-            changeStatusAfterGetLastLocation("1","Manual");
-
-        } catch (SecurityException e) {
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+        } catch (Exception e) {
             e.printStackTrace();
+            return Result.retry();
         }
+        WorkManager.getInstance().getWorkInfosByTag("OneTimeLocation").cancel(true);
         return Result.success();
     }
 
@@ -65,30 +73,14 @@ public class LocationWorker extends Worker {
         mLocationSettingsRequest = builder.build();
     }
 
+    // This method sets the attributes to fetch location updates.
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
-//        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
-
-        //mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
     }
-
-
-
-    @SuppressLint("MissingPermission")
-    private void changeStatusAfterGetLastLocation(final String value, final String changeby) {
-        if(value == "1"){
-
-            Log.d("","Location Updates started");
-
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
-
-        }
-    }
-
 
     private PendingIntent getPendingIntent() {
         Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);

@@ -1,17 +1,24 @@
 package com.boardactive.bakit;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.work.WorkManager;
 
 import com.google.android.gms.location.LocationResult;
 
@@ -30,108 +37,122 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     public static final String ACTION_PROCESS_UPDATES = "PROCESS_UPDATES";
     public static final String TAG = LocationUpdatesBroadcastReceiver.class.getName();
 
-
-    static String addressFragments = "";
-    static List<Address> addresses = null;
+    private BoardActive mBoardActive;
+    Context context;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        this.context = context;
         if (intent != null) {
-
+            mBoardActive = new BoardActive(context.getApplicationContext());
             final String action = intent.getAction();
             if (ACTION_PROCESS_UPDATES.equals(action)) {
-                Log.d("Dhruvit Test::::::"," Address:");
                 getLocationUpdates(context,intent,"PROCESS_UPDATES");
             }
         }
     }
 
 
-
     @SuppressLint("MissingPermission")
-    public static void getLocationUpdates(final Context context, final Intent intent, String broadcastevent)  {
+    public void getLocationUpdates(final Context context, final Intent intent, String broadcastevent)  {
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
 
-            Date today = Calendar.getInstance().getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
-            String nowDate = formatter.format(today);
-
-
             List<Location> locations = result.getLocations();
-            Location firstLocation = locations.get(0);
 
-            getAddress(firstLocation,context);
-//            LocationRequestHelper.getInstance(context).setValue("locationTextInApp","You are at "+getAddress(firstLocation,context)+"("+nowDate+") with accuracy "+firstLocation.getAccuracy()
-//            +" Latitude:"+firstLocation.getLatitude()+" Longitude:"+firstLocation.getLongitude()+" Speed:"+firstLocation.getSpeed()+" Bearing:"+firstLocation.getBearing());
-            Log.d("Dhruvit Test::::::"," Latitude:"+firstLocation.getLatitude()+" Longitude:"+firstLocation.getLongitude());
+            if (locations.size() > 0) {
+                Location firstLocation = locations.get(0);
+                updateLocation(context, firstLocation);
+            }
+        }else{
+            // An additional check to start worker by checking the location permissions in case locations are not being retreived.
+            if (PermissionExceptionHandler.with(context).wantToStartWorker()) {
+                startWorker();
+            } else {
+                WorkManager.getInstance(context).cancelAllWork();
+            }
+        }
+    }
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
+    // This method starts the worker if locations are not being retreived.
+    private void startWorker() {
+        Intent intent = new Intent(context, MyBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context.getApplicationContext(), 234324243, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() +
+                2 * 60 * 1000, pendingIntent);
+    }
+
+    // This method sends the data to server and displays a local notification of the location
+    private void updateLocation(Context context, Location firstLocation) {
+        DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
+        String date = df.format(Calendar.getInstance().getTime());
+
+        createNotification(firstLocation, date);
+
+        mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+            @Override
+            public void onResponse(Object value) {
+                Log.d(TAG, "[BAKit] onResponse" + value.toString());
+            }
+        }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
+    }
+
+
+
+    private void createNotification(Location firstLocation, String date) {
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("BAKit",
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        Notification builder =
+                null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            builder = new Notification.Builder(context,
+                    "BAKit")
+                    .setContentTitle("New Location Update")
+                    .setContentText("You are at " + getAddress(firstLocation, context))
+                    .setSubText(date)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setStyle(new Notification.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context) + "\n" + firstLocation.getLatitude() + "\n" + firstLocation.getLongitude()))
+                    .setChannelId("BAKit")
+                    .setSmallIcon(android.R.drawable.ic_dialog_info)
+                    .build();
+            notificationManager.notify(1001, builder);
+        }else{
+            NotificationCompat.Builder builder1 = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
                     .setSmallIcon(android.R.drawable.ic_menu_mylocation)
                     .setContentTitle("New Location Update")
                     .setContentText("You are at " + getAddress(firstLocation, context))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context)));
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context) + "\n" + firstLocation.getLatitude() + "\n" + firstLocation.getLongitude()));
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(context);
 
             // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(1001, builder.build());
-
-            updateLocation(context,firstLocation);
+            notificationManager1.notify(1001, builder1.build());
         }
+
     }
 
-    private static void updateLocation(Context context, Location firstLocation) {
-        //make a log file and write location details
-
-        File file = new File(Environment.getExternalStorageDirectory() + "/BoardActive/");
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        try {
-            DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
-            String date = df.format(Calendar.getInstance().getTime());
-            File locationLogFile = new File(file, "LocationLogs.txt");
-            if(!locationLogFile.exists())
-                file.createNewFile();
-
-
-
-            BufferedWriter fos = null;
-            try {
-                fos = new BufferedWriter(new FileWriter(locationLogFile.getPath(), true));
-                fos.append("Location: " + getAddress(firstLocation,context) + "\n" + "Time: " + date+ "\n" + "Latitude: " +firstLocation.getLatitude()+"\n" +"Longitude: " + firstLocation.getLongitude() + "\n\n");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }finally {
-                try {
-                    if (fos != null) {
-                        fos.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    public static String getAddress(Location location,Context context){
+    // This method returns the address from location object.
+    public static String getAddress(Location location, Context context) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 
         // Address found using the Geocoder.
-        addresses = null;
+        List<Address> addresses = null;
         Address address = null;
-        addressFragments="";
+        String addressFragments = "";
         try {
             addresses = geocoder.getFromLocation(
                     location.getLatitude(),
@@ -145,12 +166,12 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     ", Longitude = " + location.getLongitude(), illegalArgumentException);
         }
 
-        if (addresses == null || addresses.size()  == 0) {
+        if (addresses == null || addresses.size() == 0) {
             Log.i(TAG, "ERORR");
             addressFragments = "NO ADDRESS FOUND";
         } else {
-            for(int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                addressFragments = addressFragments+String.valueOf(address.getAddressLine(i));
+            for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                addressFragments = addressFragments + String.valueOf(address.getAddressLine(i));
             }
         }
         return addressFragments;

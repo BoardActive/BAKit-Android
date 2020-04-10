@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -53,16 +55,25 @@ public class BootReceiver extends BroadcastReceiver {
 
     }
 
+    /** Starts the worker after device reboots with a one time request.
+     * */
     private void startWorker(){
         //Flex Interval
-        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
+        /*PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .build();
         //No Flex Interval
 //        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
 //                .addTag(TAG)
 //                .build();
-        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);*/
+
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(LocationWorker.class)
+                .addTag("OneTimeLocation")
+                .build();
+
+        WorkManager.getInstance().enqueueUniqueWork("OneTimeLocation", ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);
 
     }
 
