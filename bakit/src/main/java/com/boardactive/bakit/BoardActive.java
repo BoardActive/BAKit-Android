@@ -95,9 +95,11 @@ public class BoardActive {
     public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
     public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
     public static final String TAG = BoardActive.class.getName();
+    private static final String IS_FOREGROUND = "isforeground";
     private final Context mContext;
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
+    boolean isForeground = true;
 
     /** Service to track and post device location */
 
@@ -266,15 +268,24 @@ public class BoardActive {
 //        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
 //                .addTag(TAG)
 //                .build();
-
-        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
-                .addTag(TAG)
-                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
-                        2,
-                        TimeUnit.MINUTES)
-                .build();
-        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
-
+        if (isForeground) {
+            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
+            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
+                    .addTag(TAG)
+                    .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
+                            2,
+                            TimeUnit.MINUTES)
+                    .build();
+            WorkManager.getInstance().enqueueUniquePeriodicWork("ForegroundLocation", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+        } else {
+            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
+                    .addTag(TAG)
+                    .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
+                            2,
+                            TimeUnit.MINUTES)
+                    .build();
+            WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+        }
     }
 
     /**

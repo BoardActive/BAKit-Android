@@ -73,4 +73,20 @@ SharedPreferenceHelper {
         editor.remove(key);
         editor.commit();
     }
+
+
+    public static long getLong(Context context, String key, long defaultValue) {
+        SharedPreferences sp = context.getSharedPreferences("config",
+                Context.MODE_PRIVATE);
+        return sp.getLong(key, defaultValue);
+    }
+
+    public static void putLong(Context context, String key, long value) {
+        Log.d(TAG, "putInt: [" + key + ":" + value + "]");
+        SharedPreferences sp = context.getSharedPreferences("config",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putLong(key, value);
+        edit.commit();
+    }
 }

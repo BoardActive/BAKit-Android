@@ -15,11 +15,13 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.work.WorkManager;
 
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.google.android.gms.location.LocationResult;
 
 import java.io.BufferedWriter;
@@ -36,7 +38,8 @@ import java.util.Locale;
 public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     public static final String ACTION_PROCESS_UPDATES = "PROCESS_UPDATES";
     public static final String TAG = LocationUpdatesBroadcastReceiver.class.getName();
-
+    public final static String LAST_DATA_UPDATED_TIME = "last_data_updated_time";
+    private static final String IS_FOREGROUND = "isforeground";
     private BoardActive mBoardActive;
     Context context;
 
@@ -78,7 +81,12 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     // This method starts the worker if locations are not being retreived.
     private void startWorker() {
+        boolean isForeground = false;
+        if(SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false)){
+            isForeground = SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false);
+        }
         Intent intent = new Intent(context, MyBroadcastReceiver.class);
+        intent.putExtra("isForeground",isForeground);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -87,18 +95,21 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     }
 
     // This method sends the data to server and displays a local notification of the location
-    private void updateLocation(Context context, Location firstLocation) {
+    private void updateLocation(final Context context, Location firstLocation) {
         DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
         String date = df.format(Calendar.getInstance().getTime());
 
         createNotification(firstLocation, date);
 
-        mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-            @Override
-            public void onResponse(Object value) {
-                Log.d(TAG, "[BAKit] onResponse" + value.toString());
-            }
-        }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
+        if(SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000){
+            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+                @Override
+                public void onResponse(Object value) {
+                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
+                    SharedPreferenceHelper.putLong(context,LAST_DATA_UPDATED_TIME,System.currentTimeMillis());
+                }
+            }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
+        }
     }
 
 
@@ -123,26 +134,26 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     .setContentTitle("New Location Update")
                     .setContentText("You are at " + getAddress(firstLocation, context))
                     .setSubText(date)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setStyle(new Notification.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context) + "\n" + firstLocation.getLatitude() + "\n" + firstLocation.getLongitude()))
                     .setChannelId("BAKit")
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
                     .build();
-            notificationManager.notify(1001, builder);
+
         }else{
-            NotificationCompat.Builder builder1 = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
+            builder = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
                     .setSmallIcon(android.R.drawable.ic_menu_mylocation)
                     .setContentTitle("New Location Update")
                     .setContentText("You are at " + getAddress(firstLocation, context))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context) + "\n" + firstLocation.getLatitude() + "\n" + firstLocation.getLongitude()));
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText("You are at " + getAddress(firstLocation, context) + "\n" + firstLocation.getLatitude() + "\n" + firstLocation.getLongitude()))
+                    .build();
 
-            NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(context);
-
-            // notificationId is a unique int for each notification that you must define
-            notificationManager1.notify(1001, builder1.build());
+//            NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(context);
+//
+//            // notificationId is a unique int for each notification that you must define
+//            notificationManager1.notify(1001, builder1.build());
         }
-
+        notificationManager.notify(1001, builder);
     }
 
     // This method returns the address from location object.

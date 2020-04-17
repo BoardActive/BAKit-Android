@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.boardactive.bakit">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -7,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Required for foreground services on P+. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application>
         <!-- [START BOOT/DEFAULT SERVICE] -->
@@ -27,6 +30,10 @@
         </receiver>
         <receiver android:name="MyBroadcastReceiver" >
         </receiver>
+        <service
+            android:name=".LocationUpdatesService"
+            android:enabled="true"
+            android:exported="true" />
 
     </application>
 
