@@ -2,9 +2,11 @@ package com.boardactive.bakit;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
@@ -35,6 +37,10 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -269,14 +275,22 @@ public class BoardActive {
 //                .addTag(TAG)
 //                .build();
         if (isForeground) {
-            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
+            /*SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
             PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
                     .addTag(TAG)
                     .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
                             2,
                             TimeUnit.MINUTES)
                     .build();
-            WorkManager.getInstance().enqueueUniquePeriodicWork("ForegroundLocation", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+            WorkManager.getInstance().enqueueUniquePeriodicWork("ForegroundLocation", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);*/
+            Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
+            serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                mContext.startForegroundService(serviceIntent);
+            } else {
+                mContext.startService(serviceIntent);
+            }
         } else {
             PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                     .addTag(TAG)
@@ -286,6 +300,8 @@ public class BoardActive {
                     .build();
             WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
         }
+
+
     }
 
     /**
@@ -848,6 +864,9 @@ public class BoardActive {
             public void onResponse(String response) {
                 Log.d(TAG, "[BAKit] postLocation onResponse: " + response.toString());
                 VolleyLog.wtf(response);
+
+                writeResponseToFile(response);
+
                 callback.onResponse(response);
             }
         }, new Response.ErrorListener() {
@@ -855,6 +874,7 @@ public class BoardActive {
             public void onErrorResponse(VolleyError error) {
                 String readableError = handleServerError(error);
                 Log.d(TAG, readableError);
+                writeResponseToFile(error.toString());
                 callback.onResponse(readableError);
             }
         }) {
@@ -922,8 +942,42 @@ public class BoardActive {
             }
 
         };
+        writeResponseToFile("Api Request: " + "Location api request" + "\n");
 
         queue.add(stringRequest);
+    }
+
+    private void writeResponseToFile(String response) {
+        File file = new File(Environment.getExternalStorageDirectory() + "/BoardActive/");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        try {
+            File locationLogFile = new File(file, "LocationLogs.txt");
+            if (!locationLogFile.exists())
+                file.createNewFile();
+
+
+            BufferedWriter fos = null;
+            try {
+                fos = new BufferedWriter(new FileWriter(locationLogFile.getPath(), true));
+                fos.append("Api Response: " + response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null) {
+                        fos.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

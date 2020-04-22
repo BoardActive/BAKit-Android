@@ -18,26 +18,13 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "Alarm....", Toast.LENGTH_LONG).show();
-        if(intent !=null){
-            isForeground = intent.getBooleanExtra("isForeground",false);
-        }
 
         startWorker();
     }
 
     private void startWorker() {
-        if(isForeground){
-            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
-                    .addTag(TAG)
-                    .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
-                            2,
-                            TimeUnit.MINUTES)
-                    .build();
-            WorkManager.getInstance().enqueueUniquePeriodicWork("ForegroundLocation", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
-        }else{
         PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                 .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
-        }
     }
 }

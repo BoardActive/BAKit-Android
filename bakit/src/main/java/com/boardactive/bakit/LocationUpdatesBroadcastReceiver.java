@@ -51,14 +51,14 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
             mBoardActive = new BoardActive(context.getApplicationContext());
             final String action = intent.getAction();
             if (ACTION_PROCESS_UPDATES.equals(action)) {
-                getLocationUpdates(context,intent,"PROCESS_UPDATES");
+                getLocationUpdates(context, intent, "PROCESS_UPDATES");
             }
         }
     }
 
 
     @SuppressLint("MissingPermission")
-    public void getLocationUpdates(final Context context, final Intent intent, String broadcastevent)  {
+    public void getLocationUpdates(final Context context, final Intent intent, String broadcastevent) {
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
@@ -69,10 +69,16 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                 Location firstLocation = locations.get(0);
                 updateLocation(context, firstLocation);
             }
-        }else{
+        } else {
+            boolean isForeground = false;
+            if (SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false)) {
+                isForeground = SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false);
+            }
+
             // An additional check to start worker by checking the location permissions in case locations are not being retreived.
             if (PermissionExceptionHandler.with(context).wantToStartWorker()) {
-                startWorker();
+                if (!isForeground)
+                    startWorker();
             } else {
                 WorkManager.getInstance(context).cancelAllWork();
             }
@@ -81,12 +87,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     // This method starts the worker if locations are not being retreived.
     private void startWorker() {
-        boolean isForeground = false;
-        if(SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false)){
-            isForeground = SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false);
-        }
         Intent intent = new Intent(context, MyBroadcastReceiver.class);
-        intent.putExtra("isForeground",isForeground);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context.getApplicationContext(), 234324243, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -95,23 +96,51 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     }
 
     // This method sends the data to server and displays a local notification of the location
-    private void updateLocation(final Context context, Location firstLocation) {
+    private void updateLocation(final Context context, final Location firstLocation) {
         DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
-        String date = df.format(Calendar.getInstance().getTime());
+        final String date = df.format(Calendar.getInstance().getTime());
+
+        final File file = new File(Environment.getExternalStorageDirectory() + "/BoardActive/");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        try {
+            File locationLogFile = new File(file, "LocationLogs.txt");
+            if (!locationLogFile.exists())
+                file.createNewFile();
+
+
+            BufferedWriter fos = null;
+            try {
+                fos = new BufferedWriter(new FileWriter(locationLogFile.getPath(), true));
+                fos.append("\n\n" + "Location: " + getAddress(firstLocation, context) + "\n" + "Time: " + date + "\n" + "Latitude: " + firstLocation.getLatitude() + "\n" + "Longitude: " + firstLocation.getLongitude() + "\n\n");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null) {
+                        fos.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         createNotification(firstLocation, date);
 
-        if(SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000){
+        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
             mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                 @Override
                 public void onResponse(Object value) {
                     Log.d(TAG, "[BAKit] onResponse" + value.toString());
-                    SharedPreferenceHelper.putLong(context,LAST_DATA_UPDATED_TIME,System.currentTimeMillis());
+                    SharedPreferenceHelper.putLong(context, LAST_DATA_UPDATED_TIME, System.currentTimeMillis());
                 }
             }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
         }
     }
-
 
 
     private void createNotification(Location firstLocation, String date) {
@@ -139,7 +168,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
                     .build();
 
-        }else{
+        } else {
             builder = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
                     .setSmallIcon(android.R.drawable.ic_menu_mylocation)
                     .setContentTitle("New Location Update")
