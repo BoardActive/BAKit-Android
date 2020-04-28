@@ -1,11 +1,16 @@
 package com.boardactive.bakitapp.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             btn_postLocation,
             btn_messages;
     private EditText httpReponse;
+    private ToggleButton btnService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +72,42 @@ public class MainActivity extends AppCompatActivity {
         btn_postEvent();
         btn_postLocation();
         btn_getMe();
+        btn_service();
         init();
 
+    }
+    ProgressDialog progressDialog;
+    private void btn_service() {
+        btnService = findViewById(R.id.btn_service);
+
+        btnService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isForeground) {
+                initHandler();
+                progressDialog = new ProgressDialog(MainActivity.this,R.style.progressDialogTheme);
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                if(isForeground){
+                    mBoardActive.initialize(isForeground);
+                }else{
+                    mBoardActive.initialize(isForeground);
+                }
+            }
+        });
+    }
+
+    private void initHandler() {
+        Handler delayHandler = new Handler();
+        delayHandler.postDelayed(new Runnable() {
+            public void run() {
+                handlerCallback();
+            }
+        }, 5000);
+    }
+
+    private void handlerCallback() {
+            if(progressDialog !=null && progressDialog.isShowing())
+                progressDialog.dismiss();
     }
 
     @Override
@@ -117,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.setAppToken(fcmToken);
 
                         // Initialize BoardActive
-                        mBoardActive.initialize();
+                        mBoardActive.initialize(false);
 
                         // Register the device with BoardActive
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {

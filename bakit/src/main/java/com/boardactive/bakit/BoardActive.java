@@ -1,19 +1,22 @@
 package com.boardactive.bakit;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
+import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -253,9 +256,10 @@ public class BoardActive {
      * Set SDK Core Variables and launches Job Dispatcher
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
+     * @param isForeground
      */
-    public void initialize() {
-
+    public void initialize(boolean isForeground) {
+        this.isForeground = isForeground;
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
@@ -275,8 +279,9 @@ public class BoardActive {
 //                .addTag(TAG)
 //                .build();
         if (isForeground) {
-            /*SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
-            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
+            WorkManager.getInstance(mContext).cancelAllWork();
+            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
+           /*  PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
                     .addTag(TAG)
                     .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
                             2,
@@ -292,8 +297,15 @@ public class BoardActive {
                 mContext.startService(serviceIntent);
             }
         } else {
+            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,false);
+            Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
+            mContext.stopService(serviceIntent);
+
+            Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+
             PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                     .addTag(TAG)
+                    .setConstraints(constraints)
                     .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
                             2,
                             TimeUnit.MINUTES)

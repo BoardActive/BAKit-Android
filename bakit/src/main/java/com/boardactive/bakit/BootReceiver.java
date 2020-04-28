@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
+import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -68,9 +70,10 @@ public class BootReceiver extends BroadcastReceiver {
 //                .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);*/
 
-
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(LocationWorker.class)
                 .addTag("OneTimeLocation")
+                .setConstraints(constraints)
                 .build();
 
         WorkManager.getInstance().enqueueUniqueWork("OneTimeLocation", ExistingWorkPolicy.REPLACE, oneTimeWorkRequest);

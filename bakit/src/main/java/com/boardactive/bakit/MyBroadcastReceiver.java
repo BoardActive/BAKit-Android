@@ -6,14 +6,15 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import java.util.concurrent.TimeUnit;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
-    boolean isForeground= false;
     public static final String TAG = BoardActive.class.getName();
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,7 +24,9 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void startWorker() {
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
         PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
+                .setConstraints(constraints)
                 .build();
         WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
     }

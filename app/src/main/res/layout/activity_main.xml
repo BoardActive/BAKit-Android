@@ -96,6 +96,17 @@
                     android:text="Post Location"
                     android:textColor="@android:color/white" />
 
+
+                <ToggleButton
+                    android:id="@+id/btn_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:background="@drawable/btn_rounded_accent"
+                    android:textOn="Start Worker"
+                    android:textOff="Start Foreground Service"
+                    android:textColor="@android:color/white" />
+
                 <EditText
                     android:id="@+id/httpResponse"
                     android:layout_width="match_parent"
