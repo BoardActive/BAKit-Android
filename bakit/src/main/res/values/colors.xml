@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue_500">#2196F3</color>
+
+    <!--Default icon color to be displayed in foreground service's notification-->
+    <color name="notification_icon_color">@color/blue_500</color>
+</resources>

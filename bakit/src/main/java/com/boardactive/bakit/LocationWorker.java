@@ -40,14 +40,15 @@ import java.util.Locale;
 public class LocationWorker extends Worker {
 
     public static final String TAG = LocationWorker.class.getName();
-    private LocationSettingsRequest mLocationSettingsRequest;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
 
-    public static final long UPDATE_INTERVAL = 50 * 1000;
-    public static final float SMALLEST_DISPLACEMENT = 5.0F;
-    public static final long FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL / 2;
-    public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 2;
+    private static final long UPDATE_INTERVAL = 50 * 1000;
+
+    //updates the location after defined displacement interval in meters
+    private static final float SMALLEST_DISPLACEMENT = 5.0F;
+
+    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 2;
     Context context;
 
     public LocationWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
@@ -65,12 +66,9 @@ public class LocationWorker extends Worker {
             return Result.failure();
         }
 
-
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
 
         createLocationRequest();
-        buildLocationSettingsRequest();
 
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
@@ -80,12 +78,6 @@ public class LocationWorker extends Worker {
         }
         WorkManager.getInstance().getWorkInfosByTag("OneTimeLocation").cancel(true);
         return Result.success();
-    }
-
-    private void buildLocationSettingsRequest() {
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        mLocationSettingsRequest = builder.build();
     }
 
     // This method sets the attributes to fetch location updates.

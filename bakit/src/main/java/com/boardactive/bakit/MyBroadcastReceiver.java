@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
     public static final String TAG = BoardActive.class.getName();
+    private static final String FETCH_LOCATION_WORKER_NAME = "Location";
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Alarm....", Toast.LENGTH_LONG).show();
 
         startWorker();
     }
@@ -28,6 +28,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build();
-        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+        WorkManager.getInstance().enqueueUniquePeriodicWork(FETCH_LOCATION_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
     }
 }

@@ -108,9 +108,10 @@ public class BoardActive {
     private final Context mContext;
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
-    boolean isForeground = true;
+    private static final String FETCH_LOCATION_WORKER_NAME = "Location";
 
-    /** Service to track and post device location */
+    // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
+    int repeatInterval = 1;
 
     /**
      * Constuctor
@@ -256,65 +257,77 @@ public class BoardActive {
      * Set SDK Core Variables and launches Job Dispatcher
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
+     *
      * @param isForeground
      */
     public void initialize(boolean isForeground) {
-        this.isForeground = isForeground;
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
 
         /** Start the JobDispatcher to check for and post location */
-        StartWorker();
+        StartWorker(isForeground);
         Log.d(TAG, "[BAKit]  initialize()");
     }
 
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
+     *
+     * @param isForeground if isForeground true then it starts foreground service else it starts worker.
      */
-    private void StartWorker() {
+    private void StartWorker(boolean isForeground) {
         Log.d(TAG, "[BAKit]  StartWorker()");
 
-//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
-//                .addTag(TAG)
-//                .build();
+        SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, isForeground);
         if (isForeground) {
             WorkManager.getInstance(mContext).cancelAllWork();
-            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,true);
-           /*  PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(ForegroundLocationWorker.class,1,TimeUnit.MINUTES)
-                    .addTag(TAG)
-                    .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
-                            2,
-                            TimeUnit.MINUTES)
-                    .build();
-            WorkManager.getInstance().enqueueUniquePeriodicWork("ForegroundLocation", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);*/
-            Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
-            serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+            if (!serviceIsRunningInForeground(mContext)) {
+                Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                mContext.startForegroundService(serviceIntent);
-            } else {
-                mContext.startService(serviceIntent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    mContext.startForegroundService(serviceIntent);
+                } else {
+                    mContext.startService(serviceIntent);
+                }
             }
         } else {
-            SharedPreferenceHelper.putBoolean(mContext,IS_FOREGROUND,false);
+            SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, false);
             Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
             mContext.stopService(serviceIntent);
 
             Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
 
-            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 1, TimeUnit.MINUTES)
+            PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, repeatInterval, TimeUnit.MINUTES)
                     .addTag(TAG)
                     .setConstraints(constraints)
                     .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
                             2,
                             TimeUnit.MINUTES)
                     .build();
-            WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+            WorkManager.getInstance(mContext).enqueueUniquePeriodicWork(FETCH_LOCATION_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
         }
-
-
     }
+
+
+    /**
+     * Returns true if this is a foreground service.
+     *
+     * @param context The {@link Context}.
+     */
+    public boolean serviceIsRunningInForeground(Context context) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(
+                Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(
+                Integer.MAX_VALUE)) {
+            if (mContext.getPackageName().equals(service.service.getPackageName())) {
+                if (service.foreground) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Check is all required variables are set

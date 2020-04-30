@@ -31,8 +31,7 @@ Context context;
                     // start worker after 2 min
                     return true;
                 } else {
-                    // start worker after 2 min
-// stop all works
+                    // start worker after 2 min if app is running else stops all works
                     return isAppRunning(context, context.getApplicationContext().getPackageName());
                 }
             } else {
@@ -42,7 +41,6 @@ Context context;
             // stop all works
            return false;
         }
-
     }
 
 

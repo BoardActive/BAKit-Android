@@ -356,4 +356,7 @@
         <item type="color">#ff9800</item>
     </array>
 
+    <!--Use this key to display icon color to be shown in foreground service's notification-->
+    <color name="notification_icon_color">#4527A0</color>
+
 </resources>

@@ -1,6 +1,8 @@
 package com.boardactive.bakitapp.activity;
 
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.boardactive.bakit.CheckPermissions;
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakitapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int NOTIFICATION_PERMISSION_CODE = 123;
 
     private View parent_view;
-
+    private static final String IS_FOREGROUND = "isforeground";
     //Add the BoardActive Object
     private BoardActive mBoardActive;
     private Button btn_userAttributes,
@@ -157,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.setAppToken(fcmToken);
 
                         // Initialize BoardActive
-                        mBoardActive.initialize(false);
+                        mBoardActive.initialize(SharedPreferenceHelper.getBoolean(MainActivity.this, IS_FOREGROUND, false));
 
                         // Register the device with BoardActive
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {

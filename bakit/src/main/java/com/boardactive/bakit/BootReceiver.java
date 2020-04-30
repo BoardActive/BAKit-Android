@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 import androidx.work.Constraints;
@@ -16,59 +17,60 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
+
 import java.util.concurrent.TimeUnit;
 
-/** Automatically starts JobDispatcher at boot time.
- *
+/**
+ * Automatically starts JobDispatcher at boot time.
+ * <p>
  * AndroidManifest Entries:
- *
+ * <p>
  * <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
- *
- *  <receiver android:name=".BootReceiver" android:enabled="true"
- *             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
- *      <intent-filter>
- *          <action android:name="android.intent.action.BOOT_COMPLETED" />
- *          <category android:name="android.intent.category.DEFAULT" />
- *      </intent-filter>
- *  </receiver>
- *
- *
- * */
+ * <p>
+ * <receiver android:name=".BootReceiver" android:enabled="true"
+ * android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+ * <intent-filter>
+ * <action android:name="android.intent.action.BOOT_COMPLETED" />
+ * <category android:name="android.intent.category.DEFAULT" />
+ * </intent-filter>
+ * </receiver>
+ */
 public class BootReceiver extends BroadcastReceiver {
 
 
     public static final String TAG = BootReceiver.class.getSimpleName();
 
-    private Context mContext;
     private static final String JOB_TAG = "BootReceiver";
+    private static final String IS_FOREGROUND = "isforeground";
 
     // This class is triggered a minute or two after the device is restarted, it starts our
     // location reporting service and Firebase Notification Job
     @Override
     public void onReceive(Context context, Intent intent) {
-        mContext = context;
 
         int permissionState = ActivityCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permissionState == PackageManager.PERMISSION_GRANTED){
+        if (permissionState == PackageManager.PERMISSION_GRANTED) {
 
-            startWorker();
+            if (SharedPreferenceHelper.getBoolean(context, IS_FOREGROUND, false)) {
+                Intent serviceIntent = new Intent(context, LocationUpdatesService.class);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    context.startForegroundService(serviceIntent);
+                } else {
+                    context.startService(serviceIntent);
+                }
+            } else {
+                startWorker();
+            }
         }
-
     }
 
-    /** Starts the worker after device reboots with a one time request.
-     * */
-    private void startWorker(){
-        //Flex Interval
-        /*PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES, 1, TimeUnit.MINUTES)
-                .addTag(TAG)
-                .build();
-        //No Flex Interval
-//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(MyWorker.class, 1, TimeUnit.MINUTES)
-//                .addTag(TAG)
-//                .build();
-        WorkManager.getInstance().enqueueUniquePeriodicWork("Location", ExistingPeriodicWorkPolicy.REPLACE, periodicWork);*/
+    /**
+     * Starts the worker after device reboots with a one time request.
+     */
+    private void startWorker() {
 
         Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(LocationWorker.class)
