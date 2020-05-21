@@ -2,9 +2,11 @@ package com.boardactive.bakit.models;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class Attributes {
     private Stock stock;
-    private Custom custom;
+    private HashMap custom;
 
     //Getters and setters
     public Stock getStock() {
@@ -15,11 +17,11 @@ public class Attributes {
         this.stock = stock;
     }
 
-    public Custom getCustom() {
+    public HashMap getCustom() {
         return custom;
     }
 
-    public void setCustom(Custom custom) {
+    public void setCustom(HashMap custom) {
         this.custom = custom;
     }
 

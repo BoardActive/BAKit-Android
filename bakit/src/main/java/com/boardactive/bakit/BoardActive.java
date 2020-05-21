@@ -40,10 +40,6 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -510,7 +506,7 @@ public class BoardActive {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+//                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
                 return params;
             }
 
@@ -763,6 +759,98 @@ public class BoardActive {
         queue.add(str);
     }
 
+
+
+
+    public void putCustomAtrributes(final PutMeCallback callback, final HashMap<String, Object> me) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+
+        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String readableError = handleServerError(error);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
+            }
+        }) {
+
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return GenerateHeaders();
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("email", getSharedPreference(BAKIT_USER_EMAIL));
+//                params.put("deviceOS", getSharedPreference(BAKIT_DEVICE_OS));
+//                params.put("deviceOSVersion", getSharedPreference(BAKIT_DEVICE_OS_VERSION));
+//                Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
+//                return params;
+//            }
+
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    Gson gson = new Gson();
+
+                    Attributes attributes = new Attributes();
+                    Stock stock = new Stock();
+//                    Custom custom = new Custom();
+
+                    /** Check for Location permission. If not then prompt to ask */
+                    int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                            Manifest.permission.ACCESS_FINE_LOCATION);
+
+//                    if (permissionState != PackageManager.PERMISSION_GRANTED) {
+//                        stock.setLocationPermission("false");
+//                    } else {
+//                        stock.setLocationPermission("true");
+//                    }
+//
+//                    stock.setNotificationPermission("true");
+
+                    attributes.setCustom(me);
+
+                    MeRequest meRequest = new MeRequest();
+                    meRequest.setEmail("");
+                    meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                    meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                    meRequest.setAttributes(attributes);
+
+                    //parse request object to json format and send as request body
+                    return gson.toJson(meRequest).getBytes();
+                } catch (Exception e) {
+                    Log.e(TAG, "error parsing request body to json");
+                }
+                return super.getBody();
+            }
+        };
+
+        queue.add(str);
+    }
+
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
 
     /**
@@ -890,8 +978,6 @@ public class BoardActive {
                 Log.d(TAG, "[BAKit] postLocation onResponse: " + response.toString());
                 VolleyLog.wtf(response);
 
-                writeResponseToFile(response);
-
                 callback.onResponse(response);
             }
         }, new Response.ErrorListener() {
@@ -899,7 +985,6 @@ public class BoardActive {
             public void onErrorResponse(VolleyError error) {
                 String readableError = handleServerError(error);
                 Log.d(TAG, readableError);
-                writeResponseToFile(error.toString());
                 callback.onResponse(readableError);
             }
         }) {
@@ -967,42 +1052,8 @@ public class BoardActive {
             }
 
         };
-        writeResponseToFile("Api Request: " + "Location api request" + "\n");
 
         queue.add(stringRequest);
-    }
-
-    private void writeResponseToFile(String response) {
-        File file = new File(Environment.getExternalStorageDirectory() + "/BoardActive/");
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        try {
-            File locationLogFile = new File(file, "LocationLogs.txt");
-            if (!locationLogFile.exists())
-                file.createNewFile();
-
-
-            BufferedWriter fos = null;
-            try {
-                fos = new BufferedWriter(new FileWriter(locationLogFile.getPath(), true));
-                fos.append("Api Response: " + response);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (fos != null) {
-                        fos.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -1074,6 +1125,51 @@ public class BoardActive {
         Log.d(TAG, "[BAKit] GenerateHeaders: " + headers.toString());
 
         return headers;
+    }
+
+    public void getAttributes(final GetMeCallback callback) {
+        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+        VolleyLog.DEBUG = true;
+        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "attributes";
+
+        StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                VolleyLog.wtf(response);
+                callback.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String readableError = handleServerError(error);
+                Log.d(TAG, readableError);
+                callback.onResponse(readableError);
+            }
+        }) {
+
+            @Override
+            public Priority getPriority() {
+                return Priority.HIGH;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return GenerateHeaders();
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                return params;
+            }
+
+        };
+
+        queue.add(str);
+
     }
 
     /**

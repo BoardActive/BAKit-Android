@@ -1,8 +1,6 @@
 package com.boardactive.bakitapp.activity;
 
-import android.app.ActivityManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -21,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.boardactive.bakit.CheckPermissions;
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
+import com.boardactive.bakit.customViews.CustomAttributesActivity;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakitapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             btn_messages;
     private EditText httpReponse;
     private ToggleButton btnService;
+    public final static String BAKIT_URL = "BAKIT_URL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +221,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(getBaseContext(), CustomActivity.class);
+//                Intent intent = new Intent(getBaseContext(), CustomActivity.class);
+                Intent intent = new Intent(getBaseContext(), CustomAttributesActivity.class);
+                intent.putExtra("baseUrl",BoardActive.APP_URL_DEV);
                 startActivity(intent);
             }
 

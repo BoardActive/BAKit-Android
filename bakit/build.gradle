@@ -38,5 +38,8 @@ dependencies {
 
     implementation 'androidx.concurrent:concurrent-futures:1.0.0'
 
+    implementation 'com.google.android.material:material:1.1.0'
+
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'         // date & time picker
 }
 //apply plugin: 'com.google.gms.google-services'

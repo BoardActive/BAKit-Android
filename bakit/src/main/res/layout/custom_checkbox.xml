@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/spacing_large"
+    android:layout_marginEnd="@dimen/spacing_large"
+    android:background="@drawable/edittext_background"
+    android:layout_marginBottom="@dimen/spacing_large">
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/spacing_xmedium"
+        android:padding="@dimen/spacing_large"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
