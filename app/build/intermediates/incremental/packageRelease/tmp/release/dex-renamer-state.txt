@@ -1,7 +1,0 @@
-#Thu Mar 26 10:46:41 EDT 2020
-base.0=/Users/boardactive/github/BAKit-Android/app/build/intermediates/dex/release/mergeDexRelease/out/classes.dex
-path.1=classes2.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=/Users/boardactive/github/BAKit-Android/app/build/intermediates/dex/release/mergeDexRelease/out/classes2.dex

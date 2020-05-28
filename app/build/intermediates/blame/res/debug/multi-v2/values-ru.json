@@ -21,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/713ebd4759c49d8a756f8b3b2ea8d0aa/res/values-ru/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e5d303f06421b55b64bb0079c8d0371a/res/values-ru/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "215",
+                        "endOffsets": "462"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "3979",
+                        "endColumns": "215",
+                        "endOffsets": "4190"
+                    }
+                },
+                {
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/7b0ace7d6a28f9a94a1e2a1b7a917e74/res/values-ru/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -38,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a67d0779ab7610ab00817ae4e6fbe6f7/res/values-ru/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/2c7877d0047a4503bce1f7cc4bee05b4/res/values-ru/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "215",
-                        "endOffsets": "462"
+                        "startOffsets": "207",
+                        "endColumns": "100",
+                        "endOffsets": "307"
                     },
                     "to": {
-                        "startLines": "37",
+                        "startLines": "47",
                         "startColumns": "4",
-                        "startOffsets": "3979",
-                        "endColumns": "215",
-                        "endOffsets": "4190"
+                        "startOffsets": "5584",
+                        "endColumns": "104",
+                        "endOffsets": "5684"
                     }
                 },
                 {
@@ -72,24 +89,7 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-ru/values-ru.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "70",
-                        "startColumns": "4",
-                        "startOffsets": "7609",
-                        "endColumns": "100",
-                        "endOffsets": "7705"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/39fc496e5d3d66ea813a2a350ca0ceeb/res/values-ru/values-ru.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/eb027cdbd6e0315a6228325c08a1519d/res/values-ru/values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -106,20 +106,20 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/54ef113c98e799f2e1185a3b7cbff02e/res/values-ru/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-ru/values-ru.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "207",
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
                         "endColumns": "100",
-                        "endOffsets": "307"
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "47",
+                        "startLines": "70",
                         "startColumns": "4",
-                        "startOffsets": "5584",
-                        "endColumns": "104",
-                        "endOffsets": "5684"
+                        "startOffsets": "7609",
+                        "endColumns": "100",
+                        "endOffsets": "7705"
                     }
                 }
             ]

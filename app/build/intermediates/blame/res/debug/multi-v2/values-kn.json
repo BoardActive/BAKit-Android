@@ -38,24 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a67d0779ab7610ab00817ae4e6fbe6f7/res/values-kn/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "204",
-                        "endOffsets": "451"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4025",
-                        "endColumns": "204",
-                        "endOffsets": "4225"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/54ef113c98e799f2e1185a3b7cbff02e/res/values-kn/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/2c7877d0047a4503bce1f7cc4bee05b4/res/values-kn/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -72,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/713ebd4759c49d8a756f8b3b2ea8d0aa/res/values-kn/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e5d303f06421b55b64bb0079c8d0371a/res/values-kn/values.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,261,331,432,495,543,618,708",
-                        "endColumns": "76,69,100,62,47,74,89,56",
-                        "endOffsets": "260,330,431,494,542,617,707,764"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "204",
+                        "endOffsets": "451"
                     },
                     "to": {
-                        "startLines": "48,49,50,51,52,53,54,55",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "5682,5763,5837,5942,6009,6061,6140,6234",
-                        "endColumns": "80,73,104,66,51,78,93,60",
-                        "endOffsets": "5758,5832,5937,6004,6056,6135,6229,6290"
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "4025",
+                        "endColumns": "204",
+                        "endOffsets": "4225"
                     }
                 },
                 {
@@ -103,6 +86,23 @@
                         "startOffsets": "6377",
                         "endColumns": "100",
                         "endOffsets": "6473"
+                    }
+                },
+                {
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/7b0ace7d6a28f9a94a1e2a1b7a917e74/res/values-kn/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,261,331,432,495,543,618,708",
+                        "endColumns": "76,69,100,62,47,74,89,56",
+                        "endOffsets": "260,330,431,494,542,617,707,764"
+                    },
+                    "to": {
+                        "startLines": "48,49,50,51,52,53,54,55",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "5682,5763,5837,5942,6009,6061,6140,6234",
+                        "endColumns": "80,73,104,66,51,78,93,60",
+                        "endOffsets": "5758,5832,5937,6004,6056,6135,6229,6290"
                     }
                 }
             ]

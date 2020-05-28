@@ -4,20 +4,20 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-be/values-be.xml",
             "map": [
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/713ebd4759c49d8a756f8b3b2ea8d0aa/res/values-be/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e5d303f06421b55b64bb0079c8d0371a/res/values-be/values.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,262,327,424,486,534,603,683",
-                        "endColumns": "77,64,96,61,47,68,79,57",
-                        "endOffsets": "261,326,423,485,533,602,682,740"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "204",
+                        "endOffsets": "451"
                     },
                     "to": {
-                        "startLines": "48,49,50,51,52,53,54,55",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "5661,5743,5812,5913,5979,6031,6104,6188",
-                        "endColumns": "81,68,100,65,51,72,83,61",
-                        "endOffsets": "5738,5807,5908,5974,6026,6099,6183,6245"
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "3997",
+                        "endColumns": "204",
+                        "endOffsets": "4197"
                     }
                 },
                 {
@@ -38,20 +38,20 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a67d0779ab7610ab00817ae4e6fbe6f7/res/values-be/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/7b0ace7d6a28f9a94a1e2a1b7a917e74/res/values-be/values.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "204",
-                        "endOffsets": "451"
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,262,327,424,486,534,603,683",
+                        "endColumns": "77,64,96,61,47,68,79,57",
+                        "endOffsets": "261,326,423,485,533,602,682,740"
                     },
                     "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3997",
-                        "endColumns": "204",
-                        "endOffsets": "4197"
+                        "startLines": "48,49,50,51,52,53,54,55",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "5661,5743,5812,5913,5979,6031,6104,6188",
+                        "endColumns": "81,68,100,65,51,72,83,61",
+                        "endOffsets": "5738,5807,5908,5974,6026,6099,6183,6245"
                     }
                 },
                 {
@@ -89,7 +89,7 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/54ef113c98e799f2e1185a3b7cbff02e/res/values-be/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/2c7877d0047a4503bce1f7cc4bee05b4/res/values-be/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

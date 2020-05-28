@@ -1187,6 +1187,7 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color notification_icon_color
 color notification_material_background_media_default_color
 color orange_100
 color orange_200
@@ -1759,6 +1760,8 @@ dimen activity_horizontal_margin
 dimen activity_vertical_margin
 dimen appbar_padding_top
 dimen appcompat_dialog_background_inset
+dimen calendar_icon_height
+dimen calendar_icon_width
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
@@ -2242,6 +2245,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable edittext_background
 drawable et_rounded_gray
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
@@ -2277,6 +2281,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_my_location
 drawable ic_near_me
 drawable ic_notification
+drawable ic_notification_icon
 drawable ic_notifications
 drawable ic_phone
 drawable ic_pin_drop
@@ -2431,6 +2436,7 @@ id btn_messages
 id btn_postEvent
 id btn_postLocation
 id btn_save
+id btn_service
 id btn_userAttributes
 id buttonPanel
 id cancel_action
@@ -2533,6 +2539,8 @@ id iv_social_twitter
 id iv_social_youtube
 id labeled
 id largeLabel
+id lblCancelDownloadSelection
+id lblSave
 id left
 id light
 id line1
@@ -2540,6 +2548,10 @@ id line3
 id linkedInUrl
 id listMode
 id list_item
+id llBottomBar
+id llCancel
+id llCustomViews
+id llSave
 id login_form
 id login_progress
 id logo
@@ -2755,6 +2767,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id viewFlipper
 id view_offset_helper
 id view_space
 id visible
@@ -2825,13 +2838,19 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_custom
+layout activity_custom_attributes
 layout activity_dialog_message
 layout activity_main
 layout activity_message
 layout activity_messages
 layout activity_user
 layout activity_webview
+layout checkbox
+layout custom_checkbox
 layout custom_dialog
+layout custom_edittext
+layout date
+layout datepicker
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar
@@ -2847,6 +2866,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout edit_text
 layout item_loading
 layout item_message
 layout mdtp_date_picker_dialog
@@ -2936,6 +2956,7 @@ menu menu_activity_message
 menu menu_activity_messages
 menu menu_activity_notification_selected
 menu menu_activity_webview
+mipmap ic_calender
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -2997,6 +3018,8 @@ string abc_toolbar_collapse_description
 string api_domain
 string app_name
 string appbar_scrolling_view_behavior
+string bakit_foreground_icon
+string bakit_foreground_message
 string batched_location_updates
 string bottom_sheet_behavior
 string character_counter_content_description
@@ -3359,6 +3382,7 @@ style BaseTheme
 style CardView
 style CardView_Dark
 style CardView_Light
+style CustomAlertDialogStyle
 style EmptyTheme
 style MaterialAlertDialog_MaterialComponents
 style MaterialAlertDialog_MaterialComponents_Body_Text
@@ -3831,6 +3855,7 @@ style mdtp_done_button_light
 style mdtp_time_label
 style mdtp_time_label_small
 style mdtp_time_label_thin
+style progressDialogTheme
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
