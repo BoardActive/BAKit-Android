@@ -41,6 +41,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(':bakit')
+//    implementation 'com.github.BoardActive:BAKit-Android:2.0.3'
 
     implementation 'com.google.firebase:firebase-core:17.4.3'
     implementation 'com.google.firebase:firebase-iid:20.2.0'
