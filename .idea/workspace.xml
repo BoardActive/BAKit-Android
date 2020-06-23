@@ -75,10 +75,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13e18317-ea65-4d94-9c7c-46b3dce1fc93" name="Default" comment="Update AndroidManifest to add JobScheduler">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bakit/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
@@ -108,40 +106,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>initToolbar</find>
-      <find>toolbar</find>
-      <find>FCMService</find>
-      <find>PErmissionActivity</find>
-      <find>ActivityCompat</find>
-      <find>MainAc</find>
-      <find>Permissions</find>
-      <find>postLocation</find>
-      <find>handleServerError</find>
-      <find>public void onErrorResponse</find>
-      <find>initialize</find>
-      <find>StartJob</find>
-      <find>posteve</find>
-      <find>baNotificationId</find>
-      <find>postEvent</find>
-      <find>getLastKnownLocation</find>
-      <find>onResponse</find>
-      <find>JobDispatcherService</find>
-      <find>startJob</find>
-      <find>StartWorker</find>
-      <find>onRequestPermissionsResult</find>
-      <find>MyWork</find>
-      <find>WorkManager</find>
-      <find>mLocation</find>
-      <find>periodi</find>
-      <find>LocationWorker</find>
-      <find>builder</find>
-      <find>getCompleteAddressString</find>
-      <find>getAddress</find>
-      <find>getPendingIntent</find>
-    </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
     <option name="EXPORT_PRIVATE_KEY" value="false" />
