@@ -5,10 +5,10 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-93:12
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-93:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1cc324bca91cb281f85c4c1528b9e48b/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:2:1-51:12
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-51:12
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:17:1-30:12
 MERGED from [com.google.android.material:material:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b85b7e0481f3222852aee40ec4c0fa26/material-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95c27f1e561f59170f577bf124144243/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.legacy:legacy-support-v13:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5ada31a803a992d6cf8ec2e603c7d64a/legacy-support-v13-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/57eaa9415bddadcf0bb4e692468635f4/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -21,21 +21,21 @@ MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users
 MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:17:1-47:12
 MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:17:1-132:12
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:17:1-30:12
-MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0f531e27d36f966ff60e67ec864464e0/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:2:1-23:12
-MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:15:1-34:12
-MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:15:1-39:12
-MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:15:1-23:12
-MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:2:1-10:12
-MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:17:1-46:12
 MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad6596eb0c86a30f3dd38b688127497e/jetified-play-services-measurement-sdk-17.4.3/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:17:1-31:12
 MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1db37c06b8fc53ae02db8ed063385fab/jetified-play-services-stats-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:2:1-23:12
+MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:15:1-34:12
+MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:15:1-39:12
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:17:1-32:12
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ea0822e5c23082939c8151c6d12b41e4/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e72df5f558314f3918a68cfb5b706e43/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:17:1-27:12
@@ -63,13 +63,13 @@ MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/thomas
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0521ed752f30c1e81430672a57106ce1/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/23efeaea9ad0d45302c6f534d3b29411/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/fca13ad2738c8e8d0f18f8babb0b2876/jetified-firebase-components-16.0.0/AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5a682cedb4d3857fe701725736f7c97/jetified-transport-backend-cct-2.2.0/AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.android.datatransport:transport-runtime:2.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/59f77f167f08297046aaa1a76f60e3e2/jetified-transport-runtime-2.2.0/AndroidManifest.xml:15:1-41:12
 MERGED from [com.google.firebase:firebase-encoders-json:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5a4239e763f528605ebb5b397325ecdc/jetified-firebase-encoders-json-16.0.0/AndroidManifest.xml:15:1-23:12
 MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/42b4d472775e0a0a5ca4b53d184e76e8/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/91cdb5fccc115091c8ed2079ad44bd08/sqlite-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0b8086a4eb91a0b51b9c558c5af06d6e/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/468ce79092f15593026d29383e329c87/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/52ef9db1c0322222b8c6b52f7d7fc8cf/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -103,22 +103,22 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:11:5-67
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:11:5-67
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:12:5-67
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:12:5-67
 MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:22:5-67
 MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:24:5-67
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5a682cedb4d3857fe701725736f7c97/jetified-transport-backend-cct-2.2.0/AndroidManifest.xml:26:5-67
@@ -127,14 +127,14 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /User
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:22-64
 application
 ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-91:19
-MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
-MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:21:5-49:19
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:21:5-49:19
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:5-49:19
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:5-49:19
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:28:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b85b7e0481f3222852aee40ec4c0fa26/material-1.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b85b7e0481f3222852aee40ec4c0fa26/material-1.1.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/99263ae0355f528cdb252f81976d504b/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/99263ae0355f528cdb252f81976d504b/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [com.balysv:material-ripple:1.0.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/f253c63eabf0235694b9bfcabb389761/jetified-material-ripple-1.0.2/AndroidManifest.xml:12:5-20
@@ -153,26 +153,8 @@ MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/cache
 MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:30:5-130:19
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
-MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:30:5-20
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0f531e27d36f966ff60e67ec864464e0/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0f531e27d36f966ff60e67ec864464e0/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
-MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:24:5-32:19
-MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:24:5-32:19
-MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
-MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
-MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:7:5-8:19
-MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:7:5-8:19
-MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:28:5-44:19
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:28:5-44:19
 MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad6596eb0c86a30f3dd38b688127497e/jetified-play-services-measurement-sdk-17.4.3/AndroidManifest.xml:22:5-23:19
@@ -181,6 +163,24 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /User
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:28:5-29:19
 MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1db37c06b8fc53ae02db8ed063385fab/jetified-play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1db37c06b8fc53ae02db8ed063385fab/jetified-play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:13:5-21:19
+MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
+MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:25:5-37:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ea0822e5c23082939c8151c6d12b41e4/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ea0822e5c23082939c8151c6d12b41e4/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e72df5f558314f3918a68cfb5b706e43/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
@@ -363,14 +363,14 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1cc324bca91cb281f85c4c1528b9e48b/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1cc324bca91cb281f85c4c1528b9e48b/multidex-2.0.0/AndroidManifest.xml:20:5-43
-MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:7:5-44
-MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:7:5-44
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:8:5-10:41
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:8:5-10:41
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:22:5-24:41
 MERGED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:22:5-24:41
 MERGED from [com.google.android.material:material:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b85b7e0481f3222852aee40ec4c0fa26/material-1.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b85b7e0481f3222852aee40ec4c0fa26/material-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:7:5-44
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:7:5-44
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95c27f1e561f59170f577bf124144243/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95c27f1e561f59170f577bf124144243/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.legacy:legacy-support-v13:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5ada31a803a992d6cf8ec2e603c7d64a/legacy-support-v13-1.0.0/AndroidManifest.xml:20:5-44
@@ -395,28 +395,8 @@ MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/cache
 MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0f531e27d36f966ff60e67ec864464e0/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0f531e27d36f966ff60e67ec864464e0/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
-MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-sdk:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad6596eb0c86a30f3dd38b688127497e/jetified-play-services-measurement-sdk-17.4.3/AndroidManifest.xml:20:5-44
@@ -425,6 +405,26 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /User
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1db37c06b8fc53ae02db8ed063385fab/jetified-play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1db37c06b8fc53ae02db8ed063385fab/jetified-play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-installations-interop:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ac6a73fb7ebfd3402c56994098ef0659/jetified-firebase-installations-interop-16.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/be2a164d7c25251de9814bfeda4fbd16/jetified-firebase-iid-interop-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c6eaa0ec54c9fbd1a1534b2774f14a5f/jetified-play-services-clearcut-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d1c251bfa7b1815baead22578d1cc1ba/jetified-play-services-phenotype-16.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/43e96ce5530e990e72ac70f577748e00/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ea0822e5c23082939c8151c6d12b41e4/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-measurement-connector:18.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ea0822e5c23082939c8151c6d12b41e4/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e72df5f558314f3918a68cfb5b706e43/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
@@ -479,8 +479,6 @@ MERGED from [androidx.core:core:1.1.0] /Users/thomaspowell/.gradle/caches/transf
 MERGED from [androidx.core:core:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/23efeaea9ad0d45302c6f534d3b29411/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/23efeaea9ad0d45302c6f534d3b29411/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/fca13ad2738c8e8d0f18f8babb0b2876/jetified-firebase-components-16.0.0/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-components:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/fca13ad2738c8e8d0f18f8babb0b2876/jetified-firebase-components-16.0.0/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5a682cedb4d3857fe701725736f7c97/jetified-transport-backend-cct-2.2.0/AndroidManifest.xml:19:5-21:41
@@ -493,6 +491,8 @@ MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/thomaspowell/.gradle
 MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/42b4d472775e0a0a5ca4b53d184e76e8/sqlite-framework-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/91cdb5fccc115091c8ed2079ad44bd08/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.sqlite:sqlite:2.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/91cdb5fccc115091c8ed2079ad44bd08/sqlite-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/c7b6252082af7c3db8c761dc5fc777cc/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0b8086a4eb91a0b51b9c558c5af06d6e/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/0b8086a4eb91a0b51b9c558c5af06d6e/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/468ce79092f15593026d29383e329c87/documentfile-1.0.0/AndroidManifest.xml:20:5-44
@@ -532,11 +532,87 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:5-79
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:13:5-79
-MERGED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:13:5-79
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:5-79
+MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:5-79
 	android:name
-		ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:22-76
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-76
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-81
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:22-78
+uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-85
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-82
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:24:5-68
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:22-65
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-81
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:22-78
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:5-77
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:28:5-77
+MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:28:5-77
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:22-74
+receiver#com.boardactive.bakit.BootReceiver
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:9-33:20
+	android:enabled
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:13-35
+	android:permission
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:13-75
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:13-62
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+category:name:android.intent.category.DEFAULT
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-32:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:17-79
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:25-76
+receiver#com.boardactive.bakit.LocationUpdatesBroadcastReceiver
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:37:9-41:20
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:37:19-88
+intent-filter#action:name:com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:13-40:29
+action#com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:17-166
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:25-163
+receiver#com.boardactive.bakit.MyBroadcastReceiver
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:9-43:20
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:19-75
+service#com.boardactive.bakit.LocationUpdatesService
+ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:9-48:39
+	android:enabled
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:47:13-35
+	android:exported
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:48:13-36
+	android:name
+		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-72
+uses-permission#android.permission.VIBRATE
+ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:5-66
+	android:name
+		ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:22-63
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:10:5-76
 	android:name
@@ -555,82 +631,6 @@ ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowel
 		ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:21:13-66
 	android:name
 		ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:17:13-91
-uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:14:5-81
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:27:5-81
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:14:22-78
-uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:15:5-85
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:15:22-82
-uses-permission#android.permission.WAKE_LOCK
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:16:5-68
-MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
-MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
-MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:24:5-68
-MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:24:5-68
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:16:22-65
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:17:5-81
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:17:22-78
-uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:19:5-77
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:28:5-77
-MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:28:5-77
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:19:22-74
-receiver#com.boardactive.bakit.BootReceiver
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:24:9-33:20
-	android:enabled
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:26:13-35
-	android:permission
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:27:13-75
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:25:13-62
-intent-filter#action:name:android.intent.action.BOOT_COMPLETED+category:name:android.intent.category.DEFAULT
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:28:13-32:29
-action#android.intent.action.BOOT_COMPLETED
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:29:17-79
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:29:25-76
-receiver#com.boardactive.bakit.LocationUpdatesBroadcastReceiver
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:37:9-41:20
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:37:19-88
-intent-filter#action:name:com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:38:13-40:29
-action#com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:39:17-166
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:39:25-163
-receiver#com.boardactive.bakit.MyBroadcastReceiver
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:42:9-43:20
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:42:19-75
-service#com.boardactive.bakit.LocationUpdatesService
-ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:45:9-48:39
-	android:enabled
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:47:13-35
-	android:exported
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:48:13-36
-	android:name
-		ADDED from [com.github.BoardActive:BAKit-Android:2.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d9c84fed654142b07500a1899e12f715/jetified-BAKit-Android-2.0.3/AndroidManifest.xml:46:13-72
-uses-permission#android.permission.VIBRATE
-ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:5-66
-	android:name
-		ADDED from [com.wdullaer:materialdatetimepicker:3.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/AndroidManifest.xml:26:22-63
 service#com.google.firebase.messaging.FirebaseMessagingService
 ADDED from [com.google.firebase:firebase-messaging:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/AndroidManifest.xml:28:9-35:19
 	android:exported
@@ -671,14 +671,14 @@ MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradl
 MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:22:5-79
 MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:26:5-79
 MERGED from [androidx.work:work-runtime:2.3.4] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/AndroidManifest.xml:26:5-79
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5a682cedb4d3857fe701725736f7c97/jetified-transport-backend-cct-2.2.0/AndroidManifest.xml:25:5-79
@@ -911,42 +911,6 @@ ADDED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches
 		ADDED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:27:13-37
 	android:name
 		ADDED from [androidx.room:room-runtime:2.2.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5581f189b27943723bfa3d7b58819b1/room-runtime-2.2.3/AndroidManifest.xml:26:13-74
-uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:26:5-28:35
-	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:27:9-41
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:28:9-32
-meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
-ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:17:13-19:85
-	android:value
-		ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:19:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:18:17-127
-meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
-ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:28:13-30:85
-	android:value
-		ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:30:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:29:17-115
-provider#com.google.firebase.provider.FirebaseInitProvider
-ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
-	android:authorities
-		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
-	android:exported
-		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
-	android:initOrder
-		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
-	android:name
-		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
 uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
 ADDED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:26:5-110
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ef8fa6881ecce79b4ffcc1403c8dce65/jetified-play-services-measurement-impl-17.4.3/AndroidManifest.xml:26:5-110
@@ -979,6 +943,42 @@ ADDED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thom
 		ADDED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:43:13-69
 	android:name
 		ADDED from [com.google.android.gms:play-services-measurement:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8e50c4481e121e43b9fce9973d991103/jetified-play-services-measurement-17.4.3/AndroidManifest.xml:40:13-87
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:17:13-19:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:19:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:16.3.2] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d779862833b2e38d034774aebdb702cf/jetified-firebase-installations-16.3.2/AndroidManifest.xml:18:17-127
+meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
+ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-datatransport:17.0.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/5306169e9b9062d38fa263bfb2c928d9/jetified-firebase-datatransport-17.0.3/AndroidManifest.xml:29:17-115
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:26:9-30:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:28:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:29:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:30:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:19.3.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/9f50104a3ed305ca2fc55bd80a29800d/jetified-firebase-common-19.3.0/AndroidManifest.xml:27:13-77
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/48ab0dd73a7cce065cdd1ec45a166bbd/jetified-play-services-maps-16.0.0/AndroidManifest.xml:28:9-32
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
 ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
 	android:value
