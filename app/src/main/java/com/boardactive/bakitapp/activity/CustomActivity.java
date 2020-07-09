@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class CustomActivity extends AppCompatActivity {
+public class  CustomActivity extends AppCompatActivity {
 
     public static final String TAG = CustomActivity.class.getName();
     private static final int ME_API_RESPONSE_CODE = 0;

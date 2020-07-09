@@ -25,12 +25,9 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.Tools.NotificationBuilder;
+import com.boardactive.bakit.models.MessageModel;
 import com.boardactive.bakitapp.activity.MainActivity;
-import com.boardactive.bakitapp.activity.MessageActivity;
-import com.boardactive.bakitapp.room.AppDatabase;
-import com.boardactive.bakitapp.room.MessageDAO;
-import com.boardactive.bakitapp.room.table.MessageEntity;
-import com.boardactive.bakitapp.utils.Tools;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -47,19 +44,10 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 public class FCMService extends FirebaseMessagingService {
 
-    public static final String TAG = FCMService.class.getSimpleName();
+    private static final String TAG = "FCMService";
     public static final String EXTRA_OBJECT = "key.EXTRA_OBJECT";
     public static final String EXTRA_MESSADE_ID = "key.EXTRA_MESSADE_ID";
     private static final String MESSAGE_ID = "MESSAGE_ID";
-
-    private MessageDAO mMessageDAO;
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-//        android.os.Debug.waitForDebugger();  // this line is key
-    }
 
     /**
      * Called when message is received.
@@ -85,16 +73,15 @@ public class FCMService extends FirebaseMessagingService {
         // sends notification
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
+
+
+
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "[BAKitApp] Payload getMessageId: " + remoteMessage.getMessageId());
-        Log.d(TAG, "[BAKitApp] Payload getData: " + remoteMessage.getData().toString());
-        Log.d(TAG, "[BAKitApp] From: " + remoteMessage.getFrom());
-
-
+        Log.d(TAG, "[BAAdDrop] From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "[BAKitApp] MessageModel data payload: " + remoteMessage.getData());
+            Log.d(TAG, "[BAAdDrop] MessageModel data payload: " + remoteMessage.getData());
             sendNotification(remoteMessage);
 
             if (/* Check if data needs to be processed by long running job */ true) {
@@ -108,7 +95,7 @@ public class FCMService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "[BAKitApp] MessageModel Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(TAG, "[BAAdDrop] MessageModel Notification Body: " + remoteMessage);
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -126,7 +113,7 @@ public class FCMService extends FirebaseMessagingService {
      */
     @Override
     public void onNewToken(String token) {
-        Log.d(TAG, "[BAKitApp] Refreshed token: " + token);
+        Log.d(TAG, "[BAAdDrop] Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
@@ -171,21 +158,12 @@ public class FCMService extends FirebaseMessagingService {
      *
      * @param remoteMessage FCM notification.
      */
-    private void sendNotification(RemoteMessage remoteMessage) {
-
+    private void sendNotification(final RemoteMessage remoteMessage) {
         Long currentDateandTime = System.currentTimeMillis();
-        MessageEntity obj = new MessageEntity();
+        MessageModel obj = new MessageModel();
 
-        mMessageDAO = AppDatabase.getDb(this).getMessageDAO();
-        int id;
-        Integer count = mMessageDAO.getMaxId();
-        if (count == null) {
-            id = 1;
-        } else {
-            id = count + 1;
-        }
+        int id = 1;
         obj.setId(id);
-        Log.d(TAG, "SetID(): " + count);
         obj.setBaMessageId(remoteMessage.getData().get("baMessageId"));
         obj.setBaNotificationId(remoteMessage.getData().get("baNotificationId"));
         obj.setFirebaseNotificationId(remoteMessage.getMessageId());
@@ -198,10 +176,9 @@ public class FCMService extends FirebaseMessagingService {
         obj.setIsTestMessage(remoteMessage.getData().get("isTestMessage"));
         obj.setDateCreated(currentDateandTime);
         obj.setDateLastUpdated(currentDateandTime);
-        obj.setIsRead(false);
-        mMessageDAO.insertMessage(obj);
 
         BoardActive mBoardActive = new BoardActive(getApplicationContext());
+
         mBoardActive.postEvent(new BoardActive.PostEventCallback() {
             @Override
             public void onResponse(Object value) {
@@ -209,10 +186,10 @@ public class FCMService extends FirebaseMessagingService {
             }
         }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId());
 
-        Intent intent = new Intent(this, MessageActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_MESSADE_ID, id);
 //        intent.putExtra(EXTRA_OBJECT, obj);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT   
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -225,11 +202,11 @@ public class FCMService extends FirebaseMessagingService {
 
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+
+//        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+        int notificationType = 0;
         new NotificationBuilder(this,pendingIntent, obj, notificationType).execute();
 
     }
-
-
 
 }

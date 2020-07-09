@@ -3,7 +3,7 @@
     package="com.boardactive.bakitapp"
     android:targetSandboxVersion="2"
     android:versionCode="2"
-    android:versionName="2.1" >
+    android:versionName="2.0.2" >
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -32,6 +32,7 @@
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
+        android:extractNativeLibs="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
