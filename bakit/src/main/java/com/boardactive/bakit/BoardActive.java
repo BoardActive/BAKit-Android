@@ -1,7 +1,10 @@
 package com.boardactive.bakit;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +13,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -107,7 +114,7 @@ public class BoardActive {
     private static final String FETCH_LOCATION_WORKER_NAME = "Location";
 
     // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
-    int repeatInterval = 1;
+    private int repeatInterval = 1;
 
     /**
      * Constuctor
@@ -257,13 +264,31 @@ public class BoardActive {
      * @param isForeground
      */
     public void initialize(boolean isForeground) {
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
 
-        /** Start the JobDispatcher to check for and post location */
-        StartWorker(isForeground);
-        Log.d(TAG, "[BAKit]  initialize()");
+        if (!NotificationManagerCompat.from(mContext).areNotificationsEnabled()) {
+            Intent settingsIntent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .putExtra(Settings.EXTRA_APP_PACKAGE, mContext.getPackageName())
+                    .putExtra(Settings.EXTRA_CHANNEL_ID, 1);
+            mContext.startActivity(settingsIntent);
+        }
+
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("isForeground",isForeground);
+            mContext.startActivity(intent);
+        } else {
+
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
+
+            /** Start the JobDispatcher to check for and post location */
+            StartWorker(isForeground);
+            Log.d(TAG, "[BAKit]  initialize()");
+        }
     }
 
     /**
@@ -654,7 +679,6 @@ public class BoardActive {
 
                     Attributes attributes = new Attributes();
                     Stock stock = new Stock();
-                    Custom custom = new Custom();
 
                     /** Check for Location permission. If not then prompt to ask */
                     int permissionState = ActivityCompat.checkSelfPermission(mContext,
@@ -758,8 +782,6 @@ public class BoardActive {
 
         queue.add(str);
     }
-
-
 
 
     public void putCustomAtrributes(final PutMeCallback callback, final HashMap<String, Object> me) {
