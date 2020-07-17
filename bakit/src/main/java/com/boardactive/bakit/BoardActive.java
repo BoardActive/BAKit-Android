@@ -265,21 +265,13 @@ public class BoardActive {
      */
     public void initialize(boolean isForeground) {
 
-        if (!NotificationManagerCompat.from(mContext).areNotificationsEnabled()) {
+        /*if (!NotificationManagerCompat.from(mContext).areNotificationsEnabled()) {
             Intent settingsIntent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     .putExtra(Settings.EXTRA_APP_PACKAGE, mContext.getPackageName())
                     .putExtra(Settings.EXTRA_CHANNEL_ID, 1);
             mContext.startActivity(settingsIntent);
-        }
-
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("isForeground",isForeground);
-            mContext.startActivity(intent);
-        } else {
+        }*/
 
             SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
             SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
@@ -288,8 +280,11 @@ public class BoardActive {
             /** Start the JobDispatcher to check for and post location */
             StartWorker(isForeground);
             Log.d(TAG, "[BAKit]  initialize()");
-        }
+
     }
+
+
+
 
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
@@ -1192,6 +1187,16 @@ public class BoardActive {
 
         queue.add(str);
 
+    }
+
+    public void checkLocationPermissions(boolean isForeground) {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("isForeground",isForeground);
+            mContext.startActivity(intent);
+        }
     }
 
     /**
