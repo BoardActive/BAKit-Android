@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog = new ProgressDialog(MainActivity.this,R.style.progressDialogTheme);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
+                mBoardActive.checkLocationPermissions(isForeground);
                 if(isForeground){
                     mBoardActive.initialize(isForeground);
                 }else{
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void init() {
         // Check for Location Permissions
-        CheckPermissions.checkForLocationPermissions(this);
+//        CheckPermissions.checkForLocationPermissions(this);
 
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
+                        mBoardActive.checkLocationPermissions(SharedPreferenceHelper.getBoolean(MainActivity.this, IS_FOREGROUND, false));
                         // Initialize BoardActive
                         mBoardActive.initialize(SharedPreferenceHelper.getBoolean(MainActivity.this, IS_FOREGROUND, false));
 
