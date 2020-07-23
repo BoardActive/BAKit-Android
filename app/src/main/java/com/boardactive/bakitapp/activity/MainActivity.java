@@ -12,12 +12,9 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.boardactive.bakit.CheckPermissions;
-import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.customViews.CustomAttributesActivity;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakitapp.R;
@@ -30,11 +27,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_userAttributes,
             btn_customAttributes,
             btn_getMe,
-            btn_postEvent,
-            btn_postLocation,
             btn_messages;
     private EditText httpReponse;
     private ToggleButton btnService;
@@ -67,13 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         httpReponse = (EditText) findViewById(R.id.httpResponse);
 
-//        requestNotificationPermission();
         btn_userAttributes();
         btn_messages();
         btn_customAttributes();
-        btn_postEvent();
-        btn_postLocation();
-        btn_getMe();
         btn_service();
         init();
 
@@ -89,12 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog = new ProgressDialog(MainActivity.this,R.style.progressDialogTheme);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-                mBoardActive.checkLocationPermissions(isForeground);
-                if(isForeground){
-                    mBoardActive.initialize(isForeground);
-                }else{
-                    mBoardActive.initialize(isForeground);
-                }
+                mBoardActive.checkLocationPermissions();
+                mBoardActive.setIsForeground(isForeground);
+                mBoardActive.initialize();
             }
         });
     }
@@ -120,15 +103,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
-        // Check for Location Permissions
-//        CheckPermissions.checkForLocationPermissions(this);
-
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
 
         // Add URL to point to BoardActive REST API
-//        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD);
-        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
+//        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Production
+        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV); // Development
 
         // Add AppID provided by BoardActive
 //        mBoardActive.setAppId("ADD_APP_ID");
@@ -140,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
+
+        // Optional, set to 'true' to run in foreground
+        mBoardActive.setIsForeground(false);
 
         // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -159,9 +142,11 @@ public class MainActivity extends AppCompatActivity {
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
-                        mBoardActive.checkLocationPermissions(SharedPreferenceHelper.getBoolean(MainActivity.this, IS_FOREGROUND, false));
+                        // Check for Location permissions
+                        mBoardActive.checkLocationPermissions();
+
                         // Initialize BoardActive
-                        mBoardActive.initialize(SharedPreferenceHelper.getBoolean(MainActivity.this, IS_FOREGROUND, false));
+                        mBoardActive.initialize();
 
                         // Register the device with BoardActive
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
@@ -232,112 +217,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    public void btn_getMe() {
-
-        btn_getMe = (Button) findViewById(R.id.btn_getMe);
-
-        btn_getMe.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                mBoardActive.getMe(new BoardActive.GetMeCallback() {
-                    @Override
-                    public void onResponse(Object value) {
-                        Log.d(TAG, "[BAKitApp] getMe(): " +  value.toString());
-                        alertDialog(value);
-                        onResume();
-                    }
-                });
-
-            }
-
-        });
-
-    }
-
-    public void btn_postEvent() {
-
-        btn_postEvent = (Button) findViewById(R.id.btn_postEvent);
-
-        btn_postEvent.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-//                mBoardActive.postEvent(new BoardActive.PostEventCallback() {
-//                    @Override
-//                    public void onResponse(Object value) {
-//                        Log.d(TAG, "[BAKit] LocationUpdatesIntentService onResponse" + value.toString());
-//                    }
-//                }, "received", "", "");
-            }
-
-        });
-
-    }
-
-    public void btn_postLocation() {
-
-        btn_postLocation = (Button) findViewById(R.id.btn_postLocation);
-
-        btn_postLocation.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
-                String date = df.format(Calendar.getInstance().getTime());
-
-                mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-                    @Override
-                    public void onResponse(Object value) {
-                        Log.d(TAG, "[BAKit] LocationUpdatesIntentService onResponse" + value.toString());
-                    }
-                }, 33.893402, -84.474600, date);
-            }
-
-        });
-
-    }
-
-    private void alertDialog(Object value) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(value.toString());
-
-//        builder.setPositiveButton("DISCARD", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-////                Snackbar.make(parent_view, "Discard clicked", Snackbar.LENGTH_SHORT).show();
-//            }
-//        });
-        builder.setNegativeButton("CANCEL", null);
-        builder.show();
-    }
-
-//    private void requestNotificationPermission() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
-//            return;
-//
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
-//
-//        }
-//
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, NOTIFICATION_PERMISSION_CODE );
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//
-//        //Checking the request code of our request
-//        if (requestCode == NOTIFICATION_PERMISSION_CODE ) {
-//
-//            //If permission is granted
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                //Displaying a toast
-//                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
-//            } else {
-//                //Displaying another toast if permission is not granted
-//                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 }

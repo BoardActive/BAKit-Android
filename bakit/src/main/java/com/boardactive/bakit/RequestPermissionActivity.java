@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
+import com.boardactive.bakit.BoardActive;
 
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 
@@ -38,6 +39,8 @@ public class RequestPermissionActivity extends AppCompatActivity {
 
     // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
     private int repeatInterval = 1;
+
+    BoardActive mBoardActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +70,8 @@ public class RequestPermissionActivity extends AppCompatActivity {
                 SharedPreferenceHelper.putString(this, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
                 SharedPreferenceHelper.putString(this, BAKIT_DEVICE_ID, getUUID());
 
-                boolean isForeground = false;
+                boolean isForeground = mBoardActive.getIsForeground();
                 /** Start the JobDispatcher to check for and post location */
-                if(getIntent().getExtras()!=null)
-                    isForeground = getIntent().getBooleanExtra("isForeground",false);
                 StartWorker(isForeground);
                 finish();
             }else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {

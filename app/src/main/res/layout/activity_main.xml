@@ -68,35 +68,6 @@
                     android:text="Custom Attributes"
                     android:textColor="@android:color/white" />
 
-                <Button
-                    android:id="@+id/btn_getMe"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_rounded_primary"
-                    android:text="GET /me"
-                    android:textColor="@android:color/white" />
-
-
-                <Button
-                    android:id="@+id/btn_postEvent"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_rounded_primary"
-                    android:text="Post Event"
-                    android:textColor="@android:color/white" />
-
-                <Button
-                    android:id="@+id/btn_postLocation"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_rounded_primary"
-                    android:text="Post Location"
-                    android:textColor="@android:color/white" />
-
-
                 <ToggleButton
                     android:id="@+id/btn_service"
                     android:layout_width="match_parent"
