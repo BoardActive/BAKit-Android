@@ -121,6 +121,10 @@
             android:label="@string/places_autocomplete_label"
             android:theme="@style/PlacesAutocompleteThemeOverlay"
             android:windowSoftInputMode="stateAlwaysVisible|adjustPan" >
+        </activity>
+        <activity
+            android:name="com.boardactive.bakit.RequestPermissionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" >
         </activity> <!-- [START BOOT/DEFAULT SERVICE] -->
         <receiver
             android:name="com.boardactive.bakit.BootReceiver"
@@ -137,8 +141,12 @@
                 <action android:name="com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
+<<<<<<< HEAD
         <receiver android:name="com.boardactive.bakit.MyBroadcastReceiver" >
         </receiver>
+=======
+        <receiver android:name="com.boardactive.bakit.MyBroadcastReceiver" />
+>>>>>>> WorkManager
 
         <service
             android:name="com.boardactive.bakit.LocationUpdatesService"

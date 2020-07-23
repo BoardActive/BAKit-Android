@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/BAKit-Android.iml" filepath="$PROJECT_DIR$/BAKit-Android.iml" group="BAKit-Android" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BAKit-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/BAKit-Android.iml" group="BAKit-Android" />
+>>>>>>> WorkManager
       <module fileurl="file://$PROJECT_DIR$/BoardActive(New).iml" filepath="$PROJECT_DIR$/BoardActive(New).iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BAKit-Android/app" />
       <module fileurl="file://$PROJECT_DIR$/bakit/bakit.iml" filepath="$PROJECT_DIR$/bakit/bakit.iml" group="BAKit-Android/bakit" />

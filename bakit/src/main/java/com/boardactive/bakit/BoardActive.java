@@ -1,7 +1,10 @@
 package com.boardactive.bakit;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +13,13 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -99,15 +106,15 @@ public class BoardActive {
     public final static String BAKIT_APP_TEST = "BAKIT_APP_TEST";
     public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
     public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
+    private static final String BAKIT_IS_FOREGROUND = "isforeground";
     public static final String TAG = BoardActive.class.getName();
-    private static final String IS_FOREGROUND = "isforeground";
     private final Context mContext;
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
     private static final String FETCH_LOCATION_WORKER_NAME = "Location";
 
     // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
-    int repeatInterval = 1;
+    private int repeatInterval = 1;
 
     /**
      * Constuctor
@@ -249,32 +256,41 @@ public class BoardActive {
         SharedPreferenceHelper.putString(mContext, BAKIT_APP_TEST, AppTest);
     }
 
+    public Boolean getIsForeground() {
+        return SharedPreferenceHelper.getBoolean(mContext, BAKIT_IS_FOREGROUND, false);
+    }
+
+    public void setIsForeground(Boolean IsForeground) {
+        SharedPreferenceHelper.putBoolean(mContext, BAKIT_IS_FOREGROUND, IsForeground);
+    }
+
+
     /**
      * Set SDK Core Variables and launches Job Dispatcher
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
      *
-     * @param isForeground
      */
-    public void initialize(boolean isForeground) {
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
-        SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
+    public void initialize() {
 
-        /** Start the JobDispatcher to check for and post location */
-        StartWorker(isForeground);
-        Log.d(TAG, "[BAKit]  initialize()");
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
+            SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
+
+            /** Start the JobDispatcher to check for and post location */
+            StartWorker();
+            Log.d(TAG, "[BAKit]  initialize()");
+
     }
 
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
      *
-     * @param isForeground if isForeground true then it starts foreground service else it starts worker.
      */
-    private void StartWorker(boolean isForeground) {
+    private void StartWorker() {
         Log.d(TAG, "[BAKit]  StartWorker()");
+        boolean isForeground = getIsForeground();
 
-        SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, isForeground);
         if (isForeground) {
             WorkManager.getInstance(mContext).cancelAllWork();
             if (!serviceIsRunningInForeground(mContext)) {
@@ -287,7 +303,7 @@ public class BoardActive {
                 }
             }
         } else {
-            SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, false);
+            setIsForeground(false);
             Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
             mContext.stopService(serviceIntent);
 
@@ -654,7 +670,6 @@ public class BoardActive {
 
                     Attributes attributes = new Attributes();
                     Stock stock = new Stock();
-                    Custom custom = new Custom();
 
                     /** Check for Location permission. If not then prompt to ask */
                     int permissionState = ActivityCompat.checkSelfPermission(mContext,
@@ -758,8 +773,6 @@ public class BoardActive {
 
         queue.add(str);
     }
-
-
 
 
     public void putCustomAtrributes(final PutMeCallback callback, final HashMap<String, Object> me) {
@@ -1170,6 +1183,15 @@ public class BoardActive {
 
         queue.add(str);
 
+    }
+
+    public void checkLocationPermissions() {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        }
     }
 
     /**

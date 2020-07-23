@@ -6,6 +6,26 @@
                 {
                     "source": "/Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/packaged_res/debug/values-large-v4/values-large-v4.xml",
                     "from": {
+<<<<<<< HEAD
+=======
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,185,256,326,396,464,532,636",
+                        "endColumns": "58,70,70,69,69,67,67,103,115",
+                        "endOffsets": "109,180,251,321,391,459,527,631,747"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,33,34",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,185,256,326,396,464,1717,1821",
+                        "endColumns": "58,70,70,69,69,67,67,103,115",
+                        "endOffsets": "109,180,251,321,391,459,527,1816,1932"
+                    }
+                },
+                {
+                    "source": "/Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/packaged_res/debug/values-large-v4/values-large-v4.xml",
+                    "from": {
+>>>>>>> WorkManager
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
                         "startOffsets": "55,100,158,214,264,316,367,409,459,518,563,608,654,700,747,791,838,884,931,978,1023,1070,1118,1175",
@@ -35,6 +55,7 @@
                         "startOffsets": "1937,2059",
                         "endColumns": "121,133",
                         "endOffsets": "2054,2188"
+<<<<<<< HEAD
                     }
                 },
                 {
@@ -52,6 +73,8 @@
                         "startOffsets": "55,114,185,256,326,396,464,1717,1821",
                         "endColumns": "58,70,70,69,69,67,67,103,115",
                         "endOffsets": "109,180,251,321,391,459,527,1816,1932"
+=======
+>>>>>>> WorkManager
                     }
                 }
             ]

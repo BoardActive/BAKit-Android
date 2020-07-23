@@ -1,40 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.boardactive.bakit">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Required for foreground services on P+. -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required for foreground services on P+. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application>
+        <activity android:name=".RequestPermissionActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
         <!-- [START BOOT/DEFAULT SERVICE] -->
-        <receiver android:name=".BootReceiver" android:enabled="true"
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver>
-
-        <!-- [END BOOT/DEFAULT SERVICE] -->
-
-        <receiver android:name="com.boardactive.bakit.LocationUpdatesBroadcastReceiver">
+        </receiver> <!-- [END BOOT/DEFAULT SERVICE] -->
+        <receiver android:name=".LocationUpdatesBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
-        <receiver android:name="MyBroadcastReceiver" >
-        </receiver>
+        <receiver android:name=".MyBroadcastReceiver"></receiver>
+
         <service
             android:name=".LocationUpdatesService"
             android:enabled="true"
             android:exported="true" />
-
     </application>
 
 </manifest>
