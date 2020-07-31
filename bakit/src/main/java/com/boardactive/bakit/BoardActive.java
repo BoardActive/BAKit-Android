@@ -463,6 +463,48 @@ public class BoardActive {
                 return Priority.HIGH;
             }
 
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+
+                    Attributes attributes = new Attributes();
+                    Stock stock = new Stock();
+
+                    /** Check for Location permission. If not then prompt to ask */
+                    int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                            Manifest.permission.ACCESS_FINE_LOCATION);
+
+                    if (permissionState != PackageManager.PERMISSION_GRANTED) {
+                        stock.setLocationPermission("false");
+                    } else {
+                        stock.setLocationPermission("true");
+                    }
+
+                    if (NotificationManagerCompat.from(mContext).areNotificationsEnabled())
+                        stock.setNotificationPermission("true");
+                    else
+                        stock.setNotificationPermission("false");
+
+
+                    attributes.setStock(stock);
+
+                    MeRequest meRequest = new MeRequest();
+                    meRequest.setEmail("");
+                    meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                    meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                    meRequest.setAttributes(attributes);
+
+                    //parse request object to json format and send as request body
+                    return gson.toJson(meRequest).getBytes();
+                } catch (Exception e) {
+                    Log.e(TAG, "error parsing request body to json");
+                }
+
+
+                return super.getBody();
+            }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 return GenerateHeaders();
