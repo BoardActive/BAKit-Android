@@ -260,7 +260,7 @@ public class BoardActive {
         return SharedPreferenceHelper.getBoolean(mContext, BAKIT_IS_FOREGROUND, false);
     }
 
-    public void setIsForeground(Boolean IsForeground) {
+    public void setIsForeground(boolean IsForeground) {
         SharedPreferenceHelper.putBoolean(mContext, BAKIT_IS_FOREGROUND, IsForeground);
     }
 

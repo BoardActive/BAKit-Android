@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
+                        mBoardActive.setIsForeground(false);
+
                         // Check for Location permissions
                         mBoardActive.checkLocationPermissions();
 
@@ -164,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
-
     }
 
 
