@@ -4,7 +4,6 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-gl/values-gl.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-gl/values.xml",
                     "from": {
                         "startLines": "4",
@@ -23,9 +22,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-gl/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-gl/values-gl.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -42,24 +38,20 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-gl/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-gl/values.xml",
->>>>>>> WorkManager
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "192",
-                        "endOffsets": "439"
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,254,320,422,485,532,606,703",
+                        "endColumns": "69,65,101,62,46,73,96,55",
+                        "endOffsets": "253,319,421,484,531,605,702,758"
                     },
                     "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4036",
-                        "endColumns": "192",
-                        "endOffsets": "4224"
+                        "startLines": "48,49,50,51,52,53,54,55",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "5728,5802,5872,5978,6045,6096,6174,6275",
+                        "endColumns": "73,69,105,66,50,77,100,59",
+                        "endOffsets": "5797,5867,5973,6040,6091,6169,6270,6330"
                     }
                 },
                 {
@@ -80,11 +72,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/res/values-gl/values-gl.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-gl/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -101,28 +89,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/res/values-gl/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-gl/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,254,320,422,485,532,606,703",
-                        "endColumns": "69,65,101,62,46,73,96,55",
-                        "endOffsets": "253,319,421,484,531,605,702,758"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "5728,5802,5872,5978,6045,6096,6174,6275",
-                        "endColumns": "73,69,105,66,50,77,100,59",
-                        "endOffsets": "5797,5867,5973,6040,6091,6169,6270,6330"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/62c70a37bd5d8c26982f1d9aecf561b6/res/values-gl/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

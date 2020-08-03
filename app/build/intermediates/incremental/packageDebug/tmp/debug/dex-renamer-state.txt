@@ -1,17 +1,16 @@
-<<<<<<< HEAD
-#Thu Jul 09 13:39:00 EDT 2020
-=======
-#Fri Jul 17 09:34:40 EDT 2020
->>>>>>> WorkManager
-path.3=classes_0.dex
-path.2=classes2.dex
-path.1=classes.dex
+#Mon Aug 03 17:01:04 EDT 2020
+path.3=classes2.dex
+path.2=classes.dex
+path.1=out/classes.dex
+renamed.4=classes5.dex
 path.0=classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
+base.4=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeLibDexDebug/classes_0.dex
 renamed.0=classes.dex
-base.3=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeLibDexDebug/classes_0.dex
-base.2=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
-base.1=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
+base.3=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
+base.2=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
+base.1=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
 base.0=/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+path.4=classes_0.dex

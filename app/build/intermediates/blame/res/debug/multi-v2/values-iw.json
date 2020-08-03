@@ -4,11 +4,7 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-iw/values-iw.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-iw/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-iw/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -22,26 +18,6 @@
                         "startOffsets": "3884",
                         "endColumns": "176",
                         "endOffsets": "4056"
-<<<<<<< HEAD
-=======
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-iw/values-iw.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,166,233,347,456,535,639,754,860,948,1033,1120,1203",
-                        "endColumns": "60,66,113,108,78,103,114,105,87,84,86,82,97",
-                        "endOffsets": "161,228,342,451,530,634,749,855,943,1028,1115,1198,1296"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58,59,60",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "5424,5485,5552,5666,5775,5854,5958,6073,6179,6267,6352,6439,6522",
-                        "endColumns": "60,66,113,108,78,103,114,105,87,84,86,82,97",
-                        "endOffsets": "5480,5547,5661,5770,5849,5953,6068,6174,6262,6347,6434,6517,6615"
->>>>>>> WorkManager
                     }
                 },
                 {
@@ -79,28 +55,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/res/values-iw/values-iw.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-iw/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,251,312,403,465,509,579,657",
-                        "endColumns": "66,60,90,61,43,69,77,52",
-                        "endOffsets": "250,311,402,464,508,578,656,709"
-                    },
-                    "to": {
-                        "startLines": "61,62,63,64,65,66,67,68",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "6620,6691,6756,6851,6917,6965,7039,7121",
-                        "endColumns": "70,64,94,65,47,73,81,56",
-                        "endOffsets": "6686,6751,6846,6912,6960,7034,7116,7173"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-iw/values-iw.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -117,11 +72,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-iw/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-iw/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -135,7 +86,6 @@
                         "startOffsets": "5320",
                         "endColumns": "103",
                         "endOffsets": "5419"
-<<<<<<< HEAD
                     }
                 },
                 {
@@ -170,8 +120,6 @@
                         "startOffsets": "6620,6691,6756,6851,6917,6965,7039,7121",
                         "endColumns": "70,64,94,65,47,73,81,56",
                         "endOffsets": "6686,6751,6846,6912,6960,7034,7116,7173"
-=======
->>>>>>> WorkManager
                     }
                 }
             ]

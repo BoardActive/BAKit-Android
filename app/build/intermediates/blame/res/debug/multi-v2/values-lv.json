@@ -55,7 +55,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/res/values-lv/values-lv.xml",
                     "from": {
                         "startLines": "2",
@@ -91,26 +90,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-lv/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-lv/values-lv.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,174,241,351,467,548,659,779,892,991,1083,1177,1266",
-                        "endColumns": "68,66,109,115,80,110,119,112,98,91,93,88,100",
-                        "endOffsets": "169,236,346,462,543,654,774,887,986,1078,1172,1261,1362"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58,59,60",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "5887,5956,6023,6133,6249,6330,6441,6561,6674,6773,6865,6959,7048",
-                        "endColumns": "68,66,109,115,80,110,119,112,98,91,93,88,100",
-                        "endOffsets": "5951,6018,6128,6244,6325,6436,6556,6669,6768,6860,6954,7043,7144"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-lv/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -127,7 +106,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/res/values-lv/values-lv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
@@ -142,56 +120,6 @@
                         "startOffsets": "5887,5956,6023,6133,6249,6330,6441,6561,6674,6773,6865,6959,7048",
                         "endColumns": "68,66,109,115,80,110,119,112,98,91,93,88,100",
                         "endOffsets": "5951,6018,6128,6244,6325,6436,6556,6669,6768,6860,6954,7043,7144"
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-lv/values-lv.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "70",
-                        "startColumns": "4",
-                        "startOffsets": "7830",
-                        "endColumns": "100",
-                        "endOffsets": "7926"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-lv/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "207",
-                        "endColumns": "100",
-                        "endOffsets": "307"
-                    },
-                    "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "5782",
-                        "endColumns": "104",
-                        "endOffsets": "5882"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-lv/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "224",
-                        "endOffsets": "471"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4152",
-                        "endColumns": "224",
-                        "endOffsets": "4372"
->>>>>>> WorkManager
                     }
                 }
             ]

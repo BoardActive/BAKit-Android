@@ -21,7 +21,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/res/values-fr-rCA/values-fr-rCA.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
@@ -57,9 +56,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-fr-rCA/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-fr-rCA/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -76,11 +72,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/res/values-fr-rCA/values-fr-rCA.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-fr-rCA/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -97,28 +89,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-fr-rCA/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-fr-rCA/values-fr-rCA.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,166,231,357,480,562,679,801,921,1027,1127,1230,1328",
-                        "endColumns": "60,64,125,122,81,116,121,119,105,99,102,97,103",
-                        "endOffsets": "161,226,352,475,557,674,796,916,1022,1122,1225,1323,1427"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58,59,60",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "5861,5922,5987,6113,6236,6318,6435,6557,6677,6783,6883,6986,7084",
-                        "endColumns": "60,64,125,122,81,116,121,119,105,99,102,97,103",
-                        "endOffsets": "5917,5982,6108,6231,6313,6430,6552,6672,6778,6878,6981,7079,7183"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e9e8402aa33b1563a48950dc00d5478c/res/values-fr-rCA/values-fr-rCA.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -135,28 +106,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-fr-rCA/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-fr-rCA/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "251",
-                        "endColumns": "219",
-                        "endOffsets": "470"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "4076",
-                        "endColumns": "219",
-                        "endOffsets": "4291"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-fr-rCA/values-fr-rCA.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

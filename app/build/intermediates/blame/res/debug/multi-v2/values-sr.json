@@ -4,7 +4,6 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sr/values-sr.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-sr/values.xml",
                     "from": {
                         "startLines": "4",
@@ -23,26 +22,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/res/values-sr/values-sr.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/62c70a37bd5d8c26982f1d9aecf561b6/res/values-sr/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,349,537,661,769,982,1107,1245,1372,1580,1685,1876,2001,2209,2377,2471,2562",
-                        "endColumns": "103,187,123,107,212,124,137,126,207,104,190,124,207,167,93,90,104",
-                        "endOffsets": "348,536,660,768,981,1106,1244,1371,1579,1684,1875,2000,2208,2376,2470,2561,2666"
-                    },
-                    "to": {
-                        "startLines": "29,30,31,32,33,34,35,36,38,39,40,41,42,43,44,45,46",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "2833,2941,3129,3257,3369,3582,3711,3853,4173,4381,4490,4681,4810,5018,5190,5288,5383",
-                        "endColumns": "107,187,127,111,212,128,141,130,207,108,190,128,207,171,97,94,108",
-                        "endOffsets": "2936,3124,3252,3364,3577,3706,3848,3979,4376,4485,4676,4805,5013,5185,5283,5378,5487"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e9e8402aa33b1563a48950dc00d5478c/res/values-sr/values-sr.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -59,49 +38,24 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-sr/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-sr/values.xml",
->>>>>>> WorkManager
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "207",
-                        "endColumns": "99",
-                        "endOffsets": "306"
+                        "startLines": "4,5,6,7,8,9,10,11",
+                        "startColumns": "0,0,0,0,0,0,0,0",
+                        "startOffsets": "184,259,325,418,485,530,596,682",
+                        "endColumns": "74,65,92,66,44,65,85,54",
+                        "endOffsets": "258,324,417,484,529,595,681,736"
                     },
                     "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "5492",
-                        "endColumns": "103",
-                        "endOffsets": "5591"
+                        "startLines": "61,62,63,64,65,66,67,68",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "6864,6943,7013,7110,7181,7230,7300,7390",
+                        "endColumns": "78,69,96,70,48,69,89,58",
+                        "endOffsets": "6938,7008,7105,7176,7225,7295,7385,7444"
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b2b51ad2129f7ae88186ad90508b79ab/core-1.1.0/res/values-sr/values-sr.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-sr/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "188",
-                        "endOffsets": "435"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3984",
-                        "endColumns": "188",
-                        "endOffsets": "4168"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-sr/values-sr.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -135,7 +89,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-sr/values.xml",
                     "from": {
                         "startLines": "4",
@@ -150,22 +103,6 @@
                         "startOffsets": "3984",
                         "endColumns": "188",
                         "endOffsets": "4168"
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-sr/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,259,325,418,485,530,596,682",
-                        "endColumns": "74,65,92,66,44,65,85,54",
-                        "endOffsets": "258,324,417,484,529,595,681,736"
-                    },
-                    "to": {
-                        "startLines": "61,62,63,64,65,66,67,68",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "6864,6943,7013,7110,7181,7230,7300,7390",
-                        "endColumns": "78,69,96,70,48,69,89,58",
-                        "endOffsets": "6938,7008,7105,7176,7225,7295,7385,7444"
->>>>>>> WorkManager
                     }
                 },
                 {

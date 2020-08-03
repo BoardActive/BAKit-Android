@@ -4,28 +4,7 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ro/values-ro.xml",
             "map": [
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d7df73591dc571468c186fdd2a992bad/jetified-play-services-base-17.0.0/res/values-ro/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-ro/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "207",
-                        "endColumns": "101",
-                        "endOffsets": "308"
-                    },
-                    "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "5600",
-                        "endColumns": "105",
-                        "endOffsets": "5701"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-ro/values-ro.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -93,7 +72,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-ro/values.xml",
                     "from": {
                         "startLines": "4",
@@ -112,26 +90,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-ro/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-ro/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "184,259,327,420,484,530,596,676",
-                        "endColumns": "74,67,92,63,45,65,79,52",
-                        "endOffsets": "258,326,419,483,529,595,675,728"
-                    },
-                    "to": {
-                        "startLines": "61,62,63,64,65,66,67,68",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "6955,7034,7106,7203,7271,7321,7391,7475",
-                        "endColumns": "78,71,96,67,49,69,83,56",
-                        "endOffsets": "7029,7101,7198,7266,7316,7386,7470,7527"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-ro/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -148,7 +106,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-ro/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
@@ -163,22 +120,6 @@
                         "startOffsets": "6955,7034,7106,7203,7271,7321,7391,7475",
                         "endColumns": "78,71,96,67,49,69,83,56",
                         "endOffsets": "7029,7101,7198,7266,7316,7386,7470,7527"
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e789e84770ac9f5fbf288df531210407/res/values-ro/values-ro.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "70",
-                        "startColumns": "4",
-                        "startOffsets": "7615",
-                        "endColumns": "100",
-                        "endOffsets": "7711"
->>>>>>> WorkManager
                     }
                 }
             ]

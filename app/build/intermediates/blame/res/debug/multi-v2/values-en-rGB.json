@@ -38,7 +38,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/95706d4ceec64f81eef9536fd8eeedfc/jetified-firebase-messaging-20.2.1/res/values-en-rGB/values.xml",
                     "from": {
                         "startLines": "4",
@@ -57,9 +56,6 @@
                 },
                 {
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/res/values-en-rGB/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/344f67c8f4f8e03b340d88f3cb90e1a5/res/values-en-rGB/values-en-rGB.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -76,28 +72,7 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/ad072bd06501b4ced252e97ed9ee745e/jetified-play-services-basement-17.0.0/res/values-en-rGB/values.xml",
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4cf8b2ffaf9c3951ce628160f4bb928c/res/values-en-rGB/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11",
-                        "startColumns": "0,0,0,0,0,0,0,0",
-                        "startOffsets": "188,258,321,406,469,514,581,653",
-                        "endColumns": "69,62,84,62,44,66,71,50",
-                        "endOffsets": "257,320,405,468,513,580,652,703"
-                    },
-                    "to": {
-                        "startLines": "61,62,63,64,65,66,67,68",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "6747,6821,6888,6977,7044,7093,7164,7240",
-                        "endColumns": "73,66,88,66,48,70,75,54",
-                        "endOffsets": "6816,6883,6972,7039,7088,7159,7235,7290"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/62c70a37bd5d8c26982f1d9aecf561b6/res/values-en-rGB/values.xml",
->>>>>>> WorkManager
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -114,7 +89,6 @@
                     }
                 },
                 {
-<<<<<<< HEAD
                     "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/8605c3c5c167eb1687cbc1d9c318e344/jetified-materialdatetimepicker-3.2.0/res/values-en-rGB/values-en-rGB.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
@@ -129,39 +103,6 @@
                         "startOffsets": "5522,5583,5649,5754,5866,5945,6054,6173,6286,6381,6470,6563,6650",
                         "endColumns": "60,65,104,111,78,108,118,112,94,88,92,86,96",
                         "endOffsets": "5578,5644,5749,5861,5940,6049,6168,6281,6376,6465,6558,6645,6742"
-=======
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/4581a548495a8fbee0cd7353dddd758e/res/values-en-rGB/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "251",
-                        "endColumns": "196",
-                        "endOffsets": "447"
-                    },
-                    "to": {
-                        "startLines": "37",
-                        "startColumns": "4",
-                        "startOffsets": "3902",
-                        "endColumns": "196",
-                        "endOffsets": "4094"
-                    }
-                },
-                {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/a4525e8170b7475c2bcf4eaae5eb9eb4/res/values-en-rGB/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "211",
-                        "endColumns": "107",
-                        "endOffsets": "318"
-                    },
-                    "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "5410",
-                        "endColumns": "111",
-                        "endOffsets": "5517"
->>>>>>> WorkManager
                     }
                 },
                 {

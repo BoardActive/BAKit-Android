@@ -69,6 +69,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
             case NOTIFICATION_BASIC: //Basic Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
@@ -79,6 +80,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
             case NOTIFICATION_BIG_PIC: //Big Pic Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
@@ -94,6 +96,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
             case NOTIFICATION_ACTION_BUTTON: //Action Button Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
@@ -108,6 +111,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                 String bigText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
@@ -121,6 +125,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
             case NOTIFICATION_INBOX: //Inbox Style Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
@@ -137,6 +142,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
             default:
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
+                                .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
