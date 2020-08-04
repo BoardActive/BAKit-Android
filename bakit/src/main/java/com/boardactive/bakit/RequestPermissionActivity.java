@@ -48,7 +48,7 @@ public class RequestPermissionActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_request_permission);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
+        mBoardActive = new BoardActive(getApplicationContext());
         requestLocationPermission();
     }
 
