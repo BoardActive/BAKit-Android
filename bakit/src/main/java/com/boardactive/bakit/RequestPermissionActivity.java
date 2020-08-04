@@ -49,6 +49,9 @@ public class RequestPermissionActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
+        // Create an instant of BoardActive
+        mBoardActive = new BoardActive(getApplicationContext());
+
         requestLocationPermission();
     }
 
