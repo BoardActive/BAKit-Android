@@ -2,38 +2,22 @@ package com.boardactive.bakit;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.work.WorkManager;
 
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.google.android.gms.location.LocationResult;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     public static final String ACTION_PROCESS_UPDATES = "PROCESS_UPDATES";
@@ -96,7 +80,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
         final String date = df.format(Calendar.getInstance().getTime());
 
         //sends data to server every minute.
-        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
+//        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
             mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                 @Override
                 public void onResponse(Object value) {
@@ -104,6 +88,6 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     SharedPreferenceHelper.putLong(context, LAST_DATA_UPDATED_TIME, System.currentTimeMillis());
                 }
             }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
-        }
+//        }
     }
 }
