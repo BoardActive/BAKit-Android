@@ -4,25 +4,6 @@
             "outputFile": "/Users/thomaspowell/github/BAKit-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/packaged_res/debug/values/values.xml",
-                    "from": {
-                        "startLines": "328,329,348,355,359,360,361,363,364,365,366,367,368,369",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "15066,15118,16041,16356,16602,16680,16714,16852,16966,17024,17084,17136,17182,17244",
-                        "endLines": "328,329,352,355,359,360,362,363,364,365,366,367,368,376",
-                        "endColumns": "51,50,14,61,77,33,31,113,57,59,51,45,61,12",
-                        "endOffsets": "15113,15164,16271,16413,16675,16709,16847,16961,17019,17079,17131,17177,17239,17734"
-                    },
-                    "to": {
-                        "startLines": "1140,1141,1571,1629,1634,1744,1750,1752,1762,1763,1764,1766,1771,4284",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "62394,62446,89410,92576,92992,106719,107555,107693,108479,108537,108597,108702,109006,274448",
-                        "endLines": "1140,1141,1575,1629,1634,1744,1751,1752,1762,1763,1764,1766,1771,4291",
-                        "endColumns": "51,50,14,61,77,33,31,113,57,59,51,45,61,12",
-                        "endOffsets": "62441,62492,89640,92633,93065,106748,107688,107802,108532,108592,108644,108743,109063,274938"
-                    }
-                },
-                {
                     "source": "/Users/thomaspowell/github/BAKit-Android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,20,45,15,22,5,61,37,41,30,24,51",
@@ -164,6 +145,25 @@
                         "endLines": "8192",
                         "endColumns": "24",
                         "endOffsets": "504909"
+                    }
+                },
+                {
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/res/values/values.xml",
+                    "from": {
+                        "startLines": "328,329,348,355,359,360,361,363,364,365,366,367,368,369",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "15066,15118,16041,16356,16602,16680,16714,16852,16966,17024,17084,17136,17182,17244",
+                        "endLines": "328,329,352,355,359,360,362,363,364,365,366,367,368,376",
+                        "endColumns": "51,50,14,61,77,33,31,113,57,59,51,45,61,12",
+                        "endOffsets": "15113,15164,16271,16413,16675,16709,16847,16961,17019,17079,17131,17177,17239,17734"
+                    },
+                    "to": {
+                        "startLines": "1140,1141,1571,1629,1634,1744,1750,1752,1762,1763,1764,1766,1771,4284",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "62394,62446,89410,92576,92992,106719,107555,107693,108479,108537,108597,108702,109006,274448",
+                        "endLines": "1140,1141,1575,1629,1634,1744,1751,1752,1762,1763,1764,1766,1771,4291",
+                        "endColumns": "51,50,14,61,77,33,31,113,57,59,51,45,61,12",
+                        "endOffsets": "62441,62492,89640,92633,93065,106748,107688,107802,108532,108592,108644,108743,109063,274938"
                     }
                 },
                 {
@@ -387,7 +387,7 @@
                     }
                 },
                 {
-                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/b608f6e4444f530b927fc42ebbee0dea/work-runtime-2.3.4/res/values/values.xml",
+                    "source": "/Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

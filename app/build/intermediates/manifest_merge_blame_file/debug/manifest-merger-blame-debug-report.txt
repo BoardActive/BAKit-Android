@@ -14,23 +14,23 @@
 11-->/Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:5-67
 11-->/Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-12-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
-12-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-76
+12-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:13:5-79
+12-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:13:22-76
 13    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-13-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-81
-13-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:22-78
+13-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:14:5-81
+13-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:14:22-78
 14    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-14-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-85
-14-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-82
+14-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:15:5-85
+14-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:15:22-82
 15    <uses-permission android:name="android.permission.WAKE_LOCK" />
-15-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-68
-15-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:22-65
+15-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:16:5-68
+15-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:16:22-65
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required for foreground services on P+. -->
-16-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-81
-16-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:22-78
+16-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:17:5-81
+16-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:17:22-78
 17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-17-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:5-77
-17-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:22-74
+17-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:18:5-77
+17-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:18:22-74
 18    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 18-->[com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:10:5-76
 18-->[com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:10:22-73
@@ -224,25 +224,25 @@
 116-->/Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:90:13-68
 117
 118        <activity
-118-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:9-24:20
+118-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:21:9-24:20
 119            android:name="com.boardactive.bakit.RequestPermissionActivity"
-119-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-75
+119-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:22:13-75
 120            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" >
-120-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-75
+120-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:23:13-75
 121        </activity> <!-- [START BOOT/DEFAULT SERVICE] -->
 122        <receiver
-122-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:9-35:20
+122-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:26:9-35:20
 123            android:name="com.boardactive.bakit.BootReceiver"
-123-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:13-62
+123-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:27:13-62
 124            android:enabled="true"
-124-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-35
+124-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:28:13-35
 125            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-125-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:13-75
+125-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:29:13-75
 126            <intent-filter>
-126-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:13-34:29
+126-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:30:13-34:29
 127                <action android:name="android.intent.action.BOOT_COMPLETED" />
-127-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:17-79
-127-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:25-76
+127-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:17-79
+127-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:25-76
 128
 129                <category android:name="android.intent.category.DEFAULT" />
 129-->/Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:62:17-76
@@ -250,27 +250,27 @@
 130            </intent-filter>
 131        </receiver> <!-- [END BOOT/DEFAULT SERVICE] -->
 132        <receiver android:name="com.boardactive.bakit.LocationUpdatesBroadcastReceiver" >
-132-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-40:20
-132-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:19-88
+132-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:36:9-40:20
+132-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:36:19-88
 133            <intent-filter>
-133-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:37:13-39:29
+133-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:37:13-39:29
 134                <action android:name="com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
-134-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:17-166
-134-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:25-163
+134-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:38:17-166
+134-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:38:25-163
 135            </intent-filter>
 136        </receiver>
 137        <receiver android:name="com.boardactive.bakit.MyBroadcastReceiver" />
-137-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-78
-137-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:19-75
+137-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:41:9-78
+137-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:41:19-75
 138
 139        <service
-139-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:9-46:39
+139-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:43:9-46:39
 140            android:name="com.boardactive.bakit.LocationUpdatesService"
-140-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:13-72
+140-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:44:13-72
 141            android:enabled="true"
-141-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:13-35
+141-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:45:13-35
 142            android:exported="true" /> <!-- Autocomplete -->
-142-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-36
+142-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:46:13-36
 143        <activity
 143-->[com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:16:9-23:20
 144            android:name="com.google.android.libraries.places.widget.AutocompleteActivity"
@@ -507,8 +507,8 @@
 266            <intent-filter>
 266-->[androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:114:13-118:29
 267                <action android:name="android.intent.action.BOOT_COMPLETED" />
-267-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:17-79
-267-->[:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:25-76
+267-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:17-79
+267-->[com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:25-76
 268                <action android:name="android.intent.action.TIME_SET" />
 268-->[androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:116:17-73
 268-->[androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:116:25-70

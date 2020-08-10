@@ -4,6 +4,7 @@ ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-93:12
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-93:12
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:1-93:12
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:2:1-49:12
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-49:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1cc324bca91cb281f85c4c1528b9e48b/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:2:1-26:12
@@ -103,6 +104,8 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:5-67
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:12:5-67
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:12:5-67
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:11:5-67
@@ -127,6 +130,8 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:2.2.0] /User
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:5:22-64
 application
 ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml:7:5-91:19
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:20:5-47:19
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:20:5-47:19
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:5-47:19
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:5-47:19
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:13:5-24:19
@@ -361,6 +366,8 @@ uses-sdk
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:8:5-10:41
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
 MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/1cc324bca91cb281f85c4c1528b9e48b/multidex-2.0.0/AndroidManifest.xml:20:5-43
@@ -532,23 +539,31 @@ INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManif
 		ADDED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/thomaspowell/github/BAKit-Android/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:13:5-79
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-79
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:5-79
 MERGED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:9:5-79
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-76
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:13:22-76
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-81
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:14:5-81
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-81
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-81
 MERGED from [androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:27:5-81
 MERGED from [androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:27:5-81
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:22-78
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:14:22-78
 uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-85
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:15:5-85
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-85
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-85
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-82
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:15:22-82
 uses-permission#android.permission.WAKE_LOCK
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-68
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:16:5-68
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-68
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:5-68
 MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
 MERGED from [com.google.android.gms:play-services-measurement-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d5552a3996f76de5fed58bcb0a1e63b5/jetified-play-services-measurement-api-17.4.3/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-iid:20.2.1] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/237790469e537c7eac89051e52c81565/jetified-firebase-iid-20.2.1/AndroidManifest.xml:24:5-68
@@ -562,59 +577,73 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:17.4.3] /User
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.4.3] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/e7a1569937cb559168f77ba807e1a558/jetified-play-services-measurement-sdk-api-17.4.3/AndroidManifest.xml:25:5-68
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:22-65
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:16:22-65
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-81
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:17:5-81
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-81
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-81
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:22-78
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:17:22-78
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:5-77
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:18:5-77
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:5-77
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:5-77
 MERGED from [androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:28:5-77
 MERGED from [androidx.work:work-runtime:2.4.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/593ccaacb58abd88d3ddfda7f410c273/work-runtime-2.4.0/AndroidManifest.xml:28:5-77
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:22-74
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:18:22-74
 activity#com.boardactive.bakit.RequestPermissionActivity
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:9-24:20
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:21:9-24:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:9-24:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:9-24:20
 	android:theme
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-75
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:23:13-75
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-75
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:22:13-75
 receiver#com.boardactive.bakit.BootReceiver
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:9-35:20
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:26:9-35:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:9-35:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:9-35:20
 	android:enabled
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-35
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:28:13-35
 	android:permission
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:13-75
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:29:13-75
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:13-62
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:27:13-62
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED+category:name:android.intent.category.DEFAULT
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:13-34:29
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:30:13-34:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:17-79
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:17-79
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:25-76
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:31:25-76
 receiver#com.boardactive.bakit.LocationUpdatesBroadcastReceiver
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-40:20
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:36:9-40:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-40:20
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-40:20
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:19-88
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:36:19-88
 intent-filter#action:name:com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:37:13-39:29
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:37:13-39:29
 action#com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:17-166
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:38:17-166
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:25-163
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:38:25-163
 receiver#com.boardactive.bakit.MyBroadcastReceiver
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-78
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:41:9-78
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-78
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-78
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:19-75
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:41:19-75
 service#com.boardactive.bakit.LocationUpdatesService
-ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:9-46:39
+ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:43:9-46:39
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:9-46:39
+MERGED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:9-46:39
 	android:enabled
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:13-35
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:45:13-35
 	android:exported
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:46:13-36
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:46:13-36
 	android:name
-		ADDED from [:bakit] /Users/thomaspowell/github/BAKit-Android/bakit/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:13-72
+		ADDED from [com.github.BoardActive:BAKit-Android:4893c3c021] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/cd07af4f246881b26b1d8e73f0f19654/jetified-BAKit-Android-4893c3c021/AndroidManifest.xml:44:13-72
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.google.android.libraries.places:places:1.0.0] /Users/thomaspowell/.gradle/caches/transforms-2/files-2.1/d73313e481a2b6bd5cd91f514118be1b/jetified-places-1.0.0/AndroidManifest.xml:10:5-76
 	android:name

@@ -38,7 +38,8 @@ dependencies {
     }
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation project(':bakit')
+//    implementation project(':bakit')
+    implementation 'com.github.BoardActive:BAKit-Android:4893c3c021'
 //    implementation 'com.github.BoardActive:BAKit-Android:2.0.3'
 
 //    implementation 'com.google.android.gms:play-services-plus:17.0.0'
