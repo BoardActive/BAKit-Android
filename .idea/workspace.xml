@@ -106,8 +106,8 @@
 >>>>>>> WorkManager
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/androidx/activity/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/androidx/activity/R.java" afterDir="false" />
@@ -1109,13 +1109,16 @@
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
 =======
 >>>>>>> WorkManager
+=======
+      <change beforePath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/LocationUpdatesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/LocationUpdatesService.java" afterDir="false" />
+>>>>>>> WorkManager
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="R3CM50EJWYY" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -1578,6 +1581,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/bakit/src/main/java/com/boardactive/bakit/BoardActive.java</url>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <line>468</line>
 =======
           <line>459</line>
@@ -1592,6 +1596,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
 =======
+=======
+>>>>>>> WorkManager
           <line>536</line>
           <option name="timeStamp" value="611" />
         </line-breakpoint>
