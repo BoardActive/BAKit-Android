@@ -1,7 +1,11 @@
 package com.boardactive.bakitapp.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,11 +16,14 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.boardactive.bakit.CheckPermissions;
+import com.boardactive.bakit.GeneratedDialog;
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.customViews.CustomAttributesActivity;
 import com.boardactive.bakit.models.Me;
@@ -108,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handlerCallback() {
-            if(progressDialog !=null && progressDialog.isShowing())
-                progressDialog.dismiss();
+        if(progressDialog !=null && progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 
     @Override
@@ -118,9 +125,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void showPermissionDialog(){
+        GeneratedDialog.with(this)
+                .setTitle(getResources().getString(com.boardactive.bakit.R.string.location_permission_title))
+                .setDescription(getResources().getString(com.boardactive.bakit.R.string.location_permission_description))
+                .setPositiveButtonText(getResources().getString(com.boardactive.bakit.R.string.ok))
+                .setNegativeButtonText(getResources().getString(com.boardactive.bakit.R.string.CANCEL))
+                .setPositiveListener(new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(DialogInterface di, int i) {
+                        di.dismiss();
+                        CheckPermissions.checkForLocationPermissions(MainActivity.this);
+                    }
+                })
+                .setNegativeListener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface di, int i) {
+                        di.dismiss();
+                    }
+                })
+                .showPermissionDialog();
+    }
+
     public void init() {
         // Check for Location Permissions
-        CheckPermissions.checkForLocationPermissions(this);
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        ) != PackageManager.PERMISSION_GRANTED
+        ){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                showPermissionDialog();
+            }
+        }
+
+        //CheckPermissions.checkForLocationPermissions(this);
 
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
@@ -165,13 +206,13 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                             @Override
                             public void onResponse(Object value) {
-                            Log.d(TAG, value.toString());
-                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                            Me me = gson.fromJson(value.toString(), Me.class);
+                                Log.d(TAG, value.toString());
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                Me me = gson.fromJson(value.toString(), Me.class);
 
-                            JsonParser parser = new JsonParser();
-                            JsonElement je = parser.parse(value.toString());
-                            httpReponse.setText(gson.toJson(je));
+                                JsonParser parser = new JsonParser();
+                                JsonElement je = parser.parse(value.toString());
+                                httpReponse.setText(gson.toJson(je));
                                 Log.d(TAG, gson.toJson(je));
                             }
                         });

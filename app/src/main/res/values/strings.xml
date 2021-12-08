@@ -3,6 +3,7 @@
     <string name="default_notification_channel_id">BAKit</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_custom">CustomActivity</string>
+    <string name="title_activity_location">Location Permission</string>
 
 
     <string name="OK">OK</string>
@@ -40,5 +41,12 @@
     Icon guidelines: The value to this key should be the file name from the drawable ,which you need to set in the notification's icon
     -->
     <string name="bakit_foreground_icon">ic_notification_icon</string>
+
+    <string name="location_permission_title">Location Permission</string>
+    <string name="location_permission_description">If you provide this app location permission it may track and save your location information. Your location information will be as confidential and will never be shared with anyone. Your location information will only be used to provide features and functionality for this app. For the best results when using this app you should allow both foreground and background.</string>
+    <string name="allow_btn_txt">Allow</string>
+    <string name="cancel_dialog_content">Are you sure you don\'t want to give permission to access location.</string>
+    <string name="permission_dialog_title">Permission</string>
+
 
 </resources>

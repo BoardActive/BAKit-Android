@@ -27,4 +27,10 @@
     <string name="CANCEL">Cancel</string>
     <string name="SAVE">Save</string>
 
+    <string name="location_permission_title">Location Permission</string>
+    <string name="location_permission_description">If you provide this app location permission it may track and save your location information. Your location information will be as confidential and will never be shared with anyone. Your location information will only be used to provide features and functionality for this app. For the best results when using this app you should allow both foreground and background.</string>
+    <string name="allow_btn_txt">Allow</string>
+    <string name="cancel_dialog_content">Are you sure you don\'t want to give permission to access location.</string>
+    <string name="permission_dialog_title">Permission</string>
+
 </resources>
