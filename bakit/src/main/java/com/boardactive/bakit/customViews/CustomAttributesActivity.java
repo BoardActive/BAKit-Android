@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.boardactive.bakit.BoardActive;
@@ -59,7 +60,10 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
 
 
         // base url sent by end user.
+        if(getIntent().getStringExtra("baseUrl") !=null)
         url = getIntent().getStringExtra("baseUrl");
+        else
+            url = BoardActive.APP_URL_DEV;
         initBakit();
     }
 
@@ -172,6 +176,7 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
                 mBoardActive.putCustomAtrributes(new BoardActive.PutMeCallback() {
                     @Override
                     public void onResponse(Object value) {
+                        //add alert dialog
                         finish();
                     }
                 }, updatedCustomAttributes);

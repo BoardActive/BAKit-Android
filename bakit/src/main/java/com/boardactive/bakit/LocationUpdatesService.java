@@ -1,29 +1,22 @@
 package com.boardactive.bakit;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 
 
 /**
@@ -64,9 +57,9 @@ public class LocationUpdatesService extends Service {
     private FusedLocationProviderClient mFusedLocationClient;
 
 
-    public static final long UPDATE_INTERVAL = 50 * 1000;
-    public static final float SMALLEST_DISPLACEMENT = 5.0F;
-    public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 2;
+    public static final long UPDATE_INTERVAL = 1 * 1000;
+    public static final float SMALLEST_DISPLACEMENT = 1.0F;
+    public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
 
     public LocationUpdatesService() {
     }
@@ -108,8 +101,8 @@ public class LocationUpdatesService extends Service {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
     }
 
     private PendingIntent getPendingIntent() {
