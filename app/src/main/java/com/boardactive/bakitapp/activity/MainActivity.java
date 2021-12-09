@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.setIsForeground(false);
 
                         // Check for Location permissions
-                        mBoardActive.checkLocationPermissions();
+                     //   mBoardActive.checkLocationPermissions();
 
                         // Initialize BoardActive
                         mBoardActive.initialize();
