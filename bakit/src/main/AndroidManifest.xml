@@ -30,7 +30,7 @@
                 <action android:name="com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
-        <receiver android:name="MyBroadcastReceiver" >
+        <receiver android:name="MyBroadcastReceiver" android:exported="true" >
         </receiver>
 
 
@@ -52,7 +52,7 @@
             </intent-filter>
 
         </receiver>
-        <activity android:name=".RequestPermissionActivity">
+        <activity android:name=".RequestPermissionActivity" android:exported="true">
 
         </activity>
         <service
