@@ -52,7 +52,7 @@ public class MyWorker extends Worker {
 	/**
 	 * The current location.
 	 */
-	private Location mLocation;
+	public Location mLocation;
 
 	/**
 	 * Provides access to the Fused Location Provider API.
@@ -75,6 +75,7 @@ public class MyWorker extends Worker {
 		mBoardActive = new BoardActive(getApplicationContext());
 
 	}
+
 
 	@NonNull
 	@Override

@@ -87,7 +87,6 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 Type collectionType = new TypeToken<List<CustomAttributes>>(){}.getType();
                 customAttributesList = gson.fromJson(value.toString(), collectionType);
-
                 getMe();
 
             }
@@ -308,7 +307,7 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
 
     public static String getFormattedDateSimple(Long dateTime) {
         TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         df.setTimeZone(tz);
         String nowAsISO = df.format(dateTime);
         return nowAsISO;

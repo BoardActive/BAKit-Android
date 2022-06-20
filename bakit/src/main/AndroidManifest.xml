@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Required for foreground services on P+. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.hardware.location.gps" />
 
     <application>
         <!-- [START BOOT/DEFAULT SERVICE] -->
@@ -30,11 +31,38 @@
         </receiver>
         <receiver android:name="MyBroadcastReceiver" >
         </receiver>
-        <service
-            android:name=".LocationUpdatesService"
+
+
+                    <service
+                        android:name=".LocationUpdatesService"
+                        android:enabled="true"
+                        android:exported="true" />
+        <receiver
+            android:name=".GeofenceBroadCastReceiver"
+            android:allowBackup="true"
+            android:directBootAware="true"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+            </intent-filter>
 
-    </application>
+        </receiver>
+        <activity android:name=".RequestPermissionActivity">
 
-</manifest>
+        </activity>
+        <service
+            android:name=".LocationService"
+            android:enabled="true"
+            android:exported="false" />
+<!--       <service-->
+<!--          android:name=".GeofenceIntentService"-->
+<!--            android:enabled="true"-->
+<!--           android:exported="false" />-->
+
+                </application>
+
+            </manifest>

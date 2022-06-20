@@ -4,6 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.boardactive.bakit.models.Coordinate;
+import com.boardactive.bakit.models.LocationModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class
 SharedPreferenceHelper {
 
@@ -88,5 +96,28 @@ SharedPreferenceHelper {
         SharedPreferences.Editor edit = sp.edit();
         edit.putLong(key, value);
         edit.commit();
+    }
+
+
+    public static void putArrayList(Context context, ArrayList<Coordinate> locationModelArrayList) {
+        SharedPreferences sp = context.getSharedPreferences("config",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        Gson gson = new Gson();
+
+        // getting data from gson and storing it in a string.
+        String json = gson.toJson(locationModelArrayList);
+
+        edit.putString("locationList",json);
+        edit.commit();
+    }
+
+    public static ArrayList<Coordinate> getArrayList(Context context,String key){
+        SharedPreferences sp = context.getSharedPreferences("config",
+                Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sp.getString(key, null);
+        Type type = new TypeToken<ArrayList<Coordinate>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 }

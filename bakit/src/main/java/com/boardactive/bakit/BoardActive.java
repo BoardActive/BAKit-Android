@@ -1,51 +1,91 @@
 package com.boardactive.bakit;
 
+import static android.content.Context.BIND_AUTO_CREATE;
+
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.bakit.models.Attributes;
+import com.boardactive.bakit.models.Coordinate;
 import com.boardactive.bakit.models.Custom;
+import com.boardactive.bakit.models.GeoData;
+import com.boardactive.bakit.models.GeofenceLocationModel;
+import com.boardactive.bakit.models.LocationModel;
 import com.boardactive.bakit.models.Me;
 import com.boardactive.bakit.models.MeRequest;
 import com.boardactive.bakit.models.Stock;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -73,13 +113,15 @@ import java.util.concurrent.TimeUnit;
  * using the BootReceiver BroadcastReceiver
  */
 
-public class BoardActive {
+public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     /**
      * Default API Global values
      */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
-    public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
+    // public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
+    public final static String APP_URL_DEV = "https://boardactiveapi.dev.radixweb.net/mobile/v1/";
+
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
     /**
@@ -99,15 +141,28 @@ public class BoardActive {
     public final static String BAKIT_APP_TEST = "BAKIT_APP_TEST";
     public final static String BAKIT_LOCATION_LATITUDE = "BAKIT_LOCATION_LATITUDE";
     public final static String BAKIT_LOCATION_LONGITUDE = "BAKIT_LOCATION_LONGITUDE";
+    private static final String BAKIT_IS_FOREGROUND = "isforeground";
+    public static final String BAKIT_GEOFENCE_DATE = "GeofenceDate";
+
     public static final String TAG = BoardActive.class.getName();
-    private static final String IS_FOREGROUND = "isforeground";
-    private final Context mContext;
+    private static final int REQUEST_CODE = 1;
+    private  Context mContext;
     protected GsonBuilder gsonBuilder = new GsonBuilder();
     protected Gson gson;
     private static final String FETCH_LOCATION_WORKER_NAME = "Location";
+    public List<Geofence> geofenceList = new ArrayList<>();
+    public ArrayList<Coordinate> locationList = new ArrayList<>();
 
+    private PendingIntent geofencePendingIntent;
     // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
-    int repeatInterval = 1;
+    private int repeatInterval = 1;
+    private GeofencingClient geofencingClient;
+    public boolean isPermissionGranted = false;
+    private GoogleApiClient googleApiClient;
+    private double latitude;
+    private double longitude;
+    public boolean isHoursExcedeed = false;
+    public boolean isAppEnabled = true;
 
     /**
      * Constuctor
@@ -118,7 +173,13 @@ public class BoardActive {
         mContext = context;
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         Log.d(TAG, "onStartJob() " + currentDateTimeString);
-        gson = gsonBuilder.create();
+        gson = gsonBuilder.setLenient().create();
+        googleApiClient = new GoogleApiClient.Builder(mContext)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).build();
+        geofencingClient = LocationServices.getGeofencingClient(mContext);
+
     }
 
     /**
@@ -249,32 +310,59 @@ public class BoardActive {
         SharedPreferenceHelper.putString(mContext, BAKIT_APP_TEST, AppTest);
     }
 
+    public Boolean getIsForeground() {
+        return SharedPreferenceHelper.getBoolean(mContext, BAKIT_IS_FOREGROUND, false);
+    }
+
+    public void setIsForeground(boolean IsForeground) {
+        SharedPreferenceHelper.putBoolean(mContext, BAKIT_IS_FOREGROUND, IsForeground);
+    }
+
+    public void  setLocationArrayList(ArrayList<Coordinate> locationModelArrayList) {
+        SharedPreferenceHelper.putArrayList(mContext, locationModelArrayList);
+    }
+    public ArrayList<Coordinate> getLocationArrayList() {
+        return SharedPreferenceHelper.getArrayList(mContext, "locationList");
+    }
+    public void setGeofenceDate(String geofenceDate) {
+        SharedPreferenceHelper.putString(mContext, BAKIT_GEOFENCE_DATE, geofenceDate);
+    }
+
+    public String getGeofenceDate() {
+        return SharedPreferenceHelper.getString(mContext, BAKIT_GEOFENCE_DATE, "");
+    }
+
     /**
      * Set SDK Core Variables and launches Job Dispatcher
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
-     *
-     * @param isForeground
      */
-    public void initialize(boolean isForeground) {
+    public void initialize() {
+
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
+        //setLocationArrayList(locationList);
 
+
+        /*Intent serviceIntent = new Intent(this, LocationService.class);
+        stopService(serviceIntent);*/
+        if (geofencingClient != null)
+            googleApiClient.connect();
         /** Start the JobDispatcher to check for and post location */
-        StartWorker(isForeground);
+        StartWorker();
+        //getLocationList();
         Log.d(TAG, "[BAKit]  initialize()");
+
     }
 
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
-     *
-     * @param isForeground if isForeground true then it starts foreground service else it starts worker.
      */
-    private void StartWorker(boolean isForeground) {
+    private void StartWorker() {
         Log.d(TAG, "[BAKit]  StartWorker()");
+        boolean isForeground = getIsForeground();
 
-        SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, isForeground);
         if (isForeground) {
             WorkManager.getInstance(mContext).cancelAllWork();
             if (!serviceIsRunningInForeground(mContext)) {
@@ -287,7 +375,7 @@ public class BoardActive {
                 }
             }
         } else {
-            SharedPreferenceHelper.putBoolean(mContext, IS_FOREGROUND, false);
+            setIsForeground(false);
             Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
             mContext.stopService(serviceIntent);
 
@@ -415,42 +503,88 @@ public class BoardActive {
         return uniqueID;
     }
 
+
+
     /**
      * post RegisterDevice with BoardActive Platform
      *
      * @param callback to return response from server
      */
+
     public void registerDevice(final PostRegisterCallback callback) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
+            StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+
+                        Attributes attributes = new Attributes();
+                        Stock stock = new Stock();
+
+                        /** Check for Location permission. If not then prompt to ask */
+                        int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                                Manifest.permission.ACCESS_FINE_LOCATION);
+
+                        if (permissionState != PackageManager.PERMISSION_GRANTED) {
+                            stock.setLocationPermission("false");
+                        } else {
+                            stock.setLocationPermission("true");
+                        }
+
+                        if (NotificationManagerCompat.from(mContext).areNotificationsEnabled())
+                            stock.setNotificationPermission("true");
+                        else
+                            stock.setNotificationPermission("false");
+
+
+                        attributes.setStock(stock);
+
+                        MeRequest meRequest = new MeRequest();
+                        meRequest.setEmail("");
+                        meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                        meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                        meRequest.setAttributes(attributes);
+
+                        //parse request object to json format and send as request body
+                        return gson.toJson(meRequest).getBytes();
+                    } catch (Exception e) {
+                        Log.e(TAG, "error parsing request body to json");
+                    }
+
+
+                    return super.getBody();
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
 
 //            @Override
 //            protected Map<String, String> getParams() {
@@ -461,9 +595,11 @@ public class BoardActive {
 //                Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
 //                return params;
 //            }
-        };
+            };
 
-        queue.add(str);
+            queue.add(str);
+        }
+
     }
 
     /**
@@ -472,47 +608,50 @@ public class BoardActive {
      * @param callback to return response from server
      */
     public void getMe(final GetMeCallback callback) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
+            StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
 //                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                return params;
-            }
+                    return params;
+                }
 
-        };
+            };
 
-        queue.add(str);
+            queue.add(str);
+        }
+
     }
 
     /**
@@ -521,76 +660,79 @@ public class BoardActive {
      * @param callback to return response from server
      */
     public void putMe(final PutMeCallback callback) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
-
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
-                params.put("deviceOS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
-                params.put("deviceOSVersion", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-                Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
-                return params;
-            }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    String json = "{" +
-                            "email:" + SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
-                            "deviceOS:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
-                            "deviceOSVersion:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
-                            "attributes:" + "{ " +
-                            "stock:" + "{)," +
-                            "custom:" + "{} " +
-                            "}" +
-                            "}";
-
-                    //parse request object to json format and send as request body
-                    return gson.toJson(json).getBytes();
-                } catch (Exception e) {
-                    Log.e(TAG, "error parsing request body to json");
-
+            StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
                 }
-                return super.getBody();
-            }
-        };
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-        queue.add(str);
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("email", SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null));
+                    params.put("deviceOS", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                    params.put("deviceOSVersion", SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                    Log.d(TAG, "[BAKit] RegisterDevice params: " + params.toString());
+                    return params;
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        String json = "{" +
+                                "email:" + SharedPreferenceHelper.getString(mContext, BAKIT_USER_EMAIL, null) + ", " +
+                                "deviceOS:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null) + ", " +
+                                "deviceOSVersion:" + SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null) + ", " +
+                                "attributes:" + "{ " +
+                                "stock:" + "{)," +
+                                "custom:" + "{} " +
+                                "}" +
+                                "}";
+
+                        //parse request object to json format and send as request body
+                        return gson.toJson(json).getBytes();
+                    } catch (Exception e) {
+                        Log.e(TAG, "error parsing request body to json");
+
+                    }
+                    return super.getBody();
+                }
+            };
+
+            queue.add(str);
+        }
+
     }
 
     /**
@@ -600,36 +742,37 @@ public class BoardActive {
      * @param me       type of Event to log
      */
     public void putMe(final PutMeCallback callback, final Me me) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
+            StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
 
 //            @Override
 //            protected Map<String, String> getParams() {
@@ -642,157 +785,157 @@ public class BoardActive {
 //            }
 
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    Gson gson = new Gson();
-
-                    Attributes attributes = new Attributes();
-                    Stock stock = new Stock();
-                    Custom custom = new Custom();
-
-                    /** Check for Location permission. If not then prompt to ask */
-                    int permissionState = ActivityCompat.checkSelfPermission(mContext,
-                            Manifest.permission.ACCESS_FINE_LOCATION);
-
-                    if (permissionState != PackageManager.PERMISSION_GRANTED) {
-                        stock.setLocationPermission("false");
-                    } else {
-                        stock.setLocationPermission("true");
-                    }
-
-                    stock.setNotificationPermission("true");
-
-                    stock.setName(me.getAttributes().getStock().getName() + "");
-                    stock.setEmail(me.getAttributes().getStock().getEmail() + "");
-                    stock.setPhone(me.getAttributes().getStock().getPhone() + "");
-                    stock.setPhone(me.getAttributes().getStock().getDateBorn() + "");
-                    stock.setGender(me.getAttributes().getStock().getGender() + "");
-                    stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
-                    stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
-                    stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
-                    stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
-                    stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
-
-                    if (me.getAttributes().getStock().getName().equals("")) {
-                        stock.setName(null);
-                    } else {
-                        stock.setName(me.getAttributes().getStock().getName() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getEmail().equals("")) {
-                        stock.setEmail(null);
-                    } else {
-                        stock.setEmail(me.getAttributes().getStock().getEmail() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getPhone().equals("")) {
-                        stock.setPhone(null);
-                    } else {
-                        stock.setPhone(me.getAttributes().getStock().getPhone() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getDateBorn().equals("")) {
-                        stock.setDateBorn(null);
-                    } else {
-                        stock.setDateBorn(me.getAttributes().getStock().getDateBorn());
-                    }
-
-                    if (me.getAttributes().getStock().getGender().equals("")) {
-                        stock.setGender(null);
-                    } else {
-                        stock.setGender(me.getAttributes().getStock().getGender() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getFacebookUrl().equals("")) {
-                        stock.setFacebookUrl(null);
-                    } else {
-                        stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getLinkedInUrl().equals("")) {
-                        stock.setLinkedInUrl(null);
-                    } else {
-                        stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getTwitterUrl().equals("")) {
-                        stock.setTwitterUrl(null);
-                    } else {
-                        stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getInstagramUrl().equals("")) {
-                        stock.setInstagramUrl(null);
-                    } else {
-                        stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
-                    }
-
-                    if (me.getAttributes().getStock().getAvatarUrl().length() == 0) {
-                        stock.setAvatarUrl(null);
-                    } else {
-                        stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
-                    }
-
-                    attributes.setStock(stock);
-
-                    MeRequest meRequest = new MeRequest();
-                    meRequest.setEmail("");
-                    meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
-                    meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-                    meRequest.setAttributes(attributes);
-
-                    //parse request object to json format and send as request body
-                    return gson.toJson(meRequest).getBytes();
-                } catch (Exception e) {
-                    Log.e(TAG, "error parsing request body to json");
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
                 }
-                return super.getBody();
-            }
-        };
 
-        queue.add(str);
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        Gson gson = new Gson();
+
+                        Attributes attributes = new Attributes();
+                        Stock stock = new Stock();
+
+                        /** Check for Location permission. If not then prompt to ask */
+                        int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                                Manifest.permission.ACCESS_FINE_LOCATION);
+
+                        if (permissionState != PackageManager.PERMISSION_GRANTED) {
+                            stock.setLocationPermission("false");
+                        } else {
+                            stock.setLocationPermission("true");
+                        }
+
+                        stock.setNotificationPermission("true");
+
+                        stock.setName(me.getAttributes().getStock().getName() + "");
+                        stock.setEmail(me.getAttributes().getStock().getEmail() + "");
+                        stock.setPhone(me.getAttributes().getStock().getPhone() + "");
+                        stock.setPhone(me.getAttributes().getStock().getDateBorn() + "");
+                        stock.setGender(me.getAttributes().getStock().getGender() + "");
+                        stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
+                        stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
+                        stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
+                        stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
+                        stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
+
+                        if (me.getAttributes().getStock().getName().equals("")) {
+                            stock.setName(null);
+                        } else {
+                            stock.setName(me.getAttributes().getStock().getName() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getEmail().equals("")) {
+                            stock.setEmail(null);
+                        } else {
+                            stock.setEmail(me.getAttributes().getStock().getEmail() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getPhone().equals("")) {
+                            stock.setPhone(null);
+                        } else {
+                            stock.setPhone(me.getAttributes().getStock().getPhone() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getDateBorn().equals("")) {
+                            stock.setDateBorn(null);
+                        } else {
+                            stock.setDateBorn(me.getAttributes().getStock().getDateBorn());
+                        }
+
+                        if (me.getAttributes().getStock().getGender().equals("")) {
+                            stock.setGender(null);
+                        } else {
+                            stock.setGender(me.getAttributes().getStock().getGender() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getFacebookUrl().equals("")) {
+                            stock.setFacebookUrl(null);
+                        } else {
+                            stock.setFacebookUrl(me.getAttributes().getStock().getFacebookUrl() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getLinkedInUrl().equals("")) {
+                            stock.setLinkedInUrl(null);
+                        } else {
+                            stock.setLinkedInUrl(me.getAttributes().getStock().getLinkedInUrl() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getTwitterUrl().equals("")) {
+                            stock.setTwitterUrl(null);
+                        } else {
+                            stock.setTwitterUrl(me.getAttributes().getStock().getTwitterUrl() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getInstagramUrl().equals("")) {
+                            stock.setInstagramUrl(null);
+                        } else {
+                            stock.setInstagramUrl(me.getAttributes().getStock().getInstagramUrl() + "");
+                        }
+
+                        if (me.getAttributes().getStock().getAvatarUrl().length() == 0) {
+                            stock.setAvatarUrl(null);
+                        } else {
+                            stock.setAvatarUrl(me.getAttributes().getStock().getAvatarUrl() + "");
+                        }
+
+                        attributes.setStock(stock);
+
+                        MeRequest meRequest = new MeRequest();
+                        meRequest.setEmail("");
+                        meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                        meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                        meRequest.setAttributes(attributes);
+
+                        //parse request object to json format and send as request body
+                        return gson.toJson(meRequest).getBytes();
+                    } catch (Exception e) {
+                        Log.e(TAG, "error parsing request body to json");
+                    }
+                    return super.getBody();
+                }
+            };
+
+            queue.add(str);
+        }
+
     }
 
 
-
-
     public void putCustomAtrributes(final PutMeCallback callback, final HashMap<String, Object> me) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "me";
 
-        StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
+            StringRequest str = new StringRequest(Request.Method.PUT, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
 
 //            @Override
 //            protected Map<String, String> getParams() {
@@ -805,23 +948,23 @@ public class BoardActive {
 //            }
 
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    Gson gson = new Gson();
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        Gson gson = new Gson();
 
-                    Attributes attributes = new Attributes();
-                    Stock stock = new Stock();
+                        Attributes attributes = new Attributes();
+                        Stock stock = new Stock();
 //                    Custom custom = new Custom();
 
-                    /** Check for Location permission. If not then prompt to ask */
-                    int permissionState = ActivityCompat.checkSelfPermission(mContext,
-                            Manifest.permission.ACCESS_FINE_LOCATION);
+                        /** Check for Location permission. If not then prompt to ask */
+                        int permissionState = ActivityCompat.checkSelfPermission(mContext,
+                                Manifest.permission.ACCESS_FINE_LOCATION);
 
 //                    if (permissionState != PackageManager.PERMISSION_GRANTED) {
 //                        stock.setLocationPermission("false");
@@ -831,24 +974,26 @@ public class BoardActive {
 //
 //                    stock.setNotificationPermission("true");
 
-                    attributes.setCustom(me);
+                        attributes.setCustom(me);
 
-                    MeRequest meRequest = new MeRequest();
-                    meRequest.setEmail("");
-                    meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
-                    meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-                    meRequest.setAttributes(attributes);
+                        MeRequest meRequest = new MeRequest();
+                        meRequest.setEmail("");
+                        meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
+                        meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                        meRequest.setAttributes(attributes);
 
-                    //parse request object to json format and send as request body
-                    return gson.toJson(meRequest).getBytes();
-                } catch (Exception e) {
-                    Log.e(TAG, "error parsing request body to json");
+                        //parse request object to json format and send as request body
+                        return gson.toJson(meRequest).getBytes();
+                    } catch (Exception e) {
+                        Log.e(TAG, "error parsing request body to json");
+                    }
+                    return super.getBody();
                 }
-                return super.getBody();
-            }
-        };
+            };
 
-        queue.add(str);
+            queue.add(str);
+        }
+
     }
 
     /** Private Function to launch serve to get and post location to BoaradActive Platform */
@@ -863,45 +1008,46 @@ public class BoardActive {
      * @param firebaseNotificationId firebase notification id to log the event
      */
     public void postEvent(final PostEventCallback callback, final String name, final String baMessageId, final String baNotificationId, final String firebaseNotificationId) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+       if(isAppEnabled){
+           RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
+           VolleyLog.DEBUG = true;
 
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "events";
+           String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "events";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "postEvent onResponse: " + response.toString());
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+           StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
+               @Override
+               public void onResponse(String response) {
+                   Log.d(TAG, "postEvent onResponse: " + response.toString());
+                   callback.onResponse(response);
+               }
+           }, new Response.ErrorListener() {
+               @Override
+               public void onErrorResponse(VolleyError error) {
+                   String readableError = handleServerError(error);
+                   Log.d(TAG, readableError);
+                   callback.onResponse(readableError);
+               }
+           }) {
+               @Override
+               public Priority getPriority() {
+                   return Priority.HIGH;
+               }
 
-            @Override
-            public Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("name", name);
-                params.put("baMessageId", baMessageId);
-                params.put("baNotificationId", baNotificationId);
-                params.put("firebaseNotificationId", firebaseNotificationId);
-                return params;
-            }
+               @Override
+               public Map<String, String> getParams() {
+                   Map<String, String> params = new HashMap<>();
+                   params.put("name", name);
+                   params.put("baMessageId", baMessageId);
+                   params.put("baNotificationId", baNotificationId);
+                   params.put("firebaseNotificationId", firebaseNotificationId);
+                   return params;
+               }
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
+               @Override
+               public String getBodyContentType() {
+                   return "application/json; charset=utf-8";
+               }
 
 //            @Override
 //            public byte[] getBody() throws AuthFailureError {
@@ -921,36 +1067,38 @@ public class BoardActive {
 //                return super.getBody();
 //            }
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
+               @Override
+               public byte[] getBody() throws AuthFailureError {
 
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("name", name);
-                    jsonObject.put("baMessageId", baMessageId);
-                    jsonObject.put("baNotificationId", baNotificationId);
-                    jsonObject.put("firebaseNotificationId", firebaseNotificationId);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                   JSONObject jsonObject = new JSONObject();
+                   try {
+                       jsonObject.put("name", name);
+                       jsonObject.put("baMessageId", baMessageId);
+                       jsonObject.put("baNotificationId", baNotificationId);
+                       jsonObject.put("firebaseNotificationId", firebaseNotificationId);
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                   }
 
-                String requestBody = jsonObject.toString();
+                   String requestBody = jsonObject.toString();
 
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                    return null;
-                }
-            }
+                   try {
+                       return requestBody == null ? null : requestBody.getBytes("utf-8");
+                   } catch (UnsupportedEncodingException uee) {
+                       VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                       return null;
+                   }
+               }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
-        };
+               @Override
+               public Map<String, String> getHeaders() throws AuthFailureError {
+                   return GenerateHeaders();
+               }
+           };
 
-        queue.add(stringRequest);
+           queue.add(stringRequest);
+       }
+
     }
 
     /**
@@ -964,34 +1112,34 @@ public class BoardActive {
     public void postLocation(final PostLocationCallback callback, final Double latitude, final Double longitude, final String deviceTime) {
         setLatitude(latitude.toString());
         setLongitude(longitude.toString());
+if(isAppEnabled){
+    RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+    VolleyLog.DEBUG = true;
+    String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "locations";
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "locations";
+    Log.d(TAG, "[BAKit] postLocation uri: " + uri);
 
-        Log.d(TAG, "[BAKit] postLocation uri: " + uri);
+    StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            Log.d(TAG, "[BAKit] postLocation onResponse: " + response.toString());
+            VolleyLog.wtf(response);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] postLocation onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+            callback.onResponse(response);
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            String readableError = handleServerError(error);
+            Log.d(TAG, readableError);
+            callback.onResponse(readableError);
+        }
+    }) {
+        @Override
+        public Priority getPriority() {
+            return Priority.HIGH;
+        }
 
 //            @Override
 //            public Map<String, String> getParams() {
@@ -1003,10 +1151,10 @@ public class BoardActive {
 //                return params;
 //            }
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
+        @Override
+        public String getBodyContentType() {
+            return "application/json; charset=utf-8";
+        }
 
 //            @Override
 //            public byte[] getBody() throws AuthFailureError {
@@ -1024,36 +1172,38 @@ public class BoardActive {
 //                return super.getBody();
 //            }
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
+        @Override
+        public byte[] getBody() throws AuthFailureError {
 
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("latitude", latitude.toString());
-                    jsonObject.put("longitude", longitude.toString());
-                    jsonObject.put("deviceTime", deviceTime);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                String requestBody = jsonObject.toString();
-
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                    return null;
-                }
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("latitude", latitude.toString());
+                jsonObject.put("longitude", longitude.toString());
+                jsonObject.put("deviceTime", deviceTime);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
+            String requestBody = jsonObject.toString();
+
+            try {
+                return requestBody == null ? null : requestBody.getBytes("utf-8");
+            } catch (UnsupportedEncodingException uee) {
+                VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                return null;
             }
+        }
 
-        };
+        @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            return GenerateHeaders();
+        }
 
-        queue.add(stringRequest);
+    };
+
+    queue.add(stringRequest);
+}
+
     }
 
     /**
@@ -1128,48 +1278,136 @@ public class BoardActive {
     }
 
     public void getAttributes(final GetMeCallback callback) {
-        RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
-        VolleyLog.DEBUG = true;
-        String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "attributes";
+            VolleyLog.DEBUG = true;
+            String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + "attributes";
 
-        StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
-                VolleyLog.wtf(response);
-                callback.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String readableError = handleServerError(error);
-                Log.d(TAG, readableError);
-                callback.onResponse(readableError);
-            }
-        }) {
+            StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
 
-            @Override
-            public Priority getPriority() {
-                return Priority.HIGH;
-            }
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return GenerateHeaders();
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                return params;
-            }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                    return params;
+                }
 
-        };
+            };
 
-        queue.add(str);
+            queue.add(str);
+        }
 
+
+    }
+
+    /**
+     * get geoefence list in boardacrive
+     *
+     * @param callback to return response from server
+     */
+    public void getGeoCoordinates(final GetMeCallback callback) {
+        if(isAppEnabled){
+            RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
+
+            VolleyLog.DEBUG = true;
+            String locationUrl = "geofenceLocation?limit=10";
+                String uri = SharedPreferenceHelper.getString(mContext, BAKIT_URL, null) + locationUrl;
+            StringRequest str = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "[BAKit] getLocation onResponse: " + response.toString());
+                    VolleyLog.wtf(response);
+                    callback.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String readableError = handleServerError(error);
+                    Log.d(TAG, readableError);
+                    callback.onResponse(readableError);
+                }
+            }) {
+
+                @Override
+                public Priority getPriority() {
+                    return Priority.HIGH;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return GenerateHeaders();
+                }
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                    return params;
+                }
+
+            };
+            str.setRetryPolicy(new DefaultRetryPolicy(
+                    10000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            queue.add(str);
+        }
+
+    }
+
+    public void checkLocationPermissions() {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
     }
 
     /**
@@ -1212,6 +1450,221 @@ public class BoardActive {
      */
     public interface PostLoginCallback<T> {
         void onResponse(T value);
+    }
+
+    /*add geofence*/
+
+    public void addGeofence() {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+
+        geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(mContext
+                            , "Geofencing has started", Toast.LENGTH_SHORT).show();
+                    Log.e("geofencing started..", "geofence");
+
+
+
+                })
+                .addOnFailureListener( e -> {
+                    Log.e("error",e.getMessage());
+                    Toast.makeText(mContext
+                            , "Geofencing failed", Toast.LENGTH_SHORT).show();
+
+                });
+
+
+    }
+
+    private GeofencingRequest getGeofencingRequest() {
+        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.addGeofences(geofenceList);
+        return builder.build();
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    private PendingIntent getGeofencePendingIntent() {
+        // Reuse the PendingIntent if we already have it.
+        if (geofencePendingIntent != null) {
+            return geofencePendingIntent;
+        }
+        Toast.makeText(mContext, "starting broadcast", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(mContext, GeofenceBroadCastReceiver.class);
+
+        geofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT);
+        return geofencePendingIntent;
+    }
+
+    public void removeGeofence(Context context) {
+        geofencingClient.removeGeofences(getGeofencePendingIntent())
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(context, "Geofencing has been removed", Toast.LENGTH_SHORT).show();
+                    Log.e("geofencing removed..", "geofence");
+                    //setLocationArrayList(null);
+
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context
+                            , "Geofencing could not be removed", Toast.LENGTH_SHORT).show();
+                });
+    }
+    /* get coorindates from server*/
+
+    public void getLocationList() {
+        if(getLocationArrayList() == null)
+        {
+            getGeoCoordinates(new BoardActive.GetMeCallback() {
+                @Override
+                public void onResponse(Object value) {
+                    try {
+                        JsonParser parser = new JsonParser();
+                        JsonElement mJson = parser.parse(value.toString());
+                        JsonElement jelement = new JsonParser().parse(value.toString());
+                        JsonObject jobject = jelement.getAsJsonObject();
+                        Gson gson = new GsonBuilder().setLenient().create();
+
+                        GeofenceLocationModel geofenceLocationModel = gson.fromJson(jobject , GeofenceLocationModel.class);
+                        locationList.clear();
+                        for (int j = 0; j < geofenceLocationModel.getData().size(); j++) {
+                            GeoData geoData = geofenceLocationModel.getData().get(j);
+                            for (int i = 0; i < geoData.getCoordinates().size(); i++) {
+                                Coordinate locationModel = geoData.getCoordinates().get(i);
+                                locationModel.setLastNotifyDate("");
+                                locationModel.setRadius(geoData.getRadius());
+                                locationList.addAll(geoData.getCoordinates());
+                                setLocationArrayList(locationList);
+                                setUpRegion();
+
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
+        }else
+        {
+             setUpRegion();
+
+        }
+
+
+    }
+
+    public void  setUpRegion() {
+        ArrayList<Coordinate> locationNewArrayList = new ArrayList<>();
+
+        for (int i = 0; i < getLocationArrayList().size(); i++) {
+            Coordinate coordinateModel = getLocationArrayList().get(i);
+            if(coordinateModel.getLastNotifyDate() != null && !coordinateModel.getLastNotifyDate().equals("")){
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy hh:mm:ss a");
+                Date date1 = null;
+                try {
+                    date1 = dateFormat.parse(coordinateModel.getLastNotifyDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Date date2 = null;
+                try {
+                    date2 = dateFormat.parse(dateFormat.format(Calendar.getInstance().getTime()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long difference = 0;
+                if (date2 != null) {
+                    if (date1 != null) {
+                        difference = date2.getTime() - date1.getTime();
+                        Log.e("differecnce", "" + difference);
+
+                        long hours = 0;
+                        long minutes=0;
+                        int geofenceTimeLimit=24;
+                        minutes
+                                = (difference
+                                / (1000 * 60))
+                                % 60;
+                        hours
+                                = (difference
+                                / (1000 * 60 * 60))
+                                % 24;
+                        Log.e("hours", "" + hours);
+                        Log.e("minutes", "" + minutes);
+
+                        if (Integer.parseInt(String.valueOf(hours)) > geofenceTimeLimit) {
+                            locationNewArrayList.addAll(getLocationArrayList());
+                            Log.e("minutes", "" + minutes);
+
+                        } else {
+                            isHoursExcedeed = false;
+                        }
+//                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//                            hours = Math.toIntExact(TimeUnit.MILLISECONDS.toHours(difference) % 24);
+//                                minutes = Math.toIntExact(TimeUnit.MILLISECONDS.toMinutes(difference));
+//
+//                            Log.e("hours", "" + hours);
+//                            if (minutes > 2) {
+//                                locationNewArrayList.addAll(getLocationArrayList());
+//                                Log.e("minutes", "" + minutes);
+//
+//                            } else {
+//                                isHoursExcedeed = false;
+//                            }
+//                        }
+
+
+                    }
+                }
+
+
+            }else
+            {
+                locationNewArrayList.addAll(getLocationArrayList());
+
+
+            }
+
+        }
+        if(locationNewArrayList.size()>0){
+            for (int i = 0; i < locationNewArrayList.size(); i++) {
+                Coordinate locationModel = locationNewArrayList.get(i);
+                if(i>=100){
+                    break;
+                }
+                createGeofence(locationModel,locationModel.getRadius());
+            }
+        }
+
+    }
+
+    public void createGeofence(Coordinate locationModel,int radius){
+
+        geofenceList.add(new Geofence.Builder()
+                // Set the request ID of the geofence. This is a string to identify this
+                // geofence.
+                .setRequestId(locationModel.getLatitude() + locationModel.getLongitude())
+                .setCircularRegion(
+                        Double.parseDouble(locationModel.getLatitude()),
+                        Double.parseDouble(locationModel.getLongitude()),
+                        radius)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setNotificationResponsiveness(1000)
+                .build());
+        addGeofence();
     }
 }
 
