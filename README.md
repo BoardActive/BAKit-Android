@@ -711,7 +711,7 @@ public class MessageModel {
 ### Use BAKit SDK in your Launch Activity
 
 ```java
-import com.boardactive.bakit.BoardActive;
+import com.boardactive.addrop.BoardActive;
 
 public class MainActivity extends AppCompatActivity {
 
