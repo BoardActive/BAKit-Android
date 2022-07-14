@@ -12,6 +12,7 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -91,7 +92,9 @@ public class LocationUpdatesService extends Service {
             // Set the Notification Channel for the Notification Manager.
             mNotificationManager.createNotificationChannel(mChannel);
         }
-        startForeground(NOTIFICATION_ID, getNotification());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startForeground(NOTIFICATION_ID, getNotification());
+        }
 
 
     }
@@ -139,13 +142,16 @@ public class LocationUpdatesService extends Service {
         } catch (Exception e) {
             resourceId = R.drawable.ba_logo;
         }
-        Notification.Builder builder = new Notification.Builder(this)
-                .setContentText(getResources().getString(R.string.bakit_foreground_message))
-                .setOngoing(true)
-                .setPriority(Notification.PRIORITY_HIGH)
-                .setSmallIcon(resourceId)
-                .setColor(getResources().getColor(R.color.notification_icon_color))
-                .setWhen(System.currentTimeMillis());
+        Notification.Builder builder = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            builder = new Notification.Builder(this)
+                    .setContentText(getResources().getString(R.string.bakit_foreground_message))
+                    .setOngoing(true)
+                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setSmallIcon(resourceId)
+                    .setColor(getResources().getColor(R.color.notification_icon_color))
+                    .setWhen(System.currentTimeMillis());
+        }
 
         // Set the Channel ID for Android O.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
