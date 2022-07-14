@@ -1,4 +1,4 @@
-package com.boardactive.bakitapp.room;
+package com.boardactive.addrop.room;
 
 import android.database.Cursor;
 import androidx.room.EntityInsertionAdapter;
@@ -8,7 +8,7 @@ import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
-import com.boardactive.bakitapp.room.table.MessageEntity;
+import com.boardactive.addrop.room.table.MessageEntity;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Long;
