@@ -147,6 +147,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     private double longitude;
     public boolean isHoursExcedeed = false;
     public boolean isAppEnabled = true;
+    Location previousUserLocation;
 
     /**
      * Constuctor
@@ -311,7 +312,12 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     public void setGeofenceDate(String geofenceDate) {
         SharedPreferenceHelper.putString(mContext, BAKIT_GEOFENCE_DATE, geofenceDate);
     }
-
+    public void  setCurrentLocationArrayList(ArrayList<Location> locationModelArrayList) {
+        SharedPreferenceHelper.putCurrentLocationArrayList(mContext, locationModelArrayList);
+    }
+    public ArrayList<Location> getCurrentLocationArrayList() {
+        return SharedPreferenceHelper.getCurrentLocationArrayList(mContext, "CurrentLocationList");
+    }
     public String getGeofenceDate() {
         return SharedPreferenceHelper.getString(mContext, BAKIT_GEOFENCE_DATE, "");
     }

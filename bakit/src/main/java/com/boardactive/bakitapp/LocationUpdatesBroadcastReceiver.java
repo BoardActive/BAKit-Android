@@ -12,10 +12,12 @@ import android.util.Log;
 import androidx.work.WorkManager;
 
 import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
+import com.boardactive.bakitapp.models.Coordinate;
 import com.google.android.gms.location.LocationResult;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     @SuppressLint("MissingPermission")
     public void getLocationUpdates(final Context context, final Intent intent) {
+        Log.e("locations","locations");
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
@@ -51,6 +54,24 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
             if (locations.size() > 0) {
                 Location firstLocation = locations.get(0);
+                if(mBoardActive.getCurrentLocationArrayList().size() > 0 && !mBoardActive.getCurrentLocationArrayList().isEmpty())
+                {
+                    for(int i=0; i< mBoardActive.getCurrentLocationArrayList().size();i++)
+                    {
+                        mBoardActive.previousUserLocation = mBoardActive.getCurrentLocationArrayList().get(i);
+                    }
+
+                }
+                if(mBoardActive.previousUserLocation == null){
+                    mBoardActive.previousUserLocation = firstLocation;
+                    saveLocation(firstLocation);
+                }else if(mBoardActive.previousUserLocation.distanceTo(firstLocation) > 15.0)
+                {
+                    mBoardActive.previousUserLocation = firstLocation;
+                    saveLocation(firstLocation);
+
+                }
+
                 updateLocation(context, firstLocation);
             }
         } else {
@@ -63,7 +84,18 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
             }
         }
     }
-
+    public void saveLocation(Location location){
+        ArrayList<Location> currrentLocationArrayList = new ArrayList();
+        if(mBoardActive.getCurrentLocationArrayList() != null){
+            currrentLocationArrayList = mBoardActive.getCurrentLocationArrayList();
+            currrentLocationArrayList.add(location);
+            mBoardActive.setCurrentLocationArrayList(currrentLocationArrayList);
+        }else
+        {
+            currrentLocationArrayList.add(location);
+            mBoardActive.setCurrentLocationArrayList(currrentLocationArrayList);
+        }
+    }
     // This method starts the worker if locations are not being retreived.
     private void startWorker() {
         Intent intent = new Intent(context, MyBroadcastReceiver.class);
