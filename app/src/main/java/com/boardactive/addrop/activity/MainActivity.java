@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity  {
         mBoardActive.setAppVersion("1.0.0");
 
         // Optional, set to 'true' to run in foreground
-        mBoardActive.setIsForeground(false);
+        mBoardActive.setIsForeground(true);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity  {
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
-                        mBoardActive.setIsForeground(false);
+                        mBoardActive.setIsForeground(true);
 
                         // Check for Location permissions
                         mBoardActive.checkLocationPermissions();

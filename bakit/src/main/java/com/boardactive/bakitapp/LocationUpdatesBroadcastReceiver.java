@@ -40,6 +40,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                 getLocationUpdates(context, intent);
             }
         }
+
     }
 
 
@@ -54,23 +55,29 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
             if (locations.size() > 0) {
                 Location firstLocation = locations.get(0);
-                if(mBoardActive.getCurrentLocationArrayList().size() > 0 && !mBoardActive.getCurrentLocationArrayList().isEmpty())
-                {
-                    for(int i=0; i< mBoardActive.getCurrentLocationArrayList().size();i++)
-                    {
-                        mBoardActive.previousUserLocation = mBoardActive.getCurrentLocationArrayList().get(i);
-                    }
+//                if(mBoardActive != null &&  mBoardActive.getCurrentLocationArrayList() != null){
+//                    if(mBoardActive.getCurrentLocationArrayList().size() > 0 && !mBoardActive.getCurrentLocationArrayList().isEmpty())
+//                    {
+//                        for(int i=0; i< mBoardActive.getCurrentLocationArrayList().size();i++)
+//                        {
+//                            mBoardActive.previousUserLocation = mBoardActive.getCurrentLocationArrayList().get(i);
+//                        }
+//
+//                    }
+//
+//                }
+//                if(mBoardActive != null){
+//                    if(mBoardActive.previousUserLocation == null){
+//                        mBoardActive.previousUserLocation = firstLocation;
+//                        saveLocation(firstLocation);
+//                    }else if(mBoardActive.previousUserLocation.distanceTo(firstLocation) > 15.0)
+//                    {
+//                        mBoardActive.previousUserLocation = firstLocation;
+//                        saveLocation(firstLocation);
+//
+//                    }
+//                }
 
-                }
-                if(mBoardActive.previousUserLocation == null){
-                    mBoardActive.previousUserLocation = firstLocation;
-                    saveLocation(firstLocation);
-                }else if(mBoardActive.previousUserLocation.distanceTo(firstLocation) > 15.0)
-                {
-                    mBoardActive.previousUserLocation = firstLocation;
-                    saveLocation(firstLocation);
-
-                }
 
                 updateLocation(context, firstLocation);
             }
