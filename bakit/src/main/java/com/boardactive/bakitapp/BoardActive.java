@@ -43,6 +43,7 @@ import com.boardactive.bakitapp.models.GeofenceLocationModel;
 import com.boardactive.bakitapp.models.Me;
 import com.boardactive.bakitapp.models.MeRequest;
 import com.boardactive.bakitapp.models.Stock;
+import com.boardactive.bakitapp.utils.Constants;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.Geofence;
@@ -103,8 +104,8 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
      * Default API Global values
      */
     public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
-    // public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
-            public final static String APP_URL_DEV = "https://boardactiveapi.dev.radixweb.net/mobile/v1/";
+    public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
+    //public final static String APP_URL_DEV = "https://boardactiveapi.dev.radixweb.net/mobile/v1/";
 
     public final static String APP_KEY_PROD = "b70095c6-1169-43d6-a5dd-099877b4acb3";
     public final static String APP_KEY_DEV = "d17f0feb-4f96-4c2a-83fd-fd6302ae3a16";
@@ -147,6 +148,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     private double longitude;
     public boolean isHoursExcedeed = false;
     public boolean isAppEnabled = true;
+
     Location previousUserLocation;
 
     /**
@@ -164,6 +166,14 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build();
         geofencingClient = LocationServices.getGeofencingClient(mContext);
+        if(SharedPreferenceHelper.getString(context,Constants.APP_STATUS,"Enable").equals("Enable"))
+        {
+            isAppEnabled =true;
+        }else
+        {
+            isAppEnabled =false;
+
+        }
 
     }
 
@@ -1216,6 +1226,28 @@ if(isAppEnabled){
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "[BAKit] postLogin onResponse: " + response.toString());
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+
+                    Log.d("My App", obj.getJSONArray("apps").toString());
+                    for(int i=0;i<obj.getJSONArray("apps").length();i++){
+                        try{
+                            JSONObject jsonObject = obj.getJSONArray("apps").getJSONObject(i);
+                            Boolean isActive=   jsonObject.getBoolean("isActive");
+                            if(jsonObject.get("appId").equals("344"))
+                            {
+                                SharedPreferenceHelper.putString(mContext,Constants.APP_STATUS,isActive.toString());
+                            }
+                            Log.e("is Active",isActive.toString());
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (Throwable t) {
+                    Log.e("My App", "Could not parse malformed JSON: \"" + response + "\"");
+                }
                 VolleyLog.wtf(response);
                 callback.onResponse(response);
             }
@@ -1459,8 +1491,8 @@ if(isAppEnabled){
 
         geofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(mContext
-                            , "Geofencing has started", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext
+//                            , "Geofencing has started", Toast.LENGTH_SHORT).show();
                     Log.e("geofencing started..", "geofence");
 
 
@@ -1468,8 +1500,8 @@ if(isAppEnabled){
                 })
                 .addOnFailureListener( e -> {
                     Log.e("error",e.getMessage());
-                    Toast.makeText(mContext
-                            , "Geofencing failed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext
+//                            , "Geofencing failed", Toast.LENGTH_SHORT).show();
 
                 });
 
@@ -1490,9 +1522,9 @@ if(isAppEnabled){
             return geofencePendingIntent;
         }
        // Toast.makeText(mContext, "starting broadcast", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(mContext, GeofenceBroadCastReceiver.class);
+        Intent intent = new Intent(mContext, GeofenceIntentService.class);
 
-        geofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT);
+        geofencePendingIntent = PendingIntent.getService(mContext, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT);
         return geofencePendingIntent;
     }
 
@@ -1601,19 +1633,6 @@ if(isAppEnabled){
                         } else {
                             isHoursExcedeed = false;
                         }
-//                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                            hours = Math.toIntExact(TimeUnit.MILLISECONDS.toHours(difference) % 24);
-//                                minutes = Math.toIntExact(TimeUnit.MILLISECONDS.toMinutes(difference));
-//
-//                            Log.e("hours", "" + hours);
-//                            if (minutes > 2) {
-//                                locationNewArrayList.addAll(getLocationArrayList());
-//                                Log.e("minutes", "" + minutes);
-//
-//                            } else {
-//                                isHoursExcedeed = false;
-//                            }
-//                        }
 
 
                     }
@@ -1641,7 +1660,6 @@ if(isAppEnabled){
     }
 
     public void createGeofence(Coordinate locationModel,int radius){
-
         geofenceList.add(new Geofence.Builder()
                 // Set the request ID of the geofence. This is a string to identify this
                 // geofence.

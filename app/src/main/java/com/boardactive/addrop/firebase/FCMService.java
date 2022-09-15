@@ -26,8 +26,10 @@ import androidx.work.WorkManager;
 
 import com.boardactive.bakitapp.BoardActive;
 import com.boardactive.bakitapp.Tools.NotificationBuilder;
+import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
 import com.boardactive.bakitapp.models.MessageModel;
 import com.boardactive.addrop.activity.MainActivity;
+import com.boardactive.bakitapp.utils.Constants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -179,7 +181,11 @@ public class FCMService extends FirebaseMessagingService {
         obj.setDateCreated(currentDateandTime);
         obj.setDateLastUpdated(currentDateandTime);
         Boolean isSilent = Boolean.valueOf(remoteMessage.getData().get("isSilent"));
+        String action = remoteMessage.getData().get("action");
         Log.v(isSilent.toString(),"");
+        Log.v(action,"action");
+        obj.setAction(action);
+        SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
 
         BoardActive mBoardActive = new BoardActive(getApplicationContext());
 

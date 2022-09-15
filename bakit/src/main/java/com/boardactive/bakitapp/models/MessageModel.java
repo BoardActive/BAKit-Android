@@ -61,6 +61,10 @@ public class MessageModel {
     @Expose
     private Long dateLastUpdated;
 
+    @SerializedName("action")
+    @Expose
+    private String action;
+
 
     /**
      * No args constructor for use in serialization
@@ -98,7 +102,8 @@ public class MessageModel {
             String isTestMessage,
             Boolean isRead,
             Long dateCreated,
-            Long dateLastUpdated
+            Long dateLastUpdated,
+            String action
     ) {
         super();
         this.id = id;
@@ -115,6 +120,7 @@ public class MessageModel {
         this.isRead = isRead;
         this.dateCreated = dateCreated;
         this.dateLastUpdated = dateLastUpdated;
+        this.action =action;
     }
 
     public Integer getId() {
@@ -229,5 +235,11 @@ public class MessageModel {
         this.dateLastUpdated = dateLastUpdated;
     }
 
+    public String getAction() {
+        return action;
+    }
 
+    public void setAction(String action) {
+        this.action = action;
+    }
 }

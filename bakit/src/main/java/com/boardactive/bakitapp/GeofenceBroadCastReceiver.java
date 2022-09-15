@@ -40,8 +40,7 @@ public  class GeofenceBroadCastReceiver extends BroadcastReceiver implements Loc
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
 
         // Test that the reported transition was of interest.
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-                geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
             Log.e("on enter","on enter");
             DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy hh:mm:ss a");
             String date = df.format(Calendar.getInstance().getTime());
@@ -91,7 +90,9 @@ public  class GeofenceBroadCastReceiver extends BroadcastReceiver implements Loc
             mBoardActive.removeGeofence(context);
             mBoardActive.getLocationList();
 
-        } else {
+        }else if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT){
+            mBoardActive.removeGeofence(context);
+        } else{
             // Log the error.
             Log.e("TAG", "Error");
         }

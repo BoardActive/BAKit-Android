@@ -46,7 +46,6 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     @SuppressLint("MissingPermission")
     public void getLocationUpdates(final Context context, final Intent intent) {
-        Log.e("locations","locations");
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
