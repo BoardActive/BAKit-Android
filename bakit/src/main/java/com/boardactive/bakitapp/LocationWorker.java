@@ -22,12 +22,12 @@ public class LocationWorker extends Worker {
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
 
-    private static final long UPDATE_INTERVAL = 50 * 1000;
+    private static final long UPDATE_INTERVAL = 5 * 1000;
 
     //updates the location after defined displacement interval in meters
-    private static final float SMALLEST_DISPLACEMENT = 5.0F;
+    private static final float SMALLEST_DISPLACEMENT = 10;
 
-    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 2;
+    private static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 6;
     Context context;
 
     public LocationWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
@@ -64,8 +64,8 @@ public class LocationWorker extends Worker {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+//      mLocationRequest.setFastestInterval(MAX_WAIT_TIME);
     }
 
     private PendingIntent getPendingIntent() {

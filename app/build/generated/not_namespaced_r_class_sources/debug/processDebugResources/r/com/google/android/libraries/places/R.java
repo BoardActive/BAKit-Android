@@ -441,6 +441,7 @@ public final class R {
         public static final int beginning = 0x7f09004f;
         public static final int blocking = 0x7f090050;
         public static final int bottom = 0x7f090051;
+<<<<<<< HEAD
         public static final int buttonPanel = 0x7f09005e;
         public static final int cancel_action = 0x7f09005f;
         public static final int center = 0x7f090065;
@@ -567,10 +568,139 @@ public final class R {
         public static final int useLogo = 0x7f0901a6;
         public static final int withText = 0x7f0901ad;
         public static final int wrap_content = 0x7f0901af;
+=======
+        public static final int buttonPanel = 0x7f09005b;
+        public static final int cancel_action = 0x7f09005c;
+        public static final int center = 0x7f090062;
+        public static final int center_horizontal = 0x7f090063;
+        public static final int center_vertical = 0x7f090064;
+        public static final int checkbox = 0x7f090066;
+        public static final int chronometer = 0x7f09006a;
+        public static final int clip_horizontal = 0x7f09006c;
+        public static final int clip_vertical = 0x7f09006d;
+        public static final int collapseActionView = 0x7f09006e;
+        public static final int content = 0x7f090072;
+        public static final int contentPanel = 0x7f090073;
+        public static final int custom = 0x7f090075;
+        public static final int customPanel = 0x7f090076;
+        public static final int decor_content_parent = 0x7f09007c;
+        public static final int default_activity_button = 0x7f09007d;
+        public static final int disableHome = 0x7f090087;
+        public static final int edit_query = 0x7f09008a;
+        public static final int end = 0x7f09008d;
+        public static final int end_padder = 0x7f09008e;
+        public static final int expand_activities_button = 0x7f090092;
+        public static final int expanded_menu = 0x7f090093;
+        public static final int fill = 0x7f090096;
+        public static final int fill_horizontal = 0x7f090097;
+        public static final int fill_vertical = 0x7f090098;
+        public static final int forever = 0x7f09009d;
+        public static final int group_divider = 0x7f0900a2;
+        public static final int home = 0x7f0900a5;
+        public static final int homeAsUp = 0x7f0900a6;
+        public static final int icon = 0x7f0900a9;
+        public static final int icon_group = 0x7f0900aa;
+        public static final int ifRoom = 0x7f0900ac;
+        public static final int image = 0x7f0900ad;
+        public static final int info = 0x7f0900af;
+        public static final int italic = 0x7f0900b2;
+        public static final int item_touch_helper_previous_elevation = 0x7f0900b3;
+        public static final int left = 0x7f0900c2;
+        public static final int line1 = 0x7f0900c4;
+        public static final int line3 = 0x7f0900c5;
+        public static final int listMode = 0x7f0900c7;
+        public static final int list_item = 0x7f0900c8;
+        public static final int media_actions = 0x7f0900f2;
+        public static final int message = 0x7f0900f3;
+        public static final int middle = 0x7f0900f4;
+        public static final int multiply = 0x7f090110;
+        public static final int never = 0x7f090114;
+        public static final int none = 0x7f090116;
+        public static final int normal = 0x7f090117;
+        public static final int notification_background = 0x7f090118;
+        public static final int notification_main_column = 0x7f090119;
+        public static final int notification_main_column_container = 0x7f09011a;
+        public static final int parentPanel = 0x7f090121;
+        public static final int places_autocomplete_action_bar = 0x7f090128;
+        public static final int places_autocomplete_back_button = 0x7f090129;
+        public static final int places_autocomplete_clear_button = 0x7f09012a;
+        public static final int places_autocomplete_edit_text = 0x7f09012b;
+        public static final int places_autocomplete_error = 0x7f09012c;
+        public static final int places_autocomplete_error_message = 0x7f09012d;
+        public static final int places_autocomplete_error_progress = 0x7f09012e;
+        public static final int places_autocomplete_list = 0x7f09012f;
+        public static final int places_autocomplete_overlay_content = 0x7f090130;
+        public static final int places_autocomplete_overlay_root = 0x7f090131;
+        public static final int places_autocomplete_powered_by_google = 0x7f090132;
+        public static final int places_autocomplete_prediction_primary_text = 0x7f090133;
+        public static final int places_autocomplete_prediction_secondary_text = 0x7f090134;
+        public static final int places_autocomplete_progress = 0x7f090135;
+        public static final int places_autocomplete_search_button = 0x7f090136;
+        public static final int places_autocomplete_search_input = 0x7f090137;
+        public static final int places_autocomplete_separator = 0x7f090138;
+        public static final int places_autocomplete_try_again = 0x7f090139;
+        public static final int progress_circular = 0x7f09013b;
+        public static final int progress_horizontal = 0x7f09013c;
+        public static final int radio = 0x7f09013e;
+        public static final int right = 0x7f090143;
+        public static final int right_icon = 0x7f090144;
+        public static final int right_side = 0x7f090145;
+        public static final int screen = 0x7f09014b;
+        public static final int scrollIndicatorDown = 0x7f09014d;
+        public static final int scrollIndicatorUp = 0x7f09014e;
+        public static final int scrollView = 0x7f09014f;
+        public static final int search_badge = 0x7f090151;
+        public static final int search_bar = 0x7f090152;
+        public static final int search_button = 0x7f090153;
+        public static final int search_close_btn = 0x7f090154;
+        public static final int search_edit_frame = 0x7f090155;
+        public static final int search_go_btn = 0x7f090156;
+        public static final int search_mag_icon = 0x7f090157;
+        public static final int search_plate = 0x7f090158;
+        public static final int search_src_text = 0x7f090159;
+        public static final int search_voice_btn = 0x7f09015a;
+        public static final int select_dialog_listview = 0x7f09015b;
+        public static final int shortcut = 0x7f09015d;
+        public static final int showCustom = 0x7f09015e;
+        public static final int showHome = 0x7f09015f;
+        public static final int showTitle = 0x7f090160;
+        public static final int spacer = 0x7f090168;
+        public static final int split_action_bar = 0x7f090169;
+        public static final int src_atop = 0x7f09016c;
+        public static final int src_in = 0x7f09016d;
+        public static final int src_over = 0x7f09016e;
+        public static final int start = 0x7f090170;
+        public static final int status_bar_latest_event_content = 0x7f090171;
+        public static final int submenuarrow = 0x7f090173;
+        public static final int submit_area = 0x7f090174;
+        public static final int tabMode = 0x7f090176;
+        public static final int tag_accessibility_heading = 0x7f090179;
+        public static final int tag_accessibility_pane_title = 0x7f09017a;
+        public static final int tag_screen_reader_focusable = 0x7f09017b;
+        public static final int tag_transition_group = 0x7f09017c;
+        public static final int tag_unhandled_key_event_manager = 0x7f09017d;
+        public static final int tag_unhandled_key_listeners = 0x7f09017e;
+        public static final int text = 0x7f090182;
+        public static final int text2 = 0x7f090183;
+        public static final int textSpacerNoButtons = 0x7f090185;
+        public static final int textSpacerNoTitle = 0x7f090186;
+        public static final int time = 0x7f09018f;
+        public static final int title = 0x7f090190;
+        public static final int titleDividerNoCustom = 0x7f090191;
+        public static final int title_template = 0x7f090192;
+        public static final int top = 0x7f090194;
+        public static final int topPanel = 0x7f090195;
+        public static final int uniform = 0x7f0901a0;
+        public static final int up = 0x7f0901a2;
+        public static final int useLogo = 0x7f0901a3;
+        public static final int withText = 0x7f0901aa;
+        public static final int wrap_content = 0x7f0901ac;
+>>>>>>> WorkManager
     }
     public static final class layout {
         private layout() {}
 
+<<<<<<< HEAD
         public static final int places_autocomplete_error_text = 0x7f0c0076;
         public static final int places_autocomplete_fragment = 0x7f0c0077;
         public static final int places_autocomplete_item_powered_by_google = 0x7f0c0078;
@@ -579,6 +709,16 @@ public final class R {
         public static final int places_autocomplete_main_overlay = 0x7f0c007b;
         public static final int places_autocomplete_progress = 0x7f0c007c;
         public static final int places_autocomplete_search_bar = 0x7f0c007d;
+=======
+        public static final int places_autocomplete_error_text = 0x7f0c0077;
+        public static final int places_autocomplete_fragment = 0x7f0c0078;
+        public static final int places_autocomplete_item_powered_by_google = 0x7f0c0079;
+        public static final int places_autocomplete_item_prediction = 0x7f0c007a;
+        public static final int places_autocomplete_main_fullscreen = 0x7f0c007b;
+        public static final int places_autocomplete_main_overlay = 0x7f0c007c;
+        public static final int places_autocomplete_progress = 0x7f0c007d;
+        public static final int places_autocomplete_search_bar = 0x7f0c007e;
+>>>>>>> WorkManager
     }
     public static final class raw {
         private raw() {}

@@ -2431,10 +2431,7 @@ id bt_open
 id bt_pick
 id btn_cancel
 id btn_customAttributes
-id btn_getMe
 id btn_messages
-id btn_postEvent
-id btn_postLocation
 id btn_save
 id btn_service
 id btn_userAttributes
@@ -2843,6 +2840,7 @@ layout activity_dialog_message
 layout activity_main
 layout activity_message
 layout activity_messages
+layout activity_request_permission
 layout activity_user
 layout activity_webview
 layout checkbox
@@ -3568,6 +3566,7 @@ style Theme_AppCompat_Light_Dialog_MinWidth
 style Theme_AppCompat_Light_DialogWhenLarge
 style Theme_AppCompat_Light_NoActionBar
 style Theme_AppCompat_NoActionBar
+style Theme_AppCompat_Transparent_NoActionBar
 style Theme_Design
 style Theme_Design_BottomSheetDialog
 style Theme_Design_Light

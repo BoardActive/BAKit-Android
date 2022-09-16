@@ -58,9 +58,9 @@ public class LocationUpdatesService extends Service {
     private FusedLocationProviderClient mFusedLocationClient;
 
 
-    public static final long UPDATE_INTERVAL = 50 * 1000;
-    public static final float SMALLEST_DISPLACEMENT = 5.0F;
-    public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 2;
+    public static final long UPDATE_INTERVAL = 1 * 1000;
+    public static final float SMALLEST_DISPLACEMENT = 1.0F;
+    public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
 
     public LocationUpdatesService() {
     }
@@ -104,8 +104,8 @@ public class LocationUpdatesService extends Service {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
     }
 
     private PendingIntent getPendingIntent() {

@@ -118,7 +118,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
         final String date = df.format(Calendar.getInstance().getTime());
 
         //sends data to server every minute.
-        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
+//        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
             mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                 @Override
                 public void onResponse(Object value) {
@@ -126,6 +126,6 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     SharedPreferenceHelper.putLong(context, LAST_DATA_UPDATED_TIME, System.currentTimeMillis());
                 }
             }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
-        }
+//        }
     }
 }
