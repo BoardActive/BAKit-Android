@@ -41,14 +41,13 @@ public class MyWorker extends Worker {
 	/**
 	 * The desired interval for location updates. Inexact. Updates may be more or less frequent.
 	 */
-	private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+	private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
 	/**
 	 * The fastest rate for active location updates. Updates will never be more frequent
 	 * than this value.
 	 */
-	private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
-			UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+	private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =2000;
 	/**
 	 * The current location.
 	 */
@@ -136,12 +135,12 @@ public class MyWorker extends Worker {
 
 										DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
 										String date = df.format(Calendar.getInstance().getTime());
-										mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-											@Override
-											public void onResponse(Object value) {
-												Log.d(TAG, "[BAKit] onResponse" + value.toString());
-											}
-										}, mLocation.getLatitude(), mLocation.getLongitude(), date);
+//										mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+//											@Override
+//											public void onResponse(Object value) {
+//												Log.d(TAG, "[BAKit] onResponse" + value.toString());
+//											}
+//										}, mLocation.getLatitude(), mLocation.getLongitude(), date);
 
 										NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, mContext.getString(R.string.app_name))
 												.setSmallIcon(android.R.drawable.ic_menu_mylocation)

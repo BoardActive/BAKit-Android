@@ -22,12 +22,14 @@ import java.util.List;
 
 public class GeofenceIntentService extends IntentService implements LocationListener {
     protected static final String TAG = "GeofenceTransitionsIS";
-     BoardActive mBoardActive;
+    BoardActive mBoardActive;
     private double latitude;
     private double longitude;
     public GeofenceIntentService() {
         super(TAG);
-       // mBoardActive = new BoardActive(context);
+        Log.e("Service","ser");
+        setIntentRedelivery(true);
+   //     mBoardActive = new BoardActive(getApplicationContext());
     }
 
     @Override
@@ -52,49 +54,49 @@ public class GeofenceIntentService extends IntentService implements LocationList
             List<Geofence> triggeringGeofences = event.getTriggeringGeofences();
             String locId = triggeringGeofences.get(0).getRequestId();
             //sendNotification(locId, context);
-            if(mBoardActive.getLocationArrayList() != null && mBoardActive.getLocationArrayList().size() >0)
-            {
-                ArrayList<Coordinate> locationList = new ArrayList<>();
-                locationList= mBoardActive.getLocationArrayList();
-
-                for(int i=0;i<locationList.size();i++)
-                {
-                    Coordinate coordinateModel = locationList.get(i);
-                    if(locId.equals(coordinateModel.getLatitude() + coordinateModel.getLongitude())){
-                        coordinateModel.setLastNotifyDate(date);
-                        locationList.set(i,coordinateModel);
-
-                        mBoardActive.setLocationArrayList(locationList);
-                        break;
-
-                    }
-
-                }
-            }
+//            if(mBoardActive.getLocationArrayList() != null && mBoardActive.getLocationArrayList().size() >0)
+//            {
+//                ArrayList<Coordinate> locationList = new ArrayList<>();
+//                locationList= mBoardActive.getLocationArrayList();
+//
+//                for(int i=0;i<locationList.size();i++)
+//                {
+//                    Coordinate coordinateModel = locationList.get(i);
+//                    if(locId.equals(coordinateModel.getLatitude() + coordinateModel.getLongitude())){
+//                        coordinateModel.setLastNotifyDate(date);
+//                        locationList.set(i,coordinateModel);
+//
+//                        mBoardActive.setLocationArrayList(locationList);
+//                        break;
+//
+//                    }
+//
+//                }
+//            }
             DateFormat df1 = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
             String date1 = df1.format(Calendar.getInstance().getTime());
 
 
-            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-                @Override
-                public void onResponse(Object value) {
-                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
-                }
-            }, latitude, longitude, date1);
+//            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+//                @Override
+//                public void onResponse(Object value) {
+//                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
+//                }
+//            }, latitude, longitude, date1);
         }
         if (event.getGeofenceTransition() == Geofence.GEOFENCE_TRANSITION_DWELL) {
             Log.i(TAG, "GeofencingEvent dwell");
             DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
             String date = df.format(Calendar.getInstance().getTime());
-            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-                @Override
-                public void onResponse(Object value) {
-                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
-                }
-            }, latitude, longitude, date);
+//            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+//                @Override
+//                public void onResponse(Object value) {
+//                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
+//                }
+//            }, latitude, longitude, date);
 
            // mBoardActive.removeGeofence(context);
-            mBoardActive.getLocationList();
+          //  mBoardActive.getLocationList();
           //  mBoardActive.removeGeofence(getApplicationContext());
         }
         if (event.getGeofenceTransition() == Geofence.GEOFENCE_TRANSITION_EXIT) {
@@ -120,5 +122,8 @@ public class GeofenceIntentService extends IntentService implements LocationList
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
+        Log.e("lat--",""+latitude);
+        Log.e("long--",""+longitude);
+
     }
 }

@@ -43,7 +43,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -64,8 +64,11 @@ public class MainActivity extends AppCompatActivity  {
     private LocationService locationService;
     final static int REQUEST_CODE = 1;
     private PendingIntent geofencePendingIntent;
-    BroadcastReceiver br = new GeofenceBroadCastReceiver();
-
+    BroadcastReceiver br = new com.boardactive.bakitapp.GeofenceBroadCastReceiver();
+    String appId;
+    String messageId;
+    String notificationId;
+    String firebaseNotificationId;
 
 
     @Override
@@ -86,9 +89,10 @@ public class MainActivity extends AppCompatActivity  {
         init();
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
-
     }
+
     ProgressDialog progressDialog;
+
     private void btn_service() {
         btnService = findViewById(R.id.btn_service);
 
@@ -96,12 +100,12 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isForeground) {
                 initHandler();
-                progressDialog = new ProgressDialog(MainActivity.this,R.style.progressDialogTheme);
+                progressDialog = new ProgressDialog(MainActivity.this, R.style.progressDialogTheme);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
-          ////      mBoardActive.checkLocationPermissions();
-               // mBoardActive.setIsForeground(isForeground);
-               // mBoardActive.initialize();
+                ////      mBoardActive.checkLocationPermissions();
+                // mBoardActive.setIsForeground(isForeground);
+                // mBoardActive.initialize();
             }
         });
     }
@@ -116,8 +120,8 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void handlerCallback() {
-            if(progressDialog !=null && progressDialog.isShowing())
-                progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing())
+            progressDialog.dismiss();
     }
 
     @Override
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity  {
         bindService(mIntent, mConnection, BIND_AUTO_CREATE);
 
     }
+
     ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity  {
             MainActivity.this.locationService = mLocalBinder.getService();
         }
     };
+
     public void init() {
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(MainActivity.this);
@@ -159,16 +165,19 @@ public class MainActivity extends AppCompatActivity  {
         mBoardActive.setAppUrl(BoardActive.APP_URL_DEV); // Development
 
         // Add AppID provided by BoardActive
-       // mBoardActive.setAppId("ADD_APP_ID");
+        // mBoardActive.setAppId("ADD_APP_ID");
 
-        mBoardActive.setAppId("344");
+        mBoardActive.setAppId("346");
 
         // Add AppKey provided by BoardActive
 //        mBoardActive.setAppKey("ADD_APP_KEY");
-       // mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
+        // mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
         //mBoardActive.setAppKey("88fd530b-c111-4077-a1d3-ad0a24b127fd");
-        mBoardActive.setAppKey("f3b64b8b-84e7-4eae-869a-9b9da7981725");
+        //    mBoardActive.setAppKey("f3b64b8b-84e7-4eae-869a-9b9da7981725");
         //mBoardActive.setAppKey("d17f0feb-4f96-4c2a-83fd-fd6302ae3a16");
+       // mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
+         //mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
+         mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
@@ -187,10 +196,9 @@ public class MainActivity extends AppCompatActivity  {
         } else {
             Log.e(TAG, "onCreate: permission granded");
             mBoardActive.isPermissionGranted = true;
-            mBoardActive.getLocationList();
+            //mBoardActive.getLocationList(false);
 
         }
-
 
         // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -219,55 +227,76 @@ public class MainActivity extends AppCompatActivity  {
                         mBoardActive.initialize();
 
                         // Register the device with BoardActive
-                        if(mBoardActive.isAppEnabled)
-                        {
-                            mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
-                                @Override
-                                public void onResponse(Object value) {
-
+                        //if(mBoardActive.isAppEnabled)
+                        // {
+//                        Log.e("list",""+mBoardActive.getLocationArrayList().size());
+                        mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
+                            @Override
+                            public void onResponse(Object value) {
+                                if(mBoardActive.latitude != 0.0 && mBoardActive.longitude != 0.0){
+                                    Constants.FIRST_TIME_GET_GEOFENCE=true;
+                                    mBoardActive.getLocationList();
+                                }else {
+                                    Constants.FIRST_TIME_GET_GEOFENCE=false;
                                 }
-                            },"taylor@boardactive.com","000000");
+
+                            }
+                        }, "taylor@boardactive.com", "000000");
+                        try {
                             mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                                 @Override
                                 public void onResponse(Object value) {
                                     Log.d(TAG, value.toString());
                                     Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setLenient().create();
                                     //   Me me = gson.fromJson(value.toString(), Me.class);
-                                    try{
+                                    try {
                                         JsonParser parser = new JsonParser();
                                         JsonElement je = parser.parse(value.toString());
                                         httpReponse.setText(gson.toJson(je));
+
                                         Log.d(TAG, gson.toJson(je));
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
 
                                 }
                             });
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-//                        mBoardActive.getGeoCoordinates(new BoardActive.GetMeCallback() {
-//                            @Override
-//                            public void onResponse(Object value) {
-//                            // mBoardActive.getLocationList();
-//                              // mBoardActive.addGeofence(MainActivity.this,getGeofencePendingIntent());
-//                            }
-//                        });
+
+
+
 
                     }
                 });
-      registerReceiver();
+        registerReceiver();
     }
     /* register receiver for geofence trigger*/
 
-    public void registerReceiver(){
+    public void registerReceiver() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver( br, filter);
+        this.registerReceiver(br, filter);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case Constants.MY_PERMISSIONS_REQUEST_READ_LOCATION:
+                if  (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mBoardActive.setupLocationRequest();
+
+                } else {
+                    // Permission Denied
+                    Toast.makeText(this, "location denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        }
     }
 
     public void btn_messages() {
@@ -312,7 +341,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View arg0) {
 //                Intent intent = new Intent(getBaseContext(), CustomActivity.class);
                 Intent intent = new Intent(getBaseContext(), CustomAttributesActivity.class);
-                intent.putExtra("baseUrl",BoardActive.APP_URL_DEV);
+                intent.putExtra("baseUrl", BoardActive.APP_URL_DEV);
                 startActivity(intent);
             }
 
@@ -323,31 +352,38 @@ public class MainActivity extends AppCompatActivity  {
     public void cancelService() {
         Intent intent = new Intent(this, LocationService.class);
         stopService(intent);
-       // mBoardActive.removeGeofence(this);
+        //mBoardActive.removeGeofence(this);
 
     }
 
     @Override
     protected void onDestroy() {
-       // unregisterReceiver(br);
         super.onDestroy();
+        if(br != null){
+            unregisterReceiver(br);
+
+        }
+        if (mConnection != null && mBounded) {
+            this.unbindService(mConnection);
+
+        }
+        //  mBoardActive.stop();
         cancelService();
     }
 
     @Override
     protected void onStop() {
-        //unregisterReceiver(br);
         super.onStop();
+//        if(br != null){
+//            unregisterReceiver(br);
+//
+//        }
+        if(mConnection != null && mBounded){
+            this.unbindService(mConnection);
+
+        }
+        //mBoardActive.stop();
     }
 
-    private PendingIntent getGeofencePendingIntent() {
-        // Reuse the PendingIntent if we already have it.
-        if (geofencePendingIntent != null) {
-            return geofencePendingIntent;
-        }
-        Toast.makeText(this, "starting broadcast", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, GeofenceBroadCastReceiver.class);
-        geofencePendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return geofencePendingIntent;
-    }
+
 }

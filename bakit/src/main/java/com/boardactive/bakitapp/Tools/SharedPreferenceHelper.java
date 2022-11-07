@@ -12,8 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class
-SharedPreferenceHelper {
+public class SharedPreferenceHelper {
 
     private static final String TAG = SharedPreferenceHelper.class.getSimpleName();
 
@@ -109,7 +108,19 @@ SharedPreferenceHelper {
         String json = gson.toJson(locationModelArrayList);
 
         edit.putString("locationList",json);
-        edit.commit();
+        edit.apply();
+    }
+    public static void putGeoArrayList(Context context, ArrayList<Coordinate> locationModelArrayList) {
+        SharedPreferences sp = context.getSharedPreferences("config",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        Gson gson = new Gson();
+
+        // getting data from gson and storing it in a string.
+        String json = gson.toJson(locationModelArrayList);
+
+        edit.putString("GeolocationList",json);
+        edit.apply();
     }
     public static void putCurrentLocationArrayList(Context context, ArrayList<Location> locationModelArrayList) {
         SharedPreferences sp = context.getSharedPreferences("config",

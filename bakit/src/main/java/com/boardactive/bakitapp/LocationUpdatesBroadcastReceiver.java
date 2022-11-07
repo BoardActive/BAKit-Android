@@ -7,8 +7,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.work.WorkManager;
 
 import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
@@ -28,8 +31,8 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     private static final String IS_FOREGROUND = "isforeground";
     private BoardActive mBoardActive;
     private Context context;
-
-
+    public static   Location firstLocation;
+    int count=0;
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
@@ -46,6 +49,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     @SuppressLint("MissingPermission")
     public void getLocationUpdates(final Context context, final Intent intent) {
+        Log.e("enter into lcoation","enter");
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
@@ -53,30 +57,57 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
             List<Location> locations = result.getLocations();
 
             if (locations.size() > 0) {
-                Location firstLocation = locations.get(0);
+                 firstLocation = locations.get(0);
+                 Log.e("firstlocation","lat"+firstLocation.getLatitude() +"long"+firstLocation.getLongitude());
+
+//                if(mBoardActive.getPastLatitude() != null && mBoardActive.getPastLongitude() != null ) {
+//                    Location temp = new Location(LocationManager.GPS_PROVIDER);
+//                    temp.setLatitude(Double.parseDouble(mBoardActive.getPastLatitude()));
+//                    temp.setLongitude(Double.parseDouble(mBoardActive.getPastLongitude()));
+//                    if (firstLocation != null) {
+//                        Log.e("distance", "" + firstLocation.distanceTo(temp));
+//                        if (firstLocation.distanceTo(temp) > 1000) {
+//                            mBoardActive.setPastLatitude(null);
+//                            mBoardActive.setPastLongitude(null);
+//
+//                            mBoardActive.setPastLatitude(firstLocation.getLatitude());
+//                            mBoardActive.setPastLongitude(firstLocation.getLongitude());
+//                            Log.e("new lat",mBoardActive.getPastLatitude());
+//                            Log.e("new lat",mBoardActive.getPastLatitude());
+//
+//                            Log.e("distance1", "" + firstLocation.distanceTo(temp));
+//
+//                            Log.e("enter into distance", "enter into distance");
+//                            mBoardActive.setLocationArrayList(null);
+//                           // Log.e("shared after distance",""+mBoardActive.getLocationArrayList().size());
+//                            mBoardActive.getLocationList(true);
+//
+//                        }
+//                    }
+//                }
+
 //                if(mBoardActive != null &&  mBoardActive.getCurrentLocationArrayList() != null){
 //                    if(mBoardActive.getCurrentLocationArrayList().size() > 0 && !mBoardActive.getCurrentLocationArrayList().isEmpty())
 //                    {
 //                        for(int i=0; i< mBoardActive.getCurrentLocationArrayList().size();i++)
 //                        {
-//                            mBoardActive.previousUserLocation = mBoardActive.getCurrentLocationArrayList().get(i);
+//                            mBoardActive.previousLocation = mBoardActive.getCurrentLocationArrayList().get(i);
 //                        }
 //
 //                    }
 //
 //                }
 //                if(mBoardActive != null){
-//                    if(mBoardActive.previousUserLocation == null){
-//                        mBoardActive.previousUserLocation = firstLocation;
+//                    if(mBoardActive.previousLocation == null){
+//                        mBoardActive.previousLocation = firstLocation;
 //                        saveLocation(firstLocation);
-//                    }else if(mBoardActive.previousUserLocation.distanceTo(firstLocation) > 15.0)
+//                    }else if(mBoardActive.previousLocation.distanceTo(firstLocation) > 2000)
 //                    {
-//                        mBoardActive.previousUserLocation = firstLocation;
+//                        mBoardActive.previousLocation = firstLocation;
 //                        saveLocation(firstLocation);
 //
 //                    }
 //                }
-
 
                 updateLocation(context, firstLocation);
             }
@@ -106,7 +137,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     private void startWorker() {
         Intent intent = new Intent(context, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                context.getApplicationContext(), 234324243, intent, 0);
+                context.getApplicationContext(), 234324243, intent, PendingIntent.FLAG_MUTABLE);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() +
                 2 * 60 * 1000, pendingIntent);
@@ -119,13 +150,27 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
         //sends data to server every minute.
 //        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
-            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
-                @Override
-                public void onResponse(Object value) {
-                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
-                    SharedPreferenceHelper.putLong(context, LAST_DATA_UPDATED_TIME, System.currentTimeMillis());
-                }
-            }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
+//            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
+//                @Override
+//                public void onResponse(Object value) {
+//                    Log.d(TAG, "[BAKit] onResponse" + value.toString());
+//                    SharedPreferenceHelper.putLong(context, LAST_DATA_UPDATED_TIME, System.currentTimeMillis());
+//                }
+//            }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
 //        }
+    }
+    private void sendNotification(String locId,String response, Context context) {
+        String channelId = "BAKit";
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.drawable.ba_logo)
+                .setContentTitle("Location Reached")
+                .setContentText("Location Api Called of getlocation " + locId +response)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setAutoCancel(true);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(1, builder.build());
     }
 }

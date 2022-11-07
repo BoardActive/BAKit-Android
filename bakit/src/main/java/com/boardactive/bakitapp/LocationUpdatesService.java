@@ -55,7 +55,7 @@ public class LocationUpdatesService extends Service {
     /**
      * Provides access to the Fused Location Provider API.
      */
-    private FusedLocationProviderClient mFusedLocationClient;
+    public FusedLocationProviderClient mFusedLocationClient;
 
 
     public static final long UPDATE_INTERVAL = 1 * 1000;
@@ -78,8 +78,6 @@ public class LocationUpdatesService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Android O requires a Notification Channel.
@@ -103,8 +101,8 @@ public class LocationUpdatesService extends Service {
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 //        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
     }
 
@@ -112,8 +110,8 @@ public class LocationUpdatesService extends Service {
         Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
 
         }else
         {

@@ -24,6 +24,7 @@ import androidx.core.app.TaskStackBuilder;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.boardactive.addrop.activity.DisplayImageActivity;
 import com.boardactive.bakitapp.BoardActive;
 import com.boardactive.bakitapp.Tools.NotificationBuilder;
 import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
@@ -32,6 +33,9 @@ import com.boardactive.addrop.activity.MainActivity;
 import com.boardactive.bakitapp.utils.Constants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Objects;
+import java.util.Random;
 
 /**
  * NOTE: There can only be one service in each app that receives FCM messages. If multiple
@@ -50,6 +54,9 @@ public class FCMService extends FirebaseMessagingService {
     public static final String EXTRA_OBJECT = "key.EXTRA_OBJECT";
     public static final String EXTRA_MESSADE_ID = "key.EXTRA_MESSADE_ID";
     private static final String MESSAGE_ID = "MESSAGE_ID";
+    public static final String IMAGE_URL = "key.IMAGE_URL";
+    public static final String TITLE = "key.TITLE";
+    public static final String DESC = "key.DESC";
 
     /**
      * Called when message is received.
@@ -165,6 +172,9 @@ public class FCMService extends FirebaseMessagingService {
     private void sendNotification(final RemoteMessage remoteMessage) {
         Long currentDateandTime = System.currentTimeMillis();
         MessageModel obj = new MessageModel();
+        Log.e("firebase message id",""+remoteMessage.getMessageId().trim());
+
+        Log.e("firebase message", Objects.requireNonNull(remoteMessage.getMessageId().trim()));
 
         int id = 1;
         obj.setId(id);
@@ -182,41 +192,95 @@ public class FCMService extends FirebaseMessagingService {
         obj.setDateLastUpdated(currentDateandTime);
         Boolean isSilent = Boolean.valueOf(remoteMessage.getData().get("isSilent"));
         String action = remoteMessage.getData().get("action");
+        String type = remoteMessage.getData().get("type");
+        String placeId = remoteMessage.getData().get("placeId");
+
         Log.v(isSilent.toString(),"");
         Log.v(action,"action");
         obj.setAction(action);
-        SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+
 
         BoardActive mBoardActive = new BoardActive(getApplicationContext());
-
         mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+
             @Override
             public void onResponse(Object value) {
                 Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
             }
-        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId());
-        mBoardActive.getLocationList();
+        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId().trim());
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(EXTRA_MESSADE_ID, id);
+        if(type != null)
+        {
+            if(type.equals("app_status") && Objects.equals(placeId, "null"))
+        {
+            if(action != null){
+                if(action.equals("Enable")){
+                    SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+                }
+                else
+                {
+                    SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+                }
+            }
+
+
+
+        }else if(type.equals("place_update") || type.equals("Campaign") || Objects.equals(placeId, "null")){
+           // SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+            mBoardActive.setLocationArrayList(null);
+            mBoardActive.getLocationList();
+        }
+
+        }
+        if(!isSilent){
+            Intent intent = new Intent(this, DisplayImageActivity.class);
+            intent.putExtra(EXTRA_MESSADE_ID, id);
+            intent.putExtra(TITLE,obj.getTitle());
+            intent.putExtra(DESC,obj.getBody());
+            intent.putExtra("MessageId",obj.getBaMessageId());
+            intent.putExtra("NotificationId",obj.getBaNotificationId());
+            intent.putExtra("FirebaseMessageId",obj.getFirebaseNotificationId());
+            if(obj.getImageUrl() != null){
+                intent.putExtra(IMAGE_URL,obj.getImageUrl());
+
+            }
 //        intent.putExtra(EXTRA_OBJECT, obj);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NO_HISTORY
-        );
-        intent.setAction(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NO_HISTORY
+            );
+            intent.setAction(Intent.ACTION_VIEW);
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(intent);
-
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addNextIntentWithParentStack(intent);
+            PendingIntent pendingIntent =null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+               //  pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_MUTABLE);
+                int requestCode = new Random().nextInt();
+                pendingIntent = PendingIntent.getActivity(
+                        this, requestCode, intent,
+                         PendingIntent.FLAG_MUTABLE);
 
 
 //        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
-        int notificationType = 0;
-        new NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+                int notificationType = 0;
+                new NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+            }else
+            {
+                 //pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+                int requestCode = new Random().nextInt();
+                pendingIntent = PendingIntent.getActivity(
+                        this, requestCode, intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+//        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+                int notificationType = 0;
+                new NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+            }
+        }
+
 
     }
 

@@ -136,7 +136,7 @@ public class MessageModel {
     }
 
     public void setBaMessageId(String messageId) {
-        this.baMessageId = baMessageId;
+        this.baMessageId = messageId;
     }
 
     public String getBaNotificationId() {
