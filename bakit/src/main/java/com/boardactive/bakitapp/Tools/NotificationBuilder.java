@@ -17,6 +17,9 @@ import androidx.core.app.NotificationCompat;
 import com.boardactive.bakitapp.R;
 import com.boardactive.bakitapp.models.MessageModel;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+
+import java.util.Date;
 
 public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     private static final String TAG = "MyNotificationBuilder";
@@ -63,35 +66,20 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap result) {
         super.onPostExecute(result);
-
         String  channelId = "BAKit";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder;
         switch(mType) {
             case NOTIFICATION_BASIC:
                 Log.e("Basic","");//Basic Notification
-                if(isSilent){
-                    notificationBuilder =
-                            new NotificationCompat.Builder(mContext, channelId)
+                    notificationBuilder = new NotificationCompat.Builder(mContext, channelId)
                                     .setContentTitle(mObj.getTitle())
                                     .setContentText(mObj.getBody())
                                     .setAutoCancel(true)
+                                    .setContentIntent(mPendingIntent)
                                     .setSound(defaultSoundUri)
                                     .setSmallIcon(R.drawable.ba_logo)
-                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                    .setContentIntent(mPendingIntent);
-                }else
-                {
-                    notificationBuilder =
-                            new NotificationCompat.Builder(mContext, channelId)
-                                    .setContentTitle(mObj.getTitle())
-                                    .setContentText(mObj.getBody())
-                                    .setAutoCancel(true)
-                                    .setSound(null)
-                                    .setSmallIcon(R.drawable.ba_logo)
-                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                    .setContentIntent(mPendingIntent);
-                }
+                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
                 break;
             case NOTIFICATION_BIG_PIC:
@@ -106,7 +94,6 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
                                 .setSmallIcon(R.drawable.ba_logo)
-
                                 .setStyle(new NotificationCompat.BigPictureStyle()
                                         .bigPicture(mBitmap)
                                         .bigLargeIcon(mBitmap));
@@ -140,7 +127,6 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
                                 .setSmallIcon(R.drawable.ba_logo)
-
                                 .setStyle(new NotificationCompat.BigTextStyle()
                                         .bigText(bigText));
                 break;
@@ -157,7 +143,6 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
                                 .setSmallIcon(R.drawable.ba_logo)
-
                                 .setStyle(new NotificationCompat.InboxStyle()
                                         .addLine("Sample MessageModel #1")
                                         .addLine("Sample MessageModel #2")
@@ -183,21 +168,16 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if(isSilent){
-                NotificationChannel channel = new NotificationChannel(channelId,
+            NotificationChannel channel = new NotificationChannel(channelId,
                         "Channel human readable title",
-                        NotificationManager.IMPORTANCE_LOW);
-                channel.setSound(null,null);
+                        NotificationManager.IMPORTANCE_DEFAULT);
                 notificationManager.createNotificationChannel(channel);
-            }else
-            {
-                NotificationChannel channel = new NotificationChannel(channelId,
-                        "Channel human readable title",
-                        NotificationManager.IMPORTANCE_HIGH);
-                notificationManager.createNotificationChannel(channel);
-            }
 
         }
-        notificationManager.notify(mObj.getId() /* ID of notification */, notificationBuilder.build());
+        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+      //  if(!isSilent){
+            notificationManager.notify(m /* ID of notification */, notificationBuilder.build());
+
+        //  }
     }
 }

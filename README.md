@@ -4,7 +4,7 @@ ___
 
 ### Location-Based Engagement
 Enhance your app. Empower your marketing.
-
+    
 It's not about Advertising... It's about "PERSONALIZING"
 
 BoardActive's platform connects brands to consumers using location-based engagement. Our international patent-pending Visualmatic™ software is a powerful marketing tool allowing brands to set up a virtual perimeter around any location, measure foot-traffic, and engage users with personalized messages when they enter geolocations… AND effectively attribute campaign efficiency by seeing where users go after the impression! 

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
@@ -63,16 +65,25 @@ public class LocationWorker extends Worker {
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 //      mLocationRequest.setFastestInterval(MAX_WAIT_TIME);
     }
 
     private PendingIntent getPendingIntent() {
-        Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
-        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-        intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
-        return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
+            intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
+            return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
+        }else
+        {
+            Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
+            intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
+            return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
     }
 
 }

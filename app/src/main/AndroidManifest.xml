@@ -16,28 +16,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.boardactive.bakitapp.customViews.CustomAttributesActivity"
-            android:exported="true"
-            android:label="@string/title_activity_custom"
-            />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name="com.boardactive.addrop.activity.UserActivity"
+            android:name=".AppIdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DisplayImageActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.boardactive.bakitapp.customViews.CustomAttributesActivity"
+            android:exported="true"
+            android:label="@string/title_activity_custom" />
+        <activity
+            android:name=".activity.UserActivity"
             android:configChanges="orientation"
+            android:exported="true"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.boardactive.addrop.activity.CustomActivity"
+            android:name=".activity.CustomActivity"
             android:configChanges="orientation"
+            android:exported="true"
             android:label="@string/title_activity_custom"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.boardactive.addrop.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -47,21 +53,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.boardactive.addrop.activity.MessagesActivity"
-            android:enabled="true"
-            android:excludeFromRecents="false"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
+        <!-- <activity -->
+        <!-- android:name=".activity.MessageActivity" -->
+        <!-- android:enabled="true" -->
+        <!-- android:excludeFromRecents="false" -->
+        <!-- android:exported="true" -->
+        <!-- android:launchMode="singleTop" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:taskAffinity="" /> -->
+
+        <activity android:name=".activity.MessagesActivity"
             android:exported="true"
-            android:taskAffinity=""></activity>
+            android:enabled="true">
+
+        </activity>
         <activity
-            android:name="com.boardactive.addrop.activity.MessageActivity"
+            android:name=".activity.MessageActivity"
             android:enabled="true"
             android:excludeFromRecents="true"
-            android:launchMode="singleTop"
-            android:parentActivityName="com.boardactive.addrop.activity.MessagesActivity"
             android:exported="true"
+            android:launchMode="singleTop"
+            android:parentActivityName=".activity.MessagesActivity"
             android:screenOrientation="portrait"
             android:taskAffinity="">
             <meta-data
@@ -75,18 +87,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.boardactive.addrop.activity.DialogMessageActivity"
+            android:name=".activity.DialogMessageActivity"
             android:enabled="true"
             android:excludeFromRecents="false"
+            android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:taskAffinity=""
-            android:exported="true"
             android:theme="@style/AppTheme.Dialog.NoActionBar" />
 
         <service
             android:name="com.boardactive.addrop.firebase.FCMService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -102,22 +114,30 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
+<!--        <receiver-->
+<!--            android:name="com.boardactive.addrop.utils.GeofenceBroadCastReceiver"-->
+<!--            android:allowBackup="true"-->
+<!--            android:directBootAware="true"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+<!--                <action android:name="android.intent.action.AIRPLANE_MODE" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
         <receiver
-            android:name="com.boardactive.addrop.utils.GeofenceBroadCastReceiver"
+            android:name="com.boardactive.bakitapp.GeofenceBroadCastReceiver"
             android:allowBackup="true"
-            android:directBootAware="true"
             android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
-            </intent-filter>
+            android:exported="true">
 
         </receiver>
         <service
-             android:name="com.boardactive.addrop.utils.LocationService"
+            android:name="com.boardactive.bakitapp.LocationService"
             android:enabled="true"
             android:exported="false" />
     </application>

@@ -17,7 +17,7 @@ public class CheckPermissions implements ActivityCompat.OnRequestPermissionsResu
             ActivityCompat.requestPermissions(context,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_READ_LOCATION);
-        }
+           }
     }
 
     @Override

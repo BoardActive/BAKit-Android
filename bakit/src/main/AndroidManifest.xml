@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.boardactive.bakitapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -13,9 +13,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.hardware.location.gps" />
 
+
     <application>
         <!-- [START BOOT/DEFAULT SERVICE] -->
-        <receiver android:name="com.boardactive.bakitapp.BootReceiver" android:enabled="true" android:exported="true"
+        <receiver
+            android:name="com.boardactive.bakitapp.BootReceiver"
+            android:enabled="true"
+            android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -25,45 +29,51 @@
 
         <!-- [END BOOT/DEFAULT SERVICE] -->
 
-        <receiver android:name="com.boardactive.bakitapp.LocationUpdatesBroadcastReceiver" android:exported="true">
+        <receiver
+            android:name="com.boardactive.bakitapp.LocationUpdatesBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.location.sample.locationupdatespendingintent.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.boardactive.bakitapp.MyBroadcastReceiver" android:exported="true" >
-        </receiver>
+        <receiver
+            android:name="com.boardactive.bakitapp.MyBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
 
 
-                    <service
-                        android:name="com.boardactive.bakitapp.LocationUpdatesService"
-                        android:enabled="true"
-                        android:exported="true" />
+        <service
+            android:name="com.boardactive.bakitapp.LocationUpdatesService"
+            android:enabled="true"
+            android:exported="true" />
+<!--        <service android:foregroundServiceType="location"/>-->
+
         <receiver
             android:name="com.boardactive.bakitapp.GeofenceBroadCastReceiver"
             android:allowBackup="true"
-            android:directBootAware="true"
             android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
-            </intent-filter>
-
+            android:exported="true">
         </receiver>
-        <activity android:name="com.boardactive.bakitapp.RequestPermissionActivity" android:exported="true">
+        <activity
+            android:name="com.boardactive.bakitapp.RequestPermissionActivity"
+            android:exported="true">
 
         </activity>
+
+<!--        <service-->
+<!--            android:name=".GeofenceJobIntentService"-->
+<!--            android:exported="true"-->
+<!--            android:permission="android.permission.BIND_JOB_SERVICE" />-->
         <service
             android:name="com.boardactive.bakitapp.LocationService"
             android:enabled="true"
             android:exported="false" />
-<!--       <service-->
-<!--          android:name=".GeofenceIntentService"-->
-<!--            android:enabled="true"-->
-<!--           android:exported="false" />-->
+<!--               <service-->
+<!--                  android:name=".GeofenceIntentService"-->
+<!--                    android:enabled="true"-->
+<!--                   android:exported="true" />-->
 
-                </application>
+    </application>
 
-            </manifest>
+</manifest>

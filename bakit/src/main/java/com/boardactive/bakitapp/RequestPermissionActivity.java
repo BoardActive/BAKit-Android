@@ -1,8 +1,10 @@
 package com.boardactive.bakitapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -12,7 +14,9 @@ import androidx.work.WorkManager;
 
 import android.Manifest;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -30,7 +34,9 @@ public class RequestPermissionActivity extends AppCompatActivity {
     public final static String BAKIT_DEVICE_OS = "BAKIT_DEVICE_OS";
     public final static String BAKIT_DEVICE_OS_VERSION = "BAKIT_DEVICE_OS_VERSION";
     public final static String BAKIT_DEVICE_ID = "BAKIT_DEVICE_ID";
-    private static final int MY_PERMISSIONS_REQUEST_READ_LOCATION = 1001;
+    private static final int MY_PERMISSIONS_REQUEST_READ_LOCATION = 1003;
+    private static final int BACKGROUND_LOCATION_PERMISSION_CODE = 1002;
+
     public static final String TAG = BoardActive.class.getName();
     private static final String FETCH_LOCATION_WORKER_NAME = "Location";
     private static final String IS_FOREGROUND = "isforeground";
@@ -52,12 +58,33 @@ public class RequestPermissionActivity extends AppCompatActivity {
     }
 
     private void requestLocationPermission() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//                // Background Location Permission is granted so do your work here
+//            } else {
+//                // Ask for Background Location Permission
+//                askPermissionForBackgroundUsage();
+//            }
+//        }else
+//        {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    MY_PERMISSIONS_REQUEST_READ_LOCATION);
+//        }
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 MY_PERMISSIONS_REQUEST_READ_LOCATION);
     }
 
-
+    private void askPermissionForBackgroundUsage() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+            ActivityCompat.requestPermissions(this,
+            new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_PERMISSION_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_PERMISSION_CODE);
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -75,6 +102,13 @@ public class RequestPermissionActivity extends AppCompatActivity {
                 finish();
             }else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 finish();
+            }
+        }
+        else if (requestCode == BACKGROUND_LOCATION_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // User granted for Background Location Permission.
+            } else {
+                // User declined for Background Location Permission.
             }
         }
     }
