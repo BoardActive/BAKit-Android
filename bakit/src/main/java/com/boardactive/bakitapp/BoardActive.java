@@ -1645,18 +1645,36 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     public void getLastLocation() {
         try {
             FusedLocationProviderClient mLocationProvider = LocationServices.getFusedLocationProviderClient(mContext);
-            mLocationProvider.getLastLocation().addOnSuccessListener((Activity) mContext, location -> {
-                if (location != null) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    Log.e("last location", "" + latitude);
-                    Log.e("last location long", "" + longitude);
-                    setPastLatitude(location.getLatitude());
-                    setPastLongitude(location.getLongitude());
+            mLocationProvider.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        Log.e("last location", "" + latitude);
+                        Log.e("last location long", "" + longitude);
+                        setPastLatitude(location.getLatitude());
+                        setPastLongitude(location.getLongitude());
+                    }else
+                    {
+                        Log.d("TAG", "location is null");
+                        setupLocationRequest();
+                    }
                 }
-            }).addOnFailureListener(e -> {
-                //some log here
+
             });
+//            mLocationProvider.getLastLocation().addOnSuccessListener((Activity) mContext, location -> {
+//                if (location != null) {
+//                    double latitude = location.getLatitude();
+//                    double longitude = location.getLongitude();
+//                    Log.e("last location", "" + latitude);
+//                    Log.e("last location long", "" + longitude);
+//                    setPastLatitude(location.getLatitude());
+//                    setPastLongitude(location.getLongitude());
+//                }
+//            }).addOnFailureListener(e -> {
+//                //some log here
+//            });
         } catch (SecurityException e) {
             e.printStackTrace();
         }
