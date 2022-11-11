@@ -68,7 +68,6 @@ public class LocationUpdatesService extends Service {
     @SuppressLint("MissingPermission")
     @Override
     public void onCreate() {
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         createLocationRequest();
@@ -91,7 +90,9 @@ public class LocationUpdatesService extends Service {
             mNotificationManager.createNotificationChannel(mChannel);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            startForeground(NOTIFICATION_ID, getNotification());
+           // startForeground(NOTIFICATION_ID, getNotification());
+            //stopForeground(false);
+
         }
 
 
@@ -151,11 +152,13 @@ public class LocationUpdatesService extends Service {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             builder = new Notification.Builder(this)
                     .setContentText(getResources().getString(R.string.bakit_foreground_message))
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_HIGH)
+                    .setOngoing(false)
+                    .setAutoCancel(true)
+                    .setPriority(Notification.PRIORITY_MIN)
                     .setSmallIcon(resourceId)
                     .setColor(getResources().getColor(R.color.notification_icon_color))
                     .setWhen(System.currentTimeMillis());
+
         }
 
         // Set the Channel ID for Android O.

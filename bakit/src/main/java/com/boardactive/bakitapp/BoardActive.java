@@ -122,7 +122,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     /**
      * Default API Global values
      */
-    // public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
+    public final static String APP_URL_PROD = "https://api.boardactive.com/mobile/v1/";
     public final static String APP_URL_DEV = "https://dev-api.boardactive.com/mobile/v1/";
     //public final static String APP_URL_DEV = "https://boardactiveapi.dev.radixweb.net/mobile/v1/";
 
@@ -1645,6 +1645,16 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     public void getLastLocation() {
         try {
             FusedLocationProviderClient mLocationProvider = LocationServices.getFusedLocationProviderClient(mContext);
+            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mLocationProvider.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
@@ -1655,8 +1665,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         Log.e("last location long", "" + longitude);
                         setPastLatitude(location.getLatitude());
                         setPastLongitude(location.getLongitude());
-                    }else
-                    {
+                    } else {
                         Log.d("TAG", "location is null");
                         setupLocationRequest();
                     }
@@ -1675,7 +1684,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
 //            }).addOnFailureListener(e -> {
 //                //some log here
 //            });
-        } catch (SecurityException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
