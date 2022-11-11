@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
        // mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
          //mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
          mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
+       // mBoardActive.setAppKey(BoardActive.BAKIT_APP_KEY);
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
@@ -242,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }, "taylor@boardactive.com", "000000");
+
                         try {
                             mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
                                 @Override
