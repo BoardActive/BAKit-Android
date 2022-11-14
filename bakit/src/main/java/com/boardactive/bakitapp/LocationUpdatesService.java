@@ -69,6 +69,7 @@ public class LocationUpdatesService extends Service {
     @Override
     public void onCreate() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        BoardActive boardActive = new  BoardActive(this);
 
         createLocationRequest();
 
@@ -90,9 +91,13 @@ public class LocationUpdatesService extends Service {
             mNotificationManager.createNotificationChannel(mChannel);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-           // startForeground(NOTIFICATION_ID, getNotification());
-            //stopForeground(false);
 
+            startForeground(NOTIFICATION_ID,getNotification());
+            if(boardActive.serviceIsRunningInForeground(this))
+            {
+                stopForeground(false);
+
+            }
         }
 
 
@@ -104,7 +109,7 @@ public class LocationUpdatesService extends Service {
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-//        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
+//      mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
     }
 
     private PendingIntent getPendingIntent() {
@@ -134,7 +139,7 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        stopForeground(true);
+        stopForeground(false);
         return mBinder;
     }
 
