@@ -93,11 +93,11 @@ public class LocationUpdatesService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             startForeground(NOTIFICATION_ID,getNotification());
-            if(boardActive.serviceIsRunningInForeground(this))
-            {
-                stopForeground(false);
-
-            }
+//            if(boardActive.serviceIsRunningInForeground(this))
+//            {
+//                stopForeground(false);
+//
+//            }
         }
 
 
@@ -139,7 +139,7 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        stopForeground(false);
+        stopForeground(true);
         return mBinder;
     }
 
