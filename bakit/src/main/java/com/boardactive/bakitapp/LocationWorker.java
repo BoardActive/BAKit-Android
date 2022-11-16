@@ -71,7 +71,7 @@ public class LocationWorker extends Worker {
     }
 
     private PendingIntent getPendingIntent() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
             intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
             intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);

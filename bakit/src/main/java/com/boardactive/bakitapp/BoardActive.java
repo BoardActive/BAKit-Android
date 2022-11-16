@@ -446,7 +446,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
         Log.d(TAG, "[BAKit]  StartWorker()");
         boolean isForeground = getIsForeground();
 
-        if (isForeground) {
+        if (getIsForeground()) {
             WorkManager.getInstance(mContext).cancelAllWork();
             if (!serviceIsRunningInForeground(mContext)) {
                 Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
@@ -1607,37 +1607,37 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
 //                        setPastLatitude(latitude);
 //                        setPastLongitude(longitude);
 //                    }
-                    if(getPastLatitude() != null && getPastLongitude() != null)
-                    {
-                        if (Double.parseDouble(getPastLatitude()) != latitude && Double.parseDouble(getPastLongitude()) != longitude) {
-                            if (!Constants.FIRST_TIME_GET_GEOFENCE) {
-                                Constants.FIRST_TIME_GET_GEOFENCE = true;
-                                getLocationList();
-                            }
-                            Location temp = new Location(LocationManager.GPS_PROVIDER);
-                            temp.setLatitude(Double.parseDouble(getPastLatitude()));
-                            temp.setLongitude(Double.parseDouble(getPastLongitude()));
-                            Log.e("distance", "" + location.distanceTo(temp));
-
-                            Log.d(TAG, "PassLoc lat/lng: " + getPastLatitude() + " " + getPastLongitude());
-                            if (location.distanceTo(temp) > Constants.DISTANCE) {
-                                //setPastLongitude(null);
-                                // setPastLatitude(null);
-                                setPastLatitude(location.getLatitude());
-                                setPastLongitude(location.getLongitude());
-                                Log.e("new lat", getPastLatitude());
-                                Log.e("new lat", getPastLongitude());
-
-
-                                Log.e("enter into distance", "enter into distance");
-                                setLocationArrayList(null);
-                                getLocationList();
-
-                            }
-
-                        }
-
-                    }
+//                    if(getPastLatitude() != null && getPastLongitude() != null)
+//                    {
+//                        if (Double.parseDouble(getPastLatitude()) != latitude && Double.parseDouble(getPastLongitude()) != longitude) {
+//                            if (!Constants.FIRST_TIME_GET_GEOFENCE) {
+//                                Constants.FIRST_TIME_GET_GEOFENCE = true;
+//                                getLocationList();
+//                            }
+//                            Location temp = new Location(LocationManager.GPS_PROVIDER);
+//                            temp.setLatitude(Double.parseDouble(getPastLatitude()));
+//                            temp.setLongitude(Double.parseDouble(getPastLongitude()));
+//                            Log.e("distance", "" + location.distanceTo(temp));
+//
+//                            Log.d(TAG, "PassLoc lat/lng: " + getPastLatitude() + " " + getPastLongitude());
+//                            if (location.distanceTo(temp) > Constants.DISTANCE) {
+//                                //setPastLongitude(null);
+//                                // setPastLatitude(null);
+//                                setPastLatitude(location.getLatitude());
+//                                setPastLongitude(location.getLongitude());
+//                                Log.e("new lat", getPastLatitude());
+//                                Log.e("new lat", getPastLongitude());
+//
+//
+//                                Log.e("enter into distance", "enter into distance");
+//                                setLocationArrayList(null);
+//                                getLocationList();
+//
+//                            }
+//
+//                        }
+//
+//                    }
 
                 }
             });
