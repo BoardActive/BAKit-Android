@@ -29,7 +29,6 @@ import androidx.core.app.ActivityCompat;
 import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
 import com.boardactive.bakitapp.customViews.CustomAttributesActivity;
 import com.boardactive.addrop.R;
-import com.boardactive.addrop.utils.GeofenceBroadCastReceiver;
 import com.boardactive.addrop.utils.LocationService;
 import com.boardactive.bakitapp.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
