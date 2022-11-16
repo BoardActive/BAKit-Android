@@ -159,18 +159,5 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 //            }, firstLocation.getLatitude(), firstLocation.getLongitude(), date);
 //        }
     }
-    private void sendNotification(String locId,String response, Context context) {
-        String channelId = "BAKit";
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.ba_logo)
-                .setContentTitle("Location Reached")
-                .setContentText("Location Api Called of getlocation " + locId +response)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
-                .setAutoCancel(true);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(1, builder.build());
-    }
 }

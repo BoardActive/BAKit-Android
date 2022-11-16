@@ -139,7 +139,7 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        stopForeground(false);
+        stopForeground(true);
         return mBinder;
     }
 
@@ -157,9 +157,8 @@ public class LocationUpdatesService extends Service {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             builder = new Notification.Builder(this)
                     .setContentText(getResources().getString(R.string.bakit_foreground_message))
-                    .setOngoing(false)
-                    .setAutoCancel(true)
-                    .setPriority(Notification.PRIORITY_MIN)
+                    .setOngoing(true)
+                    .setPriority(Notification.PRIORITY_HIGH)
                     .setSmallIcon(resourceId)
                     .setColor(getResources().getColor(R.color.notification_icon_color))
                     .setWhen(System.currentTimeMillis());
