@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver implements LocationListener {
+public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
     public static final String ACTION_PROCESS_UPDATES = "PROCESS_UPDATES";
     public static final String TAG = LocationUpdatesBroadcastReceiver.class.getName();
     public final static String LAST_DATA_UPDATED_TIME = "last_data_updated_time";
@@ -151,48 +151,6 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver implemen
         DateFormat df = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss Z (zzzz)");
         final String date = df.format(Calendar.getInstance().getTime());
 
-        double latitude = firstLocation.getLatitude();
-        double   longitude = firstLocation.getLongitude();
-        mBoardActive.setLatitude("" + latitude);
-        mBoardActive.setLongitude("" + longitude);
-        Log.e("lat1", "" + latitude);
-        Log.e("long1", "" + longitude);
-
-//                    if (getPastLongitude() == null && getPastLatitude() == null) {
-//                        setPastLatitude(latitude);
-//                        setPastLongitude(longitude);
-//                    }
-        if(mBoardActive.getPastLatitude() != null && mBoardActive.getPastLongitude() != null)
-        {
-            if (Double.parseDouble(mBoardActive.getPastLatitude()) != latitude && Double.parseDouble(mBoardActive.getPastLongitude()) != longitude) {
-                if (!Constants.FIRST_TIME_GET_GEOFENCE) {
-                    Constants.FIRST_TIME_GET_GEOFENCE = true;
-                    mBoardActive.getLocationList();
-                }
-                Location temp = new Location(LocationManager.GPS_PROVIDER);
-                temp.setLatitude(Double.parseDouble(mBoardActive.getPastLatitude()));
-                temp.setLongitude(Double.parseDouble(mBoardActive.getPastLongitude()));
-                Log.e("distance", "" + firstLocation.distanceTo(temp));
-
-                Log.d(TAG, "PassLoc lat/lng: " + mBoardActive.getPastLatitude() + " " + mBoardActive.getPastLongitude());
-                if (firstLocation.distanceTo(temp) > Constants.DISTANCE) {
-                    //setPastLongitude(null);
-                    // setPastLatitude(null);
-                    mBoardActive.setPastLatitude(firstLocation.getLatitude());
-                    mBoardActive.setPastLongitude(firstLocation.getLongitude());
-                    Log.e("new lat", mBoardActive.getPastLatitude());
-                    Log.e("new lat", mBoardActive.getPastLongitude());
-
-
-                    Log.e("enter into distance", "enter into distance");
-                    mBoardActive.setLocationArrayList(null);
-                    mBoardActive.getLocationList();
-
-                }
-
-            }
-
-        }
         //sends data to server every minute.
 //        if (SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) == 0 || System.currentTimeMillis() - SharedPreferenceHelper.getLong(context, LAST_DATA_UPDATED_TIME, 0) >= 60000) {
 //            mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
@@ -205,53 +163,4 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver implemen
 //        }
     }
 
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-
-        Log.e("lat1", "" + location.getLatitude());
-        Log.e("long1", "" + location.getLongitude());
-
-        double latitude = location.getLatitude();
-        double   longitude = location.getLongitude();
-        mBoardActive.setLatitude("" + latitude);
-        mBoardActive.setLongitude("" + longitude);
-        Log.e("lat1", "" + latitude);
-        Log.e("long1", "" + longitude);
-
-//                    if (getPastLongitude() == null && getPastLatitude() == null) {
-//                        setPastLatitude(latitude);
-//                        setPastLongitude(longitude);
-//                    }
-        if(mBoardActive.getPastLatitude() != null && mBoardActive.getPastLongitude() != null)
-        {
-            if (Double.parseDouble(mBoardActive.getPastLatitude()) != latitude && Double.parseDouble(mBoardActive.getPastLongitude()) != longitude) {
-                if (!Constants.FIRST_TIME_GET_GEOFENCE) {
-                    Constants.FIRST_TIME_GET_GEOFENCE = true;
-                    mBoardActive.getLocationList();
-                }
-                Location temp = new Location(LocationManager.GPS_PROVIDER);
-                temp.setLatitude(Double.parseDouble(mBoardActive.getPastLatitude()));
-                temp.setLongitude(Double.parseDouble(mBoardActive.getPastLongitude()));
-                Log.e("distance", "" + location.distanceTo(temp));
-
-                Log.d(TAG, "PassLoc lat/lng: " + mBoardActive.getPastLatitude() + " " + mBoardActive.getPastLongitude());
-                if (location.distanceTo(temp) > Constants.DISTANCE) {
-                    //setPastLongitude(null);
-                    // setPastLatitude(null);
-                    mBoardActive.setPastLatitude(location.getLatitude());
-                    mBoardActive.setPastLongitude(location.getLongitude());
-                    Log.e("new lat", mBoardActive.getPastLatitude());
-                    Log.e("new lat", mBoardActive.getPastLongitude());
-
-
-                    Log.e("enter into distance", "enter into distance");
-                    mBoardActive.setLocationArrayList(null);
-                    mBoardActive.getLocationList();
-
-                }
-
-            }
-
-        }
-    }
 }
