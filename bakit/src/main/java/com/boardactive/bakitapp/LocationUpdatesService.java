@@ -139,7 +139,7 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        stopForeground(false);
+        stopForeground(true);
         return mBinder;
     }
 
