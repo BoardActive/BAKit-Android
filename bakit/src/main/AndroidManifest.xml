@@ -46,8 +46,8 @@
         <service
             android:name="com.boardactive.bakitapp.LocationUpdatesService"
             android:enabled="true"
-            android:exported="true" />
-<!--        <service android:foregroundServiceType="location"/>-->
+            android:exported="true"
+            android:foregroundServiceType="location"/>
 
         <receiver
             android:name="com.boardactive.bakitapp.GeofenceBroadCastReceiver"
