@@ -85,19 +85,15 @@ public class LocationUpdatesService extends Service {
             CharSequence name = getString(R.string.app_name);
             // Create the channel for the notification
             NotificationChannel mChannel =
-                    new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+                    new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_NONE);
 
             // Set the Notification Channel for the Notification Manager.
             mNotificationManager.createNotificationChannel(mChannel);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            startForeground(NOTIFICATION_ID,getNotification());
-//            if(boardActive.serviceIsRunningInForeground(this))
-//            {
-//                stopForeground(false);
-//
-//            }
+            //startForeground(NOTIFICATION_ID,getNotification());
+
         }
 
 
@@ -139,8 +135,14 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        stopForeground(true);
+      //  stopForeground(true);
         return mBinder;
+    }
+
+    @Override
+    public void onDestroy() {
+    //    stopForeground(true);
+        super.onDestroy();
     }
 
     /**

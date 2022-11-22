@@ -104,7 +104,7 @@ public class GeofenceBroadCastReceiver extends BroadcastReceiver implements Loca
             mBoardActive.postLocation(new BoardActive.PostLocationCallback() {
                                           @Override
                                           public void onResponse(Object value) {
-                                              SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, true);
+                                             // SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, true);
                                               // mBoardActive.appendLog("enter into api");
                                               // count++;
                                               Log.d("TAG", "[BAKit] onResponse" + value.toString());
@@ -122,8 +122,7 @@ public class GeofenceBroadCastReceiver extends BroadcastReceiver implements Loca
                     if (locId.equals(coordinateModel.getId().toString())) {
                         Log.e("last notify date",""+coordinateModel.getLastNotifyDate());
                         mBoardActive.removeGeofence(context,locId,true);
-                       // SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
-
+                        SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
 
                         if(coordinateModel.getLastNotifyDate() != null && !coordinateModel.getLastNotifyDate().equals("")){
                            // DateFormat df1 = new SimpleDateFormat("EEE MMM dd yyyy hh:mm:ss a");
@@ -170,14 +169,14 @@ public class GeofenceBroadCastReceiver extends BroadcastReceiver implements Loca
              List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
              geofenceTransitionDetails = getGeofenceTransitionDetails(geofenceTransition,
                      triggeringGeofences);
-           // SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
+            SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
            // sendNotification(context,locId,geofenceTransitionDetails);
              Log.e("exit trigger","exit");
              //  mBoardActive.removeGeofence(context);
         } else {
             // Log the error.
             Log.e("TAG", "Error");
-            //SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
+            SharedPreferenceHelper.putBoolean(context, Constants.API_CALLED_STATUS, false);
         }
     }
 

@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Optional, set to 'true' to run in foreground
         mBoardActive.setIsForeground(true);
+        mBoardActive.StartWorker();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)

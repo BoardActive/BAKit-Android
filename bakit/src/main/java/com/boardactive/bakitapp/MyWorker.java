@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.work.WorkerParameters;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -71,7 +73,7 @@ public class MyWorker extends Worker {
 	public MyWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
 		super(context, workerParams);
 		mContext = context;
-		mBoardActive = new BoardActive(getApplicationContext());
+		//mBoardActive = new BoardActive(getApplicationContext());
 
 	}
 
@@ -100,6 +102,8 @@ public class MyWorker extends Worker {
 					@Override
 					public void onLocationResult(LocationResult locationResult) {
 						super.onLocationResult(locationResult);
+
+
 					}
 				};
 
@@ -117,7 +121,8 @@ public class MyWorker extends Worker {
 									if (task.isSuccessful() && task.getResult() != null) {
 										mLocation = task.getResult();
 										Log.d(TAG, "Location : " + mLocation);
-
+										Log.e("lat11",""+mLocation.getLatitude());
+										Log.e("long11",""+mLocation.getLongitude());
 										// Create the NotificationChannel, but only on API 26+ because
 										// the NotificationChannel class is new and not in the support library
 										if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -165,6 +170,7 @@ public class MyWorker extends Worker {
 				}
 
 				try {
+
 					mFusedLocationClient.requestLocationUpdates(mLocationRequest, null);
 				} catch (SecurityException unlikely) {
 					//Utils.setRequestingLocationUpdates(this, false);
