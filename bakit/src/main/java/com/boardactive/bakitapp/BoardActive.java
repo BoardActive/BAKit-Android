@@ -63,6 +63,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -90,7 +91,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * NOTE: In the class constructor you will need to pass in the getApplicationContext() from the main app
@@ -198,7 +198,6 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                 .addOnConnectionFailedListener(this).build();
         geofencingClient = LocationServices.getGeofencingClient(mContext);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
-
     }
 
     /**
@@ -433,7 +432,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
         if (geofencingClient != null)
             googleApiClient.connect();
         /** Start the JobDispatcher to check for and post location */
-        StartWorker();
+        //StartWorker();
         //getLocationList();
         Log.d(TAG, "[BAKit]  initialize()");
 
@@ -442,8 +441,20 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
      */
-    private void StartWorker() {
+    public void StartWorker() {
         Log.d(TAG, "[BAKit]  StartWorker()");
+//        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+//
+//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 15  , TimeUnit.MINUTES)
+//                //.addTag(TAG)
+//                .setConstraints(constraints)
+//                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
+//                        2,
+//                        TimeUnit.MINUTES)
+//                .build();
+//        WorkManager.getInstance(mContext.getApplicationContext()).enqueue(periodicWork);
+//        Toast.makeText(mContext, "Location Worker Started : " + periodicWork.getId(), Toast.LENGTH_SHORT).show();
+
         boolean isForeground = getIsForeground();
 
         if (isForeground) {
@@ -1818,7 +1829,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
 //        }
         // Toast.makeText(mContext, "starting broadcast", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(mContext, GeofenceBroadCastReceiver.class);
+        Intent intent = new Intent(mContext,GeofenceBroadCastReceiver.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             geofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_MUTABLE);
         } else {
@@ -1858,12 +1869,14 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                             GeofenceLocationModel geofenceLocationModel = gson.fromJson(jobject, GeofenceLocationModel.class);
                             locationList.clear();
                             locationList = new ArrayList<>();
+                            ArrayList<LatLng>  arrayListLatLng = new ArrayList<LatLng>();
 //                            for (int j = 0; j < geofenceLocationModel.getData().size(); j++) {
 //                                GeoData geoData = geofenceLocationModel.getData().get(j);
 //                                if (getGeofencePendingIntent() != null) {
 //                                    removeGeofence(mContext, geoData.getId().toString());
 //                                }
 //                            }
+                                ArrayList<Double> distanceList = new ArrayList<Double>();
                             for (int j = 0; j < geofenceLocationModel.getData().size(); j++) {
                                 GeoData geoData = geofenceLocationModel.getData().get(j);
                                 if (getGeofencePendingIntent() != null) {
@@ -1874,17 +1887,34 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                                     locationModel.setLastNotifyDate("");
                                     locationModel.setId(geoData.getId());
                                     locationModel.setType(geoData.getType());
+
+                                    if(locationModel.getType().equals("polygon")){
+                                        arrayListLatLng.add(new LatLng(Double.parseDouble(geoData.getCoordinates().get(i).getLatitude()),Double.parseDouble(geoData.getCoordinates().get(i).getLongitude())));
+                                       Log.e( "",String.valueOf(computeCentroid(arrayListLatLng).latitude +""+String.valueOf(computeCentroid(arrayListLatLng).longitude)));
+                                        Location coordinateLatLng = new Location(LocationManager.GPS_PROVIDER);
+                                        coordinateLatLng.setLatitude(Double.parseDouble(geoData.getCoordinates().get(i).getLatitude()));
+                                        coordinateLatLng.setLongitude(Double.parseDouble(geoData.getCoordinates().get(i).getLongitude()));
+                                        Location centerLatLng = new Location(LocationManager.GPS_PROVIDER);
+                                        centerLatLng.setLatitude(computeCentroid(arrayListLatLng).latitude);
+                                        centerLatLng.setLongitude(computeCentroid(arrayListLatLng).longitude);
+                                        distanceList.add((double) coordinateLatLng.distanceTo(centerLatLng));
+                                        locationModel.setLatitude(String.valueOf(computeCentroid(arrayListLatLng).latitude));
+                                        locationModel.setLongitude(String.valueOf(computeCentroid(arrayListLatLng).longitude));
+
+                                    }
                                     if (geoData.getRadius() != null) {
                                         locationModel.setRadius(geoData.getRadius());
 
                                     } else {
-                                        locationModel.setRadius(150);
+                                        if(Collections.max(distanceList)>0.0){
+                                            locationModel.setRadius(Collections.max(distanceList).intValue());
+                                        }
 
                                     }
+                                    //Log.e("max",Collections.max(distanceList).toString());
                                     locationModel.setLatitude(locationModel.getLatitude());
                                     locationModel.setLongitude(locationModel.getLongitude());
                                     locationList.add(locationModel);
-
                                 }
                                 //comment for geofence circular date (3-11-2022)
 //                                Coordinate locationModel = geoData.getCoordinates().get(0);
@@ -2056,7 +2086,51 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
             e.printStackTrace();
         }
     }
-}
+    private boolean isPointInPolygon(LatLng tap, ArrayList<LatLng> vertices) {
+        int intersectCount = 0;
+        for (int j = 0; j < vertices.size() - 1; j++) {
+            if (rayCastIntersect(tap, vertices.get(j), vertices.get(j + 1))) {
+                intersectCount++;
+            }
+        }
+
+        return ((intersectCount % 2) == 1); // odd = inside, even = outside;
+    }
+
+    private boolean rayCastIntersect(LatLng tap, LatLng vertA, LatLng vertB) {
+
+        double aY = vertA.latitude;
+        double bY = vertB.latitude;
+        double aX = vertA.longitude;
+        double bX = vertB.longitude;
+        double pY = tap.latitude;
+        double pX = tap.longitude;
+
+        if ((aY > pY && bY > pY) || (aY < pY && bY < pY)
+                || (aX < pX && bX < pX)) {
+            return false; // a and b can't both be above or below pt.y, and a or
+            // b must be east of pt.x
+        }
+
+        double m = (aY - bY) / (aX - bX); // Rise over run
+        double bee = (-aX) * m + aY; // y = mx + b
+        double x = (pY - bee) / m; // algebra is neat!
+
+        return x > pX;
+    }
+
+    private LatLng computeCentroid(List<LatLng> points) {
+        double latitude = 0;
+        double longitude = 0;
+        int n = points.size();
+
+        for (LatLng point : points) {
+            latitude += point.latitude;
+            longitude += point.longitude;
+        }
+
+        return new LatLng(latitude/n, longitude/n);
+    }}
 
 
 

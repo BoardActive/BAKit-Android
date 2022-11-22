@@ -42,7 +42,7 @@ public class RequestPermissionActivity extends AppCompatActivity {
     private static final String IS_FOREGROUND = "isforeground";
 
     // periodic worker takes 15 mins repeatInterval by default to restart even if you set <15 mins.
-    private int repeatInterval = 1;
+    private int repeatInterval = 15;
 
     BoardActive mBoardActive;
 
@@ -116,8 +116,18 @@ public class RequestPermissionActivity extends AppCompatActivity {
 
     private void StartWorker(boolean isForeground) {
         Log.d(TAG, "[BAKit]  StartWorker()");
+//        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
+//
+//        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, repeatInterval, TimeUnit.MINUTES)
+//                .addTag(TAG)
+//                .setConstraints(constraints)
+//                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL,
+//                        2,
+//                        TimeUnit.MINUTES)
+//                .build();
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(FETCH_LOCATION_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, periodicWork);
+//        SharedPreferenceHelper.putBoolean(this, IS_FOREGROUND, isForeground);
 
-        SharedPreferenceHelper.putBoolean(this, IS_FOREGROUND, isForeground);
         if (isForeground) {
             WorkManager.getInstance(this).cancelAllWork();
             if (!serviceIsRunningInForeground(this)) {

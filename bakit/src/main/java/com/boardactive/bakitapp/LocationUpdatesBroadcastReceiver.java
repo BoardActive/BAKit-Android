@@ -52,7 +52,7 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
 
     @SuppressLint("MissingPermission")
     public void getLocationUpdates(final Context context, final Intent intent) {
-        Log.e("enter into lcoation","enter");
+       // Log.e("enter into lcoation","enter");
 
         LocationResult result = LocationResult.extractResult(intent);
         if (result != null) {
@@ -62,6 +62,42 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
             if (locations.size() > 0) {
                  firstLocation = locations.get(0);
                  Log.e("firstlocation","lat"+firstLocation.getLatitude() +"long"+firstLocation.getLongitude());
+
+
+
+//                if (mBoardActive.getPastLongitude() == null && mBoardActive.getPastLatitude() == null) {
+//                    mBoardActive.setPastLatitude(firstLocation.getLatitude());
+//                    mBoardActive.setPastLongitude(firstLocation.getLongitude());
+//                }
+//                if(mBoardActive.getPastLatitude() != null && mBoardActive.getPastLongitude() != null)
+//                {
+//                    if (Double.parseDouble(mBoardActive.getPastLatitude()) != firstLocation.getLatitude() && Double.parseDouble(mBoardActive.getPastLongitude()) != firstLocation.getLongitude()) {
+//                        if (!Constants.FIRST_TIME_GET_GEOFENCE) {
+//                            Constants.FIRST_TIME_GET_GEOFENCE = true;
+//                            mBoardActive.getLocationList();
+//                        }
+//                        Location temp = new Location(LocationManager.GPS_PROVIDER);
+//                        temp.setLatitude(Double.parseDouble(mBoardActive.getPastLatitude()));
+//                        temp.setLongitude(Double.parseDouble(mBoardActive.getPastLongitude()));
+//                        Log.e("distance", "" + firstLocation.distanceTo(temp));
+//
+//                        Log.d(TAG, "PassLoc lat/lng: " + mBoardActive.getPastLatitude() + " " + mBoardActive.getPastLongitude());
+//                        if (firstLocation.distanceTo(temp) > Constants.DISTANCE) {
+//                            //setPastLongitude(null);
+//                            // setPastLatitude(null);
+//                            mBoardActive.setPastLatitude(firstLocation.getLatitude());
+//                            mBoardActive.setPastLongitude(firstLocation.getLongitude());
+//                            Log.e("new lat", mBoardActive.getPastLatitude());
+//                            Log.e("new lat", mBoardActive.getPastLongitude());
+//                            Log.e("enter into distance", "enter into distance");
+//                            mBoardActive.setLocationArrayList(null);
+//                            mBoardActive.getLocationList();
+//
+//                        }
+//
+//                    }
+//
+//                }
 
 //                if(mBoardActive.getPastLatitude() != null && mBoardActive.getPastLongitude() != null ) {
 //                    Location temp = new Location(LocationManager.GPS_PROVIDER);
