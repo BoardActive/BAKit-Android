@@ -106,7 +106,7 @@ public class LocationWorker extends Worker {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-
+                Log.d(TAG, "location");
 
 
             }
