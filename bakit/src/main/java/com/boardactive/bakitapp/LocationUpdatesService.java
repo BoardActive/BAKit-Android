@@ -92,7 +92,7 @@ public class LocationUpdatesService extends Service {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            //startForeground(NOTIFICATION_ID,getNotification());
+            startForeground(NOTIFICATION_ID,getNotification());
 
         }
 
