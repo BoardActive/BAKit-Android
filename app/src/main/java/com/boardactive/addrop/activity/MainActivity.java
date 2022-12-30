@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.checkLocationPermissions();
 
                         // Initialize BoardActive
-                        mBoardActive.initialize();
+                        mBoardActive.initialize("");
 
                         // Register the device with BoardActive
                         //if(mBoardActive.isAppEnabled)

@@ -61,15 +61,18 @@ public class LocationUpdatesService extends Service {
     public static final long UPDATE_INTERVAL = 1 * 1000;
     public static final float SMALLEST_DISPLACEMENT = 1.0F;
     public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
+    public  String appName;
 
     public LocationUpdatesService() {
     }
+
 
     @SuppressLint("MissingPermission")
     @Override
     public void onCreate() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         BoardActive boardActive = new  BoardActive(this);
+
 
         createLocationRequest();
 
@@ -92,7 +95,7 @@ public class LocationUpdatesService extends Service {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            startForeground(NOTIFICATION_ID,getNotification());
+            startForeground(NOTIFICATION_ID,getNotification(appName));
 
         }
 
@@ -125,6 +128,8 @@ public class LocationUpdatesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Tells the system to not try to recreate the service after it has been killed.
+        appName=(String) intent.getExtras().get("appName");
+
         return START_NOT_STICKY;
     }
 
@@ -148,7 +153,7 @@ public class LocationUpdatesService extends Service {
     /**
      * Returns the {@link NotificationCompat} used as part of the foreground service.
      */
-    private Notification getNotification() {
+    private Notification getNotification(String appname) {
         int resourceId;
         try {
             resourceId = getResources().getIdentifier(getResources().getString(R.string.bakit_foreground_icon), "drawable", getPackageName());
@@ -158,7 +163,7 @@ public class LocationUpdatesService extends Service {
         Notification.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             builder = new Notification.Builder(this)
-                    .setContentText(getResources().getString(R.string.bakit_foreground_message))
+                    .setContentText(appname+getResources().getString(R.string.bakit_foreground_message))
                     .setOngoing(true)
                     .setPriority(Notification.PRIORITY_HIGH)
                     .setSmallIcon(resourceId)

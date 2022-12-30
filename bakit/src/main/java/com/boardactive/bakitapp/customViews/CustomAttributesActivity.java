@@ -269,8 +269,6 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
     public void clickListener(final String tag) {
         if(llCustomViews.findViewWithTag(tag) instanceof  CustomDatePicker ){
 
-
-
             Calendar cur_calender = Calendar.getInstance();
             DatePickerDialog datePicker = DatePickerDialog.newInstance(
                     new DatePickerDialog.OnDateSetListener() {
