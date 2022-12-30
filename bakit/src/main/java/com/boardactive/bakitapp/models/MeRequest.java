@@ -6,6 +6,8 @@ public class MeRequest {
     private String deviceOS;
     private String deviceOSVersion;
     private Attributes attributes;
+    private String dateLastOpenedApp;
+
 
     public String getEmail() {
         return email;
@@ -29,6 +31,14 @@ public class MeRequest {
 
     public void setDeviceOSVersion(String deviceOSVersion) {
         this.deviceOSVersion = deviceOSVersion;
+    }
+
+    public void setDateLastOpenedApp(String dateLastOpenedApp) {
+        this.dateLastOpenedApp = dateLastOpenedApp;
+    }
+
+    public String getDateLastOpenedApp() {
+        return dateLastOpenedApp;
     }
 
     public Attributes getAttributes() {

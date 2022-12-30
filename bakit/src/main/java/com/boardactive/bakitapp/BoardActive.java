@@ -181,6 +181,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     public Location previousLocation;
     public boolean isAPICalled = true;
     private FusedLocationProviderClient fusedLocationClient;
+    public String appName;
 
     /**
      * Constuctor
@@ -419,14 +420,14 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
      */
-    public void initialize() {
+    public void initialize(String appName) {
 
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
         //setLocationArrayList(locationList);
 
-
+       this.appName =appName;
             /*Intent serviceIntent = new Intent(this, LocationService.class);
             stopService(serviceIntent);*/
         if (geofencingClient != null)
@@ -461,6 +462,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
             WorkManager.getInstance(mContext).cancelAllWork();
             if (!serviceIsRunningInForeground(mContext)) {
                 Intent serviceIntent = new Intent(mContext, LocationUpdatesService.class);
+                serviceIntent.putExtra("appName",appName);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     mContext.startForegroundService(serviceIntent);
@@ -662,6 +664,10 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         meRequest.setEmail("");
                         meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
                         meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
+                        Calendar cal = Calendar.getInstance();
+                        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
+                        System.out.println("Today's date and time = "+simpleformat.format(cal.getTime()));
+                        meRequest.setDateLastOpenedApp(simpleformat.format(cal.getTime()));
                         meRequest.setAttributes(attributes);
 
                         //parse request object to json format and send as request body
