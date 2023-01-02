@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +20,9 @@ import com.boardactive.bakitapp.models.MessageModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Date;
 
 public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
@@ -54,7 +58,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                     with(mContext).
                     load(mObj.getImageUrl()).
                     asBitmap().
-                    into(100, 100). // Width and height
+                    into(300, 300). // Width and height
                     get();
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -78,6 +82,8 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                     .setAutoCancel(true)
                                     .setContentIntent(mPendingIntent)
                                     .setSound(defaultSoundUri)
+                            .setLargeIcon(mBitmap).setStyle(new NotificationCompat.BigPictureStyle()
+                                    .bigPicture(mBitmap).bigLargeIcon(null))
                                     .setSmallIcon(R.drawable.ba_logo)
                                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
@@ -151,12 +157,15 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                 break;
             default:
                 Log.e("default","");
+
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
-                                .setSmallIcon(R.drawable.ba_logo)
+                                .setLargeIcon(mBitmap)
+                                .setSmallIcon(R.drawable.ba_logo).setStyle(new NotificationCompat.BigPictureStyle()
+                                .bigPicture(mBitmap).bigLargeIcon(null))
                                 .setSound(defaultSoundUri)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent);

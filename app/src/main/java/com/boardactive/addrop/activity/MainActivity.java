@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Optional, set to 'true' to run in foreground
         mBoardActive.setIsForeground(true);
-        mBoardActive.StartWorker();
+        mBoardActive.StartWorker(getResources().getString(R.string.app_name));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.checkLocationPermissions();
 
                         // Initialize BoardActive
-                        mBoardActive.initialize("");
+                        mBoardActive.initialize();
 
                         // Register the device with BoardActive
                         //if(mBoardActive.isAppEnabled)
