@@ -420,14 +420,13 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
      * Checks is location permissions are on if not it will prompt user to turn on location
      * permissions.
      */
-    public void initialize(String appName) {
+    public void initialize() {
 
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS, "android");
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_OS_VERSION, Build.VERSION.RELEASE);
         SharedPreferenceHelper.putString(mContext, BAKIT_DEVICE_ID, getUUID(mContext));
         //setLocationArrayList(locationList);
 
-       this.appName =appName;
             /*Intent serviceIntent = new Intent(this, LocationService.class);
             stopService(serviceIntent);*/
         if (geofencingClient != null)
@@ -442,8 +441,10 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     /**
      * Private Function to launch serve to get and post location to BoaradActive Platform
      */
-    public void StartWorker() {
+    public void StartWorker(String appName) {
         Log.d(TAG, "[BAKit]  StartWorker()");
+        this.appName = appName;
+
 //        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
 //
 //        PeriodicWorkRequest periodicWork = new PeriodicWorkRequest.Builder(LocationWorker.class, 15  , TimeUnit.MINUTES)

@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -18,6 +19,8 @@ import androidx.core.app.NotificationCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import java.util.Objects;
 
 
 /**
@@ -73,7 +76,6 @@ public class LocationUpdatesService extends Service {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         BoardActive boardActive = new  BoardActive(this);
 
-
         createLocationRequest();
 
         try {
@@ -93,11 +95,7 @@ public class LocationUpdatesService extends Service {
             // Set the Notification Channel for the Notification Manager.
             mNotificationManager.createNotificationChannel(mChannel);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            startForeground(NOTIFICATION_ID,getNotification(appName));
-
-        }
 
 
     }
@@ -127,9 +125,13 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Tells the system to not try to recreate the service after it has been killed.
-        appName=(String) intent.getExtras().get("appName");
+        appName=(String) Objects.requireNonNull(intent.getExtras()).getString("appName");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
+            startForeground(NOTIFICATION_ID,getNotification(appName));
+
+        }
+        // Tells the system to not try to recreate the service after it has been killed.
         return START_NOT_STICKY;
     }
 
@@ -140,7 +142,6 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-      //  stopForeground(true);
         return mBinder;
     }
 
@@ -163,7 +164,7 @@ public class LocationUpdatesService extends Service {
         Notification.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             builder = new Notification.Builder(this)
-                    .setContentText(appname+getResources().getString(R.string.bakit_foreground_message))
+                    .setContentText(appname+ " "+getResources().getString(R.string.bakit_foreground_message))
                     .setOngoing(true)
                     .setPriority(Notification.PRIORITY_HIGH)
                     .setSmallIcon(resourceId)
