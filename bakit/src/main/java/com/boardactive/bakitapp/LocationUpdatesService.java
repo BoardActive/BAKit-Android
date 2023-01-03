@@ -65,7 +65,7 @@ public class LocationUpdatesService extends Service {
     public static final float SMALLEST_DISPLACEMENT = 1.0F;
     public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
     public  String appName;
-
+    public String ACTION_STOP_SERVICE="";
     public LocationUpdatesService() {
     }
 
@@ -131,6 +131,11 @@ public class LocationUpdatesService extends Service {
             startForeground(NOTIFICATION_ID,getNotification(appName));
 
         }
+        if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
+            Log.d(TAG,"called to cancel service");
+            mNotificationManager.cancel(NOTIFICATION_ID);
+            stopSelf();
+        }
         // Tells the system to not try to recreate the service after it has been killed.
         return START_NOT_STICKY;
     }
@@ -161,11 +166,15 @@ public class LocationUpdatesService extends Service {
         } catch (Exception e) {
             resourceId = R.drawable.ba_logo;
         }
+        Intent stopSelf = new Intent(this, LocationUpdatesService.class);
+        stopSelf.setAction(ACTION_STOP_SERVICE);
+        PendingIntent pStopSelf = PendingIntent.getService(this, 0, stopSelf,PendingIntent.FLAG_CANCEL_CURRENT);
+
         Notification.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             builder = new Notification.Builder(this)
                     .setContentText(appname+ " "+getResources().getString(R.string.bakit_foreground_message))
-                    .setOngoing(true)
+                    .setOngoing(true).addAction(R.drawable.ba_logo, "Stop service",pStopSelf)
                     .setPriority(Notification.PRIORITY_HIGH)
                     .setSmallIcon(resourceId)
                     .setColor(getResources().getColor(R.color.notification_icon_color))
