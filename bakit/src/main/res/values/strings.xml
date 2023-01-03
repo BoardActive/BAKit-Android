@@ -20,7 +20,7 @@
     </plurals>
 
     <!--Default message to be displayed in foreground service's notification-->
-    <string name="bakit_foreground_message"> app is running.</string>
+    <string name="bakit_foreground_message">is running.</string>
     <!--Default icon to be displayed in foreground service's notification-->
     <string name="bakit_foreground_icon">ba_logo</string>
 
