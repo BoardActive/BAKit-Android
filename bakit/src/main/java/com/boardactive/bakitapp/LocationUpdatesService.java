@@ -125,12 +125,15 @@ public class LocationUpdatesService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        appName=(String) Objects.requireNonNull(intent.getExtras()).getString("appName");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if(intent.getExtras() != null){
+            appName=(String) Objects.requireNonNull(intent.getExtras()).getString("appName");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            startForeground(NOTIFICATION_ID,getNotification(appName));
+                startForeground(NOTIFICATION_ID,getNotification(appName));
 
+            }
         }
+
         if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
             Log.d(TAG,"called to cancel service");
             mNotificationManager.cancel(NOTIFICATION_ID);
