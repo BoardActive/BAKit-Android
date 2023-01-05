@@ -65,7 +65,7 @@ public class LocationUpdatesService extends Service {
     public static final float SMALLEST_DISPLACEMENT = 1.0F;
     public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
     public  String appName;
-    public String ACTION_STOP_SERVICE="";
+    public String ACTION_STOP_SERVICE="ACTION_STOP_SERVICE";
     public LocationUpdatesService() {
     }
 
@@ -113,7 +113,7 @@ public class LocationUpdatesService extends Service {
         Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
         intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
 
         }else
@@ -171,7 +171,15 @@ public class LocationUpdatesService extends Service {
         }
         Intent stopSelf = new Intent(this, LocationUpdatesService.class);
         stopSelf.setAction(ACTION_STOP_SERVICE);
-        PendingIntent pStopSelf = PendingIntent.getService(this, 0, stopSelf,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pStopSelf;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+             pStopSelf = PendingIntent.getService(this, 0, stopSelf,PendingIntent.FLAG_MUTABLE);
+
+        }else
+        {
+             pStopSelf = PendingIntent.getService(this, 0, stopSelf,PendingIntent.FLAG_CANCEL_CURRENT);
+
+        }
 
         Notification.Builder builder = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
