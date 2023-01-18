@@ -11,7 +11,10 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -82,7 +85,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                     .setAutoCancel(true)
                                     .setContentIntent(mPendingIntent)
                                     .setSound(defaultSoundUri)
-                            .setLargeIcon(mBitmap).setStyle(new NotificationCompat.BigPictureStyle()
+                                    .setLargeIcon(mBitmap).setStyle(new NotificationCompat.BigPictureStyle()
                                     .bigPicture(mBitmap).bigLargeIcon(null))
                                     .setSmallIcon(R.drawable.ba_logo)
                                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
@@ -189,4 +192,5 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
 
         //  }
     }
+
 }

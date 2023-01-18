@@ -1,6 +1,7 @@
 package com.boardactive.bakitapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.PendingIntent;
@@ -89,6 +90,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -657,7 +659,11 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                             stock.setNotificationPermission("true");
                         else
                             stock.setNotificationPermission("false");
-
+                        Calendar cal = Calendar.getInstance();
+                        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                        System.out.println("Today's date and time = "+simpleformat.format(cal.getTime()));
+                        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        stock.setDateLastOpenedApp(getLocalToUTCDate(cal.getTime()));
 
                         attributes.setStock(stock);
 
@@ -665,10 +671,10 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         meRequest.setEmail("");
                         meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
                         meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
-                        Calendar cal = Calendar.getInstance();
-                        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
-                        System.out.println("Today's date and time = "+simpleformat.format(cal.getTime()));
-                        meRequest.setDateLastOpenedApp(simpleformat.format(cal.getTime()));
+                        Calendar cal1 = Calendar.getInstance();
+                        SimpleDateFormat simpleformat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                        System.out.println("Today's date and time = "+simpleformat1.format(cal1.getTime()));
+                        meRequest.setDateLastOpenedApp(getLocalToUTCDate(cal.getTime()));
                         meRequest.setAttributes(attributes);
 
                         //parse request object to json format and send as request body
@@ -685,7 +691,6 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     return GenerateHeaders();
                 }
-
                 //            @Override
                 //            protected Map<String, String> getParams() {
                 //                Map<String, String> params = new HashMap<String, String>();
@@ -700,7 +705,15 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
             queue.add(str);
         }
     }
-
+    public String getLocalToUTCDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date time = calendar.getTime();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        outputFmt.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return outputFmt.format(time);
+    }
 
     /**
      * post Event and log in the BoardActive Platform
@@ -743,7 +756,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
-                    //                params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+                    //  params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
                     return params;
                 }
 

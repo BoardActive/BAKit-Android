@@ -14,6 +14,15 @@ public class Stock {
     private String locationPermission;
     private String notificationPermission;
 
+    public String getDateLastOpenedApp() {
+        return dateLastOpenedApp;
+    }
+
+    public void setDateLastOpenedApp(String dateLastOpenedApp) {
+        this.dateLastOpenedApp = dateLastOpenedApp;
+    }
+
+    private String dateLastOpenedApp;
     //Getters and setters
     public String getName() {
         return name;
