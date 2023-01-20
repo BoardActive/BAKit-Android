@@ -660,11 +660,8 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         else
                             stock.setNotificationPermission("false");
                         Calendar cal = Calendar.getInstance();
-                        SimpleDateFormat simpleformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                        System.out.println("Today's date and time = "+simpleformat.format(cal.getTime()));
                         cal.setTimeZone(TimeZone.getTimeZone("UTC"));
                         stock.setDateLastOpenedApp(getLocalToUTCDate(cal.getTime()));
-
                         attributes.setStock(stock);
 
                         MeRequest meRequest = new MeRequest();
@@ -672,9 +669,7 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         meRequest.setDeviceOS(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS, null));
                         meRequest.setDeviceOSVersion(SharedPreferenceHelper.getString(mContext, BAKIT_DEVICE_OS_VERSION, null));
                         Calendar cal1 = Calendar.getInstance();
-                        SimpleDateFormat simpleformat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                        System.out.println("Today's date and time = "+simpleformat1.format(cal1.getTime()));
-                        meRequest.setDateLastOpenedApp(getLocalToUTCDate(cal.getTime()));
+                        meRequest.setDateLastOpenedApp(getLocalToUTCDate(cal1.getTime()));
                         meRequest.setAttributes(attributes);
 
                         //parse request object to json format and send as request body
