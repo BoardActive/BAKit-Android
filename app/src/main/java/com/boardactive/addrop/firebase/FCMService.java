@@ -194,7 +194,8 @@ public class FCMService extends FirebaseMessagingService {
         String action = remoteMessage.getData().get("action");
         String type = remoteMessage.getData().get("type");
         String placeId = remoteMessage.getData().get("placeId");
-
+        Boolean isAllowToDownloadNotificationImage = Boolean.valueOf(remoteMessage.getData().get("isAllowToDownloadNotificationImage"));
+        obj.setAllowToDownloadNotificationImage(isAllowToDownloadNotificationImage);
         Log.v(isSilent.toString(),"");
         Log.v(action,"action");
         obj.setAction(action);
@@ -244,6 +245,14 @@ public class FCMService extends FirebaseMessagingService {
                 intent.putExtra(IMAGE_URL,obj.getImageUrl());
 
             }
+            if(obj.getAllowToDownloadNotificationImage()){
+                intent.putExtra("isAllowImage",true);
+
+            }else
+            {
+                intent.putExtra("isAllowImage",false);
+
+            }
 //        intent.putExtra(EXTRA_OBJECT, obj);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                     | Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -266,7 +275,7 @@ public class FCMService extends FirebaseMessagingService {
 
 //        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
                 int notificationType = 0;
-                new NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+                new com.boardactive.addrop.firebase.NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
             }else
             {
                  //pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -277,7 +286,7 @@ public class FCMService extends FirebaseMessagingService {
 
 //        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
                 int notificationType = 0;
-                new NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+                new com.boardactive.addrop.firebase.NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
             }
         }
 

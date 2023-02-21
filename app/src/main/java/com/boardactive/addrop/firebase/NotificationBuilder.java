@@ -1,4 +1,4 @@
-package com.boardactive.bakitapp.Tools;
+package com.boardactive.addrop.firebase;
 
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
@@ -7,28 +7,22 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.Parcelable;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
-import com.boardactive.bakitapp.NotificationReceiver;
+import com.boardactive.addrop.activity.DisplayImageActivity;
 import com.boardactive.bakitapp.R;
 import com.boardactive.bakitapp.models.MessageModel;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.Date;
+import java.util.Random;
 
 public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     private static final String TAG = "MyNotificationBuilder";
@@ -47,7 +41,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     public static final int NOTIFICATION_BIG_TEXT = 3;
     public static final int NOTIFICATION_INBOX = 4;
 
-    public NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type,Boolean isSilent) {
+    public  NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type,Boolean isSilent) {
         super();
         this.mContext = context;
         this.mObj = obj;
@@ -78,17 +72,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
         String  channelId = "BAKit";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder;
-        Intent intentAction = new Intent(mContext, NotificationReceiver.class);
-        intentAction.putExtra("bitmap",mBitmap);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
-            mPendingIntent = PendingIntent.getBroadcast(mContext, 1, intentAction, PendingIntent.FLAG_MUTABLE);
-        }
-        else
-        {
-            mPendingIntent = PendingIntent.getBroadcast(mContext, 1, intentAction, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        }
         switch(mType) {
             case NOTIFICATION_BASIC:
                 Log.e("Basic","");//Basic Notification
@@ -128,6 +112,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
@@ -145,6 +130,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
@@ -161,6 +147,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
@@ -177,6 +164,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)

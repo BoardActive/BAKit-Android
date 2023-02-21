@@ -73,7 +73,7 @@ public class  CustomActivity extends AppCompatActivity {
         mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
 
         // Add AppID provided by BoardActive
-        mBoardActive.setAppId("164");
+        mBoardActive.setAppId("346");
 
         // Add AppKey provided by BoardActive
         mBoardActive.setAppKey("bb85c28a-0ac4-439d-ad9c-5527be3cafdd");
