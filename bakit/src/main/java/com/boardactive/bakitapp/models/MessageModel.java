@@ -1,9 +1,14 @@
 package com.boardactive.bakitapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MessageModel {
+public class MessageModel implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -65,6 +70,9 @@ public class MessageModel {
     @Expose
     private String action;
 
+    @SerializedName("isAllowToDownloadNotificationImage")
+    @Expose
+    private Boolean isAllowToDownloadNotificationImage;
 
     /**
      * No args constructor for use in serialization
@@ -123,6 +131,51 @@ public class MessageModel {
         this.action =action;
     }
 
+    protected MessageModel(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        baMessageId = in.readString();
+        baNotificationId = in.readString();
+        firebaseNotificationId = in.readString();
+        body = in.readString();
+        title = in.readString();
+        imageUrl = in.readString();
+        latitude = in.readString();
+        longitude = in.readString();
+        messageData = in.readString();
+        isTestMessage = in.readString();
+        byte tmpIsRead = in.readByte();
+        isRead = tmpIsRead == 0 ? null : tmpIsRead == 1;
+        if (in.readByte() == 0) {
+            dateCreated = null;
+        } else {
+            dateCreated = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            dateLastUpdated = null;
+        } else {
+            dateLastUpdated = in.readLong();
+        }
+        action = in.readString();
+        byte tmpIsAllowToDownloadNotificationImage = in.readByte();
+        isAllowToDownloadNotificationImage = tmpIsAllowToDownloadNotificationImage == 0 ? null : tmpIsAllowToDownloadNotificationImage == 1;
+    }
+
+    public static final Creator<MessageModel> CREATOR = new Creator<MessageModel>() {
+        @Override
+        public MessageModel createFromParcel(Parcel in) {
+            return new MessageModel(in);
+        }
+
+        @Override
+        public MessageModel[] newArray(int size) {
+            return new MessageModel[size];
+        }
+    };
+
     public Integer getId() {
         return id;
     }
@@ -153,6 +206,14 @@ public class MessageModel {
 
     public void setFirebaseNotificationId(String firebaseNotificationId) {
         this.firebaseNotificationId = firebaseNotificationId;
+    }
+
+    public Boolean getAllowToDownloadNotificationImage() {
+        return isAllowToDownloadNotificationImage;
+    }
+
+    public void setAllowToDownloadNotificationImage(Boolean allowToDownloadNotificationImage) {
+        isAllowToDownloadNotificationImage = allowToDownloadNotificationImage;
     }
 
     public String getTitle() {
@@ -241,5 +302,45 @@ public class MessageModel {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeString(baMessageId);
+        parcel.writeString(baNotificationId);
+        parcel.writeString(firebaseNotificationId);
+        parcel.writeString(body);
+        parcel.writeString(title);
+        parcel.writeString(imageUrl);
+        parcel.writeString(latitude);
+        parcel.writeString(longitude);
+        parcel.writeString(messageData);
+        parcel.writeString(isTestMessage);
+        parcel.writeByte((byte) (isRead == null ? 0 : isRead ? 1 : 2));
+        if (dateCreated == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(dateCreated);
+        }
+        if (dateLastUpdated == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(dateLastUpdated);
+        }
+        parcel.writeString(action);
+        parcel.writeByte((byte) (isAllowToDownloadNotificationImage == null ? 0 : isAllowToDownloadNotificationImage ? 1 : 2));
     }
 }

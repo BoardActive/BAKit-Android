@@ -74,7 +74,6 @@ public class ActivityWebView extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close);
         toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);

@@ -85,6 +85,7 @@ public class LocationWorker extends Worker {
     private BoardActive mBoardActive;
     public double latitude;
     public double longitude;
+
     public LocationWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
         super(appContext, workerParams);
         context = appContext;

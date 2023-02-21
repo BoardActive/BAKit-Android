@@ -160,13 +160,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Add URL to point to BoardActive REST API
-//        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Production
+        //mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Production
         mBoardActive.setAppUrl(BoardActive.APP_URL_DEV); // Development
 
         // Add AppID provided by BoardActive
         // mBoardActive.setAppId("ADD_APP_ID");
 
-        mBoardActive.setAppId("346");
+        mBoardActive.setAppId("347");
 
         // Add AppKey provided by BoardActive
 //        mBoardActive.setAppKey("ADD_APP_KEY");
@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
         //mBoardActive.setAppKey("88fd530b-c111-4077-a1d3-ad0a24b127fd");
         //    mBoardActive.setAppKey("f3b64b8b-84e7-4eae-869a-9b9da7981725");
         //mBoardActive.setAppKey("d17f0feb-4f96-4c2a-83fd-fd6302ae3a16");
-       // mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
-         //mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
-         mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
+        mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
+      //   mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
+         //mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
        // mBoardActive.setAppKey(BoardActive.BAKIT_APP_KEY);
 
         // Add the version of your App

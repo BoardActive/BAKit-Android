@@ -141,6 +141,8 @@
             android:name="com.boardactive.bakitapp.LocationService"
             android:enabled="true"
             android:exported="false" />
+
+
     </application>
 
 </manifest>
