@@ -48,9 +48,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        //Add the following to your Top-Level build.gradle
-        classpath 'com.google.gms:google-services:4.0.0'        
+    classpath 'com.android.tools.build:gradle:4.2.2'
+     //Add the following to your Top-Level build.gradle
+    classpath 'com.google.gms:google-services:4.3.3'  
     }
 }
 // Add JitPack repository to top level build.gradle
@@ -70,7 +70,7 @@ Include the following to your App-level build.gradle
 dependencies {
     ...
     // This line imports the BAKit-Android to your project.
-    implementation 'com.github.BoardActive:BAKit-Android:1.0.3'
+    implementation 'com.github.BoardActive:BAKit-Android:2.0.3'
     ...
 }
 ```
@@ -109,10 +109,10 @@ If you app does not already support Firebase messaging you can follow these inst
 dependencies {
     ...
     // This line imports the Firebase Support to your project.
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-iid:17.1.2'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
-    implementation 'android.arch.work:work-runtime:1.0.1'
+    implementation  'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.8'
+    implementation 'androidx.work:work-runtime:2.7.1'
     ...
 }
 // Include Google Play Services
@@ -132,6 +132,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     private MessageModel mObj;
     private PendingIntent mPendingIntent;
     private int mType;
+    private Boolean isSilent;
 
     public static final String NOTIFICATION_KEY = "NOTIFICATION_KEY";
     public static final int NOTIFICATION_BASIC = 0;
@@ -140,12 +141,13 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     public static final int NOTIFICATION_BIG_TEXT = 3;
     public static final int NOTIFICATION_INBOX = 4;
 
-    public NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type) {
+    public  NotificationBuilder(Context context, PendingIntent pendingIntent, MessageModel obj, int type,Boolean isSilent) {
         super();
         this.mContext = context;
         this.mObj = obj;
         this.mPendingIntent = pendingIntent;
         this.mType = type;
+        this.isSilent = isSilent;
     }
 
     @Override
@@ -155,7 +157,7 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                     with(mContext).
                     load(mObj.getImageUrl()).
                     asBitmap().
-                    into(100, 100). // Width and height
+                    into(300, 300). // Width and height
                     get();
         } catch (Exception e) {
             Log.d(TAG, e.toString());
@@ -167,78 +169,106 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap result) {
         super.onPostExecute(result);
-
-        String channelId = mContext.getString(R.string.default_notification_channel_id);
+        String  channelId = "BAKit";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder;
+
         switch(mType) {
-            case NOTIFICATION_BASIC: //Basic Notification
-                notificationBuilder =
-                        new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
-                                .setContentTitle(mObj.getTitle())
-                                .setContentText(mObj.getBody())
-                                .setAutoCancel(true)
-                                .setSound(defaultSoundUri)
-                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                .setContentIntent(mPendingIntent);
+            case NOTIFICATION_BASIC:
+                Log.e("Basic","");//Basic Notification
+                if(mObj.getAllowToDownloadNotificationImage()) {
+
+                    notificationBuilder = new NotificationCompat.Builder(mContext, channelId)
+                            .setContentTitle(mObj.getTitle())
+                            .setContentText(mObj.getBody())
+                            .setAutoCancel(true)
+                            .setContentIntent(mPendingIntent)
+                            .addAction(0,"Download Image",mPendingIntent)
+                            .setSound(defaultSoundUri)
+                            .setLargeIcon(mBitmap).setStyle(new NotificationCompat.BigPictureStyle()
+                                    .bigPicture(mBitmap).bigLargeIcon(null))
+                            .setSmallIcon(R.drawable.ba_logo)
+                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+                }else
+                {
+                    notificationBuilder = new NotificationCompat.Builder(mContext, channelId)
+                            .setContentTitle(mObj.getTitle())
+                            .setContentText(mObj.getBody())
+                            .setAutoCancel(true)
+                            .setContentIntent(mPendingIntent)
+                            .setSound(defaultSoundUri)
+                            .setLargeIcon(mBitmap).setStyle(new NotificationCompat.BigPictureStyle()
+                                    .bigPicture(mBitmap).bigLargeIcon(null))
+                            .setSmallIcon(R.drawable.ba_logo)
+                            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+                }
+
                 break;
-            case NOTIFICATION_BIG_PIC: //Big Pic Notification
+            case NOTIFICATION_BIG_PIC:
+                Log.e("Basic","");//Big Pic Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
+                                .setSmallIcon(R.drawable.ba_logo)
                                 .setStyle(new NotificationCompat.BigPictureStyle()
                                         .bigPicture(mBitmap)
                                         .bigLargeIcon(mBitmap));
 
                 break;
-            case NOTIFICATION_ACTION_BUTTON: //Action Button Notification
+            case NOTIFICATION_ACTION_BUTTON:
+                Log.e("Action Button","");//Action Button Notification
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
-                                .addAction(R.drawable.ic_notification, "Action Button",
+                                .setSmallIcon(R.drawable.ba_logo)
+                                .addAction(0, "Action Button",
                                         mPendingIntent);;
                 break;
-            case NOTIFICATION_BIG_TEXT: //Big Text Notification
+            case NOTIFICATION_BIG_TEXT:
+                Log.e("Big Text","");//Big Text Notification
                 String bigText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
+                                .setSmallIcon(R.drawable.ba_logo)
                                 .setStyle(new NotificationCompat.BigTextStyle()
                                         .bigText(bigText));
                 break;
             case NOTIFICATION_INBOX: //Inbox Style Notification
+                Log.e("Inbox","");//Big Text Notification
+
                 notificationBuilder =
                         new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
                                 .setContentTitle(mObj.getTitle())
                                 .setContentText(mObj.getBody())
                                 .setAutoCancel(true)
                                 .setSound(defaultSoundUri)
+                                .addAction(0,"Download Image",mPendingIntent)
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 .setContentIntent(mPendingIntent)
                                 .setLargeIcon(mBitmap)
+                                .setSmallIcon(R.drawable.ba_logo)
                                 .setStyle(new NotificationCompat.InboxStyle()
                                         .addLine("Sample MessageModel #1")
                                         .addLine("Sample MessageModel #2")
@@ -246,15 +276,34 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
                                 .setContentIntent(mPendingIntent);
                 break;
             default:
-                notificationBuilder =
-                        new NotificationCompat.Builder(mContext, channelId)
-                                .setSmallIcon(R.drawable.ic_notification)
-                                .setContentTitle(mObj.getTitle())
-                                .setContentText(mObj.getBody())
-                                .setAutoCancel(true)
-                                .setSound(defaultSoundUri)
-                                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                .setContentIntent(mPendingIntent);
+                Log.e("default","");
+                if(mObj.getAllowToDownloadNotificationImage()) {
+                    notificationBuilder =
+                            new NotificationCompat.Builder(mContext, channelId)
+                                    .setContentTitle(mObj.getTitle())
+                                    .setContentText(mObj.getBody())
+                                    .setAutoCancel(true)
+                                    .setLargeIcon(mBitmap)
+                                    .addAction(0,"Download Image",mPendingIntent)
+                                    .setSmallIcon(R.drawable.ba_logo).setStyle(new NotificationCompat.BigPictureStyle()
+                                            .bigPicture(mBitmap).bigLargeIcon(null))
+                                    .setSound(defaultSoundUri)
+                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                    .setContentIntent(mPendingIntent);
+                }else {
+                    notificationBuilder =
+                            new NotificationCompat.Builder(mContext, channelId)
+                                    .setContentTitle(mObj.getTitle())
+                                    .setContentText(mObj.getBody())
+                                    .setAutoCancel(true)
+                                    .setLargeIcon(mBitmap)
+                                    .setSmallIcon(R.drawable.ba_logo).setStyle(new NotificationCompat.BigPictureStyle()
+                                            .bigPicture(mBitmap).bigLargeIcon(null))
+                                    .setSound(defaultSoundUri)
+                                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                                    .setContentIntent(mPendingIntent);
+                }
+
                 break;
         }
 
@@ -264,12 +313,18 @@ public class NotificationBuilder extends AsyncTask<String, Void, Bitmap> {
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
+                        "Channel human readable title",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                notificationManager.createNotificationChannel(channel);
+
         }
-        notificationManager.notify(mObj.getId() /* ID of notification */, notificationBuilder.build());
+        int m = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+      //  if(!isSilent){
+            notificationManager.notify(m /* ID of notification */, notificationBuilder.build());
+
+        //  }
     }
+
 }
 ```
 
@@ -292,6 +347,9 @@ public class FCMService extends FirebaseMessagingService {
     public static final String EXTRA_OBJECT = "key.EXTRA_OBJECT";
     public static final String EXTRA_MESSADE_ID = "key.EXTRA_MESSADE_ID";
     private static final String MESSAGE_ID = "MESSAGE_ID";
+    public static final String IMAGE_URL = "key.IMAGE_URL";
+    public static final String TITLE = "key.TITLE";
+    public static final String DESC = "key.DESC";
 
     /**
      * Called when message is received.
@@ -319,9 +377,11 @@ public class FCMService extends FirebaseMessagingService {
         // [END_EXCLUDE]
 
 
+        Log.d(TAG, "on message received data");
 
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "[BAAdDrop] From: " + remoteMessage.getFrom());
+        Log.d(TAG, "notification data");
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
@@ -371,7 +431,7 @@ public class FCMService extends FirebaseMessagingService {
      */
     private void scheduleJob() {
         // [START dispatch_job]
-        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(MyWorker.class)
+        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(FCMWorker.class)
                 .build();
         WorkManager.getInstance().beginWith(work).enqueue();
         // [END dispatch_job]
@@ -400,97 +460,155 @@ public class FCMService extends FirebaseMessagingService {
      * Create and show a simple notification containing the received FCM message.
      * Set notification's tap action.
      *
-     * @param remoteNotification FCM notification.
+     * @param remoteMessage FCM notification.
      */
-    private void sendNotification(final RemoteMessage remoteNotification) {
+    private void sendNotification(final RemoteMessage remoteMessage) {
         Long currentDateandTime = System.currentTimeMillis();
         MessageModel obj = new MessageModel();
+        Log.e("firebase message id",""+remoteMessage.getMessageId().trim());
+
+        Log.e("firebase message", Objects.requireNonNull(remoteMessage.getMessageId().trim()));
 
         int id = 1;
         obj.setId(id);
-        obj.setMessageId(remoteNotification.getData().get("messageId"));
-        obj.setNotificationId(remoteNotification.getMessageId());
-        obj.setTitle(remoteNotification.getData().get("title"));
-        obj.setBody(remoteNotification.getData().get("body"));
-        obj.setImageUrl(remoteNotification.getData().get("imageUrl"));
-        obj.setLatitude(remoteNotification.getData().get("latitude"));
-        obj.setLongitude(remoteNotification.getData().get("longitude"));
-        obj.setMessageData(remoteNotification.getData().get("messageData"));
-        obj.setIsTestMessage(remoteNotification.getData().get("isTestMessage"));
+        obj.setBaMessageId(remoteMessage.getData().get("baMessageId"));
+        obj.setBaNotificationId(remoteMessage.getData().get("baNotificationId"));
+        obj.setFirebaseNotificationId(remoteMessage.getMessageId());
+        obj.setTitle(remoteMessage.getData().get("title"));
+        obj.setBody(remoteMessage.getData().get("body"));
+        obj.setImageUrl(remoteMessage.getData().get("imageUrl"));
+        obj.setLatitude(remoteMessage.getData().get("latitude"));
+        obj.setLongitude(remoteMessage.getData().get("longitude"));
+        obj.setMessageData(remoteMessage.getData().get("messageData"));
+        obj.setIsTestMessage(remoteMessage.getData().get("isTestMessage"));
         obj.setDateCreated(currentDateandTime);
         obj.setDateLastUpdated(currentDateandTime);
-        obj.setIsRead(false);
+        Boolean isSilent = Boolean.valueOf(remoteMessage.getData().get("isSilent"));
+        String action = remoteMessage.getData().get("action");
+        String type = remoteMessage.getData().get("type");
+        String placeId = remoteMessage.getData().get("placeId");
+        Boolean isAllowToDownloadNotificationImage = Boolean.valueOf(remoteMessage.getData().get("isAllowToDownloadNotificationImage"));
+        obj.setAllowToDownloadNotificationImage(isAllowToDownloadNotificationImage);
+        Log.v(isSilent.toString(),"");
+        Log.v(action,"action");
+        obj.setAction(action);
+
 
         BoardActive mBoardActive = new BoardActive(getApplicationContext());
         mBoardActive.postEvent(new BoardActive.PostEventCallback() {
+
             @Override
             public void onResponse(Object value) {
-                Log.d(TAG, "Received Event: " + value.toString());
+                Log.d(TAG, "[BAKitApp] Received Event: " + value.toString());
             }
-        }, "received", obj.getMessageId(), obj.getNotificationId());
+        }, "received", obj.getBaMessageId(), obj.getBaNotificationId(), obj.getFirebaseNotificationId().trim());
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(EXTRA_MESSADE_ID, id);
+        if(type != null)
+        {
+            if(type.equals("app_status") && Objects.equals(placeId, "null"))
+        {
+            if(action != null){
+                if(action.equals("Enable")){
+                    SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+                }
+                else
+                {
+                    SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+                }
+            }
+
+
+
+        }else if(type.equals("place_update") || type.equals("Campaign") || Objects.equals(placeId, "null")){
+           // SharedPreferenceHelper.putString(this, Constants.APP_STATUS, action);
+            mBoardActive.setLocationArrayList(null);
+            mBoardActive.getLocationList();
+        }
+
+        }
+        if(!isSilent){
+            Intent intent = new Intent(this, DisplayImageActivity.class);
+            intent.putExtra(EXTRA_MESSADE_ID, id);
+            intent.putExtra(TITLE,obj.getTitle());
+            intent.putExtra(DESC,obj.getBody());
+            intent.putExtra("MessageId",obj.getBaMessageId());
+            intent.putExtra("NotificationId",obj.getBaNotificationId());
+            intent.putExtra("FirebaseMessageId",obj.getFirebaseNotificationId());
+            if(obj.getImageUrl() != null){
+                intent.putExtra(IMAGE_URL,obj.getImageUrl());
+
+            }
+            if(obj.getAllowToDownloadNotificationImage()){
+                intent.putExtra("isAllowImage",true);
+
+            }else
+            {
+                intent.putExtra("isAllowImage",false);
+
+            }
 //        intent.putExtra(EXTRA_OBJECT, obj);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NO_HISTORY
-        );
-        intent.setAction(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    | Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NO_HISTORY
+            );
+            intent.setAction(Intent.ACTION_VIEW);
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(intent);
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addNextIntentWithParentStack(intent);
+            PendingIntent pendingIntent =null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+               //  pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_MUTABLE);
+                int requestCode = new Random().nextInt();
+                pendingIntent = PendingIntent.getActivity(
+                        this, requestCode, intent,
+                         PendingIntent.FLAG_MUTABLE);
 
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
 
+//        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+                int notificationType = 0;
+                new com.boardactive.addrop.firebase.NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+            }else
+            {
+                 //pendingIntent = stackBuilder.getPendingIntent(id, PendingIntent.FLAG_UPDATE_CURRENT);
+                int requestCode = new Random().nextInt();
+                pendingIntent = PendingIntent.getActivity(
+                        this, requestCode, intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
-        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
-        new NotificationBuilder(this,pendingIntent, obj, notificationType).execute();
+//        int notificationType = Tools.getSharedPrecerenceInt(this, NotificationBuilder.NOTIFICATION_KEY);
+                int notificationType = 0;
+                new com.boardactive.addrop.firebase.NotificationBuilder(this,pendingIntent, obj, notificationType,isSilent).execute();
+            }
+        }
+
 
     }
 
-}
-```
-
-#### Schedule Worker Class
-
-```java
-public class MyWorker extends Worker {
-
-    private static final String TAG = "MyWorker";
-
-    public MyWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
-        super(appContext, workerParams);
-    }
-
-    @NonNull
-    @Override
-    public Result doWork() {
-        Log.d(TAG, "Performing long running task in scheduled job");
-        // TODO(developer): add long running task here.
-        return Result.success();
-    }
 }
 ```
 
 #### Message Model Class
 
 ```java
-public class MessageModel {
+public class MessageModel implements Parcelable {
 
     @SerializedName("id")
     @Expose
     private Integer id;
 
-    @SerializedName("messageId")
+    @SerializedName("baMessageId")
     @Expose
-    private String messageId;
+    private String baMessageId;
 
-    @SerializedName("notificationId")
+    @SerializedName("baNotificationId")
     @Expose
-    private String notificationId;
+    private String baNotificationId;
+
+    @SerializedName("firebaseNotificationId")
+    @Expose
+    private String firebaseNotificationId;
 
     @SerializedName("body")
     @Expose
@@ -532,6 +650,13 @@ public class MessageModel {
     @Expose
     private Long dateLastUpdated;
 
+    @SerializedName("action")
+    @Expose
+    private String action;
+
+    @SerializedName("isAllowToDownloadNotificationImage")
+    @Expose
+    private Boolean isAllowToDownloadNotificationImage;
 
     /**
      * No args constructor for use in serialization
@@ -541,8 +666,9 @@ public class MessageModel {
 
     /**
      * @param id
-     * @param messageId
-     * @param notificationId
+     * @param baMessageId
+     * @param baNotificationId
+     * @param firebaseNotificationId
      * @param title
      * @param body
      * @param imageUrl
@@ -556,8 +682,9 @@ public class MessageModel {
      */
     public MessageModel(
             Integer id,
-            String messageId,
-            String notificationId,
+            String baMessageId,
+            String baNotificationId,
+            String firebaseNotificationId,
             String title,
             String body,
             String imageUrl,
@@ -567,12 +694,14 @@ public class MessageModel {
             String isTestMessage,
             Boolean isRead,
             Long dateCreated,
-            Long dateLastUpdated
+            Long dateLastUpdated,
+            String action
     ) {
         super();
         this.id = id;
-        this.messageId = messageId;
-        this.notificationId = notificationId;
+        this.baMessageId = baMessageId;
+        this.baNotificationId = baNotificationId;
+        this.firebaseNotificationId = firebaseNotificationId;
         this.title = title;
         this.body = body;
         this.imageUrl = imageUrl;
@@ -583,7 +712,53 @@ public class MessageModel {
         this.isRead = isRead;
         this.dateCreated = dateCreated;
         this.dateLastUpdated = dateLastUpdated;
+        this.action =action;
     }
+
+    protected MessageModel(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        baMessageId = in.readString();
+        baNotificationId = in.readString();
+        firebaseNotificationId = in.readString();
+        body = in.readString();
+        title = in.readString();
+        imageUrl = in.readString();
+        latitude = in.readString();
+        longitude = in.readString();
+        messageData = in.readString();
+        isTestMessage = in.readString();
+        byte tmpIsRead = in.readByte();
+        isRead = tmpIsRead == 0 ? null : tmpIsRead == 1;
+        if (in.readByte() == 0) {
+            dateCreated = null;
+        } else {
+            dateCreated = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            dateLastUpdated = null;
+        } else {
+            dateLastUpdated = in.readLong();
+        }
+        action = in.readString();
+        byte tmpIsAllowToDownloadNotificationImage = in.readByte();
+        isAllowToDownloadNotificationImage = tmpIsAllowToDownloadNotificationImage == 0 ? null : tmpIsAllowToDownloadNotificationImage == 1;
+    }
+
+    public static final Creator<MessageModel> CREATOR = new Creator<MessageModel>() {
+        @Override
+        public MessageModel createFromParcel(Parcel in) {
+            return new MessageModel(in);
+        }
+
+        @Override
+        public MessageModel[] newArray(int size) {
+            return new MessageModel[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -593,20 +768,36 @@ public class MessageModel {
         this.id = id;
     }
 
-    public String getMessageId() {
-        return messageId;
+    public String getBaMessageId() {
+        return baMessageId;
     }
 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
+    public void setBaMessageId(String messageId) {
+        this.baMessageId = messageId;
     }
 
-    public String getNotificationId() {
-        return notificationId;
+    public String getBaNotificationId() {
+        return baNotificationId;
     }
 
-    public void setNotificationId(String notificationId) {
-        this.notificationId = notificationId;
+    public void setBaNotificationId(String baNotificationId) {
+        this.baNotificationId = baNotificationId;
+    }
+
+    public String getFirebaseNotificationId() {
+        return firebaseNotificationId;
+    }
+
+    public void setFirebaseNotificationId(String firebaseNotificationId) {
+        this.firebaseNotificationId = firebaseNotificationId;
+    }
+
+    public Boolean getAllowToDownloadNotificationImage() {
+        return isAllowToDownloadNotificationImage;
+    }
+
+    public void setAllowToDownloadNotificationImage(Boolean allowToDownloadNotificationImage) {
+        isAllowToDownloadNotificationImage = allowToDownloadNotificationImage;
     }
 
     public String getTitle() {
@@ -689,20 +880,67 @@ public class MessageModel {
         this.dateLastUpdated = dateLastUpdated;
     }
 
+    public String getAction() {
+        return action;
+    }
 
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeString(baMessageId);
+        parcel.writeString(baNotificationId);
+        parcel.writeString(firebaseNotificationId);
+        parcel.writeString(body);
+        parcel.writeString(title);
+        parcel.writeString(imageUrl);
+        parcel.writeString(latitude);
+        parcel.writeString(longitude);
+        parcel.writeString(messageData);
+        parcel.writeString(isTestMessage);
+        parcel.writeByte((byte) (isRead == null ? 0 : isRead ? 1 : 2));
+        if (dateCreated == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(dateCreated);
+        }
+        if (dateLastUpdated == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(dateLastUpdated);
+        }
+        parcel.writeString(action);
+        parcel.writeByte((byte) (isAllowToDownloadNotificationImage == null ? 0 : isAllowToDownloadNotificationImage ? 1 : 2));
+    }
 }
+
 ```
 
 #### Add to your AndroidManifest.xml
 
 ```xml
-    <service
-        android:name=".MyFirebaseMessagingService"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT" />
-        </intent-filter>
-    </service>
+     <service
+            android:name="com.boardactive.addrop.firebase.FCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 ```
 
 
