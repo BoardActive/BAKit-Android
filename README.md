@@ -527,7 +527,7 @@ public class FCMService extends FirebaseMessagingService {
 
         }
         if(!isSilent){
-            Intent intent = new Intent(this, DisplayImageActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(EXTRA_MESSADE_ID, id);
             intent.putExtra(TITLE,obj.getTitle());
             intent.putExtra(DESC,obj.getBody());
