@@ -1044,7 +1044,6 @@ public class MainActivity extends AppCompatActivity {
                                     try {
                                         JsonParser parser = new JsonParser();
                                         JsonElement je = parser.parse(value.toString());
-                                        httpReponse.setText(gson.toJson(je));
 
                                         Log.d(TAG, gson.toJson(je));
                                     } catch (Exception e) {
