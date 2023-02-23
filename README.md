@@ -978,6 +978,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Add the BoardActive Object
     private BoardActive mBoardActive;
+    Boolean isAllowImage = false;
+    String imageUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1058,9 +1060,109 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-                 
+        
+        if (getIntent().getExtras() != null) {
+            isAllowImage = getIntent().getBooleanExtra("isAllowImage", false);
+            if (isAllowImage) {
+
+                imageUrl = getIntent().getStringExtra("key.IMAGE_URL");
+                new ImageAsync(this, imageUrl).execute();
+                showAlert("Download Image", "Do you want to download this image?", this);
+
+            } else {
+                title = getIntent().getStringExtra("key.TITLE");
+                desc = getIntent().getStringExtra("key.DESC");
+                imageUrl = getIntent().getStringExtra("key.IMAGE_URL");
+
+            }
+
+        }
+    }
+
+    private void showAlert(String title, String message, Context context) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            saveImage(bitmap, "downloadedImage", context);
+                            dialog.dismiss();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        alertDialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+    }
+
+    public static void saveImage(Bitmap bitmap, @NonNull String name, Context context) throws IOException {
+        boolean saved;
+        OutputStream fos;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContentResolver resolver = context.getContentResolver();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/" + "images");
+            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+            fos = resolver.openOutputStream(imageUri);
+        } else {
+            String imagesDir = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DCIM).toString() + File.separator + "images";
+
+            File file = new File(imagesDir);
+
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
+            File image = new File(imagesDir, name + ".png");
+            fos = new FileOutputStream(image);
+
+        }
+        saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        fos.flush();
+        fos.close();
     }
 }
+
+    class ImageAsync extends AsyncTask<String, Void, Bitmap> {
+
+        Context mContext;
+        String imageUrl;
+
+        ImageAsync(Context context,String imageUrl)
+        {
+            this.imageUrl =imageUrl;
+            this.mContext=context;
+        }
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            try {
+                MainActivity.bitmap = Glide.
+                        with(mContext).
+                        asBitmap().load(imageUrl).
+                        into(300, 300). // Width and height
+                                get();
+
+            } catch (Exception e) {
+                Log.d("TAG", e.toString());
+            }
+            return null;
+        }
+
+    }
+                 
 ```
 
 ## Download Example App Source Code
