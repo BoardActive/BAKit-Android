@@ -109,9 +109,9 @@ If you app does not already support Firebase messaging you can follow these inst
 dependencies {
     ...
     // This line imports the Firebase Support to your project.
-    implementation  'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.firebase:firebase-iid:21.1.0'
-    implementation 'com.google.firebase:firebase-messaging:23.0.8'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     implementation 'androidx.work:work-runtime:2.7.1'
     ...
 }
@@ -589,6 +589,27 @@ public class FCMService extends FirebaseMessagingService {
 }
 ```
 
+#### FCM Worker Class
+
+```java
+
+```
+public class FCMWorker extends Worker {
+
+    public static final String TAG = FCMWorker.class.getName();
+
+    public FCMWorker(@NonNull Context appContext, @NonNull WorkerParameters workerParams) {
+        super(appContext, workerParams);
+    }
+
+    @NonNull
+    @Override
+    public Result doWork() {
+        Log.d(TAG, "[BAAdDrop] Performing long running task in scheduled job");
+        // TODO(developer): add long running task here.
+        return Result.success();
+    }
+}
 #### Message Model Class
 
 ```java
@@ -992,20 +1013,53 @@ public class MainActivity extends AppCompatActivity {
 
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
+			
+			//location permission
+		        mBoardActive.checkLocationPermissions();
 
                         // Initialize BoardActive
                         mBoardActive.initialize();
 
-                        // Register the device with BoardActive
-                        mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
+                        mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
                             @Override
                             public void onResponse(Object value) {
-                                Log.d("[BAkit]", value.toString());
-                                onResume();
+                                if(mBoardActive.latitude != 0.0 && mBoardActive.longitude != 0.0){
+                                    Constants.FIRST_TIME_GET_GEOFENCE=true;
+                                    mBoardActive.getLocationList();
+                                }else {
+                                    Constants.FIRST_TIME_GET_GEOFENCE=false;
+                                }
+
                             }
-                        });
+                        }, "taylor@boardactive.com", "000000");
+                        // Register the device with BoardActive
+
+                        try {
+                            mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
+                                @Override
+                                public void onResponse(Object value) {
+                                    Log.d(TAG, value.toString());
+                                    Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setLenient().create();
+                                    //   Me me = gson.fromJson(value.toString(), Me.class);
+                                    try {
+                                        JsonParser parser = new JsonParser();
+                                        JsonElement je = parser.parse(value.toString());
+                                        httpReponse.setText(gson.toJson(je));
+
+                                        Log.d(TAG, gson.toJson(je));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
+                 
     }
 }
 ```
