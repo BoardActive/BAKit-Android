@@ -1022,6 +1022,8 @@ public class MainActivity extends AppCompatActivity {
                         // Initialize BoardActive
                         mBoardActive.initialize();
 
+                        mBoardActive.setIsForeground(true);
+
                         mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
                             @Override
                             public void onResponse(Object value) {
