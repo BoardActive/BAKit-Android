@@ -1023,6 +1023,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.initialize();
 
                         mBoardActive.setIsForeground(true);
+                        mBoardActive.StartWorker(getResources().getString(R.string.app_name)+" ");
 
                         mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
                             @Override
