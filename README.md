@@ -1025,18 +1025,7 @@ public class MainActivity extends AppCompatActivity {
                         mBoardActive.setIsForeground(true);
                         mBoardActive.StartWorker(getResources().getString(R.string.app_name)+" ");
 
-                        mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
-                            @Override
-                            public void onResponse(Object value) {
-                                if(mBoardActive.latitude != 0.0 && mBoardActive.longitude != 0.0){
-                                    Constants.FIRST_TIME_GET_GEOFENCE=true;
-                                    mBoardActive.getLocationList();
-                                }else {
-                                    Constants.FIRST_TIME_GET_GEOFENCE=false;
-                                }
-
-                            }
-                        }, "taylor@boardactive.com", "000000");
+                  
                         // Register the device with BoardActive
 
                         try {
