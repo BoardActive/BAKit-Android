@@ -716,6 +716,7 @@ import com.boardactive.addrop.BoardActive;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    HashMap<String,Object> updatedCustomAttributes;
 
     //Add the BoardActive Object
     private BoardActive mBoardActive;
@@ -768,6 +769,14 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+
+                updatedCustomAttributes = new HashMap<>();
+                updatedCustomAttributes.put("braves_fan", true);
+                mBoardActive.putCustomAtrributes(new BoardActive.PutMeCallback() {
+                @Override
+                public void onResponse(Object value) {
+                }
+                }, updatedCustomAttributes);
     }
 }
 ```
