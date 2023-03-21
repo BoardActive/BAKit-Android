@@ -980,6 +980,7 @@ public class MainActivity extends AppCompatActivity {
     private BoardActive mBoardActive;
     Boolean isAllowImage = false;
     String imageUrl = "";
+    HashMap<String,Object> updatedCustomAttributes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1000,6 +1001,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
+
 
         // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -1049,9 +1051,17 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                    }
-                });
+			// update custom attributes stuff
+				
+			updatedCustomAttributes = new HashMap<>();
+			updatedCustomAttributes.put("braves_fan", true);
+			mBoardActive.putCustomAtrributes(new BoardActive.PutMeCallback() {
+			    @Override
+			    public void onResponse(Object value) {
+			    }
+			}, updatedCustomAttributes);
+				    }
+				});
         
         if (getIntent().getExtras() != null) {
             isAllowImage = getIntent().getBooleanExtra("isAllowImage", false);
