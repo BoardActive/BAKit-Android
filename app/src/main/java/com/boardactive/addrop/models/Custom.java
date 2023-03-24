@@ -15,6 +15,7 @@ public class Custom {
     private String locationPermission;
     private String notificationPermission;
 
+
     //Getters and setters
     public String getName() {
         return name;

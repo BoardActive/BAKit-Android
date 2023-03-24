@@ -23,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
 
@@ -36,6 +37,7 @@ public class RequestPermissionActivity extends AppCompatActivity {
     public final static String BAKIT_DEVICE_ID = "BAKIT_DEVICE_ID";
     private static final int MY_PERMISSIONS_REQUEST_READ_LOCATION = 1003;
     private static final int BACKGROUND_LOCATION_PERMISSION_CODE = 1002;
+    private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1004;
 
     public static final String TAG = BoardActive.class.getName();
     private static final String FETCH_LOCATION_WORKER_NAME = "Location";
@@ -55,6 +57,7 @@ public class RequestPermissionActivity extends AppCompatActivity {
         // Create an instant of BoardActive
         mBoardActive = new BoardActive(getApplicationContext());
         requestLocationPermission();
+        requestNotificationPermission();
     }
 
     private void requestLocationPermission() {
@@ -74,6 +77,17 @@ public class RequestPermissionActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 MY_PERMISSIONS_REQUEST_READ_LOCATION);
+
+    }
+    private void requestNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED)
+            return;
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY)) {
+
+        }
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NOTIFICATION_POLICY}, MY_PERMISSIONS_REQUEST_NOTIFICATION );
     }
 
     private void askPermissionForBackgroundUsage() {
@@ -109,6 +123,17 @@ public class RequestPermissionActivity extends AppCompatActivity {
                 // User granted for Background Location Permission.
             } else {
                 // User declined for Background Location Permission.
+            }
+        }
+        else if (requestCode == MY_PERMISSIONS_REQUEST_NOTIFICATION ) {
+
+            // If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Displaying a toast
+                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show();
+            } else {
+                // Displaying another toast if permission is not granted
+                Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG).show();
             }
         }
     }

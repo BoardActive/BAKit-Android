@@ -65,11 +65,11 @@ public class CustomAttributesActivity extends AppCompatActivity implements Click
         mBoardActive.setAppUrl(url);
 
         // Add AppID provided by BoardActive
-        mBoardActive.setAppId("164");
+        mBoardActive.setAppId("346");
 
         // Add AppKey provided by BoardActive
-        mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
-
+        //mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
+        mBoardActive.setAppKey("63e93e07-7ee5-4491-91e9-e2ab93786646");
         // Add the version of your App
         mBoardActive.setAppVersion("1.0.0");
 

@@ -610,7 +610,6 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
      */
 
     public void registerDevice(final PostRegisterCallback callback) {
-        if (SharedPreferenceHelper.getString(mContext, Constants.APP_STATUS, "").equals("Enable")) {
             RequestQueue queue = AppSingleton.getInstance(mContext).getRequestQueue();
 
             VolleyLog.DEBUG = true;
@@ -621,6 +620,19 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                 public void onResponse(String response) {
                     Log.d(TAG, "[BAKit] RegisterDevice onResponse: " + response.toString());
                     VolleyLog.wtf(response);
+                    JSONObject json = null;
+                    Boolean isActive=false;
+                    try {
+                        json = new JSONObject(response);
+                         isActive = json.getBoolean("isActive");
+                        if (isActive) {
+                            SharedPreferenceHelper.putString(mContext, Constants.APP_STATUS, "Enable");
+                        } else {
+                            SharedPreferenceHelper.putString(mContext, Constants.APP_STATUS, "Disable");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     callback.onResponse(response);
                 }
             }, new Response.ErrorListener() {
@@ -698,7 +710,6 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
             };
 
             queue.add(str);
-        }
     }
     public String getLocalToUTCDate(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -1217,7 +1228,13 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
      * @param longitude  current longitude
      * @param deviceTime current Date and Time
      */
-    public void postLocation(final PostLocationCallback callback, final Double latitude, final Double longitude, final String deviceTime) {
+    public void
+
+
+
+
+
+    postLocation(final PostLocationCallback callback, final Double latitude, final Double longitude, final String deviceTime) {
         setLatitude(latitude.toString());
         setLongitude(longitude.toString());
         if (SharedPreferenceHelper.getString(mContext, Constants.APP_STATUS, "").equals("Enable")) {
@@ -1344,19 +1361,12 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
                         try {
                             JSONObject jsonObject = obj.getJSONArray("apps").getJSONObject(i);
                             Boolean isActive = jsonObject.getBoolean("isActive");
-                            //if (jsonObject.get("id").equals(344)) {
                             if (isActive) {
                                 SharedPreferenceHelper.putString(mContext, Constants.APP_STATUS, "Enable");
-                                //isAppEnabled = true;
                                 Log.e("is Active", isActive.toString());
-
                             } else {
                                 SharedPreferenceHelper.putString(mContext, Constants.APP_STATUS, "Disable");
-                                //isAppEnabled = false;
-
                             }
-
-                            //}
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1563,6 +1573,16 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
         }
+
+    }
+    public void checkNotificationPermissions() {
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_NOTIFICATION_POLICY) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(mContext, RequestPermissionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        }
+
     }
 
     public void setupLocationRequest() {
@@ -1870,7 +1890,6 @@ public class BoardActive implements GoogleApiClient.ConnectionCallbacks, GoogleA
     /* get coorindates from server*/
 
     public void getLocationList() {
-        //Log.e("shared pref",SharedPreferenceHelper.getString(mContext, Constants.APP_STATUS,""));
         if (SharedPreferenceHelper.getString(mContext, Constants.APP_STATUS, "").equals("Enable")) {
             if (getLocationArrayList() == null) {
                 getGeoCoordinates(new BoardActive.GetMeCallback() {
