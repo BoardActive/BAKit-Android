@@ -42,7 +42,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+
+public class    MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -64,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
     final static int REQUEST_CODE = 1;
     private PendingIntent geofencePendingIntent;
     BroadcastReceiver br = new com.boardactive.bakitapp.GeofenceBroadCastReceiver();
-    String appId;
-    String messageId;
-    String notificationId;
-    String firebaseNotificationId;
+    HashMap<String,Object> updatedCustomAttributes;
 
 
     @Override
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         init();
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
+
     }
 
     ProgressDialog progressDialog;
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         // Add AppID provided by BoardActive
         // mBoardActive.setAppId("ADD_APP_ID");
 
-        mBoardActive.setAppId("347");
+        mBoardActive.setAppId("346");
 
         // Add AppKey provided by BoardActive
 //        mBoardActive.setAppKey("ADD_APP_KEY");
@@ -174,8 +174,10 @@ public class MainActivity extends AppCompatActivity {
         //mBoardActive.setAppKey("88fd530b-c111-4077-a1d3-ad0a24b127fd");
         //    mBoardActive.setAppKey("f3b64b8b-84e7-4eae-869a-9b9da7981725");
         //mBoardActive.setAppKey("d17f0feb-4f96-4c2a-83fd-fd6302ae3a16");
-        mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
-      //   mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
+       // mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
+       // mBoardActive.setAppKey("63e93e07-7ee5-4491-91e9-e2ab93786646");
+        mBoardActive.setAppKey("fe8c3310-498c-4fd0-b3df-ea430d9a8084");
+        //   mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
          //mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
        // mBoardActive.setAppKey(BoardActive.BAKIT_APP_KEY);
 
@@ -200,6 +202,13 @@ public class MainActivity extends AppCompatActivity {
             //mBoardActive.getLocationList(false);
 
         }
+        updatedCustomAttributes = new HashMap<>();
+        updatedCustomAttributes.put("braves_fan", true);
+        mBoardActive.putCustomAtrributes(new BoardActive.PutMeCallback() {
+            @Override
+            public void onResponse(Object value) {
+            }
+        }, updatedCustomAttributes);
 
         // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -215,7 +224,6 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.d(TAG, "[BAKitApp] fcmToken: " + fcmToken);
 
-
                         // Add Firebase Token to BoardActive
                         mBoardActive.setAppToken(fcmToken);
 
@@ -223,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Check for Location permissions
                         mBoardActive.checkLocationPermissions();
+                        mBoardActive.checkNotificationPermissions();
 
                         // Initialize BoardActive
                         mBoardActive.initialize();
@@ -231,18 +240,18 @@ public class MainActivity extends AppCompatActivity {
                         //if(mBoardActive.isAppEnabled)
                         // {
 //                        Log.e("list",""+mBoardActive.getLocationArrayList().size());
-                        mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
-                            @Override
-                            public void onResponse(Object value) {
-                                if(mBoardActive.latitude != 0.0 && mBoardActive.longitude != 0.0){
-                                    Constants.FIRST_TIME_GET_GEOFENCE=true;
-                                    mBoardActive.getLocationList();
-                                }else {
-                                    Constants.FIRST_TIME_GET_GEOFENCE=false;
-                                }
-
-                            }
-                        }, "taylor@boardactive.com", "000000");
+//                        mBoardActive.postLogin(new BoardActive.PostLoginCallback() {
+//                            @Override
+//                            public void onResponse(Object value) {
+//                                if(mBoardActive.latitude != 0.0 && mBoardActive.longitude != 0.0){
+//                                    Constants.FIRST_TIME_GET_GEOFENCE=true;
+//                                    mBoardActive.getLocationList();
+//                                }else {
+//                                    Constants.FIRST_TIME_GET_GEOFENCE=false;
+//                                }
+//
+//                            }
+//                        }, "taylor@boardactive.com", "000000");
 
                         try {
                             mBoardActive.registerDevice(new BoardActive.PostRegisterCallback() {
@@ -255,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
                                         JsonParser parser = new JsonParser();
                                         JsonElement je = parser.parse(value.toString());
                                         httpReponse.setText(gson.toJson(je));
-
                                         Log.d(TAG, gson.toJson(je));
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -266,10 +274,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-
-
-
                     }
                 });
         registerReceiver();
