@@ -210,6 +210,7 @@ public class    MainActivity extends AppCompatActivity {
             }
         }, updatedCustomAttributes);
 
+
         // Get Firebase Token
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
