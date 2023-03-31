@@ -1138,7 +1138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-    class ImageAsync extends AsyncTask<String, Void, Bitmap> {
+class ImageAsync extends AsyncTask<String, Void, Bitmap> {
 
         Context mContext;
         String imageUrl;
