@@ -610,6 +610,7 @@ public class FCMWorker extends Worker {
         return Result.success();
     }
 }
+```
 #### Message Model Class
 
 ```java
@@ -956,7 +957,7 @@ public class MessageModel implements Parcelable {
 
 ```xml
      <service
-            android:name="com.boardactive.addrop.firebase.FCMService"
+            android:name="com.boardactive.addrop.FCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
