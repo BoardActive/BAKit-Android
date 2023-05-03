@@ -177,7 +177,7 @@ public class LocationUpdatesService extends Service {
 
         }else
         {
-             pStopSelf = PendingIntent.getService(this, 0, stopSelf,PendingIntent.FLAG_CANCEL_CURRENT);
+             pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         }
 
@@ -190,6 +190,9 @@ public class LocationUpdatesService extends Service {
                     .setSmallIcon(resourceId)
                     .setColor(getResources().getColor(R.color.notification_icon_color))
                     .setWhen(System.currentTimeMillis());
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
+            }
 
         }
 
