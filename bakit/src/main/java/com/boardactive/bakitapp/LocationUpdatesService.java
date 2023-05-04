@@ -190,10 +190,10 @@ public class LocationUpdatesService extends Service {
                     .setSmallIcon(resourceId)
                     .setColor(getResources().getColor(R.color.notification_icon_color))
                     .setWhen(System.currentTimeMillis());
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
-            }
 
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
         }
 
         // Set the Channel ID for Android O.
