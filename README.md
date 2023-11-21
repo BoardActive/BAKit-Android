@@ -1209,6 +1209,5 @@ There is an example app provided [here](https://github.com/BoardActive/BAAdDrop-
 Our team wants to help. Please contact us 
 
 * Help Documentation: [http://help.boardactive.com/en/](http://help.boardactive.com/en/)
-* Call us: [(657)229-4669](tel:+6572294669)
 * Email Us [taylor@boardactive.com](mailto:taylor@boardactive.com)
 * Online Support [Web Site](https://www.boardactive.com/)
