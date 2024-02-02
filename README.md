@@ -1167,6 +1167,7 @@ class ImageAsync extends AsyncTask<String, Void, Bitmap> {
     }
 
 ```
+```java
 public class BAKitApp extends Application {
 
     public static final String TAG = BAKitApp.class.getName();
