@@ -39,6 +39,7 @@
     <!--Use this key to display icon to be shown in foreground service's notification.
     Icon guidelines: The value to this key should be the file name from the drawable ,which you need to set in the notification's icon
     -->
-    <string name="bakit_foreground_icon">ic_notification_icon</string>
+    <string name="bakit_foreground_icon">ic_notification</string>
+<!--    <string name="bakit_foreground_icon">ic_notification_icon</string>-->
 
 </resources>

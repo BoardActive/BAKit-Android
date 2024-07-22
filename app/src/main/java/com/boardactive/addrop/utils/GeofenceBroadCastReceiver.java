@@ -5,14 +5,14 @@ import static com.boardactive.addrop.BAKitApp.CHANNEL_ID;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
-import com.boardactive.bakitapp.BoardActive;
-import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
+import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
 import com.boardactive.addrop.R;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
@@ -54,11 +54,12 @@ public  class GeofenceBroadCastReceiver extends BroadcastReceiver {
             sendNotification(locId, context);
 
             Intent serviceIntent = new Intent(context, LocationService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ContextCompat.startForegroundService(context, serviceIntent);
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(serviceIntent);
             } else {
                 context.startService(serviceIntent);
-            }
+            }*/
         } else {
             // Log the error.
             Log.e("TAG", "Error");

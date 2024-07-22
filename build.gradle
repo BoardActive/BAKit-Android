@@ -3,23 +3,18 @@
 buildscript {
     repositories {
         google()
-        jcenter()
-//        maven {
-//            url 'https://maven.fabric.io/public'
-//        }
+        mavenCentral()
     }
     dependencies {
-            classpath 'com.android.tools.build:gradle:4.2.2'
-            classpath 'com.google.gms:google-services:4.3.3'    // Google Services plugin
+        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath 'com.google.gms:google-services:4.4.2'    // Google Services plugin
     }
-
-
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url 'https://jitpack.io'
         }
@@ -27,6 +22,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

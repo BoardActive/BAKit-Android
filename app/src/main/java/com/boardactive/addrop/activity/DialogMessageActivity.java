@@ -134,7 +134,7 @@ public class DialogMessageActivity extends AppCompatActivity {
                 if (!from_notif && position != -1) {
                     mMessageDAO.deleteMessage(messageEntity.getId());
                     MessagesActivity.getInstance().adapter.removeItem(position);
-                    Snackbar.make(MessagesActivity.getInstance().parent_view, "Delete successfull", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(MessagesActivity.getInstance().parent_view, "Delete Successful", Snackbar.LENGTH_SHORT).show();
                 }
                 finish();
             }

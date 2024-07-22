@@ -42,6 +42,7 @@ import com.boardactive.addrop.R;
 import com.boardactive.addrop.activity.ActivityWebView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.net.URI;
@@ -126,17 +127,18 @@ public class Tools {
         }
     }
 
-    public static void displayImageOriginal(Context ctx, ImageView img, @DrawableRes int drawable) {
+    public static void displayImageOriginal(Context ctx, ImageView img, String url) {
         try {
-            Glide.with(ctx).load(drawable)
-                    .crossFade()
+            Glide.with(ctx)
+                    .load(url)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(img);
         } catch (Exception e) {
         }
     }
 
-    public static void displayImageRound(final Context ctx, final ImageView img, @DrawableRes int drawable) {
+    /*public static void displayImageRound(final Context ctx, final ImageView img, @DrawableRes int drawable) {
         try {
             Glide.with(ctx)
                     .load(drawable)
@@ -153,8 +155,9 @@ public class Tools {
         } catch (Exception e) {
         }
     }
+    */
 
-    public static void displayImageOriginal(Context ctx, ImageView img, String url) {
+    /*public static void displayImageOriginal(Context ctx, ImageView img, String url) {
         try {
             Glide.with(ctx).load(url)
                     .crossFade()
@@ -162,7 +165,7 @@ public class Tools {
                     .into(img);
         } catch (Exception e) {
         }
-    }
+    }*/
 
     public static String getFormattedDateShort(Long dateTime) {
         SimpleDateFormat newFormat = new SimpleDateFormat("MMM dd, yyyy");

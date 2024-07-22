@@ -18,7 +18,7 @@ import androidx.cardview.widget.CardView;
 import com.boardactive.addrop.firebase.FCMService;
 import com.boardactive.addrop.R;
 
-import com.boardactive.bakitapp.BoardActive;
+import com.boardactive.bakit.BoardActive;
 import com.boardactive.addrop.models.MessageData;
 import com.boardactive.addrop.models.OfferList;
 import com.boardactive.addrop.room.AppDatabase;

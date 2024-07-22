@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.boardactive.bakitapp">
+    package="com.boardactive.bakit">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,11 +13,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.hardware.location.gps" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application>
         <!-- [START BOOT/DEFAULT SERVICE] -->
         <receiver
-            android:name="com.boardactive.bakitapp.BootReceiver"
+            android:name="com.boardactive.bakit.BootReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -30,7 +32,7 @@
         <!-- [END BOOT/DEFAULT SERVICE] -->
 
         <receiver
-            android:name="com.boardactive.bakitapp.LocationUpdatesBroadcastReceiver"
+            android:name="com.boardactive.bakit.LocationUpdatesBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -38,25 +40,25 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.boardactive.bakitapp.MyBroadcastReceiver"
+            android:name="com.boardactive.bakit.MyBroadcastReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
 
         <service
-            android:name="com.boardactive.bakitapp.LocationUpdatesService"
+            android:name="com.boardactive.bakit.LocationUpdatesService"
             android:enabled="true"
             android:exported="true"
             android:foregroundServiceType="location"/>
 
         <receiver
-            android:name="com.boardactive.bakitapp.GeofenceBroadCastReceiver"
+            android:name="com.boardactive.bakit.GeofenceBroadCastReceiver"
             android:allowBackup="true"
             android:enabled="true"
             android:exported="true">
         </receiver>
         <activity
-            android:name="com.boardactive.bakitapp.RequestPermissionActivity"
+            android:name="com.boardactive.bakit.RequestPermissionActivity"
             android:exported="true">
 
         </activity>
@@ -66,8 +68,9 @@
 <!--            android:exported="true"-->
 <!--            android:permission="android.permission.BIND_JOB_SERVICE" />-->
         <service
-            android:name="com.boardactive.bakitapp.LocationService"
+            android:name="com.boardactive.bakit.LocationService"
             android:enabled="true"
+            android:foregroundServiceType="location"
             android:exported="false" />
 <!--               <service-->
 <!--                  android:name=".GeofenceIntentService"-->

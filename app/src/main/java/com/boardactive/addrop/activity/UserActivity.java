@@ -13,8 +13,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.boardactive.bakitapp.BoardActive;
-import com.boardactive.bakitapp.models.Me;
+import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.models.Me;
 import com.boardactive.addrop.R;
 import com.boardactive.addrop.utils.Tools;
 import com.google.gson.Gson;
@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
 
+import com.google.gson.Strictness;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 public class UserActivity extends AppCompatActivity {
@@ -99,7 +100,7 @@ public class UserActivity extends AppCompatActivity {
         mBoardActive.getMe(new BoardActive.GetMeCallback() {
             @Override
             public void onResponse(Object value) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                Gson gson = new GsonBuilder().setStrictness(Strictness.LENIENT).setPrettyPrinting().create();
                 mMe = gson.fromJson(value.toString(), Me.class);
                 name.setText(mMe.getAttributes().getStock().getName());
                 email.setText(mMe.getAttributes().getStock().getEmail());
@@ -252,7 +253,7 @@ public class UserActivity extends AppCompatActivity {
         datePicker.setThemeDark(false);
         datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
         datePicker.setMinDate(cur_calender);
-        datePicker.show(getFragmentManager(), "Datepickerdialog");
+        datePicker.show(getSupportFragmentManager(), "Datepickerdialog");
     }
 
 }

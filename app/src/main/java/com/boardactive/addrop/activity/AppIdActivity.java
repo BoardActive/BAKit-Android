@@ -25,9 +25,9 @@ public class AppIdActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
-                                             String text= editText.getText().toString().trim();
-                                             Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-                                             intent.putExtra("APPID",text);
+                                             String text = editText.getText().toString().trim();
+                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                             intent.putExtra("APPID", text);
                                              startActivity(intent);
                                          }
                                      }

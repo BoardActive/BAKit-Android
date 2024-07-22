@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+
 import androidx.appcompat.widget.AppCompatRadioButton;
 
 import android.widget.TextView;
@@ -13,8 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.boardactive.bakitapp.BoardActive;
-import com.boardactive.bakitapp.models.Me;
+import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.models.Me;
 import com.boardactive.addrop.R;
 import com.boardactive.addrop.utils.Tools;
 import com.google.gson.Gson;
@@ -22,9 +23,10 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
 
+import com.google.gson.Strictness;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class  CustomActivity extends AppCompatActivity {
+public class CustomActivity extends AppCompatActivity {
 
     public static final String TAG = CustomActivity.class.getName();
     private static final int ME_API_RESPONSE_CODE = 0;
@@ -70,23 +72,24 @@ public class  CustomActivity extends AppCompatActivity {
         mBoardActive = new BoardActive(getApplicationContext());
 
         // Add URL to point to BoardActive REST API
-        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV);
+        //mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Production
+        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Development
 
         // Add AppID provided by BoardActive
-        mBoardActive.setAppId("346");
+        mBoardActive.setAppId(BoardActive.APP_ID);
 
         // Add AppKey provided by BoardActive
-        mBoardActive.setAppKey("bb85c28a-0ac4-439d-ad9c-5527be3cafdd");
+        mBoardActive.setAppKey(BoardActive.APP_KEY);
 
         // Add the version of your App
-        mBoardActive.setAppVersion("1.0.0");
+        mBoardActive.setAppVersion(BoardActive.APP_VERSION);
 
 //        mStockAttributes = new Stock();
 
         mBoardActive.getMe(new BoardActive.GetMeCallback() {
             @Override
             public void onResponse(Object value) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                Gson gson = new GsonBuilder().setStrictness(Strictness.LENIENT).setPrettyPrinting().create();
                 mMe = gson.fromJson(value.toString(), Me.class);
 //                name.setText(mMe.getAttributes().getCustom().getName());
                 email.setText(mMe.getAttributes().getStock().getEmail());
@@ -101,7 +104,7 @@ public class  CustomActivity extends AppCompatActivity {
 
 //                ((TextView) findViewById(R.id.dateBorn)).setText(mMe.getAttributes().getStock().getDateBorn());
 
-                if(mMe.getAttributes().getStock().getGender() == "f"){
+                if (mMe.getAttributes().getStock().getGender() == "f") {
                     radioFemale.setChecked(true);
                     radioMale.setChecked(false);
                 } else {
@@ -161,7 +164,7 @@ public class  CustomActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                if (name.getText().equals("")){
+                if (name.getText().equals("")) {
                     mMe.getAttributes().getStock().setName(null);
                 } else {
                     mMe.getAttributes().getStock().setName(name.getText().toString());
@@ -177,7 +180,7 @@ public class  CustomActivity extends AppCompatActivity {
                 mMe.getAttributes().getStock().setInstagramUrl(instagramUrl.getText().toString());
                 mMe.getAttributes().getStock().setAvatarUrl(avatarUrl.getText().toString());
 
-                if(radioFemale.isChecked()) {
+                if (radioFemale.isChecked()) {
                     mMe.getAttributes().getStock().setGender("f");
                 } else {
                     mMe.getAttributes().getStock().setGender("m");
@@ -235,7 +238,7 @@ public class  CustomActivity extends AppCompatActivity {
         datePicker.setThemeDark(false);
         datePicker.setAccentColor(getResources().getColor(R.color.colorPrimary));
         datePicker.setMinDate(cur_calender);
-        datePicker.show(getFragmentManager(), "Datepickerdialog");
+        datePicker.show(getSupportFragmentManager(), "Datepickerdialog");
     }
 
 }

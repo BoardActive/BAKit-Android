@@ -21,7 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.boardactive.addrop.R;
 
-import com.boardactive.bakitapp.BoardActive;
+import com.boardactive.bakit.BoardActive;
 import com.boardactive.addrop.adapter.AdapterMessages;
 import com.boardactive.addrop.room.AppDatabase;
 import com.boardactive.addrop.room.MessageDAO;

@@ -25,12 +25,10 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.boardactive.addrop.activity.DisplayImageActivity;
-import com.boardactive.bakitapp.BoardActive;
-import com.boardactive.bakitapp.Tools.NotificationBuilder;
-import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
-import com.boardactive.bakitapp.models.MessageModel;
-import com.boardactive.addrop.activity.MainActivity;
-import com.boardactive.bakitapp.utils.Constants;
+import com.boardactive.bakit.BoardActive;
+import com.boardactive.bakit.Tools.SharedPreferenceHelper;
+import com.boardactive.bakit.models.MessageModel;
+import com.boardactive.bakit.utils.Constants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

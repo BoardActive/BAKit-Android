@@ -1,5 +1,8 @@
 package com.boardactive.addrop.activity;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
+
 import android.Manifest;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -10,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -25,26 +29,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import com.boardactive.bakitapp.Tools.SharedPreferenceHelper;
-import com.boardactive.bakitapp.customViews.CustomAttributesActivity;
+import com.boardactive.bakit.customViews.CustomAttributesActivity;
 import com.boardactive.addrop.R;
 import com.boardactive.addrop.utils.LocationService;
-import com.boardactive.bakitapp.utils.Constants;
+import com.boardactive.bakit.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.boardactive.bakitapp.BoardActive;
+import com.boardactive.bakit.BoardActive;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.Strictness;
 
 import java.util.HashMap;
 
-public class    MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -65,8 +70,8 @@ public class    MainActivity extends AppCompatActivity {
     private LocationService locationService;
     final static int REQUEST_CODE = 1;
     private PendingIntent geofencePendingIntent;
-    BroadcastReceiver br = new com.boardactive.bakitapp.GeofenceBroadCastReceiver();
-    HashMap<String,Object> updatedCustomAttributes;
+    BroadcastReceiver br = new com.boardactive.bakit.GeofenceBroadCastReceiver();
+    HashMap<String, Object> updatedCustomAttributes;
 
 
     @Override
@@ -80,6 +85,8 @@ public class    MainActivity extends AppCompatActivity {
 
         httpReponse = (EditText) findViewById(R.id.httpResponse);
 
+        checkNotificationPermission();
+
         btn_userAttributes();
         btn_messages();
         btn_customAttributes();
@@ -88,6 +95,14 @@ public class    MainActivity extends AppCompatActivity {
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
 
+    }
+
+    private void checkNotificationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, 1002);
+            }
+        }
     }
 
     ProgressDialog progressDialog;
@@ -161,43 +176,35 @@ public class    MainActivity extends AppCompatActivity {
 
         // Add URL to point to BoardActive REST API
         //mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Production
-        mBoardActive.setAppUrl(BoardActive.APP_URL_DEV); // Development
+        mBoardActive.setAppUrl(BoardActive.APP_URL_PROD); // Development
 
         // Add AppID provided by BoardActive
-        // mBoardActive.setAppId("ADD_APP_ID");
-
-        mBoardActive.setAppId("346");
+        mBoardActive.setAppId(BoardActive.APP_ID);
 
         // Add AppKey provided by BoardActive
-//        mBoardActive.setAppKey("ADD_APP_KEY");
-        // mBoardActive.setAppKey("ef748553-e55a-4cb4-b339-7813e395a5b1");
-        //mBoardActive.setAppKey("88fd530b-c111-4077-a1d3-ad0a24b127fd");
-        //    mBoardActive.setAppKey("f3b64b8b-84e7-4eae-869a-9b9da7981725");
-        //mBoardActive.setAppKey("d17f0feb-4f96-4c2a-83fd-fd6302ae3a16");
-       // mBoardActive.setAppKey("f6947f91-740f-4ce2-9620-73a91316d289");
-       // mBoardActive.setAppKey("63e93e07-7ee5-4491-91e9-e2ab93786646");
-        mBoardActive.setAppKey("fe8c3310-498c-4fd0-b3df-ea430d9a8084");
-        //   mBoardActive.setAppKey("355cd7b8-e355-4b07-916c-67a4eb2360ab");
-         //mBoardActive.setAppKey("474c7aef-83fd-411e-8a83-e781ef5f3dff");
-       // mBoardActive.setAppKey(BoardActive.BAKIT_APP_KEY);
+        mBoardActive.setAppKey(BoardActive.APP_KEY);
 
         // Add the version of your App
-        mBoardActive.setAppVersion("1.0.0");
+        mBoardActive.setAppVersion(BoardActive.APP_VERSION);
 
         // Optional, set to 'true' to run in foreground
         mBoardActive.setIsForeground(true);
         mBoardActive.StartWorker(getResources().getString(R.string.app_name));
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION}, REQUEST_CODE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                            Manifest.permission.FOREGROUND_SERVICE_LOCATION,
+                    }, REQUEST_CODE);
             Log.e(TAG, "onCreate: permission denied");
             mBoardActive.isPermissionGranted = false;
-
         } else {
-            Log.e(TAG, "onCreate: permission granded");
+            Log.e(TAG, "onCreate: permission granted");
             mBoardActive.isPermissionGranted = true;
             //mBoardActive.getLocationList(false);
 
@@ -258,7 +265,7 @@ public class    MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Object value) {
                                     Log.d(TAG, value.toString());
-                                    Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setLenient().create();
+                                    Gson gson = new GsonBuilder().setStrictness(Strictness.LENIENT).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
                                     //   Me me = gson.fromJson(value.toString(), Me.class);
                                     try {
                                         JsonParser parser = new JsonParser();
@@ -283,14 +290,15 @@ public class    MainActivity extends AppCompatActivity {
     public void registerReceiver() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        this.registerReceiver(br, filter);
+        ContextCompat.registerReceiver(this, br, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
+//        this.registerReceiver(br, filter);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case Constants.MY_PERMISSIONS_REQUEST_READ_LOCATION:
-                if  (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mBoardActive.setupLocationRequest();
 
                 } else {
@@ -347,7 +355,7 @@ public class    MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 //                Intent intent = new Intent(getBaseContext(), CustomActivity.class);
                 Intent intent = new Intent(getBaseContext(), CustomAttributesActivity.class);
-                intent.putExtra("baseUrl", BoardActive.APP_URL_DEV);
+                intent.putExtra("baseUrl", BoardActive.APP_URL_PROD);
                 startActivity(intent);
             }
 
@@ -365,7 +373,7 @@ public class    MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(br != null){
+        if (br != null) {
             unregisterReceiver(br);
 
         }
@@ -384,7 +392,7 @@ public class    MainActivity extends AppCompatActivity {
 //            unregisterReceiver(br);
 //
 //        }
-        if(mConnection != null && mBounded){
+        if (mConnection != null && mBounded) {
             this.unbindService(mConnection);
 
         }
