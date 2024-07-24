@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/spacing_xmedium"
         android:padding="@dimen/spacing_large"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_xmedium" />
 
 </LinearLayout>
