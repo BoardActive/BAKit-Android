@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id('com.android.library')
+    id('maven-publish')
+}
 
 android {
     namespace 'com.boardactive.bakit'
@@ -19,10 +22,29 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    publishing {
+        publishing {
+            singleVariant("release") {
+                withSourcesJar()
+                withJavadocJar()
+            }
+        }
+    }
+}
 
+afterEvaluate {
+    android.libraryVariants.each {
+        publishing.publications.create(it.name, MavenPublication) {
+            from components.findByName(it.name)
+
+            groupId='com.github.BoardActive'
+            artifactId='BAKit-Android'
+            version='2.1.31'
+        }
+    }
 }
 
 dependencies {
@@ -51,4 +73,4 @@ dependencies {
     }
 
 }
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
