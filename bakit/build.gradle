@@ -42,7 +42,7 @@ afterEvaluate {
 
             groupId='com.github.BoardActive'
             artifactId='BAKit-Android'
-            version='2.1.31'
+            version='2.1.33'
         }
     }
 }

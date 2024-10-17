@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 public class LocationWorker extends Worker {
 
     public static final String TAG = LocationWorker.class.getName();
-    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =2000 ;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 2000;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
 
@@ -44,8 +44,6 @@ public class LocationWorker extends Worker {
      * The name of the channel for notifications.
      */
     private static final String CHANNEL_ID = "LocationUpdates";
-
-
 
 
     /**
@@ -79,7 +77,7 @@ public class LocationWorker extends Worker {
     public Result doWork() {
         Log.d(TAG, "[BAAdDrop] Performing long running task in scheduled job");
         // TODO(developer): add long running task here.
-        if(!PermissionExceptionHandler.with(context).wantToStartWorker()){
+        if (!PermissionExceptionHandler.with(context).wantToStartWorker()) {
             return Result.failure();
         }
 
@@ -97,10 +95,10 @@ public class LocationWorker extends Worker {
         try {
             mFusedLocationClient
                     .getLastLocation().
-            addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null) {
+                    addOnSuccessListener(new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
 //                                mLocation = location;
 //                                Log.d(TAG, "Location : " + mLocation);
 //                                Log.e("latworker",""+mLocation.getLatitude());
@@ -149,8 +147,7 @@ public class LocationWorker extends Worker {
 //                                    }
 //
 //                                }
-
-                                mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+                                stopLocationUpdates();
                             } else {
                                 Log.w(TAG, "Failed to get location.");
                             }
@@ -160,13 +157,25 @@ public class LocationWorker extends Worker {
             Log.e(TAG, "Lost location permission." + unlikely);
         }
         try {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+            startLocationUpdates();
         } catch (Exception e) {
             e.printStackTrace();
             return Result.retry();
         }
         //WorkManager.getInstance().getWorkInfosByTag( BoardActive.class.getName()).cancel(true);
         return Result.success();
+    }
+
+    public void startLocationUpdates() {
+        try {
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopLocationUpdates() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
     // This method sets the attributes to fetch location updates.
@@ -186,8 +195,7 @@ public class LocationWorker extends Worker {
             intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
             intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
             return PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
-        }else
-        {
+        } else {
             Intent intent = new Intent(getApplicationContext(), LocationUpdatesBroadcastReceiver.class);
             intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
             intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
