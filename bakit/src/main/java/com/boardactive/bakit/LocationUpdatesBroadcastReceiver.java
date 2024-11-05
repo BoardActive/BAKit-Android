@@ -7,14 +7,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.work.WorkManager;
 
 import com.boardactive.bakit.Tools.SharedPreferenceHelper;
-import com.google.android.gms.location.ActivityRecognitionResult;
-import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.LocationResult;
 
 import java.text.DateFormat;
@@ -40,33 +37,9 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
             final String action = intent.getAction();
             if (ACTION_PROCESS_UPDATES.equals(action)) {
                 getLocationUpdates(context, intent);
-                ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-                if (result != null) {
-                    Log.d(TAG, "Detected activity: " + result.getMostProbableActivity().getType());
-                    handleActivityResult(context, result.getMostProbableActivity());
-                }
             }
         }
     }
-
-    private void handleActivityResult(Context context, DetectedActivity result) {
-        Intent serviceIntent = new Intent(context, LocationUpdatesService.class);
-        if (result.getType() == DetectedActivity.STILL) {
-            Log.d(TAG, "Device is still, stopping location updates");
-            serviceIntent.setAction(LocationUpdatesService.ACTION_STOP_SERVICE);
-        } else {
-            Log.d(TAG, "Device is moving, continuing location updates");
-            // Start service without any action, which will continue location updates
-            serviceIntent.setAction(LocationUpdatesService.ACTION_START_SERVICE);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(serviceIntent);
-        } else {
-            context.startService(serviceIntent);
-        }
-    }
-
 
     @SuppressLint("MissingPermission")
     public void getLocationUpdates(final Context context, final Intent intent) {

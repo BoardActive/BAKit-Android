@@ -1,6 +1,5 @@
 package com.boardactive.bakit;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -8,7 +7,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.os.Binder;
@@ -16,13 +14,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.ServiceCompat;
 
-import com.boardactive.bakit.R;
-import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -73,9 +67,6 @@ public class LocationUpdatesService extends Service {
     public static final long MAX_WAIT_TIME = UPDATE_INTERVAL * 1;
     public String appName;
     public static String ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE";
-    public static String ACTION_START_SERVICE = "ACTION_START_SERVICE";
-
-    private ActivityRecognitionClient mActivityRecognitionClient;
 
     public LocationUpdatesService() {
     }
@@ -87,17 +78,13 @@ public class LocationUpdatesService extends Service {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         BoardActive boardActive = new BoardActive(this);
 
-        mActivityRecognitionClient = ActivityRecognition.getClient(this);
-
         createLocationRequest();
 
-        /*try {
+        try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
-
-        startActivityUpdates();
+        }
 
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -111,27 +98,6 @@ public class LocationUpdatesService extends Service {
             // Set the Notification Channel for the Notification Manager.
             mNotificationManager.createNotificationChannel(mChannel);
         }
-    }
-
-    private void startActivityUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mActivityRecognitionClient.requestActivityUpdates(3, getPendingIntent())
-                .addOnSuccessListener(aVoid -> Log.d(TAG, "Activity recognition requested"))
-                .addOnFailureListener(e -> Log.e(TAG, "Activity recognition request failed", e));
-    }
-
-    public void startLocationUpdates() {
-        try {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void stopLocationUpdates() {
-        mFusedLocationClient.removeLocationUpdates(getPendingIntent());
     }
 
     // This method sets the attributes to fetch location updates.
@@ -175,19 +141,12 @@ public class LocationUpdatesService extends Service {
             }
         }
 
-        /*if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
+        if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
             Log.d(TAG, "called to cancel service");
             mNotificationManager.cancel(NOTIFICATION_ID);
             stopSelf();
-        }*/
-
-        if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
-            Log.d(TAG, "called to cancel service");
-            stopLocationUpdates();
-            mNotificationManager.cancel(NOTIFICATION_ID);
-        } else if (ACTION_START_SERVICE.equals(intent.getAction())) {
-            startLocationUpdates();
         }
+
         // Tells the system to not try to recreate the service after it has been killed.
         return START_NOT_STICKY;
     }
